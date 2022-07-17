@@ -15,7 +15,18 @@ class ScaleType(Enum):
     Major, Minor, MajorPentatonic, MinorPentatonic = range(4) 
 
 def scale_from_steps(root, formula):
-    pass
+    notes = [Note.from_index(root.value)] # Add root first
+    
+    step_counter = 0
+    for step in formula[:-1]: # The last step will be the root
+        if (step.lower() == 'h') or (step.lower() == 'half'):
+            step_counter += 1
+        if (step.lower() == 'w') or (step.lower() == 'whole'):
+            step_counter += 2
+
+        notes.append(Note.from_index(root.value + step_counter))
+
+    return notes
 
 def scale_from_intervals(root, formula):   
     return [Note.from_index(root.value + interval.value) for interval in formula]
@@ -26,17 +37,17 @@ def form_scale(root, s_type):
     # Determine the scale formula
     if(s_type == ScaleType.Major):
         formula = ['w', 'w', 'h', 'w', 'w', 'w', 'h']
+        notes = scale_from_steps(root, formula)
 
     if(s_type == ScaleType.Minor):
         formula = ['w', 'h', 'w', 'w', 'h', 'w', 'w']
+        notes = scale_from_steps(root, formula)
 
     if(s_type == ScaleType.MajorPentatonic):
-        # formula = ['1', '2', '3', '5', '6']
         formula = [Interval.Unison, Interval.M2, Interval.M3, Interval.P5, Interval.M6]
         notes = scale_from_intervals(root, formula)
 
     if(s_type == ScaleType.MinorPentatonic):
-        # formula = ['1', 'b3', '4', '5', 'b7']
         formula = [Interval.Unison, Interval.m3, Interval.P4, Interval.P5, Interval.m7]
         notes = scale_from_intervals(root, formula)
 

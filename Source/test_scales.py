@@ -30,19 +30,27 @@ class TestNotes(unittest.TestCase):
     # setUp and tearDown run before every single test.
     #---------------------------------------------------------------------------
     def setUp(self):
-        print('\tsetUp')
+        # print('\tsetUp')
+        pass
 
     def tearDown(self):
-        print('\ttearDown')
+        # print('\ttearDown')
+        pass
 
     #---------------------------------------------------------------------------
     # Tests
     #---------------------------------------------------------------------------
-    # def test_major_scale(self):
-    #     print('\t\ttest_major_scale')
+    def test_c_major_scale(self):
+        print('\t\ttest_c_major')
 
-        # scale = s.Scale(Note.C, s.ScaleType.Major)
-        # self.assertEqual(scale.notes, [Note.C, Note.D, Note.E, Note.F, Note.G, Note.A, Note.B])
+        scale = s.Scale(Note.C, s.ScaleType.Major)
+        self.assertEqual(scale.notes, [Note.C, Note.D, Note.E, Note.F, Note.G, Note.A, Note.B])
+
+    def test_c_minor_scale(self):
+        print('\t\ttest_c_minor')
+
+        scale = s.Scale(Note.C, s.ScaleType.Minor)
+        self.assertEqual(scale.notes, [Note.C, Note.D, Note.Eb, Note.F, Note.G, Note.Ab, Note.Bb])
 
 
     def test_a_major_pentatonic(self):
