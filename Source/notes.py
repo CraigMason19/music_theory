@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Name:        music_notes.py
+# Name:        notes.py
 #
 # Notes:       A representation of the 12 notes of the musical scale
 #
@@ -52,6 +52,7 @@ def main():
 
     print(n)
     print(ns)
+
 
 
  
