@@ -8,10 +8,15 @@
 # TODO:
 #-------------------------------------------------------------------------------
 
-import sys
+from notes import Note
+from scales import Scale, ScaleType
 
 def main():
-    pass
+    s = Scale(Note.C, ScaleType.Dorian)
+
+    print(s)
+    print(str(s))
+    print(repr(s))
 
 if __name__ == '__main__':
     main()

@@ -12,7 +12,9 @@ from enum import Enum
 from notes import Note, Interval, notes_to_string, intervals_to_string
 
 class ScaleType(Enum):
-    Major, Minor, MajorPentatonic, MinorPentatonic = range(4) 
+    (Major, Minor, 
+    MajorPentatonic, MinorPentatonic, 
+    Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian) = range(11) 
 
 def scale_from_steps(root, formula):
     notes = [Note.from_index(root.value)] # Add root first
@@ -51,10 +53,36 @@ def form_scale(root, s_type):
         formula = [Interval.Unison, Interval.m3, Interval.P4, Interval.P5, Interval.m7]
         notes = scale_from_intervals(root, formula)
 
+    # 7 Modes
+    if(s_type == ScaleType.Ionian): # Same as the Major scale
+        formula = ['w', 'w', 'h', 'w', 'w', 'w', 'h']
+        notes = scale_from_steps(root, formula)
 
-    # Determine the notes from the correct formula
+    if(s_type == ScaleType.Dorian):
+        formula = ['w', 'h', 'w', 'w', 'w', 'h', 'w']
+        notes = scale_from_steps(root, formula)
+
+    if(s_type == ScaleType.Phrygian):
+        formula = ['h', 'w', 'w', 'w', 'h', 'w', 'w']
+        notes = scale_from_steps(root, formula)
+
+    if(s_type == ScaleType.Lydian):
+        formula = ['w', 'w', 'w', 'h', 'w', 'w', 'h']
+        notes = scale_from_steps(root, formula)
+
+    if(s_type == ScaleType.Mixolydian):
+        formula = ['w', 'w', 'h', 'w', 'w', 'h', 'w']
+        notes = scale_from_steps(root, formula)   
+
+    if(s_type == ScaleType.Aeolian): # Same as the minor scale
+        formula = ['w', 'h', 'w', 'w', 'h', 'w', 'w']
+        notes = scale_from_steps(root, formula)   
+
+    if(s_type == ScaleType.Locrian):
+        formula = ['h', 'w', 'w', 'h', 'w', 'w', 'w']
+        notes = scale_from_steps(root, formula)   
+
     return notes, formula
-
 
 class Scale:
     def __init__(self, root, s_type):
@@ -74,11 +102,12 @@ class Scale:
 def main():
     scale = Scale(Note.A, ScaleType.MajorPentatonic)
 
-    # print(str(scale))
-    # print(repr(scale))
-    # print(scale.root)
-    # print(scale.formula)
-    # print(scale.type)
+    print(str(scale))
+    print(repr(scale))
+    print(scale.root)
+    print(str(scale.formula))
+    print(scale.formula)
+    print(scale.type)
 
 if __name__ == '__main__':
     main()
