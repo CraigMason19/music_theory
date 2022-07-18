@@ -16,7 +16,7 @@ class ScaleType(Enum):
     MajorPentatonic, MinorPentatonic, 
     Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian) = range(11) 
 
-formula_dict = {
+formula_step_dict = {
     ScaleType.Major: ['w', 'w', 'h', 'w', 'w', 'w', 'h'],
     ScaleType.Minor: ['w', 'h', 'w', 'w', 'h', 'w', 'w'],
     # Modes
@@ -27,6 +27,11 @@ formula_dict = {
     ScaleType.Mixolydian: ['w', 'w', 'h', 'w', 'w', 'h', 'w'],
     ScaleType.Aeolian: ['w', 'h', 'w', 'w', 'h', 'w', 'w'],
     ScaleType.Locrian: ['h', 'w', 'w', 'h', 'w', 'w', 'w'],
+}
+
+formula_interval_dict = {
+    ScaleType.MajorPentatonic: [Interval.Unison, Interval.M2, Interval.M3, Interval.P5, Interval.M6],
+    ScaleType.MinorPentatonic: [Interval.Unison, Interval.m3, Interval.P4, Interval.P5, Interval.m7],
 }
 
 def scale_from_steps(root, formula):
@@ -46,39 +51,23 @@ def scale_from_steps(root, formula):
 def scale_from_intervals(root, formula):   
     return [Note.from_index(root.value + interval.value) for interval in formula]
 
-def form_scale(root, s_type):
-
-    notes, formula = [], []
-
-    if(s_type == ScaleType.MajorPentatonic):
-        formula = [Interval.Unison, Interval.M2, Interval.M3, Interval.P5, Interval.M6]
-        notes = scale_from_intervals(root, formula)
-
-    elif(s_type == ScaleType.MinorPentatonic):
-        formula = [Interval.Unison, Interval.m3, Interval.P4, Interval.P5, Interval.m7]
-        notes = scale_from_intervals(root, formula)
-
-    # if not in dict - raise error
-
-    else:
-        formula = formula_dict[s_type]
-        notes = scale_from_steps(root, formula)   
-    
-    # Determine the scale formula
-    
-
- 
-
-    return notes, formula
-
 class Scale:
-    def __init__(self, root, s_type):
-        self.notes, self.formula = form_scale(root, s_type) # calculate notes
-        self.type = s_type
+    def __init__(self, root, scale_type):
+        self.root = root
+        self.type = scale_type
+        self._form()
 
-    @property
-    def root(self):
-        return self.notes[0].name
+    def _form(self):
+        if(self.type in formula_step_dict):
+                self.formula = formula_step_dict[self.type]
+                self.notes = scale_from_steps(self.root, self.formula)  
+
+        elif(self.type in formula_interval_dict):
+                self.formula = formula_interval_dict[self.type]
+                self.notes = scale_from_intervals(self.root, self.formula)  
+
+        else:
+            raise ValueError(f'Scale is not in either formula dictionary {self.type}')
 
     def __str__(self):
         return f"{self.notes[0].name} {self.type.name}: { notes_to_string(self.notes) }"
@@ -87,7 +76,7 @@ class Scale:
         return f"Scale({self.notes[0]}, {self.type})"
 
 def main():
-    scale = Scale(Note.A, ScaleType.MajorPentatonic)
+    scale = Scale(Note.A, ScaleType.Dorian)
 
     print(str(scale))
     print(repr(scale))
