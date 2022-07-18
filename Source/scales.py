@@ -16,6 +16,19 @@ class ScaleType(Enum):
     MajorPentatonic, MinorPentatonic, 
     Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian) = range(11) 
 
+formula_dict = {
+    ScaleType.Major: ['w', 'w', 'h', 'w', 'w', 'w', 'h'],
+    ScaleType.Minor: ['w', 'h', 'w', 'w', 'h', 'w', 'w'],
+    # Modes
+    ScaleType.Ionian: ['w', 'w', 'h', 'w', 'w', 'w', 'h'],
+    ScaleType.Dorian: ['w', 'h', 'w', 'w', 'w', 'h', 'w'],
+    ScaleType.Phrygian: ['h', 'w', 'w', 'w', 'h', 'w', 'w'],
+    ScaleType.Lydian: ['w', 'w', 'w', 'h', 'w', 'w', 'h'],
+    ScaleType.Mixolydian: ['w', 'w', 'h', 'w', 'w', 'h', 'w'],
+    ScaleType.Aeolian: ['w', 'h', 'w', 'w', 'h', 'w', 'w'],
+    ScaleType.Locrian: ['h', 'w', 'w', 'h', 'w', 'w', 'w'],
+}
+
 def scale_from_steps(root, formula):
     notes = [Note.from_index(root.value)] # Add root first
     
@@ -34,53 +47,27 @@ def scale_from_intervals(root, formula):
     return [Note.from_index(root.value + interval.value) for interval in formula]
 
 def form_scale(root, s_type):
+
     notes, formula = [], []
-
-    # Determine the scale formula
-    if(s_type == ScaleType.Major):
-        formula = ['w', 'w', 'h', 'w', 'w', 'w', 'h']
-        notes = scale_from_steps(root, formula)
-
-    if(s_type == ScaleType.Minor):
-        formula = ['w', 'h', 'w', 'w', 'h', 'w', 'w']
-        notes = scale_from_steps(root, formula)
 
     if(s_type == ScaleType.MajorPentatonic):
         formula = [Interval.Unison, Interval.M2, Interval.M3, Interval.P5, Interval.M6]
         notes = scale_from_intervals(root, formula)
 
-    if(s_type == ScaleType.MinorPentatonic):
+    elif(s_type == ScaleType.MinorPentatonic):
         formula = [Interval.Unison, Interval.m3, Interval.P4, Interval.P5, Interval.m7]
         notes = scale_from_intervals(root, formula)
 
-    # 7 Modes
-    if(s_type == ScaleType.Ionian): # Same as the Major scale
-        formula = ['w', 'w', 'h', 'w', 'w', 'w', 'h']
-        notes = scale_from_steps(root, formula)
+    # if not in dict - raise error
 
-    if(s_type == ScaleType.Dorian):
-        formula = ['w', 'h', 'w', 'w', 'w', 'h', 'w']
-        notes = scale_from_steps(root, formula)
-
-    if(s_type == ScaleType.Phrygian):
-        formula = ['h', 'w', 'w', 'w', 'h', 'w', 'w']
-        notes = scale_from_steps(root, formula)
-
-    if(s_type == ScaleType.Lydian):
-        formula = ['w', 'w', 'w', 'h', 'w', 'w', 'h']
-        notes = scale_from_steps(root, formula)
-
-    if(s_type == ScaleType.Mixolydian):
-        formula = ['w', 'w', 'h', 'w', 'w', 'h', 'w']
+    else:
+        formula = formula_dict[s_type]
         notes = scale_from_steps(root, formula)   
+    
+    # Determine the scale formula
+    
 
-    if(s_type == ScaleType.Aeolian): # Same as the minor scale
-        formula = ['w', 'h', 'w', 'w', 'h', 'w', 'w']
-        notes = scale_from_steps(root, formula)   
-
-    if(s_type == ScaleType.Locrian):
-        formula = ['h', 'w', 'w', 'h', 'w', 'w', 'w']
-        notes = scale_from_steps(root, formula)   
+ 
 
     return notes, formula
 
