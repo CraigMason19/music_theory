@@ -53,8 +53,7 @@ def scale_from_intervals(root, formula):
 
 class Scale:
     def __init__(self, root, scale_type):
-        self.root = root
-        self.type = scale_type
+        self.root, self.type = root, scale_type
         self._form()
 
     def _form(self):
@@ -78,12 +77,14 @@ class Scale:
 def main():
     scale = Scale(Note.A, ScaleType.Dorian)
 
-    print(str(scale))
-    print(repr(scale))
-    print(scale.root)
-    print(str(scale.formula))
-    print(scale.formula)
-    print(scale.type)
+    print("Scale:")
+    print(f"\t{scale}")
+    print(f"\t{repr(scale)}")
+
+    print(f"\tRoot -> {scale.root}")
+    print(f"\tType -> {scale.type})")
+    print(f"\tFormula -> {scale.formula})")
+    print(f"\tNotes -> {notes_to_string(scale.notes)}")
 
 if __name__ == '__main__':
     main()
