@@ -1,24 +1,12 @@
+Remove playground.py
+
 major minor chords from note thingy
+circle of 5ths
 
-
-
-
-
-python random scale
-
-eg scale random
-
-
-
-class scale, notes, length
-
+ 
 note.py
 def next_step(note=Note.a, step=Step.half):
-	g	
 
-scales.py
-def harmonic_minor(note='a'):
-	return a + half + whole + half
 
 
 
@@ -31,11 +19,3 @@ A# Harmonic minor
 notes = ['c', 'c#', 'd', 'd#']
 def next_note():
 	yield 'A'
-
-
-mode??? only on 7 degree scales
-get_mode(note='a', mode='ionian')
-
-
-
-The major scale contains seven modes: Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, and Locrian. Modes are a way to reorganize the pitches of a scale so that the focal point of the scale changes.

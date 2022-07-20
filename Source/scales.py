@@ -8,6 +8,7 @@
 # TODO:
 #-------------------------------------------------------------------------------
 
+import random
 from enum import Enum
 from notes import Note, Interval, notes_to_string, intervals_to_string
 
@@ -15,6 +16,14 @@ class ScaleType(Enum):
     (Major, Minor, 
     MajorPentatonic, MinorPentatonic, 
     Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian) = range(11) 
+
+    @classmethod    
+    def items(cls):
+        return [n for n in cls]
+
+    @classmethod
+    def random(cls):
+        return random.choice(cls.items())
 
 formula_step_dict = {
     ScaleType.Major: ['w', 'w', 'h', 'w', 'w', 'w', 'h'],
@@ -68,6 +77,10 @@ class Scale:
         else:
             raise ValueError(f'Scale is not in either formula dictionary {self.type}')
 
+    @classmethod
+    def random(cls):
+        return Scale(Note.random(), ScaleType.random())
+
     def __str__(self):
         return f"{self.notes[0].name} {self.type.name}: { notes_to_string(self.notes) }"
 
@@ -75,7 +88,8 @@ class Scale:
         return f"Scale({self.notes[0]}, {self.type})"
 
 def main():
-    scale = Scale(Note.A, ScaleType.Dorian)
+    # scale = Scale(Note.A, ScaleType.Dorian)
+    scale = Scale.random()
 
     print("Scale:")
     print(f"\t{scale}")
@@ -85,6 +99,7 @@ def main():
     print(f"\tType -> {scale.type})")
     print(f"\tFormula -> {scale.formula})")
     print(f"\tNotes -> {notes_to_string(scale.notes)}")
+
 
 if __name__ == '__main__':
     main()

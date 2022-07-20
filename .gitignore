@@ -1,3 +1,4 @@
 .virtualenv/
 Source/__pycache__/
 Extras/
+playground.py
