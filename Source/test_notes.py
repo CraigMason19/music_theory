@@ -37,6 +37,7 @@ class TestNotes(unittest.TestCase):
     #---------------------------------------------------------------------------
     # Tests
     #---------------------------------------------------------------------------
+
     def test_notes_to_string_000(self):
         print('\t\ttest_notes_to_string_000')
 
@@ -52,8 +53,6 @@ class TestNotes(unittest.TestCase):
         expected = "A, Db, F"
 
         self.assertEqual(notes, expected)
-
-
 
     def test_next_note(self):
         print('\t\ttest_next_note')

@@ -10,8 +10,9 @@
 
 import unittest
 from notes import Note
+from chords import chords_in_key, Chord, ChordType
 
-class TestNotes(unittest.TestCase):
+class TestChords(unittest.TestCase):
     #---------------------------------------------------------------------------
     # setUpClass and tearDownClass run before and after all tests, called once
     # NOTE - the camelCase syntax. Important that they are named this way.
@@ -19,30 +20,51 @@ class TestNotes(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print('setupClass')
+        pass
 
     @classmethod
     def tearDownClass(cls):
-        print('teardownClass')
+        pass
 
     #---------------------------------------------------------------------------
     # setUp and tearDown run before every single test.
     #---------------------------------------------------------------------------
+
     def setUp(self):
-        print('\tsetUp')
+        pass
 
     def tearDown(self):
-        print('\ttearDown')
+        pass
 
     #---------------------------------------------------------------------------
     # Tests
     #---------------------------------------------------------------------------
-    def test_major_chord(self):
-        print('\t\ttest_major_chord')
 
-        # note, expected = notes.Notes.C, notes.Notes.D
-        # self.assertEqual(1, 1) Notes
-        
+    #region Chords Equal
+    def test_chord_equal_A_major(self):
+        print('\t\ttest_chord_equal_A_major')
+        self.assertEqual(Chord(Note.A, ChordType.Major), Chord(Note.A, ChordType.Major))
+
+    def test_chord_equal_Gb_minor(self):
+        print('\t\ttest_chord_equal_Gb_minor')
+        self.assertEqual(Chord(Note.Gb, ChordType.Minor), Chord(Note.Gb, ChordType.Minor))
+    #endregion
+
+    #region Chords in Major Key
+    def test_chords_in_key_A_major(self):
+        print('\t\ttest_chords_in_key_A_major')
+
+        chord_dict = chords_in_key(Note.A, True)
+        expected = [Chord(Note.A, ChordType.Major),
+                    Chord(Note.B, ChordType.Minor),
+                    Chord(Note.Db, ChordType.Minor),
+                    Chord(Note.D, ChordType.Major),
+                    Chord(Note.E, ChordType.Major),
+                    Chord(Note.Gb, ChordType.Minor),
+                    Chord(Note.Ab, ChordType.Diminished)]
+ 
+        self.assertCountEqual(list(chord_dict.values()), expected)
+    #endregion
 
 if __name__ == '__main__':
     unittest.main()

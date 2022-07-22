@@ -8,19 +8,51 @@
 # TODO:
 #-------------------------------------------------------------------------------
 
-
-
 from enum import Enum
 
-# class ScaleType(Enum):
-#     (Major, Minor, 
-#     MajorPentatonic, MinorPentatonic, 
-#     Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian) = range(11) 
+from notes import Note
+from scales import Scale, ScaleType
 
-# MajorChords = ['i']
+# Just out of interest
+cadence_dict = {"Plagal": "IV->I",
+                "Authentic": "V->I",
+}
 
-class MajorChord(Enum):
-    (I, II, III, IV, V, VI, VII) = range(7)
+class ChordType(Enum):
+    (Major, Minor, Diminished) = range(3)
 
-class MinorChord(Enum):
-    (i, ii, iii, iv, v, vi, vii) = range(7)
+class Chord():
+    def __init__(self, note, chord_type):
+        self.root = note
+        self.chord_type = chord_type
+    
+    def __eq__(self, other):
+        try:
+            return self.root == other.root and self.chord_type == other.chord_type
+        except AttributeError:
+            return False
+
+    def __str__(self):
+        return f"{self.root} {self.chord_type}"
+
+    def __repr__(self):
+        return f"Chord({self.root}, {self.chord_type})"
+ 
+def chords_in_key(key, isMajor=True):
+    scale, numerals, sequence = None, None, None
+    
+    if isMajor:
+        numerals = ["I", "ii", "iii", "IV", "V", "vi", "vii"]
+        scale = Scale(key, ScaleType.Major)
+        sequence = [ChordType.Major, ChordType.Minor, ChordType.Minor, 
+                    ChordType.Major, ChordType.Major, ChordType.Minor, 
+                    ChordType.Diminished]
+        
+    else:
+        numerals = ["i", "ii", "III", "iv", "v", "VI", "VII"]
+        scale = Scale(key, ScaleType.Minor)
+        sequence = [ChordType.Minor, ChordType.Diminished, ChordType.Major, 
+                    ChordType.Minor, ChordType.Minor, ChordType.Major, 
+                    ChordType.Major]
+
+    return  {n[0]: Chord(n[1], n[2]) for n in zip(numerals, scale.notes, sequence)}

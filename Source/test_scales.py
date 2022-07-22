@@ -29,6 +29,7 @@ class TestScales(unittest.TestCase):
     #---------------------------------------------------------------------------
     # setUp and tearDown run before every single test.
     #---------------------------------------------------------------------------
+    
     def setUp(self):
         pass
 
