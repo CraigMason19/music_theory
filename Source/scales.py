@@ -85,6 +85,22 @@ class Scale:
     def random(cls):
         return Scale(Note.random(), ScaleType.random())
 
+    @classmethod
+    def modes(cls, root):
+        m, s = [], Scale(root, ScaleType.Ionian)
+
+        m.append(s)
+        m.append(Scale(s.notes[1], ScaleType.Dorian))
+        m.append(Scale(s.notes[2], ScaleType.Phrygian))
+        m.append(Scale(s.notes[3], ScaleType.Lydian))
+        m.append(Scale(s.notes[4], ScaleType.Mixolydian))
+        m.append(Scale(s.notes[5], ScaleType.Aeolian))
+        m.append(Scale(s.notes[6], ScaleType.Locrian))
+
+        return m
+ 
+
+
     def __str__(self):
         return f"{self.notes[0].name} {self.type.name}: { notes_to_string(self.notes) }"
 
@@ -93,18 +109,20 @@ class Scale:
 
 def main():
     # scale = Scale(Note.A, ScaleType.Dorian)
-    scale = Scale.random()
+    # scale = Scale.random()
 
-    print("Scale:")
-    print(f"\t{scale}")
-    print(f"\t{repr(scale)}")
+    # print("Scale:")
+    # print(f"\t{scale}")
+    # print(f"\t{repr(scale)}")
 
-    print(f"\tRoot -> {scale.root}")
-    print(f"\tType -> {scale.type})")
-    print(f"\tFormula -> {scale.formula})")
-    print(f"\tNotes -> {notes_to_string(scale.notes)}")
-    print(f"\tNumber of flats -> {scale.number_of_flats}")
+    # print(f"\tRoot -> {scale.root}")
+    # print(f"\tType -> {scale.type})")
+    # print(f"\tFormula -> {scale.formula})")
+    # print(f"\tNotes -> {notes_to_string(scale.notes)}")
+    # print(f"\tNumber of flats -> {scale.number_of_flats}")
 
+    x = Scale.modes(Note.C)
+    print(x)
 
 if __name__ == '__main__':
     main()
