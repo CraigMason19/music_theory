@@ -77,6 +77,10 @@ class Scale:
         else:
             raise ValueError(f'Scale is not in either formula dictionary {self.type}')
 
+    @property
+    def number_of_flats(self):
+        return sum(map(lambda x : len(x.name) == 2, self.notes))
+
     @classmethod
     def random(cls):
         return Scale(Note.random(), ScaleType.random())
@@ -99,6 +103,7 @@ def main():
     print(f"\tType -> {scale.type})")
     print(f"\tFormula -> {scale.formula})")
     print(f"\tNotes -> {notes_to_string(scale.notes)}")
+    print(f"\tNumber of flats -> {scale.number_of_flats}")
 
 
 if __name__ == '__main__':

@@ -1,21 +1,30 @@
+[Structure]
 Remove playground.py
 
+[Chords]
 major minor chords from note thingy
 circle of 5ths
 
- 
-note.py
-def next_step(note=Note.a, step=Step.half):
+[Notes]
 
-
-
+[Scales]
+Add degrees to scale???
 
 A# Harmonic minor
 	notes:		[a, b, c, d, e] etcc.
 	degrees:	[I 2 b3 4 aug5, 5] etc..
 	formula:	[W – W – H – W – W – W – H] etc..
 
+Scale.modes(Note.C)
+# return scale as list 
 
-notes = ['c', 'c#', 'd', 'd#']
-def next_note():
-	yield 'A'
+C Ionian (major) — CDEFGABC. (intervals: Whole - Whole - Half - Whole - Whole - Whole - Half)
+D Dorian — DEFGABCD. ...
+E Phrygian — EFGABCDE. ...
+F Lydian — FGABCDEF. ...
+G Mixolydian — GABCDEFG. ...
+A Aeolian (minor) — ABCDEFGA. ...
+B Locrian — BCDEFGAB.
+
+[Test]
+test random scale

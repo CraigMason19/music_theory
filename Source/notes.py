@@ -36,6 +36,9 @@ class Note(Enum):
         r = random.choice(cls.items())
         return r
 
+    def __str__(self):
+        return self.name
+
 class Interval(Enum):
     Unison, m2, M2, m3, M3, P4, dim5, P5, m6, M6, m7, M7 = range(12) 
 
