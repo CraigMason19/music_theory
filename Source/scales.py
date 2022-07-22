@@ -29,12 +29,12 @@ formula_step_dict = {
     ScaleType.Major: ['w', 'w', 'h', 'w', 'w', 'w', 'h'],
     ScaleType.Minor: ['w', 'h', 'w', 'w', 'h', 'w', 'w'],
     # Modes
-    ScaleType.Ionian: ['w', 'w', 'h', 'w', 'w', 'w', 'h'],
+    ScaleType.Ionian: ['w', 'w', 'h', 'w', 'w', 'w', 'h'], # Major
     ScaleType.Dorian: ['w', 'h', 'w', 'w', 'w', 'h', 'w'],
     ScaleType.Phrygian: ['h', 'w', 'w', 'w', 'h', 'w', 'w'],
     ScaleType.Lydian: ['w', 'w', 'w', 'h', 'w', 'w', 'h'],
     ScaleType.Mixolydian: ['w', 'w', 'h', 'w', 'w', 'h', 'w'],
-    ScaleType.Aeolian: ['w', 'h', 'w', 'w', 'h', 'w', 'w'],
+    ScaleType.Aeolian: ['w', 'h', 'w', 'w', 'h', 'w', 'w'], # Minor
     ScaleType.Locrian: ['h', 'w', 'w', 'h', 'w', 'w', 'w'],
 }
 
@@ -98,8 +98,6 @@ class Scale:
         m.append(Scale(s.notes[6], ScaleType.Locrian))
 
         return m
- 
-
 
     def __str__(self):
         return f"{self.notes[0].name} {self.type.name}: { notes_to_string(self.notes) }"
@@ -108,21 +106,21 @@ class Scale:
         return f"Scale({self.notes[0]}, {self.type})"
 
 def main():
-    # scale = Scale(Note.A, ScaleType.Dorian)
-    # scale = Scale.random()
+    scale = Scale.random()
 
-    # print("Scale:")
-    # print(f"\t{scale}")
-    # print(f"\t{repr(scale)}")
+    print("Scale:")
+    print(f"\t{scale}")
+    print(f"\t{repr(scale)}")
 
-    # print(f"\tRoot -> {scale.root}")
-    # print(f"\tType -> {scale.type})")
-    # print(f"\tFormula -> {scale.formula})")
-    # print(f"\tNotes -> {notes_to_string(scale.notes)}")
-    # print(f"\tNumber of flats -> {scale.number_of_flats}")
+    print(f"\tRoot -> {scale.root}")
+    print(f"\tType -> {scale.type})")
+    print(f"\tFormula -> {scale.formula})")
+    print(f"\tNotes -> {notes_to_string(scale.notes)}")
+    print(f"\tNumber of flats -> {scale.number_of_flats}")
 
-    x = Scale.modes(Note.C)
-    print(x)
+    print(f"\tModes ->")
+    for mode in scale.modes(scale.root):
+        print(f"\t\t{mode}")
 
 if __name__ == '__main__':
     main()
