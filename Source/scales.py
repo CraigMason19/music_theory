@@ -48,9 +48,10 @@ def scale_from_steps(root, formula):
     
     step_counter = 0
     for step in formula[:-1]: # The last step will be the root
-        if (step.lower() == 'h') or (step.lower() == 'half'):
+        step = step.lower()
+        if (step == 'h') or (step == 'half'):
             step_counter += 1
-        if (step.lower() == 'w') or (step.lower() == 'whole'):
+        if (step == 'w') or (step == 'whole'):
             step_counter += 2
 
         notes.append(Note.from_index(root.value + step_counter))

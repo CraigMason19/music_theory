@@ -2,10 +2,11 @@
 Remove playground.py
 
 [Chords]
-major minor chords from note thingy
 circle of 5ths
 
 [Notes]
+Chnage flat to sharp
+flat to natureal
 
 [Scales]
 Add degrees to scale???
@@ -15,16 +16,7 @@ A# Harmonic minor
 	degrees:	[I 2 b3 4 aug5, 5] etc..
 	formula:	[W – W – H – W – W – W – H] etc..
 
-Scale.modes(Note.C)
-# return scale as list 
-
-C Ionian (major) — CDEFGABC. (intervals: Whole - Whole - Half - Whole - Whole - Whole - Half)
-D Dorian — DEFGABCD. ...
-E Phrygian — EFGABCDE. ...
-F Lydian — FGABCDEF. ...
-G Mixolydian — GABCDEFG. ...
-A Aeolian (minor) — ABCDEFGA. ...
-B Locrian — BCDEFGAB.
+note generator -> continually print next note?? list to generator?
 
 [Test]
 test random scale

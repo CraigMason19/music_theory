@@ -23,8 +23,7 @@ class ChordType(Enum):
 
 class Chord():
     def __init__(self, note, chord_type):
-        self.root = note
-        self.chord_type = chord_type
+        self.root, self.chord_type = note, chord_type
     
     def __eq__(self, other):
         try:
@@ -56,3 +55,12 @@ def chords_in_key(key, isMajor=True):
                     ChordType.Major]
 
     return  {n[0]: Chord(n[1], n[2]) for n in zip(numerals, scale.notes, sequence)}
+
+def main():
+    c = Chord(Note.C, ChordType.Diminished)
+
+    print(str(c))
+    print(repr(c))
+
+if __name__ == '__main__':
+    main()
