@@ -9,7 +9,7 @@
 #-------------------------------------------------------------------------------
 
 import unittest
-from notes import Note, Interval, notes_to_string, transpose
+from notes import Note, Interval, notes_to_string, transpose, interval_distance
 
 class TestNotes(unittest.TestCase):
     #---------------------------------------------------------------------------
@@ -76,6 +76,31 @@ class TestNotes(unittest.TestCase):
     def test_note_index_wrap_around_B_down(self):
         index = Note.B.value
         self.assertEqual(Note.from_index(index - 27), Note.Ab)
+    #endregion
+
+    #region Interval Distance
+    def test_interval_distance_same(self):    
+        inteval, expected = interval_distance(Note.Bb, Note.Bb), Interval.Unison
+        self.assertEqual(inteval, expected)
+
+    def test_interval_distance_up_00(self):    
+        inteval, expected = interval_distance(Note.B, Note.Gb, direction="UP"), Interval.P5 
+        self.assertEqual(inteval, expected)
+
+    def test_interval_distance_up_01(self):    
+        inteval, expected = interval_distance(Note.A, Note.C, direction="UP"), Interval.m3 
+        self.assertEqual(inteval, expected)
+
+    def test_interval_distance_down_00(self):    
+        inteval, expected = interval_distance(Note.C, Note.G, direction="below"), Interval.P4 
+        self.assertEqual(inteval, expected)
+
+    def test_interval_distance_down_01(self):    
+        inteval, expected = interval_distance(Note.A, Note.C, direction="below"), Interval.M6 
+        self.assertEqual(inteval, expected)
+
+    def test_interval_distance_value_error(self):
+        self.assertRaises(ValueError, interval_distance, Note.C, Note.G, direction='sideways')
     #endregion
 
     #region Transpose

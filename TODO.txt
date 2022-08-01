@@ -18,5 +18,14 @@ A# Harmonic minor
 
 note generator -> continually print next note?? list to generator?
 
+
+[Keys]???
+Key of C
+	chords c d e f
+	parallel chords
+	seconday dominates:
+	printgrid
+
+
 [Test]
 test random scale

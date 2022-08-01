@@ -11,9 +11,6 @@
 import random
 from enum import Enum
 
-# TODO - Remove global
-# NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-
 def _index_to_range(index):
     """ Takes a index and converts it into the range -11 to +11.
 
@@ -33,6 +30,7 @@ def _index_to_range(index):
     return sign * index
 
 class Interval(Enum):
+    """ A interval class by Craig"""
     Unison, m2, M2, m3, M3, P4, dim5, P5, m6, M6, m7, M7 = range(12) 
 
     @classmethod    
@@ -68,31 +66,77 @@ class Note(Enum):
         return self.name
 
 def notes_to_string(note_list):
+    """ Takes a list of notes and returns a string of note names. 
+
+        e.g. [Note.C, Note.B, Note.D] -> "C, B, D"
+
+    Args:
+        note_list:
+            The list of notes to be converted to a string.
+
+    Returns:
+        The string of note names.
+    """  
     return ', '.join([n.name for n in note_list])
 
 def intervals_to_string(interval_list):
+    """ Takes a list of intervals and returns a string of interval names. 
+
+        e.g. [Interval.M3, Interval.P4, Interval.P5] -> "M3, P4, P5"
+
+    Args:
+        note_list:
+            The list of intervals to be converted to a string.
+
+    Returns:
+        The string of interval names
+    """  
     return ', '.join([i.name for i in interval_list])
 
+def interval_distance(first_note, second_note, direction="u"):
+    """ Takes two notes and calculates the interval distance between them, 
+        either up or down.
 
+        NOTE: A perfect 5th up is the same as a perfect 4th down and vice-versa
 
-    # Note: A perfect 5th down is the same as a perfect 5th up and vice-versa
-# def interval_distance(first_note, second_note, direction="u"):
-#     if(first_note == second_note):
-#         return Interval.Unison
+        e.g. Note.C, Note.G, 'u' -> interval.P5
+             Note.C, Note.G, 'd' -> interval.P4
 
-#     direction = direction.lower()
+    Args:
+        first_note:
+            The note to start measuring from.
+        second_note:
+            The note above or below the first.
+        direction:
+            Can either check distance up or down in pitch. acceptable values are
+            "u", "up", "above", "d", "down" or "below" in any case.
 
-#     if direction in ["u", "up", "above"]:
-#         dif = 12 - abs(first_note.value - second_note.value)
-#         return Interval.from_index(dif)
-        
+    Returns:
+        A interval representing the difference between two notes.
 
-#     elif direction in ["d", "down", "below"]:
-#         dif = 12 + abs(first_note.value - second_note.value)
-#         return Interval.from_index(dif)
+    Raises:
+        ValueError:
+            If the direction string is not recognized.
+    """  
+    if(first_note == second_note):
+        return Interval.Unison
 
-#     raise ValueError(f'direction not recognized({direction})')
+    direction = direction.lower()
+    dif = abs(first_note.value - second_note.value)
 
+    if direction in ["u", "up", "above"]:
+        if first_note.value > second_note.value:
+            return Interval.from_index(12 - dif)  
+
+        return Interval.from_index(dif)        
+
+    elif direction in ["d", "down", "below"]:
+        if first_note.value > second_note.value:
+            return Interval.from_index(dif) 
+         
+        return Interval.from_index(12 - dif) 
+
+    raise ValueError(f'direction not recognized({direction})')
 
 def transpose(note, interval, direction="u"):
     """ Takes a note and transposes (changes) it into a different note lower or 
@@ -127,21 +171,13 @@ def transpose(note, interval, direction="u"):
     raise ValueError(f'direction not recognized({direction})')
 
 def main():
-    # n = Note.C
-    # ns = notes_to_string([Note.C, Note.B, Note.D])
-
-    # print(n)
-    # print(ns)
-
-    # print(Note.random())
-
-    # ac = interval_distance(Note.A, Note.C) # -> m3
-    # cf = interval_distance(Note.C, Note.F) # ->
-    # ag = interval_distance(Note.A, Note.G) # ->
-    # print(ac, cf, ag)
+ 
+    ac = interval_distance(Note.A, Note.C) # -> m3
+    cf = interval_distance(Note.C, Note.F) # ->
+    ag = interval_distance(Note.A, Note.G) # ->
+    print(ac, cf, ag)
 
  
-    pass
  
 
 if __name__ == '__main__':

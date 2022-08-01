@@ -32,7 +32,13 @@ class Chord():
             return False
 
     def __str__(self):
-        return f"{self.root} {self.chord_type}"
+        if self.chord_type == ChordType.Diminished:
+            return f"{self.root}dim"
+
+        elif self.chord_type == ChordType.Minor:
+            return f"{self.root}m"
+
+        return f"{self.root}M"
 
     def __repr__(self):
         return f"Chord({self.root}, {self.chord_type})"
