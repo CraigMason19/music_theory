@@ -4,4 +4,4 @@ A set of Python classes to help me learn music theory.
 
 ## Requirements
 
-None extra packages are needed.
+No extra packages are needed.
