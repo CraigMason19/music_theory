@@ -1,7 +1,8 @@
 #-------------------------------------------------------------------------------
 # Name:        notes.py
 #
-# Notes:       A representation of the 12 notes of the musical scale
+# Notes:       A collection of objects and methods representing the 12 notes of 
+#              the western musical scale.
 #
 # Links:
 #
@@ -30,39 +31,133 @@ def _index_to_range(index):
     return sign * index
 
 class Interval(Enum):
-    """ A interval class by Craig"""
+    """ Represents a interval (diffence between two notes). Derived from the 
+        Enum class.
+    
+    Attributes:
+        class attributes:
+            12 class attributes representing a Enum .
+
+    Methods:
+        items(cls):
+            A class method to return the enums as a list.
+        from_index(cls, index):
+            A class method to return a enumeration based upon an index.
+    """
     Unison, m2, M2, m3, M3, P4, dim5, P5, m6, M6, m7, M7 = range(12) 
 
     @classmethod    
     def items(cls):
+        """ Returns a list of the interval enumerations. 
+
+            e.g. [Interval.Unison, Interval.m2, ... ]
+
+        Args:
+            None.
+
+        Returns:
+            A list of intervals.
+        """  
         return [n for n in cls]
  
     @classmethod
     def from_index(cls, index):
+        """ Returns a interval based upon it's enumeration value (positive or 
+            negative). 
+
+            e.g. from_index(8) -> Interval.m6
+
+        Args:
+            index:
+                The index of the value to be retrieved. Can be positive or 
+                negative.
+
+        Returns:
+            A interval.
+        """  
         index = _index_to_range(index)
         return Interval.items()[index]
 
 class Note(Enum):
-    # Note:
-    #   - Can't have sharps (#) in variable names
-    #   - Start at 'middle c'
+    """ Represents a musical note starting at 'middle C'. Derived from the 
+        Enum class.
+
+        NOTE: Can't have sharps (#) in variable names
+
+    Attributes:
+        class attributes:
+            12 class attributes representing note enumerations.
+
+    Methods:
+        items(cls):
+            A class method to return the enums as a list.
+        from_index(cls, index):
+            A class method to return a enumeration based upon an index.
+        random(cls):
+            Returns a random note.
+        __str__(self):
+            Returns the name of the note.
+    """
     C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B = range(12) 
 
     @classmethod    
     def items(cls):
+        """ Returns a list of the note enumerations. 
+
+            e.g. [Note.C, Note.Db, ... ]
+
+        Args:
+            None.
+
+        Returns:
+            A list of notes.
+        """  
         return [n for n in cls]
  
     @classmethod
     def from_index(cls, index):
+        """ Returns a note based upon it's enumeration value (positive or 
+            negative). 
+
+            e.g. from_index(3) -> Note.Eb
+
+        Args:
+            index:
+                The index of the value to be retrieved. Can be positive or 
+                negative.
+
+        Returns:
+            A note.
+        """  
         index = _index_to_range(index)
         return Note.items()[index]
 
     @classmethod
     def random(cls):
+        """ Returns a random note. 
+
+            e.g. Note.Ab
+
+        Args:
+            None.
+
+        Returns:
+            A note.
+        """  
         r = random.choice(cls.items())
         return r
 
     def __str__(self):
+        """ Returns a string representing the note name. 
+
+            e.g. str(Note.Ab) -> 'Ab'
+
+        Args:
+            None.
+
+        Returns:
+            A string representing a note's name.
+        """
         return self.name
 
 def notes_to_string(note_list):
@@ -176,6 +271,11 @@ def main():
     cf = interval_distance(Note.C, Note.F) # ->
     ag = interval_distance(Note.A, Note.G) # ->
     print(ac, cf, ag)
+
+    print(Interval.from_index(8))
+    print(Interval.from_index(-8))
+
+    print(str(Note.random()))
 
  
  
