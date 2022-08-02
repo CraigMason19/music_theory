@@ -24,7 +24,7 @@ Key of C
 	chords c d e f
 	parallel chords
 	seconday dominates:
-	printgrid
+ 
 
 
 [Test]
