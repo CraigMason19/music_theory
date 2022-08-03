@@ -43,6 +43,12 @@ class Interval(Enum):
             A class method to return the enums as a list.
         from_index(cls, index):
             A class method to return a enumeration based upon an index.
+        random(cls):
+            Returns a random interval.
+        __str__(self):
+            Returns the name of the interval.
+        __repr__(self):
+            Returns the Enum name.
     """
     Unison, m2, M2, m3, M3, P4, dim5, P5, m6, M6, m7, M7 = range(12) 
 
@@ -78,6 +84,46 @@ class Interval(Enum):
         index = _index_to_range(index)
         return Interval.items()[index]
 
+    @classmethod
+    def random(cls):
+        """ Returns a random interval. 
+
+            e.g. Interval.P4
+
+        Args:
+            None.
+
+        Returns:
+            A interval.
+        """  
+        return random.choice(cls.items())
+
+    def __str__(self):
+        """ Returns a string representing the interval name. 
+
+            e.g. str(Interval.P5) -> 'P5'
+
+        Args:
+            None.
+
+        Returns:
+            A string representing a interval's name.
+        """
+        return self.name
+
+    def __repr__(self):
+        """ Returns a string representing the interval. 
+
+            e.g. repr(Interval.P5) -> 'Interval.P5'
+
+        Args:
+            None.
+
+        Returns:
+            A string representing a interval.
+        """
+        return f'Interval.{self.name}'
+
 class Note(Enum):
     """ Represents a musical note starting at 'middle C'. Derived from the 
         Enum class.
@@ -97,6 +143,8 @@ class Note(Enum):
             Returns a random note.
         __str__(self):
             Returns the name of the note.
+        __repr__(self):
+            Returns the Enum name.
     """
     C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B = range(12) 
 
@@ -144,8 +192,7 @@ class Note(Enum):
         Returns:
             A note.
         """  
-        r = random.choice(cls.items())
-        return r
+        return random.choice(cls.items())
 
     def __str__(self):
         """ Returns a string representing the note name. 
@@ -159,6 +206,19 @@ class Note(Enum):
             A string representing a note's name.
         """
         return self.name
+
+    def __repr__(self):
+        """ Returns a string representing the class and note. 
+
+            e.g. repr(Note.Ab) -> 'Note.Ab'
+
+        Args:
+            None.
+
+        Returns:
+            A string representing a note.
+        """
+        return f'Note.{self.name}'
 
 def notes_to_string(note_list):
     """ Takes a list of notes and returns a string of note names. 
@@ -267,17 +327,38 @@ def transpose(note, interval, direction="u"):
 
 def main():
  
-    ac = interval_distance(Note.A, Note.C) # -> m3
-    cf = interval_distance(Note.C, Note.F) # ->
-    ag = interval_distance(Note.A, Note.G) # ->
-    print(ac, cf, ag)
+    note, interval = Note.random(), Interval.random()
 
-    print(Interval.from_index(8))
-    print(Interval.from_index(-8))
+    # Notes
+    print(f"Note: {note}:")
+    print(f"\tstr() -> {str(note)}")
+    print(f"\trepr() -> {repr(note)}\n")
 
-    print(str(Note.random()))
+    # Intervals
+    print(f"Interval: {interval}:")
+    print(f"\tstr() -> {str(interval)}")
+    print(f"\trepr() -> {repr(interval)}\n")
 
- 
+    print(f"Interval distances:")
+    for i in range(2):
+        note_a, note_b = Note.random(), Note.random()
+
+        dif = interval_distance(note_a, note_b) 
+        print(f"\t{note_a}, {note_b} -> {dif}")
+
+        dif = interval_distance(note_a, note_b, direction='down')  
+        print(f"\t{note_a}, {note_b} <- {dif}\n")
+
+    # Transpose
+    print(f"Transpose:")
+    for i in range(2):
+        note, interval = Note.random(), Interval.random()
+
+        new_note = transpose(note, interval)  
+        print(f"\t{note}, {interval} -> {new_note}")
+
+        new_note = transpose(note, interval, direction='down')  
+        print(f"\t{note}, {interval} <- {new_note}\n")
  
 
 if __name__ == '__main__':
