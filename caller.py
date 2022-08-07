@@ -8,10 +8,10 @@
 # TODO:
 #-------------------------------------------------------------------------------
 
-from notes import Note
+from notes import Note, Interval
 from scales import Scale, ScaleType
 import chords
-
+import scales
 
 
 def foobar(progression, chord_dict):
@@ -27,7 +27,7 @@ def foobar(progression, chord_dict):
 
 
 
-def main():
+def chord_progressions():
     # s = Scale(Note.C, ScaleType.Dorian)
 
     # print(s)
@@ -68,7 +68,22 @@ def main():
 
 
 
+def main():
+    # x = ['1', 'b3', '4', 'b5', '5', 'b7']
+    
+    # Gb, Ab, A, B, Db, D, E
+    # print(scales.formula_from_steps(sf))
 
+    print(Interval.P4.to_numeric())
+
+    # c = scales.formula_from_numerics(x)
+    # print(c)
+
+    # s = Scale(Note.C, ScaleType.HarmonicMinor)
+    # print(s)
+    # s = Scale(Note.C, ScaleType.MelodicMinor)
+    # print(s)
 
 if __name__ == '__main__':
+    # chord_progressions()
     main()

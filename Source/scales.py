@@ -15,7 +15,8 @@ from notes import Note, Interval, notes_to_string, intervals_to_string
 class ScaleType(Enum):
     (Major, Minor, 
     MajorPentatonic, MinorPentatonic, 
-    Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian) = range(11) 
+    Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian,
+    Blues, HarmonicMinor, MelodicMinor) = range(14) 
 
     @classmethod    
     def items(cls):
@@ -31,7 +32,7 @@ class ScaleType(Enum):
     def __repr__(self):
         return f'ScaleType.{self.name}'
 
-
+# 3 ways to load a scale
 formula_step_dict = {
     ScaleType.Major: ['w', 'w', 'h', 'w', 'w', 'w', 'h'],
     ScaleType.Minor: ['w', 'h', 'w', 'w', 'h', 'w', 'w'],
@@ -50,6 +51,12 @@ formula_interval_dict = {
     ScaleType.MinorPentatonic: [Interval.Unison, Interval.m3, Interval.P4, Interval.P5, Interval.m7],
 }
 
+formula_numeric_dict = {
+    ScaleType.Blues: ['1', 'b3', '4', 'b5', '5', 'b7'],
+    ScaleType.HarmonicMinor: ['1', '2', 'b3', '4', '5', 'b6', '7'],
+    ScaleType.MelodicMinor: ['1', '2', 'b3', '4', '5', '6', '7'],
+}
+
 def scale_from_steps(root, formula):
     notes = [Note.from_index(root.value)] # Add root first
     
@@ -65,28 +72,68 @@ def scale_from_steps(root, formula):
 
     return notes
 
-def scale_from_intervals(root, formula):   
-    return [Note.from_index(root.value + interval.value) for interval in formula]
+def formula_from_steps(formula):
+    notes = [Interval.Unison] # Add root first
+    
+    step_counter = 0
+    for step in formula[:-1]: # The last step will be the root
+        step = step.lower()
+        if (step == 'h') or (step == 'half'):
+            step_counter += 1
+        if (step == 'w') or (step == 'whole'):
+            step_counter += 2
 
+        notes.append(Interval.from_index(step_counter))
 
+    return notes
 
+def formula_from_numerics(formula):
+    return [Interval.from_numeric(n) for n in formula]
+
+def scale_from_intervals(root, interval_formula):   
+    return [Note.from_index(root.value + interval.value) for interval in interval_formula]
 
 class Scale:
+
     def __init__(self, root, scale_type):
         self.root, self.type = root, scale_type
         self._form()
 
     def _form(self):
-        if(self.type in formula_step_dict):
-                self.formula = formula_step_dict[self.type]
-                self.notes = scale_from_steps(self.root, self.formula)  
+        if(self.type in formula_interval_dict):
+            self.creation_formula = formula_interval_dict[self.type]
 
-        elif(self.type in formula_interval_dict):
-                self.formula = formula_interval_dict[self.type]
-                self.notes = scale_from_intervals(self.root, self.formula)  
+            self.interval_formula = self.creation_formula
+ 
+
+        elif(self.type in formula_step_dict):    
+            self.creation_formula = formula_step_dict[self.type]
+
+            # convert
+            self.interval_formula = formula_from_steps(formula_step_dict[self.type])
+ 
+
+
+
+        elif(self.type in formula_numeric_dict):
+            self.creation_formula = formula_numeric_dict[self.type]
+
+            # convert the numeric intervals into regular intervals and calculate the scale that way
+            self.interval_formula = formula_from_numerics(formula_numeric_dict[self.type]) 
+            
+
+
+
 
         else:
             raise ValueError(f'Scale is not in either formula dictionary {self.type}')
+
+        self.notes = scale_from_intervals(self.root, self.interval_formula) 
+        self.numeric_formula = [i.to_numeric() for i in self.interval_formula]
+
+      
+
+
 
     @property
     def name(self):
@@ -133,9 +180,12 @@ def main():
 
     print(f"\tRoot -> {scale.root}")
     print(f"\tType -> {scale.type}")
-    print(f"\tFormula -> {scale.formula})")
     print(f"\tNotes -> {notes_to_string(scale.notes)}")
     print(f"\tNumber of flats -> {scale.number_of_flats}\n")
+    print(f"\tCreation Formula -> {scale.creation_formula})")
+    print(f"\tInterval Formula -> {scale.interval_formula})")
+    print(f"\tNumeric Formula -> {scale.numeric_formula})")
+
 
     # Print modes
     note = Note.random()

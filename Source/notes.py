@@ -85,6 +85,38 @@ class Interval(Enum):
         return Interval.items()[index]
 
     @classmethod
+    def from_numeric(cls, numeric):
+        """ Returns a interval based upon a numeric interval value.
+            ('1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7')
+            
+            e.g. from_numeric('b3') -> Interval.m3
+
+        Args:
+            numeric:
+                The numeric interval to be translated.
+
+        Returns:
+            A interval.
+        """  
+        numerics = ['1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7']
+        index = numerics.index(numeric)
+        return Interval.items()[index]
+
+    def to_numeric(self):
+        """ Returns the numeric value of an interval. 
+
+            e.g. Interval.P4.to_numeric() -> '4'
+
+        Args:
+            None.
+
+        Returns:
+            A string representing the numeric value.
+        """  
+        numerics = ['1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7']
+        return numerics[self.value]
+
+    @classmethod
     def random(cls):
         """ Returns a random interval. 
 

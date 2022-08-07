@@ -78,6 +78,11 @@ class TestNotes(unittest.TestCase):
         self.assertEqual(Note.from_index(index - 27), Note.Ab)
     #endregion
 
+    #region Interval Numeric
+    def test_interval_from_numeric_000(self):
+        self.assertEqual(Interval.from_numeric('b3'), Interval.m3)
+    #endregion
+
     #region Interval Distance
     def test_interval_distance_same(self):    
         inteval, expected = interval_distance(Note.Bb, Note.Bb), Interval.Unison
