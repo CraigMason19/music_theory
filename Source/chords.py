@@ -19,7 +19,7 @@ cadence_dict = {"Plagal": "IV->I",
 }
 
 class ChordType(Enum):
-    (Major, Minor, Diminished) = range(3)
+    (Major, Minor, Diminished, Seven) = range(4)
 
 class Chord():
     def __init__(self, note, chord_type):
@@ -37,6 +37,9 @@ class Chord():
 
         elif self.chord_type == ChordType.Minor:
             return f"{self.root}m"
+
+        elif self.chord_type == ChordType.Seven:
+            return f"{self.root}7"
 
         return f"{self.root}M"
 
@@ -63,7 +66,7 @@ def chords_in_key(key, isMajor=True):
     return  {n[0]: Chord(n[1], n[2]) for n in zip(numerals, scale.notes, sequence)}
 
 def main():
-    c = Chord(Note.C, ChordType.Diminished)
+    c = Chord(Note.C, ChordType.Seven)
 
     print(str(c))
     print(repr(c))

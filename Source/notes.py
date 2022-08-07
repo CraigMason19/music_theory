@@ -43,6 +43,10 @@ class Interval(Enum):
             A class method to return the enums as a list.
         from_index(cls, index):
             A class method to return a enumeration based upon an index.
+        from_numeric(cls, numeric):
+            A class method to construct an interval from a numeric.
+        to_numeric(self):
+            Converts an interval to a numeric.
         random(cls):
             Returns a random interval.
         __str__(self):

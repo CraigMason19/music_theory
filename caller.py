@@ -12,7 +12,7 @@ from notes import Note, Interval
 from scales import Scale, ScaleType
 import chords
 import scales
-
+import notes as ns
 
 def foobar(progression, chord_dict):
     l = []
@@ -34,19 +34,32 @@ def chord_progressions():
     # print(str(s))
     # print(repr(s))
 
-    key = Note.C
-    cM = Scale(Note.C, ScaleType.Major)
-    paralell = Scale(Note.C, ScaleType.Minor)
+    key = Note.G
+    scale = Scale(key, ScaleType.Major)
+    paralell = Scale(key, ScaleType.Minor)
 
-    print(cM)
+    print(scale)
     print(paralell)
 
-    x = chords.chords_in_key(Note.C, True)
-    paralell_chords = chords.chords_in_key(Note.C, False) 
+    x = chords.chords_in_key(key, True)
+    paralell_chords = chords.chords_in_key(key, False) 
+
+# dominant is 5th up from root G->D
+# sec dom is everything else
+# [dominant] + [secondary_sominants]
+
+    dom_notes = [ns.transpose(n, Interval.P5) for n in scale.notes]
+    dom_chords = [chords.Chord(n, chords.ChordType.Seven) for n in dom_notes]
 
     table_data = [
-        list(x.keys()), 
         [str(chord) for chord in x.values()],
+        list(x.keys()), 
+        ["", "", "", "", "", "", "",],
+        [str(chord) for chord in dom_chords],
+
+        [f"V7/{dunno}" for dunno in list(x.keys())],
+
+
         ["", "", "", "", "", "", "",],
         [str(chord) for chord in paralell_chords.values()],
         list(paralell_chords.keys()),
@@ -60,7 +73,10 @@ def chord_progressions():
 # ]
  
     for row in table_data:
-        print("{: >5} {: >5} {: >5} {: >5} {: >5} {: >5} {: >5}".format(*row))
+        # print("{: >5} {: >5} {: >5} {: >5} {: >5} {: >5} {: >5}".format(*row))
+
+        print(("{: >10}" * 7).format(*row))
+
 
 
     # progression = ['I', 'V', 'vi', 'IV', 'IIIIIII']
@@ -85,5 +101,5 @@ def main():
     # print(s)
 
 if __name__ == '__main__':
-    # chord_progressions()
+    chord_progressions()
     main()

@@ -176,15 +176,14 @@ def main():
 
     print(f"{scale.name}:")
     print(f"\tstr() -> {str(scale)}")
-    print(f"\trepr() -> {repr(scale)}\n")
-
+    print(f"\trepr() -> {repr(scale)}")
     print(f"\tRoot -> {scale.root}")
     print(f"\tType -> {scale.type}")
     print(f"\tNotes -> {notes_to_string(scale.notes)}")
     print(f"\tNumber of flats -> {scale.number_of_flats}\n")
     print(f"\tCreation Formula -> {scale.creation_formula})")
     print(f"\tInterval Formula -> {scale.interval_formula})")
-    print(f"\tNumeric Formula -> {scale.numeric_formula})")
+    print(f"\tNumeric Formula -> {scale.numeric_formula})\n")
 
 
     # Print modes

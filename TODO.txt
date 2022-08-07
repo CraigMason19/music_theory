@@ -9,38 +9,19 @@ Chnage flat to sharp
 flat to natureal
 
 [Scales]
-Formula -> ['w', 'h', 'w', 'w', 'h', 'w', 'w'])
-
-step_formula
-interval_formula
-numeric_formula = [1,3,5,b6]
-
--> convert all to interval formula
-	-> self.formula // self.creation_formula
-	-> self.interval_formula
-	-> self.numeric_formula
-
+# Add a step formula - how to handle non 7 len Scales
+# A minor -> A -> C is minor 3rd, not whole or half
 
 Add degrees to scale??? [1, b3, 5] are just the same as intervals
 https://en.wikipedia.org/wiki/Degree_(music)#:~:text=In%20music%20theory%2C%20the%20scale,interval%20is%20major%20or%20minor.
 interval to degree
 
 
-add harmonic minor, natural minor, diminished etc..
-
-A# Harmonic minor
-	notes:		[a, b, c, d, e] etcc.
-	degrees:	[I 2 b3 4 aug5, 5] etc..
-	formula:	[W – W – H – W – W – W – H] etc..
-
 note generator -> continually print next note?? list to generator?
 
 
-[Keys]???
-Key of C
-	chords c d e f
-	parallel chords
-	seconday dominates:
+[Keys]
+
  
 
 
