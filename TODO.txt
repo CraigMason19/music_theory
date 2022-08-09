@@ -1,28 +1,34 @@
 [Structure]
-Remove playground.py
+
 
 [Chords]
-circle of 5ths
+    Circle of 5ths?
 
 [Notes]
-Chnage flat to sharp
-flat to natureal
+    complete tests, print out and read through & comment
+
+
+    Change flat to sharp
+        n.alter_sign('Db') -> 'C#'
+         
+    Double flats?
 
 [Scales]
-# Add a step formula - how to handle non 7 len Scales
-# A minor -> A -> C is minor 3rd, not whole or half
+    Relative scales?
+
+    Add a step formula - how to handle non 7 len Scales?
+        A minor -> A -> C is minor 3rd, not whole or half
 
 Add degrees to scale??? [1, b3, 5] are just the same as intervals
 https://en.wikipedia.org/wiki/Degree_(music)#:~:text=In%20music%20theory%2C%20the%20scale,interval%20is%20major%20or%20minor.
 interval to degree
 
 
-note generator -> continually print next note?? list to generator?
-
-
 [Keys]
-
- 
+    # note, major or minor?
+    Key(Note.G, 'major')
+    key.dominant
+    key.secondary dominants
 
 
 [Test]

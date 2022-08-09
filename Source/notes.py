@@ -177,6 +177,8 @@ class Note(Enum):
             A class method to return a enumeration based upon an index.
         random(cls):
             Returns a random note.
+        to_sharp(self):
+            Returns a string of a flat note as a sharp.
         __str__(self):
             Returns the name of the note.
         __repr__(self):
@@ -229,6 +231,23 @@ class Note(Enum):
             A note.
         """  
         return random.choice(cls.items())
+
+    def to_sharp(self):
+        """ Returns a sharp rather than a flat. 
+
+            e.g. Note.Eb.to_sharp() -> 'D#'
+
+        Args:
+            None.
+
+        Returns:
+            A string representing a note.
+        """  
+        if(len(self.name) == 2):
+            lower_note = Note.from_index(self.value-1)
+            return lower_note.name + '#'
+
+        return self.name
 
     def __str__(self):
         """ Returns a string representing the note name. 
@@ -362,7 +381,7 @@ def transpose(note, interval, direction="u"):
     raise ValueError(f'direction not recognized({direction})')
 
 def main():
- 
+    test_range = 3
     note, interval = Note.random(), Interval.random()
 
     # Notes
@@ -376,7 +395,7 @@ def main():
     print(f"\trepr() -> {repr(interval)}\n")
 
     print(f"Interval distances:")
-    for i in range(2):
+    for i in range(test_range):
         note_a, note_b = Note.random(), Note.random()
 
         dif = interval_distance(note_a, note_b) 
@@ -387,15 +406,14 @@ def main():
 
     # Transpose
     print(f"Transpose:")
-    for i in range(2):
+    for i in range(test_range):
         note, interval = Note.random(), Interval.random()
 
         new_note = transpose(note, interval)  
         print(f"\t{note}, {interval} -> {new_note}")
 
         new_note = transpose(note, interval, direction='down')  
-        print(f"\t{note}, {interval} <- {new_note}\n")
- 
+        print(f"\t{note}, {interval} <- {new_note}\n") 
 
 if __name__ == '__main__':
     main()

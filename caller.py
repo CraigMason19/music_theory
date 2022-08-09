@@ -85,20 +85,13 @@ def chord_progressions():
 
 
 def main():
-    # x = ['1', 'b3', '4', 'b5', '5', 'b7']
-    
-    # Gb, Ab, A, B, Db, D, E
-    # print(scales.formula_from_steps(sf))
+    x = ns.Note.Eb.to_sharp()
+    print(x)
+    # x = n.alter_sign()
 
-    print(Interval.P4.to_numeric())
-
-    # c = scales.formula_from_numerics(x)
-    # print(c)
-
-    # s = Scale(Note.C, ScaleType.HarmonicMinor)
-    # print(s)
-    # s = Scale(Note.C, ScaleType.MelodicMinor)
-    # print(s)
+ 
+    l = list(map(ns.Note.to_sharp, ns.Note.items()))
+    print(l)
 
 if __name__ == '__main__':
     chord_progressions()

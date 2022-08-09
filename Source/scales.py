@@ -97,43 +97,28 @@ class Scale:
 
     def __init__(self, root, scale_type):
         self.root, self.type = root, scale_type
-        self._form()
+        self._construct()
 
-    def _form(self):
+    # private so not to pollute the __init__ method
+    def _construct(self):
         if(self.type in formula_interval_dict):
             self.creation_formula = formula_interval_dict[self.type]
-
             self.interval_formula = self.creation_formula
- 
 
+        # If the formula is not in interval form, convert it first and then construct it from there
         elif(self.type in formula_step_dict):    
             self.creation_formula = formula_step_dict[self.type]
-
-            # convert
             self.interval_formula = formula_from_steps(formula_step_dict[self.type])
  
-
-
-
         elif(self.type in formula_numeric_dict):
             self.creation_formula = formula_numeric_dict[self.type]
-
-            # convert the numeric intervals into regular intervals and calculate the scale that way
             self.interval_formula = formula_from_numerics(formula_numeric_dict[self.type]) 
             
-
-
-
-
         else:
             raise ValueError(f'Scale is not in either formula dictionary {self.type}')
 
         self.notes = scale_from_intervals(self.root, self.interval_formula) 
-        self.numeric_formula = [i.to_numeric() for i in self.interval_formula]
-
-      
-
-
+        self.numeric_formula = [i.to_numeric() for i in self.interval_formula]  
 
     @property
     def name(self):
@@ -180,11 +165,10 @@ def main():
     print(f"\tRoot -> {scale.root}")
     print(f"\tType -> {scale.type}")
     print(f"\tNotes -> {notes_to_string(scale.notes)}")
-    print(f"\tNumber of flats -> {scale.number_of_flats}\n")
+    print(f"\tNumber of flats -> {scale.number_of_flats}")
     print(f"\tCreation Formula -> {scale.creation_formula})")
     print(f"\tInterval Formula -> {scale.interval_formula})")
     print(f"\tNumeric Formula -> {scale.numeric_formula})\n")
-
 
     # Print modes
     note = Note.random()
