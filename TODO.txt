@@ -1,28 +1,18 @@
-[Structure]
-
-
 [Chords]
     Circle of 5ths?
+    Sus2, Sus4, add 9, add 11?
 
 [Notes]
-    complete tests, print out and read through & comment
+    Complete tests, print out and read through & comment
 
-
-    Change flat to sharp
+    Change flat to sharp, and vice versa.
         n.alter_sign('Db') -> 'C#'
+	n.alter_sign('C#') -> 'Db'
          
     Double flats?
 
 [Scales]
     Relative scales?
-
-    Add a step formula - how to handle non 7 len Scales?
-        A minor -> A -> C is minor 3rd, not whole or half
-
-Add degrees to scale??? [1, b3, 5] are just the same as intervals
-https://en.wikipedia.org/wiki/Degree_(music)#:~:text=In%20music%20theory%2C%20the%20scale,interval%20is%20major%20or%20minor.
-interval to degree
-
 
 [Keys]
     # note, major or minor?
@@ -30,6 +20,5 @@ interval to degree
     key.dominant
     key.secondary dominants
 
-
 [Test]
-test random scale
+    Test random scale

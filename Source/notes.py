@@ -14,6 +14,7 @@ from enum import Enum
 
 def _index_to_range(index):
     """ Takes a index and converts it into the range -11 to +11.
+        12 would be an octave and so the note would not change. 
 
     Args:
         index:
@@ -73,9 +74,11 @@ class Interval(Enum):
     @classmethod
     def from_index(cls, index):
         """ Returns a interval based upon it's enumeration value (positive or 
-            negative). 
+            negative). Positive indices are counted from the start and negative 
+            indices are counted from the end.
 
             e.g. from_index(8) -> Interval.m6
+                 from_index(-8) -> Interval.M3
 
         Args:
             index:
@@ -203,10 +206,12 @@ class Note(Enum):
     @classmethod
     def from_index(cls, index):
         """ Returns a note based upon it's enumeration value (positive or 
-            negative). 
+            negative). Positive indices are counted from the start and negative 
+            indices are counted from the end.
 
             e.g. from_index(3) -> Note.Eb
-
+                 from_index(-3) -> Note.A
+                 
         Args:
             index:
                 The index of the value to be retrieved. Can be positive or 
@@ -381,6 +386,7 @@ def transpose(note, interval, direction="u"):
     raise ValueError(f'direction not recognized({direction})')
 
 def main():
+    """ Example Usage """
     test_range = 3
     note, interval = Note.random(), Interval.random()
 

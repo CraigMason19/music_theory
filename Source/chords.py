@@ -46,24 +46,6 @@ class Chord():
     def __repr__(self):
         return f"Chord({self.root}, {self.chord_type})"
  
-def chords_in_key(key, isMajor=True):
-    scale, numerals, sequence = None, None, None
-    
-    if isMajor:
-        numerals = ["I", "ii", "iii", "IV", "V", "vi", "vii"]
-        scale = Scale(key, ScaleType.Major)
-        sequence = [ChordType.Major, ChordType.Minor, ChordType.Minor, 
-                    ChordType.Major, ChordType.Major, ChordType.Minor, 
-                    ChordType.Diminished]
-        
-    else:
-        numerals = ["i", "ii", "III", "iv", "v", "VI", "VII"]
-        scale = Scale(key, ScaleType.Minor)
-        sequence = [ChordType.Minor, ChordType.Diminished, ChordType.Major, 
-                    ChordType.Minor, ChordType.Minor, ChordType.Major, 
-                    ChordType.Major]
-
-    return  {n[0]: Chord(n[1], n[2]) for n in zip(numerals, scale.notes, sequence)}
 
 def main():
     c = Chord(Note.C, ChordType.Seven)
