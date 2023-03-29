@@ -10,9 +10,9 @@
 
 from notes import Note, Interval
 from scales import Scale, ScaleType
+
 import chords
-import scales
-import notes as ns
+
 import keys
 
 #TODO change name
@@ -29,11 +29,11 @@ def foobar(progression, chord_dict, empty="X"):
 
 
 
-def chords(note, scale_type):
+def chords(note, key_type):
     ''' Shows how to call the chords in a scale type'''
-    print(f"Chords in {note} {scale_type}")
+    print(f"Chords in {note} {key_type}")
 
-    chords = keys.chords_in_key(note, scale_type) 
+    chords = keys.chords_in_key(note, key_type) 
     
     for _ in chords.values():
         print(f'\t{str(_)}')
@@ -41,7 +41,7 @@ def chords(note, scale_type):
 
 def chord_progressions():
     ''' Shows which chords match a numerical expresion in a key'''
-    chords = keys.chords_in_key(Note.C, ScaleType.Major)
+    chords = keys.chords_in_key(Note.C, keys.KeyType.Major)
 
     progression = ['I', 'V', 'vi', 'IV', 'IIIIIII']
     print(progression)
@@ -50,7 +50,7 @@ def chord_progressions():
 
 
 def main():
-    chords(Note.F, ScaleType.Major)
+    chords(Note.F, keys.KeyType.Major)
     chord_progressions()
 
 if __name__ == '__main__':

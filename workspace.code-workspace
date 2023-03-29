@@ -2,21 +2,26 @@
 	"folders": [
 		{
 			"path": "."
-		}
+		},
 	],
 
 	"settings": {
-		// //"python.defaultInterpreterPath": "${workspaceFolder}/.env/Scripts/python.exe",
-		// "terminal.integrated.env.windows": 
-		// {
-		// 	"PYTHONPATH": ".;./source;"
-		// },
+
+		"terminal.integrated.env.windows": 
+		{
+			"PYTHONPATH": ".;./Source;"
+		},
 							
 
-		// "python.autoComplete.extraPaths": [
-		// 	"./source",
-		// ],
+		"python.autoComplete.extraPaths": [
+			"./Source",
+		],
 
-		// "python.linting.pylintArgs": ["--init-hook"]
+		"python.linting.pylintArgs": [
+			"--init-hook"
+		],
+		"python.analysis.extraPaths": [
+			"./Source"
+		]
 	},
 }

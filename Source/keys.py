@@ -2,7 +2,7 @@
 # Name:        keys.py
 #
 # Notes:       Contains a KeyType class and methods for building and printing 
-#              keys and dominant keys
+#              keys, dominant and parallel keys.
 #
 # Links:
 #
@@ -30,7 +30,7 @@ class KeyType(Enum):
         random(cls):
             A class method to return a random key type.
         parralell(self):
-            A class method to return a parralell (opposite) key type.
+            A method to return a parralell (opposite) key type.
         __str__(self):
             Returns the name of the key type.
         __repr__(self):
@@ -67,10 +67,10 @@ class KeyType(Enum):
         return random.choice(cls.items())
 
 
-    def parralell(self):
+    def parallel(self):
         """ Returns the opposite KeyType. 
 
-            e.g. C Minor is the parralell of C Major.
+            e.g. C Minor is the parallel of C Major.
 
         Args:
             None.
@@ -113,7 +113,7 @@ class KeyType(Enum):
 def chords_in_key(note, key_type=KeyType.Major):
     """ Returns a dict representing all the chords in the key.
 
-        The key is a Roman numeral as used in traditional notation. 
+        The dict key is a Roman numeral as used in traditional notation. 
         A upper case numneral represents a major chord and a lower case numeral
         represents a minor chord (or diminished).
 
@@ -183,7 +183,6 @@ def pretty_print_key(note, key_type=KeyType.Major):
         Last row is the parralel chords in (the opposite key).
     
         E.g.
-
             Key of C Minor:
                     Cm      Ddim       EbM        Fm        Gm       AbM       BbM
                      i        ii       III        iv         v        VI       VII
@@ -204,7 +203,7 @@ def pretty_print_key(note, key_type=KeyType.Major):
             None.
     """
     chords = chords_in_key(note, key_type)
-    parallel_chords = chords_in_key(note, key_type.parralell())
+    parallel_chords = chords_in_key(note, key_type.parallel())
     dominant_chords = dominant_chords_in_key(note, key_type)
     
     print(f"Key of {note} {key_type}:")

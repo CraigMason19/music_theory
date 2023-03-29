@@ -9,8 +9,9 @@
 #-------------------------------------------------------------------------------
 
 import unittest
+
 from notes import Note
-# from chords import chords_in_key, Chord, ChordType
+from chords import Chord, ChordType
 
 class TestChords(unittest.TestCase):
     #---------------------------------------------------------------------------
@@ -41,30 +42,42 @@ class TestChords(unittest.TestCase):
     #---------------------------------------------------------------------------
 
     #region Chords Equal
-    # def test_chord_equal_A_major(self):
-    #     print('\t\ttest_chord_equal_A_major')
-    #     self.assertEqual(Chord(Note.A, ChordType.Major), Chord(Note.A, ChordType.Major))
 
-    # def test_chord_equal_Gb_minor(self):
-    #     print('\t\ttest_chord_equal_Gb_minor')
-    #     self.assertEqual(Chord(Note.Gb, ChordType.Minor), Chord(Note.Gb, ChordType.Minor))
+    def test_chord_equal_A_major(self):
+        print('\t\ttest_chord_equal_B_major')
+        self.assertEqual(Chord(Note.B, ChordType.Major), Chord(Note.B, ChordType.Major))
+
+    def test_chord_equal_Gb_minor(self):
+        print('\t\ttest_chord_equal_Gb_minor')
+        self.assertEqual(Chord(Note.Gb, ChordType.Minor), Chord(Note.Gb, ChordType.Minor))
+    
     #endregion
 
-    #region Chords in Major Key
-    # def test_chords_in_key_A_major(self):
-    #     print('\t\ttest_chords_in_key_A_major')
+    #region string representation
 
-    #     chord_dict = chords_in_key(Note.A, True)
-    #     expected = [Chord(Note.A, ChordType.Major),
-    #                 Chord(Note.B, ChordType.Minor),
-    #                 Chord(Note.Db, ChordType.Minor),
-    #                 Chord(Note.D, ChordType.Major),
-    #                 Chord(Note.E, ChordType.Major),
-    #                 Chord(Note.Gb, ChordType.Minor),
-    #                 Chord(Note.Ab, ChordType.Diminished)]
- 
-    #     self.assertCountEqual(list(chord_dict.values()), expected)
+    def test_str_equal_Gb_major(self):
+        print('\t\ttest_str_equal_Gb_major')
+        expected = str(Chord(Note.Gb, ChordType.Major))
+        self.assertEqual("GbM", expected)
+
+    def test_str_equal_Gb_minor(self):
+        print('\t\ttest_str_equal_Gb_minor')
+        expected = str(Chord(Note.Gb, ChordType.Minor))
+        self.assertEqual("Gbm", expected)
+        
+    def test_str_equal_Gb_diminished(self):
+        print('\t\ttest_str_equal_Gb_diminished')
+        expected = str(Chord(Note.Gb, ChordType.Diminished))
+        self.assertEqual("Gbdim", expected)
+
+    def test_str_equal_Gb_seven(self):
+        print('\t\ttest_str_equal_Gb_seven')
+        expected = str(Chord(Note.Gb, ChordType.Seven))
+        self.assertEqual("Gb7", expected)
+
     #endregion
+    
+
 
 if __name__ == '__main__':
     unittest.main()

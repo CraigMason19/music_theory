@@ -13,9 +13,11 @@ from enum import Enum
 from notes import Note
 from scales import Scale, ScaleType
 
-# Just out of interest
-cadence_dict = {"Plagal": "IV->I",
-                "Authentic": "V->I",
+# A cadence in music is a chord progression of at least 2 chords that ends a 
+# phrase or section of a piece of music.
+cadence_dict = {
+    "Plagal": ["IV", "I"],
+    "Authentic": ["V", "I"],
 }
 
 class ChordType(Enum):
