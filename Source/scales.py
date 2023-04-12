@@ -219,7 +219,11 @@ def _intervals_from_numerics(formula):
 #endregion
 
 class Scale:
-    """ A class representing a Scale (A collection of musical notes). 
+    """ A class representing a Scale (A collection of musical notes).
+
+        Note: There isn't a step_fomula attribute, because not every scale can
+        represent them. The pentatonic scale for example, will cover steps
+        greater than a whole (2 semi-tones).
     
     Attributes:
         root:
@@ -252,7 +256,7 @@ class Scale:
         __repr__(self):
             Returns a string representation of the scale and type.
     """
-    def __init__(self, root, scale_type):
+    def __init__(self, root, scale_type=ScaleType.Major):
         """ Builds the scale from a root note and a scale type. 
 
         Args:

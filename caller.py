@@ -1,7 +1,8 @@
 #-------------------------------------------------------------------------------
 # Name:        caller.py
 #
-# Notes:       A caller that shows the usage of the music classes.
+# Notes:       A caller that shows the usage of the music classes. The idea is
+#              to help me write music.
 #
 # Links:
 #
@@ -13,45 +14,33 @@ from scales import Scale, ScaleType
 
 import chords
 
-import keys
+from keys import Key, KeyType, find_chords_from_progression
 
-#TODO change name
-# map progression???
-def foobar(progression, chord_dict, empty="X"):
-    l = []
-    for chord in progression:
-        if chord in chord_dict:
-            l.append(str(chord_dict[chord]))
-        else:
-            l.append(empty)
+def chord_progressions(key, progression):
+    """ An example of how to find chord progressions in a key. """
+    chords = find_chords_from_progression(key, progression)
 
-    return l
+    # Printouts
+    key.pretty_print(True, True)
 
-
-
-def chords(note, key_type):
-    ''' Shows how to call the chords in a scale type'''
-    print(f"Chords in {note} {key_type}")
-
-    chords = keys.chords_in_key(note, key_type) 
-    
-    for _ in chords.values():
-        print(f'\t{str(_)}')
-     
-
-def chord_progressions():
-    ''' Shows which chords match a numerical expresion in a key'''
-    chords = keys.chords_in_key(Note.C, keys.KeyType.Major)
-
-    progression = ['I', 'V', 'vi', 'IV', 'IIIIIII']
-    print(progression)
-    print(foobar(progression, chords))
-
-
+    print("Progresion:")
+    print(f"\t{progression}")
+    print(f"\t{chords}")
 
 def main():
-    chords(Note.F, keys.KeyType.Major)
-    chord_progressions()
+    # Using my song SadHappy to understand how to use the music classes.
+    #
+    # I, ii, IV, parallel VII
+    key = Key(Note.A, KeyType.Major) 
+    chord_progressions(key, ['I', 'ii', 'IV', 'IIIIIII'])
+
+    scales = []
+    scales.append(Scale(Note.A, ScaleType.Major))
+    scales.append(Scale(Note.B, ScaleType.Minor))
+
+    for scale in scales:
+        print(f"\t{scale}")
+        # print(f"\t{scale.interval_formula}")
 
 if __name__ == '__main__':
     main()

@@ -112,7 +112,7 @@ class KeyType(Enum):
 
 
 class Key:
-    def __init__(self, root, key_type):
+    def __init__(self, root, key_type=KeyType.Major):
         self.root = root
         self.type = key_type
 
@@ -129,6 +129,20 @@ class Key:
             A Key.
         """  
         return Key(Note.random(), KeyType.random())
+
+    @property
+    def parellel(self):
+        """ Returns the paralell (opposite) key. 
+
+            e.g. C Minor -> C Major
+
+        Args:
+            None.
+
+        Returns:
+            A Key.
+        """  
+        return Key(self.root, self.type.parallel())
 
     @property
     def name(self):
@@ -180,8 +194,7 @@ class Key:
         return  {n[0]: Chord(n[1], n[2]) for n in zip(numerals, scale.notes, sequence)}
  
     def parallel_chords(self):
-        parallel = Key(self.root, self.type.parallel())
-        return parallel.chords()
+        return self.parellel.chords()
 
     def dominant_chords(self):
         """ Returns a dict representing all the chords in dominant the key.
@@ -212,9 +225,6 @@ class Key:
         dom_chords = [Chord(note, ChordType.Seven) for note in dom_notes]
 
         return {f'V7/{n[0]}': n[1] for n in zip(chords.keys(), dom_chords)}
-
-
-
 
     def pretty_print(self, dominant=False, parallel=False):
         """ Prints out the key information in a formatted table view. 
@@ -278,6 +288,21 @@ class Key:
     def __repr__(self):
         return f'Key({self.root} {self.type})' 
 
+def find_chords_from_progression(key, progression, error='X'):
+    ''' Shows which chords match a numerical expresion in a key'''
+    chord_dict = key.chords()
+
+    l = []
+    for numeral in progression:
+        if numeral in chord_dict:
+            l.append(str(chord_dict[numeral]))
+        else:
+            l.append(error)
+
+    return l
+
+
+
 def main():
     """ Example Usage """
     key = Key.random()
@@ -287,6 +312,7 @@ def main():
     print(f"\trep() -> {repr(key)}")
     print(f"\tRoot -> {key.root}")
     print(f"\tType -> {key.type}")
+    print(f"\tParallel -> {key.parellel}")
 
     print(f"\tChords:")
     for numeral, chord in key.chords().items():

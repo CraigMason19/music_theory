@@ -11,7 +11,7 @@
 import unittest
 from notes import Note
 from chords import Chord, ChordType
-from keys import KeyType, chords_in_key, dominant_chords_in_key
+from keys import Key, KeyType
 
 class TestChords(unittest.TestCase):
     #---------------------------------------------------------------------------
@@ -45,7 +45,7 @@ class TestChords(unittest.TestCase):
     def test_chords_in_key_A_major(self):
         print('\t\ttest_chords_in_key_A_major')
 
-        chord_dict = chords_in_key(Note.A)
+        chord_dict = Key(Note.A).chords()
 
         expected = [Chord(Note.A, ChordType.Major),
                     Chord(Note.B, ChordType.Minor),
@@ -62,7 +62,7 @@ class TestChords(unittest.TestCase):
     def test_chords_in_key_C_minor(self):
         print('\t\ttest_chords_in_key_C_minor')
 
-        chord_dict = chords_in_key(Note.C, KeyType.Minor)
+        chord_dict = Key(Note.C, KeyType.Minor).chords()
 
         expected = [Chord(Note.C, ChordType.Minor),
                     Chord(Note.D, ChordType.Diminished),
@@ -79,7 +79,7 @@ class TestChords(unittest.TestCase):
     def test_paralell_chords_from_key_A_major(self):
         print('\t\ttest_paralell_chords_from_key_A_major')
 
-        chord_dict = chords_in_key(Note.A, KeyType.Major.parallel())
+        chord_dict = Key(Note.A).parallel_chords()
 
         expected = [Chord(Note.A, ChordType.Minor),
                     Chord(Note.B, ChordType.Diminished),
@@ -94,7 +94,7 @@ class TestChords(unittest.TestCase):
     def test_paralell_chords_from_key_C_minor(self):
         print('\t\ttest_paralell_chords_from_key_C_minor')
 
-        chord_dict = chords_in_key(Note.C, KeyType.Minor.parallel())
+        chord_dict = Key(Note.C, KeyType.Minor).parallel_chords()
 
         expected = [Chord(Note.C, ChordType.Major),
                     Chord(Note.D, ChordType.Minor),
@@ -111,7 +111,7 @@ class TestChords(unittest.TestCase):
     def test_dominant_chords_from_key_A_major(self):
         print('\t\ttest_dominant_chords_from_key_A_major')
 
-        chord_dict = dominant_chords_in_key(Note.A, KeyType.Major)
+        chord_dict = Key(Note.A, KeyType.Major).dominant_chords()
 
         expected = [Chord(Note.E, ChordType.Seven),
                     Chord(Note.Gb, ChordType.Seven),
@@ -126,7 +126,7 @@ class TestChords(unittest.TestCase):
     def test_dominant_chords_from_key_C_minor(self):
         print('\t\ttest_dominant_chords_from_key_C_minor')
 
-        chord_dict = dominant_chords_in_key(Note.C, KeyType.Minor)
+        chord_dict = Key(Note.C, KeyType.Minor).dominant_chords()
 
         expected = [Chord(Note.G, ChordType.Seven),
                     Chord(Note.A, ChordType.Seven),
