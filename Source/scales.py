@@ -11,14 +11,16 @@
 
 import random
 from enum import Enum
+
 from notes import Note, Interval, notes_to_string, intervals_to_string
 
 class ScaleType(Enum):
-    """ Represents a scale type. This determines how the scale will be constructed.
-        Derived from the Enum class.
+    """ Represents a type of scale (e.g. minor, major, blues, lydian, etc...).
+        This determines how the scale will be constructed. Derived from the Enum
+        class.
     
     Attributes:
-        class attributes:
+        scale type attributes:
             14 class attributes representing a Enum.
 
     Methods:
@@ -38,7 +40,7 @@ class ScaleType(Enum):
 
     @classmethod    
     def items(cls):
-        """ Returns a list of the scale enumerations. 
+        """ A class method that returns a list of the scale enumerations. 
 
             e.g. [ScaleType.Minor, ScaleType.Major ... ]
 
@@ -46,13 +48,13 @@ class ScaleType(Enum):
             None.
 
         Returns:
-            A list of scale types.
+            A list of ScaleTypes.
         """  
         return [n for n in cls]
 
     @classmethod
     def random(cls):
-        """ Returns a random scale. 
+        """ A class method that returns a random scale. 
 
             e.g. ScaleType.MelodicMinor
 
@@ -86,11 +88,14 @@ class ScaleType(Enum):
             None.
 
         Returns:
-            A string representing the scale's name.
+            A string representing the ScaleType.
         """
         return f'ScaleType.{self.name}'
 
-# 3 ways to load a scale (step formula, interval, formula)
+#region ScaleFormulas
+
+# 3 ways to load a scale (step formula, interval, formula). 
+
 formula_step_dict = {
     ScaleType.Major: ['w', 'w', 'h', 'w', 'w', 'w', 'h'],
     ScaleType.Minor: ['w', 'h', 'w', 'w', 'h', 'w', 'w'],
@@ -115,52 +120,159 @@ formula_numeric_dict = {
     ScaleType.MelodicMinor: ['1', '2', 'b3', '4', '5', '6', '7'],
 }
 
-def scale_from_steps(root, formula):
+#endregion
+
+#region ScaleCreationMethods
+
+def _notes_from_steps(root, formula):
+    """ Returns a list of notes comprising a scale from a root note and a step
+        formula. 
+
+        e.g. _notes_from_steps(Note.Bb, ['w', 'w', 'h', 'w', 'w', 'h', 'w'])
+            [Note.Bb, Note.C, Note.D, Note.Eb, Note.F, Note.G, Note.Ab]
+
+    Args:
+        root:
+            The root Note to build the scale from.
+        formula:
+            The step formula to construct the note sequence. Made of h's and w's.
+            (half and whole steps).
+
+    Returns:
+        A list of Notes.
+    """  
     notes = [Note.from_index(root.value)] # Add root first
     
     step_counter = 0
-    for step in formula[:-1]: # The last step will be the root
+    for step in formula[:-1]: # The last step will be the root, completing the scale.
         step = step.lower()
-        if (step == 'h') or (step == 'half'):
+        if step in ['h', 'half']:
             step_counter += 1
-        if (step == 'w') or (step == 'whole'):
+        if step in ['w', 'whole']:
             step_counter += 2
 
         notes.append(Note.from_index(root.value + step_counter))
 
     return notes
 
-def interval_formula_from_steps(formula):
-    notes = [Interval.Unison] # Add root first
+def _notes_from_intervals(root, formula):   
+    """ Returns a list of notes comprising a scale from a root note and a interval
+        formula.
+
+        e.g. _notes_from_intervals(Note.C [Unison, M2, M3, P4, P5, M6, M7])
+            [C, D, E, F, G, A, B]
+
+    Args:
+        formula:
+            The interval formula to construct the Note sequence. 
+
+    Returns:
+        A list of Notes.
+    """  
+    return [Note.from_index(root.value + interval.value) for interval in formula]
+
+def _intervals_from_steps(formula):
+    """ Returns a list of intervals comprising a scale formula derived from a step
+        formula. Essentially converts a step formula into a interval formula.
+
+        e.g. _intervals_from_steps(['w', 'w', 'h', 'w', 'w', 'w', 'h'])
+            [Unison, M2, M3, P4, P5, M6, M7]
+
+    Args:
+        formula:
+            The step formula to construct the Interval sequence. Made of h's and w's.
+            (half and whole steps).
+
+    Returns:
+        A list of Intervals.
+    """  
+    intervals = [Interval.Unison] # Add root first
     
     step_counter = 0
-    for step in formula[:-1]: # The last step will be the root
+    for step in formula[:-1]: # The last step will be the root, completing the scale.
         step = step.lower()
-        if (step == 'h') or (step == 'half'):
+        if step in ['h', 'half']:
             step_counter += 1
-        if (step == 'w') or (step == 'whole'):
+        if step in ['w', 'whole']:
             step_counter += 2
 
-        notes.append(Interval.from_index(step_counter))
+        intervals.append(Interval.from_index(step_counter))
 
-    return notes
+    return intervals
 
-def interval_formula_from_numerics(formula):
+def _intervals_from_numerics(formula):
+    """ Returns a list of intervals comprising a scale formula derived from a step
+        formula. Essentially converts a step formula into a interval formula.
+
+        e.g. _intervals_from_numerics(['1', '2', 'b3', '4', '5', 'b6', '7'])
+            [Unison, M2, m3, P4, P5, m6, M7]
+
+    Args:
+        formula:
+            The numeric formula to construct the Interval sequence. 
+
+    Returns:
+        A list of Intervals.
+    """  
     return [Interval.from_numeric(n) for n in formula]
 
-def scale_from_intervals(root, interval_formula):   
-    return [Note.from_index(root.value + interval.value) for interval in interval_formula]
+#endregion
 
 class Scale:
+    """ A class representing a Scale (A collection of musical notes). 
+    
+    Attributes:
+        root:
+            The root Note of the scale.
+        type:
+            The type of scale (e.g. minor, major, blues, lydian, etc...).
+        notes:
+            A list of notes for the scale
+        creation_formula:
+            The formula used to create the scale.
+        interval_formula:
+            A list of intervals describing the scale.
+        numeric_formula:
+            A list of numerics describing the scale.
+        name:
+            A property that returns the name of the scale.
+        number_of_flats:
+            A property that returns the number of flats in the scale.
+
+    Methods:        
+        __init__(self, root, scale_type):
+            Initialises the root and scale type, then calls _construct().
+        _construct(self):
+            Constructs the scale from the root and scale type in __init__().
+            Put into it's own private method so that __init__() remains readable. 
+        random(cls):
+            A class method to return a random scale (root and type).
+        __str__(self):
+            returns a string representation of the scale, type and notes.
+        __repr__(self):
+            Returns a string representation of the scale and type.
+    """
     def __init__(self, root, scale_type):
+        """ Builds the scale from a root note and a scale type. 
+
+        Args:
+            root:
+                The note to build the scale from.
+            scale_type:
+                The type of scale (e.g. minor, major, blues, lydian, etc...
+
+        Returns:
+            None.        
+        """
         self.root, self.type = root, scale_type
         self._construct()
 
     def _construct(self):
-        """ Method is private so not to pollute the __init__ method. 
+        """ Method is private so not to pollute the __init__() method. 
 
             Build the scale from 3 different ways. Some scales are defined by intervals, 
-            some are defined by steps and some are defined by numerics.
+            some are defined by steps and some are defined by numerics. They can also
+            have a different number of notes in them.
 
         Args:
             None.
@@ -184,7 +296,7 @@ class Scale:
             steps = formula_step_dict[self.type]
 
             self.creation_formula = steps
-            self.interval_formula = interval_formula_from_steps(steps)
+            self.interval_formula = _intervals_from_steps(steps)
  
         # Last way to construct a scale is from numerics.
         # e.g. (1 b3 4 b5 5 b7) -> (Unison, m3, P4, dim5 5 m7)
@@ -192,18 +304,18 @@ class Scale:
             numerics = formula_numeric_dict[self.type]
 
             self.creation_formula = numerics
-            self.interval_formula = interval_formula_from_numerics(numerics) 
+            self.interval_formula = _intervals_from_numerics(numerics) 
             
         else:
             raise ValueError(f'Scale is not in either formula dictionary ({self.type})')
 
         # Once we have a formula in interval format we can build the scale from it.
-        self.notes = scale_from_intervals(self.root, self.interval_formula) 
+        self.notes = _notes_from_intervals(self.root, self.interval_formula) 
         self.numeric_formula = [i.to_numeric() for i in self.interval_formula]  
 
     @property
     def name(self):
-        """ Returns the name of the scale. 
+        """ Returns the name of the scale, the root and scale type. 
 
             e.g. 'C MAJOR'
 
@@ -235,7 +347,7 @@ class Scale:
             None.
 
         Returns:
-            An Scale.
+            A Scale.
         """
         return Scale(Note.random(), ScaleType.random())
 
@@ -270,7 +382,7 @@ def modes_from_note(note):
 
         Each subsequent mode starts from the next note in the scale (effectively 
         shifts the notes up). This repeats until it wraps back to the start.
-        There are always 7 modes and they are always in the same order and are
+        There are always 7 modes and they are always in the same order. Theyare
         named (note -> mode).
 
         e.g. Mode 1 - C Ionian - C D E F G A B
@@ -315,7 +427,7 @@ def main():
     print(f"\tInterval Formula -> {scale.interval_formula})")
     print(f"\tNumeric Formula -> {scale.numeric_formula})\n")
 
-    # Print modes
+    # Modes
     note = Note.random()
     print(f"Modes of {note}:")
     for mode in modes_from_note(note):

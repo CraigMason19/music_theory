@@ -12,9 +12,11 @@
 import random
 from enum import Enum
 
+# Single underscore indicates that this function is not meant to be imported from
+# other modules.
 def _index_to_range(index):
-    """ Takes a index and converts it into the range -11 to +11.
-        12 would be an octave and so the note would not change. 
+    """ Takes a index and converts it into the range -11 to +11 (+ or - Interval 
+        or note). 12 would be an octave and so the note would not change. 
 
     Args:
         index:
@@ -36,20 +38,20 @@ class Interval(Enum):
         Enum class.
     
     Attributes:
-        class attributes:
-            12 class attributes representing a Enum .
+        interval attributes:
+            12 class attributes representing interval enumerations.
 
     Methods:
         items(cls):
             A class method to return the enums as a list.
         from_index(cls, index):
-            A class method to return a enumeration based upon an index.
+            A class method to return a enum based upon an index.
         from_numeric(cls, numeric):
             A class method to construct an interval from a numeric.
         to_numeric(self):
             Converts an interval to a numeric.
         random(cls):
-            Returns a random interval.
+            A class method that returns a random interval.
         __str__(self):
             Returns the name of the interval.
         __repr__(self):
@@ -59,7 +61,7 @@ class Interval(Enum):
 
     @classmethod    
     def items(cls):
-        """ Returns a list of the interval enumerations. 
+        """ A class method that returns a list of the interval enumerations. 
 
             e.g. [Interval.Unison, Interval.m2, ... ]
 
@@ -73,9 +75,9 @@ class Interval(Enum):
  
     @classmethod
     def from_index(cls, index):
-        """ Returns a interval based upon it's enumeration value (positive or 
-            negative). Positive indices are counted from the start and negative 
-            indices are counted from the end.
+        """ A class methd that returns a interval based upon it's enumeration 
+            value (positive or negative). Positive indices are counted from the
+            start and negative indices are counted from the end.
 
             e.g. from_index(8) -> Interval.m6
                  from_index(-8) -> Interval.M3
@@ -86,14 +88,15 @@ class Interval(Enum):
                 negative.
 
         Returns:
-            A interval.
+            A Interval.
         """  
         index = _index_to_range(index)
         return Interval.items()[index]
 
     @classmethod
     def from_numeric(cls, numeric):
-        """ Returns a interval based upon a numeric interval value.
+        """ A class method that returns a interval based upon a numeric interval
+            value.
             ('1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7')
             
             e.g. from_numeric('b3') -> Interval.m3
@@ -103,7 +106,7 @@ class Interval(Enum):
                 The numeric interval to be translated.
 
         Returns:
-            A interval.
+            A Interval.
         """  
         numerics = ['1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7']
         index = numerics.index(numeric)
@@ -125,7 +128,7 @@ class Interval(Enum):
 
     @classmethod
     def random(cls):
-        """ Returns a random interval. 
+        """ A class method that returns a random interval. 
 
             e.g. Interval.P4
 
@@ -170,7 +173,7 @@ class Note(Enum):
         NOTE: Can't have sharps (#) in variable names
 
     Attributes:
-        class attributes:
+        note attributes:
             12 class attributes representing note enumerations.
 
     Methods:
@@ -179,7 +182,7 @@ class Note(Enum):
         from_index(cls, index):
             A class method to return a enumeration based upon an index.
         random(cls):
-            Returns a random note.
+            A class method that returns a random note.
         to_sharp(self):
             Returns a string of a flat note as a sharp.
         __str__(self):
@@ -191,7 +194,7 @@ class Note(Enum):
 
     @classmethod    
     def items(cls):
-        """ Returns a list of the note enumerations. 
+        """ A class method that returns a list of the note enumerations. 
 
             e.g. [Note.C, Note.Db, ... ]
 
@@ -205,9 +208,9 @@ class Note(Enum):
  
     @classmethod
     def from_index(cls, index):
-        """ Returns a note based upon it's enumeration value (positive or 
-            negative). Positive indices are counted from the start and negative 
-            indices are counted from the end.
+        """ A class method that returns a note based upon it's enumeration
+            value (positive or negative). Positive indices are counted from
+            the start and negative indices are counted from the end.
 
             e.g. from_index(3) -> Note.Eb
                  from_index(-3) -> Note.A
@@ -218,14 +221,14 @@ class Note(Enum):
                 negative.
 
         Returns:
-            A note.
+            A Note.
         """  
         index = _index_to_range(index)
         return Note.items()[index]
 
     @classmethod
     def random(cls):
-        """ Returns a random note. 
+        """ A class method that returns a random note. 
 
             e.g. Note.Ab
 
@@ -233,7 +236,7 @@ class Note(Enum):
             None.
 
         Returns:
-            A note.
+            A Note.
         """  
         return random.choice(cls.items())
 
@@ -249,7 +252,7 @@ class Note(Enum):
             A string representing a note.
         """  
         if(len(self.name) == 2):
-            lower_note = Note.from_index(self.value-1)
+            lower_note = Note.from_index(self.value-1) # move down a semitone
             return lower_note.name + '#'
 
         return self.name
@@ -268,7 +271,7 @@ class Note(Enum):
         return self.name
 
     def __repr__(self):
-        """ Returns a string representing the class and note. 
+        """ Returns a string representing the note. 
 
             e.g. repr(Note.Ab) -> 'Note.Ab'
 
@@ -279,6 +282,8 @@ class Note(Enum):
             A string representing a note.
         """
         return f'Note.{self.name}'
+
+#region Functions
 
 def notes_to_string(note_list):
     """ Takes a list of notes and returns a string of note names. 
@@ -304,7 +309,7 @@ def intervals_to_string(interval_list):
             The list of intervals to be converted to a string.
 
     Returns:
-        The string of interval names
+        The string of interval names.
     """  
     return ', '.join([i.name for i in interval_list])
 
@@ -327,7 +332,7 @@ def interval_distance(first_note, second_note, direction="u"):
             "u", "up", "above", "d", "down" or "below" in any case.
 
     Returns:
-        A interval representing the difference between two notes.
+        A Interval representing the difference between two notes.
 
     Raises:
         ValueError:
@@ -385,22 +390,24 @@ def transpose(note, interval, direction="u"):
 
     raise ValueError(f'direction not recognized({direction})')
 
+#endregion
+
 def main():
     """ Example Usage """
     test_range = 3
     note, interval = Note.random(), Interval.random()
 
     # Notes
-    print(f"Note: {note}:")
+    print(f"Note {note}:")
     print(f"\tstr() -> {str(note)}")
     print(f"\trepr() -> {repr(note)}\n")
 
     # Intervals
-    print(f"Interval: {interval}:")
+    print(f"Interval {interval}:")
     print(f"\tstr() -> {str(interval)}")
     print(f"\trepr() -> {repr(interval)}\n")
 
-    print(f"Interval distances:")
+    print(f"Interval distances")
     for i in range(test_range):
         note_a, note_b = Note.random(), Note.random()
 

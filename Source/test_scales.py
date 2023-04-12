@@ -9,7 +9,7 @@
 #-------------------------------------------------------------------------------
 
 import unittest
-from notes import Note
+from notes import Note, Interval
 import scales as s
 
 class TestScales(unittest.TestCase):
@@ -95,6 +95,45 @@ class TestScales(unittest.TestCase):
         scale = s.Scale(Note.F, s.ScaleType.MinorPentatonic)
         self.assertEqual(scale.notes, [Note.F, Note.Ab, Note.Bb, Note.C, Note.Eb])
     #endregion
+
+    #region NotesFromSteps
+    def test_c_major_notes_from_steps(self):
+        notes = s._notes_from_steps(Note.C, 'wwhwwwh')
+        expected = [Note.C, Note.D, Note.E, Note.F, Note.G, Note.A, Note.B]
+        self.assertEqual(notes, expected)
+
+    def test_Bb_mixolydian_notes_from_steps(self):
+        notes = s._notes_from_steps(Note.Bb, ['w', 'w', 'h', 'w', 'w', 'h', 'w'])
+        expected = [Note.Bb, Note.C, Note.D, Note.Eb, Note.F, Note.G, Note.Ab]
+        self.assertEqual(notes, expected)
+    #endregion
+
+    #region IntervalsFromSteps
+    def test_major_intervals_from_steps(self):
+        intervals = s._intervals_from_steps(['w', 'w', 'h', 'w', 'w', 'w', 'h'])
+        expected = [Interval.Unison, Interval.M2, Interval.M3, Interval.P4, Interval.P5, Interval.M6, Interval.M7]
+        self.assertEqual(intervals, expected)
+    #endregion
+
+    #region IntervalsFromNumerics
+    def test_major_intervals_from_numerics(self):
+        intervals = s._intervals_from_numerics(['1', '2', '3', '4', '5', '6', '7'])
+        expected = [Interval.Unison, Interval.M2, Interval.M3, Interval.P4, Interval.P5, Interval.M6, Interval.M7]
+        self.assertEqual(intervals, expected)
+
+    def test_harmonic_minor_intervals_from_numerics(self):
+        intervals = s._intervals_from_numerics(['1', '2', 'b3', '4', '5', 'b6', '7'])
+        expected = [Interval.Unison, Interval.M2, Interval.m3, Interval.P4, Interval.P5, Interval.m6, Interval.M7]
+        self.assertEqual(intervals, expected)
+    #endregion
+
+    #region NotesFromIntervals
+    def test_C_major_notes_from_intervals(self):
+        notes = s._notes_from_intervals(Note.C, [Interval.Unison, Interval.M2, Interval.M3, Interval.P4, Interval.P5, Interval.M6, Interval.M7])
+        expected = [Note.C, Note.D, Note.E, Note.F, Note.G, Note.A, Note.B]
+        self.assertEqual(notes, expected)
+    #endregion
+
 
 if __name__ == '__main__':
     unittest.main()
