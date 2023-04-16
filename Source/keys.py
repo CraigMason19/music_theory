@@ -54,7 +54,7 @@ class KeyType(Enum):
 
     @classmethod
     def random(cls):
-        """ A class ethod that eturns a random key type. 
+        """ A class method that returns a random key type. 
 
             e.g. KeyType.Major
 
