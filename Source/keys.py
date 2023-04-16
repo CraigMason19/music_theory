@@ -1,8 +1,8 @@
 #-------------------------------------------------------------------------------
 # Name:        keys.py
 #
-# Notes:       Contains a KeyType class and methods for building and printing 
-#              keys, dominant and parallel keys.
+# Notes:       Contains KeyType and Key class and methods for building and 
+#              printing standard, dominant and parallel keys.
 #
 # Links:
 #
@@ -21,7 +21,7 @@ class KeyType(Enum):
     """ Represents a key type. Keys are either Major or Minor.
     
     Attributes:
-        class attributes:
+        Type attributes:
             2 class attributes representing a Enum.
 
     Methods:
@@ -29,8 +29,8 @@ class KeyType(Enum):
             A class method to return the enums as a list.
         random(cls):
             A class method to return a random key type.
-        parralell(self):
-            A method to return a parralell (opposite) key type.
+        parallel(self):
+            A method to return a parallel (opposite) key type.
         __str__(self):
             Returns the name of the key type.
         __repr__(self):
@@ -40,7 +40,7 @@ class KeyType(Enum):
 
     @classmethod    
     def items(cls):
-        """ Returns a list of the key enumerations. 
+        """ A class method that returns a list of the key enumerations. 
 
             e.g. [KeyType.Major, KeyType.Minor ... ]
 
@@ -54,7 +54,7 @@ class KeyType(Enum):
 
     @classmethod
     def random(cls):
-        """ Returns a random key. 
+        """ A class ethod that eturns a random key type. 
 
             e.g. KeyType.Major
 
@@ -83,9 +83,8 @@ class KeyType(Enum):
          
         return KeyType.Major
 
-
     def __str__(self):
-        """ Returns a string representing the key name. 
+        """ Returns a string representing the key type name. 
 
             e.g. str(KeyType.Major) -> 'Major'
 
@@ -106,19 +105,62 @@ class KeyType(Enum):
             None.
 
         Returns:
-            A string representing the key's name.
+            A string representing the key type's name.
         """
         return f'KeyType.{self.name}'
 
-
 class Key:
+    """ Represents a musical key. A key is important to find what chords can be 
+        used.
+
+    Attributes:
+        root:
+            A note that the key starts on. (defines the I chord)
+        type:
+            A KeyType. (Major or Minor)
+
+    Methods:
+        __init__(root, key_type=KeyType.Major):
+            Contructs the key.
+        random(cls):
+            A class method that returns a random Key from a random Note.
+        parallel(self):
+            Returns the paralell (opposite) key.
+        name(self):
+            A property that returns the name of the key.
+        chords(self):
+            Returns a dict containing the chords of the key.
+        parallel_chords(self):
+            Returns a dict containing the parallel chords of the key.
+        dominant_chords(self):
+            Returns a dict containing the dominant chords of the key.
+        pretty_print(self, dominant=False, parallel=False):
+            Prints out the chords in a easy to read table format.
+        __str__(self):
+            Returns the name of the key.
+        __repr__(self):
+            Returns the name of the key.
+    """
     def __init__(self, root, key_type=KeyType.Major):
+        """ Constructs the key 
+
+            e.g. C Minor
+
+        Args:
+            root:
+                The note to build the key from
+            key_type:
+                The type of the key to be built.
+
+        Returns:
+            None.
+        """  
         self.root = root
         self.type = key_type
 
     @classmethod
     def random(cls):
-        """ Returns a random key. 
+        """ A class method that returns a random key. 
 
             e.g. C Minor
 
@@ -131,7 +173,7 @@ class Key:
         return Key(Note.random(), KeyType.random())
 
     @property
-    def parellel(self):
+    def parallel(self):
         """ Returns the paralell (opposite) key. 
 
             e.g. C Minor -> C Major
@@ -166,10 +208,7 @@ class Key:
             represents a minor chord (or diminished).
 
             Args:
-                note: 
-                    The note the key is based on.
-                key_type: 
-                    A KeyType class that can be either major or minor.
+                None.
                 
         Returns:
                 A dict in the form. key=RomanNumeral value=Chord
@@ -194,7 +233,19 @@ class Key:
         return  {n[0]: Chord(n[1], n[2]) for n in zip(numerals, scale.notes, sequence)}
  
     def parallel_chords(self):
-        return self.parellel.chords()
+        """ Returns a dict representing all the parallel chords in the key.
+
+            These are the chords that are constructed from the parallel (opposite)
+            key. e.g. the paralell chords of C Major are the chords of C Minor. 
+
+        Args:
+            None
+                
+        Returns:
+                A dict in the form. key=RomanNumeral value=Chord
+                e.g. { "I": Chord(C, ChordType.Major) ... }
+        """
+        return self.parallel.chords()
 
     def dominant_chords(self):
         """ Returns a dict representing all the chords in dominant the key.
@@ -206,11 +257,8 @@ class Key:
                 I        ii       iii        IV         V        vi       vii
                 V7/I     V7/ii    V7/iii     V7/IV      V7/V     V7/vi    V7/vii
 
-            Args:
-                note: 
-                    The note the key is based on.
-                key_type: 
-                    A KeyType class that can be either major or minor.
+        Args:
+            None.
                 
         Returns:
                 A dict in the form. key='V7/RomanNumeral' value=Chord
@@ -244,11 +292,11 @@ class Key:
                         CM        Dm        Em        FM        GM        Am      Bdim
                         I        ii       iii        IV         V        vi       vii
 
-            Args:
-                note: 
-                    The note the key is based on.
-                key_type: 
-                    A KeyType class that can be either major or minor.
+        Args:
+            dominant: 
+                A bool indicating whether you want to print the dominant chords.
+            parallel: 
+                A bool indicating whether you want to print the parallel chords.
                 
         Returns:
                 None.
@@ -283,13 +331,49 @@ class Key:
             print(("{: >10}" * 7).format(*row)) # Always 7 chords in a key
 
     def __str__(self):
+        """ Returns a string representing the key. 
+
+            e.g. str(Key(Note.G, KeyType.Major)) -> 'G Major'
+
+        Args:
+            None.
+
+        Returns:
+            A string.
+        """
         return f'{self.root} {self.type}' 
 
     def __repr__(self):
+        """ Returns a string representing the key. 
+
+            e.g. repr(Key(Note.G, KeyType.Major)) -> 'Key(G Major)'
+
+        Args:
+            None.
+
+        Returns:
+            A string representing the key type's name.
+        """
         return f'Key({self.root} {self.type})' 
 
-def find_chords_from_progression(key, progression, error='X'):
-    ''' Shows which chords match a numerical expresion in a key'''
+def chords_from_progression(key, progression, error='X'):
+    """ Returns a list of chords that match a progression in a key. Error is 
+        used if a chord can't be found in the progression.
+
+        e.g. key=C Major, progression=['I', 'IV', 'V']'
+            -> [C Major, F Major, G Major]
+
+    Args:
+        key:
+            The key the chords are from.
+        progression:
+            A list of roman numerals notating the chords.
+        error:
+            A empty value representing a missing of invalid chord in the key.
+
+    Returns:
+        A List of chords.
+    """
     chord_dict = key.chords()
 
     l = []
@@ -301,8 +385,6 @@ def find_chords_from_progression(key, progression, error='X'):
 
     return l
 
-
-
 def main():
     """ Example Usage """
     key = Key.random()
@@ -312,7 +394,7 @@ def main():
     print(f"\trep() -> {repr(key)}")
     print(f"\tRoot -> {key.root}")
     print(f"\tType -> {key.type}")
-    print(f"\tParallel -> {key.parellel}")
+    print(f"\tParallel -> {key.parallel}")
 
     print(f"\tChords:")
     for numeral, chord in key.chords().items():

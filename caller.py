@@ -14,11 +14,11 @@ from scales import Scale, ScaleType
 
 import chords
 
-from keys import Key, KeyType, find_chords_from_progression
+from keys import Key, KeyType, chords_from_progression
 
 def chord_progressions(key, progression):
     """ An example of how to find chord progressions in a key. """
-    chords = find_chords_from_progression(key, progression)
+    chords = chords_from_progression(key, progression)
 
     # Printouts
     key.pretty_print(True, True)
