@@ -241,7 +241,8 @@ class Note(Enum):
         return random.choice(cls.items())
 
     def to_sharp(self):
-        """ Returns a sharp rather than a flat. 
+        """ Returns a sharp rather than a flat. Or just the name of the note if 
+            it doesn't have a flat. 
 
             e.g. Note.Eb.to_sharp() -> 'D#'
 

@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------
 # Name:        test_notes.py
 #
-# Notes:       A test suite for the Note class
+# Notes:       A test suite for the Note script.
 #
 # Links:       
 #
@@ -9,7 +9,8 @@
 #-------------------------------------------------------------------------------
 
 import unittest
-from notes import Note, Interval, notes_to_string, transpose, interval_distance
+from notes import (Note, Interval, transpose, interval_distance, notes_to_string,
+                   intervals_to_string)
 
 class TestNotes(unittest.TestCase):
     #---------------------------------------------------------------------------
@@ -38,27 +39,39 @@ class TestNotes(unittest.TestCase):
     # Tests
     #---------------------------------------------------------------------------
 
-    def test_notes_to_string_000(self):
-        notes = notes_to_string(Note.items())
-        expected = "C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B"
+    #region Interval
+    def test_interval_from_index_00(self):
+        self.assertEqual(Interval.from_index(0), Interval.Unison)
 
-        self.assertEqual(notes, expected)
-    
-    def test_notes_to_string_001(self):
-        notes = notes_to_string([Note.A, Note.Db, Note.F])
-        expected = "A, Db, F"
+    def test_interval_from_index_01(self):
+        self.assertEqual(Interval.from_index(13), Interval.m2)
 
-        self.assertEqual(notes, expected)
+    def test_interval_from_index_02(self):
+        self.assertEqual(Interval.from_index(-4), Interval.m6)
 
-    #region Note Equality
+    def test_interval_to_numeric_00(self):
+        self.assertEqual(Interval.P4.to_numeric(), "4")
+
+    def test_interval_to_numeric_01(self):
+        self.assertEqual(Interval.Unison.to_numeric(), "1")
+
+    def test_interval_from_numeric_00(self):
+        self.assertEqual(Interval.from_numeric('b3'), Interval.m3)
+
+    def test_interval_from_numeric_01(self):
+        self.assertEqual(Interval.from_numeric('5'), Interval.P5)
+
+    def test_interval_from_numeric_02(self):
+        self.assertEqual(Interval.from_numeric('b5'), Interval.dim5)
+    #endregion
+
+    #region Note
     def test_note_C_equality(self):
         self.assertEqual(Note.C, Note.C)
 
     def test_note_Bb_equality(self):
         self.assertEqual(Note.Bb, Note.Bb)
-    #endregion
 
-    #region Note Index
     def test_note_index_octave_C_up(self):
         self.assertEqual(Note.from_index(0), Note.C)
         self.assertEqual(Note.from_index(12), Note.C)
@@ -76,11 +89,44 @@ class TestNotes(unittest.TestCase):
     def test_note_index_wrap_around_B_down(self):
         index = Note.B.value
         self.assertEqual(Note.from_index(index - 27), Note.Ab)
+
+    def test_to_sharp_00(self):
+        sharp = Note.to_sharp(Note.Db)
+        self.assertEqual(sharp, "C#")
+
+    def test_to_sharp_01(self):
+        sharp = Note.to_sharp(Note.F)
+        self.assertEqual(sharp, "F")
+
+    def test_to_sharp_02(self):
+        sharp = Note.to_sharp(Note.Gb)
+        self.assertEqual(sharp, "F#")
     #endregion
 
-    #region Interval Numeric
-    def test_interval_from_numeric_000(self):
-        self.assertEqual(Interval.from_numeric('b3'), Interval.m3)
+    #region ListsToStrings
+    def test_notes_to_string_00(self):
+        notes = notes_to_string(Note.items())
+        expected = "C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B"
+
+        self.assertEqual(notes, expected)
+    
+    def test_notes_to_string_01(self):
+        notes = notes_to_string([Note.A, Note.Db, Note.F])
+        expected = "A, Db, F"
+
+        self.assertEqual(notes, expected)
+
+    def test_intervals_to_string_00(self):
+        intervals = intervals_to_string(Interval.items())
+        expected = "Unison, m2, M2, m3, M3, P4, dim5, P5, m6, M6, m7, M7"
+
+        self.assertEqual(intervals, expected)
+
+    def test_intervals_to_string_01(self):
+        intervals = intervals_to_string([Interval.Unison, Interval.dim5, Interval.M7])
+        expected = "Unison, dim5, M7"
+
+        self.assertEqual(intervals, expected)
     #endregion
 
     #region Interval Distance
