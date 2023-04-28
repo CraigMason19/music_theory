@@ -17,8 +17,7 @@ from notes import Note, Interval, transpose
 from chords import Chord, ChordType
 from scales import Scale, ScaleType
 
-"""
-The circle of 5th's and keys.
+""" The circle of 5th's and keys.
 
 Going to the right of the circle goes up a 5th and to the left goes down a 5th.
 
@@ -32,7 +31,7 @@ The circle shows how many sharps and flats are in the key.
 # Fast Cars Go Dangerously Around Every Bend
 # 
 # Order of flats (the reverse)
-#  B E A D G C F
+# B E A D G C F
 # Before Eating A Doughnut Get Coffee First.
 """
 
@@ -145,8 +144,14 @@ class Key:
             A class method that returns a random Key from a random Note.
         parallel(self):
             Returns the paralell (opposite) key.
+        relative_key(self):
+            Returns the key relative to this one.
         name(self):
             A property that returns the name of the key.
+        sharp_count(self):
+            A property that returns the number of sharps in a key.
+        flat_count(self):
+            A property that returns the number of flats in a key.
         chords(self):
             Returns a dict containing the chords of the key.
         parallel_chords(self):
@@ -205,6 +210,7 @@ class Key:
         """  
         return Key(self.root, self.type.parallel())
 
+    @property
     def relative_key(self):
         """ Returns the relative key. If a Key is Major it will have a relative 
             Minor key (and vice-versa). This can be easily found on a instrument
@@ -248,9 +254,13 @@ class Key:
         Returns:
             An integer.        
         """
+        if self.type == KeyType.Minor:
+            return self.relative_key.sharp_count
+
         note = Note.C
 
         for i in range(7+1):
+ 
             if note == self.root:
                 return i
 
@@ -268,6 +278,9 @@ class Key:
         Returns:
             An integer.        
         """
+        if self.type == KeyType.Minor:
+            return self.relative_key.flat_count
+
         note = Note.C
 
         for i in range(7+1):
@@ -360,7 +373,7 @@ class Key:
             Last row is the parralel chords in (the opposite key).
         
             E.g.
-                Key of C Minor:
+                Chords of C Minor:
                         Cm      Ddim       EbM        Fm        Gm       AbM       BbM
                         i        ii       III        iv         v        VI       VII
 
@@ -379,7 +392,7 @@ class Key:
         Returns:
                 None.
         """      
-        print(f"Key of {self.root} {self.type}:")
+        print(f"Chords of {self.root} {self.type}:")
 
         chords = self.chords()
         table_data = [
@@ -469,23 +482,27 @@ def main():
 
     print(f"Key of {key.name}:")
     print(f"\tstr() -> {str(key)}")
-    print(f"\trep() -> {repr(key)}")
+    print(f"\trepr() -> {repr(key)}")
     print(f"\tRoot -> {key.root}")
     print(f"\tType -> {key.type}")
     print(f"\tParallel -> {key.parallel}")
+    print(f"\tRelative -> {key.relative_key}")
+    print(f"\tSharp Count -> {key.sharp_count}")
+    print(f"\tFlat Count -> {key.flat_count}")
 
-    print(f"\tChords:")
-    for numeral, chord in key.chords().items():
-        print(f"\t\t{numeral}: {chord}")
+    # print(f"\tChords:")
+    # for numeral, chord in key.chords().items():
+    #     print(f"\t\t{numeral}: {chord}")
 
-    print(f"\tDominant Chords:")
-    for numeral, chord in key.dominant_chords().items():
-        print(f"\t\t{numeral}: {chord}")
+    # print(f"\tDominant Chords:")
+    # for numeral, chord in key.dominant_chords().items():
+    #     print(f"\t\t{numeral}: {chord}")
 
-    print(f"\tParallel Chords:")
-    for numeral, chord in key.parallel_chords().items():
-        print(f"\t\t{numeral}: {chord}")
+    # print(f"\tParallel Chords:")
+    # for numeral, chord in key.parallel_chords().items():
+    #     print(f"\t\t{numeral}: {chord}")
 
+    print('')
     key.pretty_print(dominant=True, parallel=True)
 
 if __name__ == '__main__':
