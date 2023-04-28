@@ -17,6 +17,25 @@ from notes import Note, Interval, transpose
 from chords import Chord, ChordType
 from scales import Scale, ScaleType
 
+"""
+The circle of 5th's and keys.
+
+Going to the right of the circle goes up a 5th and to the left goes down a 5th.
+
+The outside are Major keys, the inside is Minor keys. This shows the relative 
+connection between the keys.
+
+The circle shows how many sharps and flats are in the key.
+
+# Order of Sharps 
+# F C G D A E B
+# Fast Cars Go Dangerously Around Every Bend
+# 
+# Order of flats (the reverse)
+#  B E A D G C F
+# Before Eating A Doughnut Get Coffee First.
+"""
+
 class KeyType(Enum):
     """ Represents a key type. Keys are either Major or Minor.
     
@@ -186,6 +205,25 @@ class Key:
         """  
         return Key(self.root, self.type.parallel())
 
+    def relative_key(self):
+        """ Returns the relative key. If a Key is Major it will have a relative 
+            Minor key (and vice-versa). This can be easily found on a instrument
+            by going up or down 3 semitones.   
+
+        Args:
+            None.
+
+        Returns:
+            A Key.        
+        """
+        if self.type == KeyType.Major:
+            new_note = transpose(self.root, Interval.m3, direction='d')
+            return Key(new_note, KeyType.Minor)
+
+        else:
+            new_note = transpose(self.root, Interval.m3, direction='u')
+            return Key(new_note, KeyType.Major)
+
     @property
     def name(self):
         """ Returns the name of the key, the root and key type. 
@@ -199,6 +237,46 @@ class Key:
             A string.
         """
         return f"{self.root} {self.type}"
+
+    @property
+    def sharp_count(self):
+        """ Returns the number of sharps in this key. 
+        
+        Args:
+            None.
+
+        Returns:
+            An integer.        
+        """
+        note = Note.C
+
+        for i in range(7+1):
+            if note == self.root:
+                return i
+
+            note = transpose(note, Interval.P5) 
+
+        return 0
+
+    @property
+    def flat_count(self):
+        """ Returns the number of flats in this key.
+        
+        Args:
+            None.
+
+        Returns:
+            An integer.        
+        """
+        note = Note.C
+
+        for i in range(7+1):
+            if note == self.root:
+                return i
+
+            note = transpose(note, Interval.P5, direction='d') 
+
+        return 0
 
     def chords(self):
         """ Returns a dict representing all the chords in the key.
