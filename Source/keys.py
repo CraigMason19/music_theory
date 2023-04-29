@@ -48,7 +48,7 @@ class KeyType(Enum):
         random(cls):
             A class method to return a random key type.
         parallel(self):
-            A method to return a parallel (opposite) key type.
+            A property that returns a parallel (opposite) key type.
         __str__(self):
             Returns the name of the key type.
         __repr__(self):
@@ -84,7 +84,7 @@ class KeyType(Enum):
         """  
         return random.choice(cls.items())
 
-
+    @property
     def parallel(self):
         """ Returns the opposite KeyType. 
 
@@ -143,9 +143,9 @@ class Key:
         random(cls):
             A class method that returns a random Key from a random Note.
         parallel(self):
-            Returns the paralell (opposite) key.
+            A property that returns the paralell (opposite) key.
         relative_key(self):
-            Returns the key relative to this one.
+            A property that returns the key relative to this one.
         name(self):
             A property that returns the name of the key.
         sharp_count(self):
@@ -212,7 +212,7 @@ class Key:
         Returns:
             A Key.
         """  
-        return Key(self.root, self.type.parallel())
+        return Key(self.root, self.type.parallel)
 
     @property
     def relative_key(self):

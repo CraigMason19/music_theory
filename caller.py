@@ -16,31 +16,21 @@ import chords
 
 from keys import Key, KeyType, chords_from_progression
 
-def chord_progressions(key, progression):
-    """ An example of how to find chord progressions in a key. """
-    chords = chords_from_progression(key, progression)
-
-    # Printouts
-    key.pretty_print(True, True)
-
-    print("Progresion:")
-    print(f"\t{progression}")
-    print(f"\t{chords}")
-
 def main():
     # Using my song SadHappy to understand how to use the music classes.
     #
     # I, ii, IV, parallel VII
     key = Key(Note.A, KeyType.Major) 
-    chord_progressions(key, ['I', 'ii', 'IV', 'IIIIIII'])
+    progression = ['I', 'ii', 'IV', 'IIIIIII']
 
-    scales = []
-    scales.append(Scale(Note.A, ScaleType.Major))
-    scales.append(Scale(Note.B, ScaleType.Minor))
+    cp = chords_from_progression(key, progression)
 
-    for scale in scales:
-        print(f"\t{scale}")
-        # print(f"\t{scale.interval_formula}")
+    key.pretty_print(True, True)
+
+    print(f"\n{progression}")
+    print(f"{cp}")
+
+
 
 if __name__ == '__main__':
     main()

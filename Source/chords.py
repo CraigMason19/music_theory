@@ -124,7 +124,7 @@ class Chord:
         __repr__(self):
             Returns a string representation of the Chord.
     """
-    def __init__(self, root, chord_type):
+    def __init__(self, root, chord_type=ChordType.Major):
         """ Constructs the chord.
 
         Args:

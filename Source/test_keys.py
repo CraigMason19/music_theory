@@ -11,7 +11,7 @@
 import unittest
 from notes import Note
 from chords import Chord, ChordType
-from keys import Key, KeyType
+from keys import Key, KeyType, chords_from_progression
 
 class TestChords(unittest.TestCase):
     #---------------------------------------------------------------------------
@@ -40,6 +40,16 @@ class TestChords(unittest.TestCase):
     #---------------------------------------------------------------------------
     # Tests
     #---------------------------------------------------------------------------
+
+    #region KeyTypes
+    def test_parallel_key_type_00(self):
+        parallel, expected = KeyType.Major.parallel, KeyType.Minor
+        self.assertEqual(parallel, expected)
+
+    def test_parallel_key_type_01(self):
+        parallel, expected = KeyType.Minor.parallel, KeyType.Major
+        self.assertEqual(parallel, expected)
+    #endregion
 
     #region Chords in Major Key
     def test_chords_in_key_A_major(self):
@@ -137,6 +147,16 @@ class TestChords(unittest.TestCase):
                     Chord(Note.F, ChordType.Seven)]
  
         self.assertListEqual(list(chord_dict.values()), expected)  
+    #endregion
+
+    #region ChordProgressions
+    def test_chord_progressions_C_major(self):
+        prog = ['I', 'IV', 'V', 'Q']
+        
+        result = chords_from_progression(Key(Note.C), prog)
+        expected = ['CM', 'FM', 'GM', 'X']
+        
+        self.assertListEqual(result, expected)
     #endregion
 
 if __name__ == '__main__':
