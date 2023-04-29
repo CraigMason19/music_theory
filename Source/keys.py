@@ -152,6 +152,10 @@ class Key:
             A property that returns the number of sharps in a key.
         flat_count(self):
             A property that returns the number of flats in a key.
+        sharps(self):
+            A property that returns a list of the sharp notes.
+        flats(self):
+            A property that returns a list of the flat notes.
         chords(self):
             Returns a dict containing the chords of the key.
         parallel_chords(self):
@@ -290,6 +294,40 @@ class Key:
             note = transpose(note, Interval.P5, direction='d') 
 
         return 0
+
+    @property
+    def sharps(self):
+        """ Returns a list of the sharps in this key.
+        
+        Order of Sharps 
+        F C G D A E B
+        Fast Cars Go Dangerously Around Every Bend
+
+        Args:
+            None.
+
+        Returns:
+            An list of Notes.        
+        """
+        order_of_sharps = [Note.F, Note.C, Note.G, Note.D, Note.A, Note.E, Note.B]
+        return order_of_sharps[:self.sharp_count]
+
+    @property
+    def flats(self):
+        """ Returns a list of the flats in this key.
+
+        Order of flats (the reverse of the order of sharps)
+        B E A D G C F
+        Before Eating A Doughnut Get Coffee First.
+
+        Args:
+            None.
+
+        Returns:
+            An list of Notes.        
+        """
+        order_of_flats = [Note.B, Note.E, Note.A, Note.D, Note.G, Note.C, Note.F]
+        return order_of_flats[:self.flat_count]
 
     def chords(self):
         """ Returns a dict representing all the chords in the key.
@@ -488,8 +526,10 @@ def main():
     print(f"\tParallel -> {key.parallel}")
     print(f"\tRelative -> {key.relative_key}")
     print(f"\tSharp Count -> {key.sharp_count}")
+    print(f"\tSharps -> {key.sharps}")
     print(f"\tFlat Count -> {key.flat_count}")
-
+    print(f"\tFlats -> {key.flats}")
+    
     # print(f"\tChords:")
     # for numeral, chord in key.chords().items():
     #     print(f"\t\t{numeral}: {chord}")
