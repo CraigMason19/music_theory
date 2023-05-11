@@ -140,6 +140,8 @@ class Key:
     Methods:
         __init__(root, key_type=KeyType.Major):
             Contructs the key.
+        __eq__(self, other):
+            Compares two keys.
         random(cls):
             A class method that returns a random Key from a random Note.
         parallel(self):
@@ -185,6 +187,23 @@ class Key:
         """  
         self.root = root
         self.type = key_type
+
+    def __eq__(self, other):
+        """ Equality operator to check that both the note and key type match. 
+
+            e.g. Key(Note.F, KeyType.Major) == Key(Note.F, KeyType.Major)
+
+        Args:
+            other:
+                The other Key to compare.
+
+        Returns:
+            A bool. True if this and another key are the same.
+        """
+        try:
+            return self.root == other.root and self.type == other.type
+        except AttributeError:
+            return False
 
     @classmethod
     def random(cls):

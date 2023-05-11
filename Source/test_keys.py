@@ -51,6 +51,68 @@ class TestChords(unittest.TestCase):
         self.assertEqual(parallel, expected)
     #endregion
 
+    #region Parallel Keys
+    def test_parallel_key_00(self):
+        parallel, expected = Key(Note.C).parallel, Key(Note.C, KeyType.Minor)
+        self.assertEqual(parallel, expected)
+
+    def test_parallel_key_01(self):
+        parallel, expected = Key(Note.A, KeyType.Minor).parallel, Key(Note.A, KeyType.Major)
+        self.assertEqual(parallel, expected)
+    #endregion
+
+    #region Relative Keys
+    def test_relative_key_00(self):
+        relative, expected = Key(Note.C).relative_key, Key(Note.A, KeyType.Minor)
+        self.assertEqual(relative, expected)
+
+    def test_relative_key_01(self):
+        relative, expected = Key(Note.D, KeyType.Minor).relative_key, Key(Note.F, KeyType.Major)
+        self.assertEqual(relative, expected)
+    #endregion
+
+    #region Sharps & flats
+    def test_sharp_count_00(self):
+        sharps, expected = Key(Note.Db).sharp_count, 7
+        self.assertEqual(sharps, expected)
+
+    def test_sharp_count_01(self):
+        sharps, expected = Key(Note.A).sharp_count, 3
+        self.assertEqual(sharps, expected)
+
+    def test_sharp_count_02(self):
+        sharps, expected = Key(Note.F, KeyType.Minor).sharp_count, 0
+        self.assertEqual(sharps, expected)
+
+    def test_flat_count_00(self):
+        flats, expected = Key(Note.B).flat_count, 7
+        self.assertEqual(flats, expected)
+
+    def test_flat_count_01(self):
+        flats, expected = Key(Note.C, KeyType.Minor).flat_count, 3
+        self.assertEqual(flats, expected)
+
+    def test_sharps_00(self):
+        sharps = Key(Note.B, KeyType.Minor).sharps
+        expected = [Note.F, Note.C]
+        self.assertListEqual(sharps, expected)
+
+    def test_sharps_01(self):
+        sharps = Key(Note.B, KeyType.Minor).sharps
+        expected = [Note.F, Note.C]
+        self.assertListEqual(sharps, expected)
+
+    def test_flats_00(self):
+        flats = Key(Note.Ab).flats
+        expected = [Note.B, Note.E, Note.A, Note.D]
+        self.assertListEqual(flats, expected)
+
+    def test_flats_01(self):
+        flats = Key(Note.B, KeyType.Minor).flats
+        expected = []
+        self.assertListEqual(flats, expected)
+#endregion
+
     #region Chords in Major Key
     def test_chords_in_key_A_major(self):
         print('\t\ttest_chords_in_key_A_major')
@@ -149,7 +211,7 @@ class TestChords(unittest.TestCase):
         self.assertListEqual(list(chord_dict.values()), expected)  
     #endregion
 
-    #region ChordProgressions
+    #region Chord Progressions
     def test_chord_progressions_C_major(self):
         prog = ['I', 'IV', 'V', 'Q']
         
