@@ -249,6 +249,8 @@ class Scale:
         _construct(self):
             Constructs the scale from the root and scale type in __init__().
             Put into it's own private method so that __init__() remains readable. 
+        __eq__(self, other):
+            Compares two scales.
         random(cls):
             A class method to return a random scale (root and type).
         __str__(self):
@@ -316,6 +318,23 @@ class Scale:
         # Once we have a formula in interval format we can build the scale from it.
         self.notes = _notes_from_intervals(self.root, self.interval_formula) 
         self.numeric_formula = [i.to_numeric() for i in self.interval_formula]  
+
+    def __eq__(self, other):
+        """ Equality operator to check that both the note and scale type match. 
+
+            e.g. Key(Note.F, ScaleType.Major) == Key(Note.F, ScaleType.Major)
+
+        Args:
+            other:
+                The other Scale to compare.
+
+        Returns:
+            A bool. True if this and another scale are the same.
+        """
+        try:
+            return self.root == other.root and self.type == other.type
+        except AttributeError:
+            return False
 
     @property
     def name(self):
