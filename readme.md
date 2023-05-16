@@ -19,6 +19,25 @@ No extra packages are needed.
 
 ## Examples
 
+### Scales
+
+To find all the modes of a note use the modes_from_note function inside scales.py
+
+```python
+for mode in modes_from_note(Note.C):
+    print(mode)
+```
+
+```python
+C Ionian:          C, D, E, F, G, A, B
+D Dorian:         D, E, F, G, A, B, C
+E Phrygian:      E, F, G, A, B, C, D
+F Lydian:          F, G, A, B, C, D, E
+G Mixolydian:  G, A, B, C, D, E, F
+A Aeolian:        A, B, C, D, E, F, G
+B Locrian:         B, C, D, E, F, G, A
+```
+
 ### Keys
 To find a list of all chords in a key simply create a Key and use the pretty_print function. e.g.
 ```python
