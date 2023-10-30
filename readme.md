@@ -20,6 +20,24 @@ No extra packages are needed.
 ## Examples
 
 ### Scales
+To create a scale simply construct a scale class.
+
+```python
+scale = Scale(Note.C, ScaleType.Minor)
+print(scale)
+print(scale.name)
+print(scale.notes)
+print(scale.number_of_flats)
+print(scale.interval_formula)
+```
+
+```python
+C Minor: C, D, Eb, F, G, Ab, Bb
+C Minor
+[Note.C, Note.D, Note.Eb, Note.F, Note.G, Note.Ab, Note.Bb]
+3
+[Interval.Unison, Interval.M2, Interval.m3, Interval.P4, Interval.P5, Interval.m6, Interval.m7]
+```
 
 To find all the modes of a note use the modes_from_note function inside scales.py
 
