@@ -73,3 +73,11 @@ key.pretty_print(dominant=True,  parallel=True)
     Am      Bdim        CM        Dm        Em        FM        GM
      i        ii       III        iv         v        VI       VII
 ```
+
+To find the chords of a key from numeral notation use the chords_from_progression function
+Note: Uppercase letters & numerals notate major and lowercase notates minor
+```python
+chords = chords_from_progression(Key(Note.A), ['I', 'ii', 'IV', 'CXIIMII-invalid''])
+print(chords)
+# ['AM', 'Bm', 'DM', 'X']
+```
