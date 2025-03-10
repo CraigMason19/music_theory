@@ -10,8 +10,9 @@
 #-------------------------------------------------------------------------------
 
 import random
-
 from enum import Enum
+
+import _setup
 
 from music_theory.notes import Note, Interval, transpose
 from music_theory.chords import Chord, ChordType

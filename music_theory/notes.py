@@ -12,6 +12,8 @@
 import random
 from enum import Enum
 
+import _setup
+
 # Single underscore indicates that this function is not meant to be imported from
 # other modules.
 def _index_to_range(index):

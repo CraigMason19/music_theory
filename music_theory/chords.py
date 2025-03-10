@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------
 # Name:        chords.py
 #
-# Notes:       Contains ChordType and chord classes. 
+# Notes:       Contains ChordType and Chord classes. 
 #
 # Links:
 #
@@ -9,12 +9,11 @@
 #-------------------------------------------------------------------------------
 
 import random
-
 from enum import Enum
 
-from music_theory.notes import Note
+import _setup
 
-#region Cadences
+from music_theory.notes import Note
 
 # A cadence in music is a chord progression of at least 2 chords that ends a 
 # phrase or section of a piece of music.
@@ -26,7 +25,7 @@ cadence_dict = {
     "Deceptive": ["V", "VI"], #Or, interupted
 }
 
-#endregion
+#region ChordType
 
 class ChordType(Enum):
     """ Represents a chord type. Derived from the Enum class.
@@ -100,6 +99,10 @@ class ChordType(Enum):
             A string.
         """
         return f'ChordType.{self.name}'
+
+#endregion
+
+#region Chord
 
 class Chord:
     """ A class representing a musical chord. 
@@ -217,6 +220,8 @@ class Chord:
             A string.
         """
         return f"Chord({self.root}, {self.chord_type})"
+
+#endregion
 
 def main():
     ct = ChordType.random()

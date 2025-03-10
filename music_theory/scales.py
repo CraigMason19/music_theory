@@ -12,6 +12,8 @@
 import random
 from enum import Enum
 
+import _setup
+
 from music_theory.notes import Note, Interval, notes_to_string, intervals_to_string
 
 class ScaleType(Enum):
