@@ -12,7 +12,7 @@
 import random
 from enum import Enum
 
-from notes import Note, Interval, notes_to_string, intervals_to_string
+from music_theory.notes import Note, Interval, notes_to_string, intervals_to_string
 
 class ScaleType(Enum):
     """ Represents a type of scale (e.g. minor, major, blues, lydian, etc...).

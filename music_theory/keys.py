@@ -13,9 +13,9 @@ import random
 
 from enum import Enum
 
-from notes import Note, Interval, transpose
-from chords import Chord, ChordType
-from scales import Scale, ScaleType
+from music_theory.notes import Note, Interval, transpose
+from music_theory.chords import Chord, ChordType
+from music_theory.scales import Scale, ScaleType
 
 """ The circle of 5th's and keys.
 

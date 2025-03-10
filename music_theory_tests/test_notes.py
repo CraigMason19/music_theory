@@ -9,7 +9,7 @@
 #-------------------------------------------------------------------------------
 
 import unittest
-from notes import (Note, Interval, transpose, interval_distance, notes_to_string,
+from music_theory.notes import (Note, Interval, transpose, interval_distance, notes_to_string,
                    intervals_to_string)
 
 class TestNotes(unittest.TestCase):

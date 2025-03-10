@@ -9,8 +9,9 @@
 #-------------------------------------------------------------------------------
 
 import unittest
-from notes import Note, Interval
-import scales as s
+
+from music_theory.notes import Note, Interval
+import music_theory.scales as s
 
 class TestScales(unittest.TestCase):
     #---------------------------------------------------------------------------

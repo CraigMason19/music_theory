@@ -10,8 +10,8 @@
 
 import unittest
 
-from notes import Note
-from chords import Chord, ChordType
+from music_theory.notes import Note
+from music_theory.chords import Chord, ChordType
 
 class TestChords(unittest.TestCase):
     #---------------------------------------------------------------------------

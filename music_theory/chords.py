@@ -12,7 +12,7 @@ import random
 
 from enum import Enum
 
-from notes import Note
+from music_theory.notes import Note
 
 #region Cadences
 

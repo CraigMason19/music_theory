@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Name:        caller.py
+# Name:        main.py
 #
 # Notes:       A caller that shows the usage of the music classes. The idea is
 #              to help me write music.
@@ -9,18 +9,17 @@
 # TODO:
 #-------------------------------------------------------------------------------
 
-from notes import Note, Interval
-from scales import Scale, ScaleType
+from music_theory.notes import Note, Interval
+from music_theory.scales import Scale, ScaleType
+from music_theory.keys import Key, KeyType, chords_from_progression
 
-import chords
-
-from keys import Key, KeyType, chords_from_progression
+import music_theory.chords
 
 def main():
     # Using my song SadHappy to understand how to use the music classes.
     #
     # I, ii, IV, parallel VII
-    key = Key(Note.A, KeyType.Major) 
+    key = Key(Note.C, KeyType.Major) 
     progression = ['I', 'ii', 'IV', 'IIIIIII']
 
     cp = chords_from_progression(key, progression)

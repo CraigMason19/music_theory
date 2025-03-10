@@ -9,9 +9,9 @@
 #-------------------------------------------------------------------------------
 
 import unittest
-from notes import Note
-from chords import Chord, ChordType
-from keys import Key, KeyType, chords_from_progression
+from music_theory.notes import Note
+from music_theory.chords import Chord, ChordType
+from music_theory.keys import Key, KeyType, chords_from_progression
 
 class TestChords(unittest.TestCase):
     #---------------------------------------------------------------------------
