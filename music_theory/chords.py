@@ -13,7 +13,7 @@ from enum import Enum
 
 import _setup
 
-from music_theory.notes import Note
+from music_theory.notes import Note, transpose, Interval
 
 # A cadence in music is a chord progression of at least 2 chords that ends a 
 # phrase or section of a piece of music.
@@ -44,7 +44,7 @@ class ChordType(Enum):
         __repr__(self):
             Returns the Enum name.
     """
-    (Major, Minor, Diminished, Seven) = range(4)
+    (Major, Minor, Diminished, Seven, Sus2, Sus4) = range(6)
 
     @classmethod    
     def items(cls):
@@ -112,6 +112,8 @@ class Chord:
             The Note the rest of the chord is built from.
         type:
             A ChordType. 
+        notes:
+            An array containing the root, 3rd(Major or Minor) & the fifth
 
     Methods:
         __init__(self, root, chord_type):
@@ -139,7 +141,29 @@ class Chord:
         Returns:
             None.
         """  
-        self.root, self.chord_type = root, chord_type
+        self.root, self.chord_type, self.notes = root, chord_type, []
+
+        match self.chord_type:
+            case ChordType.Major:
+                self.notes = [self.root, transpose(self.root, Interval.M3), transpose(self.root, Interval.P5)]
+
+            case ChordType.Minor:
+                self.notes = [self.root, transpose(self.root, Interval.m3), transpose(self.root, Interval.P5)]
+
+            case ChordType.Diminished:
+                self.notes = [self.root, transpose(self.root, Interval.m3), transpose(self.root, Interval.dim5)]
+
+            case ChordType.Seven:
+                self.notes = [self.root, transpose(self.root, Interval.M3), transpose(self.root, Interval.P5), transpose(self.root, Interval.m7)]
+            
+            case ChordType.Sus2:
+                self.notes = [self.root, transpose(self.root, Interval.M2), transpose(self.root, Interval.P5)]        
+
+            case ChordType.Sus4:
+                self.notes = [self.root, transpose(self.root, Interval.P4), transpose(self.root, Interval.P5)]      
+
+            case _:
+                pass
     
     @classmethod
     def random(cls):
@@ -183,17 +207,25 @@ class Chord:
 
         Returns:
             A string.
-        """
-        if self.chord_type == ChordType.Diminished:
-            return f"dim"
-
-        elif self.chord_type == ChordType.Minor:
-            return f"m"
-
-        elif self.chord_type == ChordType.Seven:
-            return f"7"
-
-        return f"M"
+        """    
+        match self.chord_type:
+            case ChordType.Minor:
+                return f"m" 
+            
+            case ChordType.Diminished:
+                return f"dim"
+            
+            case ChordType.Seven:
+                return f"7"
+            
+            case ChordType.Sus2:
+                return f"Sus2"
+            
+            case ChordType.Sus4:
+                return f"Sus4"
+            
+            case _:
+                return f"M"
 
     def __str__(self):
         """ Returns a string representing the Chord name and type. 
@@ -231,6 +263,7 @@ def main():
 
     c = Chord.random()
     print(f"Chord {c}:")
+    print(f"\tNotes {c.notes}:")
     print(f"\tstr() -> {str(c)}")
     print(f"\trep() -> {repr(c)}")
     print(f"\tnotation -> {c.notation}")

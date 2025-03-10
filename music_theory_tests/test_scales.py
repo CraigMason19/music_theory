@@ -10,6 +10,8 @@
 
 import unittest
 
+import _setup
+
 from music_theory.notes import Note, Interval
 import music_theory.scales as s
 

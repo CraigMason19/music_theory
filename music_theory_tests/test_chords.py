@@ -10,6 +10,8 @@
 
 import unittest
 
+import _setup
+
 from music_theory.notes import Note
 from music_theory.chords import Chord, ChordType
 
@@ -50,6 +52,46 @@ class TestChords(unittest.TestCase):
     def test_chord_equal_Gb_minor(self):
         print('\t\ttest_chord_equal_Gb_minor')
         self.assertEqual(Chord(Note.Gb, ChordType.Minor), Chord(Note.Gb, ChordType.Minor))
+    
+    #endregion
+
+    #region Chords Notes
+
+    def test_chord_notes_A_major(self):
+        print('\t\ttest_chord_notes_for_A_major')
+        chord = Chord(Note.A, ChordType.Major)
+        expected_notes = [Note.A, Note.Db, Note.E]
+        self.assertEqual(chord.notes, expected_notes)
+    
+    def test_chord_notes_for_A_minor(self):
+        print('\t\ttest_chord_notes_for_A_minor')
+        chord = Chord(Note.A, ChordType.Minor)
+        expected_notes = [Note.A, Note.C, Note.E]
+        self.assertEqual(chord.notes, expected_notes)
+
+    def test_chord_notes_for_A_diminished(self):
+        print('\t\ttest_chord_notes_for_A_diminished')
+        chord = Chord(Note.A, ChordType.Diminished)
+        expected_notes = [Note.A, Note.C, Note.Eb] 
+        self.assertEqual(chord.notes, expected_notes)
+
+    def test_chord_notes_for_A_seven(self):
+        print('\t\ttest_chord_notes_for_A_seven')
+        chord = Chord(Note.A, ChordType.Seven)
+        expected_notes = [Note.A, Note.Db, Note.E, Note.G]
+        self.assertEqual(chord.notes, expected_notes)
+
+    def test_chord_notes_for_A_sus2(self):
+        print('\t\ttest_chord_notes_for_A_sus2')
+        chord = Chord(Note.A, ChordType.Sus2)
+        expected_notes = [Note.A, Note.B, Note.E]
+        self.assertEqual(chord.notes, expected_notes)
+
+    def test_chord_notes_for_A_sus4(self):
+        print('\t\ttest_chord_notes_for_A_sus4')
+        chord = Chord(Note.A, ChordType.Sus4)
+        expected_notes = [Note.A, Note.D, Note.E]
+        self.assertEqual(chord.notes, expected_notes)
     
     #endregion
 

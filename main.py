@@ -8,6 +8,10 @@
 #
 # TODO:
 #-------------------------------------------------------------------------------
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'music_theory')))
 
 from music_theory.notes import Note, Interval
 from music_theory.scales import Scale, ScaleType

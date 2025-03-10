@@ -9,11 +9,14 @@
 #-------------------------------------------------------------------------------
 
 import unittest
+
+import _setup
+
 from music_theory.notes import Note
 from music_theory.chords import Chord, ChordType
 from music_theory.keys import Key, KeyType, chords_from_progression
 
-class TestChords(unittest.TestCase):
+class TestKeys(unittest.TestCase):
     #---------------------------------------------------------------------------
     # setUpClass and tearDownClass run before and after all tests, called once
     # NOTE - the camelCase syntax. Important that they are named this way.

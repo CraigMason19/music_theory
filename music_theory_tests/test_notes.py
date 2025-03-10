@@ -9,6 +9,9 @@
 #-------------------------------------------------------------------------------
 
 import unittest
+
+import _setup
+
 from music_theory.notes import (Note, Interval, transpose, interval_distance, notes_to_string,
                    intervals_to_string)
 
