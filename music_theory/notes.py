@@ -176,14 +176,13 @@ class Interval(Enum):
 #region Note
 
 class Note(Enum):
-    """ Represents a musical note starting at 'middle C'. Derived from the 
-        Enum class.
+    """ Represents a musical note. Derived from the Enum class.
 
         NOTE: Can't have sharps (#) in variable names
 
     Attributes:
         note attributes:
-            12 class attributes representing note enumerations. Starting at middle C
+            12 class attributes representing note enumerations. Starting at 'middle C'.
 
     Methods:
         items(cls):
