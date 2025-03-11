@@ -11,8 +11,6 @@
 import random
 from enum import Enum
 
-import _setup
-
 from music_theory.notes import Note, transpose, Interval
 
 # A cadence in music is a chord progression of at least 2 chords that ends a 
@@ -254,19 +252,3 @@ class Chord:
         return f"Chord({self.root}, {self.chord_type})"
 
 #endregion
-
-def main():
-    ct = ChordType.random()
-    print(f"ChordType {ct}:")
-    print(f"\tstr() -> {str(ct)}")
-    print(f"\trep() -> {repr(ct)}")
-
-    c = Chord.random()
-    print(f"Chord {c}:")
-    print(f"\tNotes {c.notes}:")
-    print(f"\tstr() -> {str(c)}")
-    print(f"\trep() -> {repr(c)}")
-    print(f"\tnotation -> {c.notation}")
-
-if __name__ == '__main__':
-    main()

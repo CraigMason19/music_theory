@@ -12,8 +12,6 @@
 import random
 from enum import Enum
 
-import _setup
-
 # Single underscore indicates that this function is not meant to be imported from
 # other modules.
 def _index_to_range(index):
@@ -394,42 +392,3 @@ def transpose(note, interval, direction="u"):
     raise ValueError(f'direction not recognized({direction})')
 
 #endregion
-
-def main():
-    """ Example Usage """
-    test_range = 3
-    note, interval = Note.random(), Interval.random()
-
-    # Notes
-    print(f"Note {note}:")
-    print(f"\tstr() -> {str(note)}")
-    print(f"\trepr() -> {repr(note)}\n")
-
-    # Intervals
-    print(f"Interval {interval}:")
-    print(f"\tstr() -> {str(interval)}")
-    print(f"\trepr() -> {repr(interval)}\n")
-
-    print(f"Interval distances")
-    for i in range(test_range):
-        note_a, note_b = Note.random(), Note.random()
-
-        dif = interval_distance(note_a, note_b) 
-        print(f"\t{note_a}, {note_b} -> {dif}")
-
-        dif = interval_distance(note_a, note_b, direction='down')  
-        print(f"\t{note_a}, {note_b} <- {dif}\n")
-
-    # Transpose
-    print(f"Transpose:")
-    for i in range(test_range):
-        note, interval = Note.random(), Interval.random()
-
-        new_note = transpose(note, interval)  
-        print(f"\t{note}, {interval} -> {new_note}")
-
-        new_note = transpose(note, interval, direction='down')  
-        print(f"\t{note}, {interval} <- {new_note}\n") 
-
-if __name__ == '__main__':
-    main()

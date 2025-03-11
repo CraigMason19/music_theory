@@ -12,8 +12,6 @@
 import random
 from enum import Enum
 
-import _setup
-
 from music_theory.notes import Note, Interval, notes_to_string, intervals_to_string
 
 class ScaleType(Enum):
@@ -436,27 +434,3 @@ def modes_from_note(note):
     m.append(Scale(s.notes[6], ScaleType.Locrian))
 
     return m
-
-def main():
-    """ Example Usage """
-    scale = Scale.random()
-
-    print(f"{scale.name}:")
-    print(f"\tstr() -> {str(scale)}")
-    print(f"\trepr() -> {repr(scale)}")
-    print(f"\tRoot -> {scale.root}")
-    print(f"\tType -> {scale.type}")
-    print(f"\tNotes -> {notes_to_string(scale.notes)}")
-    print(f"\tNumber of flats -> {scale.number_of_flats}")
-    print(f"\tCreation Formula -> {scale.creation_formula})")
-    print(f"\tInterval Formula -> {scale.interval_formula})")
-    print(f"\tNumeric Formula -> {scale.numeric_formula})\n")
-
-    # Modes
-    note = Note.random()
-    print(f"Modes of {note}:")
-    for mode in modes_from_note(note):
-        print(f"\t{mode}")
-
-if __name__ == '__main__':
-    main()

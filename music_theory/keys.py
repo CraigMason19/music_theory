@@ -12,8 +12,6 @@
 import random
 from enum import Enum
 
-import _setup
-
 from music_theory.notes import Note, Interval, transpose
 from music_theory.chords import Chord, ChordType
 from music_theory.scales import Scale, ScaleType
@@ -533,37 +531,3 @@ def chords_from_progression(key, progression, error='X'):
             l.append(error)
 
     return l
-
-def main():
-    """ Example Usage """
-    key = Key.random()
-
-    print(f"Key of {key.name}:")
-    print(f"\tstr() -> {str(key)}")
-    print(f"\trepr() -> {repr(key)}")
-    print(f"\tRoot -> {key.root}")
-    print(f"\tType -> {key.type}")
-    print(f"\tParallel -> {key.parallel}")
-    print(f"\tRelative -> {key.relative_key}")
-    print(f"\tSharp Count -> {key.sharp_count}")
-    print(f"\tSharps -> {key.sharps}")
-    print(f"\tFlat Count -> {key.flat_count}")
-    print(f"\tFlats -> {key.flats}")
-    
-    # print(f"\tChords:")
-    # for numeral, chord in key.chords().items():
-    #     print(f"\t\t{numeral}: {chord}")
-
-    # print(f"\tDominant Chords:")
-    # for numeral, chord in key.dominant_chords().items():
-    #     print(f"\t\t{numeral}: {chord}")
-
-    # print(f"\tParallel Chords:")
-    # for numeral, chord in key.parallel_chords().items():
-    #     print(f"\t\t{numeral}: {chord}")
-
-    print('')
-    key.pretty_print(dominant=True, parallel=True)
-
-if __name__ == '__main__':
-    main()
