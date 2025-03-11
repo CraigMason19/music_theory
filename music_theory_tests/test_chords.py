@@ -95,6 +95,27 @@ class TestChords(unittest.TestCase):
     
     #endregion
 
+    #region Chords Notes
+
+    def test_chord_A_major_add9(self):
+        print('\t\ttest_chord_notes_for_A_major_add9')
+        notes = Chord(Note.A, ChordType.Major).add9()
+        expected_notes = [Note.A, Note.Db, Note.E, Note.B]
+        self.assertEqual(notes, expected_notes)
+
+    def test_chord_A_major_add11(self):
+        print('\t\ttest_chord_notes_for_A_major_add11')
+        notes = Chord(Note.A, ChordType.Major).add11()
+        expected_notes = [Note.A, Note.Db, Note.E, Note.D]
+        self.assertEqual(notes, expected_notes)
+
+    def test_chord_A_major_add13(self):
+        print('\t\ttest_chord_notes_for_A_major_add13')
+        notes = Chord(Note.A, ChordType.Major).add13()
+        expected_notes = [Note.A, Note.Db, Note.E, Note.Gb]
+        self.assertEqual(notes, expected_notes)
+    #endregion
+
     #region string representation
 
     def test_str_equal_Gb_major(self):

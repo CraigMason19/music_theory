@@ -122,6 +122,12 @@ class Chord:
             Compares two chords.
         notation(self):
             Returns the chord's notation without the Note.
+        add9(self):
+            Returns an array of the chord's notes with the added 9th
+        add11(self):
+            Returns an array of the chord's notes with the added 11th
+        add13(self):
+            Returns an array of the chord's notes with the added 13th
         __str__(self):
             Returns a string representation of the Chord.
         __repr__(self):
@@ -225,6 +231,45 @@ class Chord:
             case _:
                 return f"M"
 
+    def add9(self):
+        """ Returns an array containing the notes of the chord with the added 9th. 
+
+            e.g. Chord(Note.A).add9() -> [Note.A, Note.Db, Note.E, Note.B]
+
+        Args:
+            None.
+
+        Returns:
+            An array.
+        """    
+        return self.notes + [transpose(self.root, Interval.M2)]
+
+    def add11(self):
+        """ Returns an array containing the notes of the chord with the added 11th. 
+
+            e.g. Chord(Note.A).add11() -> [Note.A, Note.Db, Note.E, Note.D]
+
+        Args:
+            None.
+
+        Returns:
+            An array.
+        """    
+        return self.notes + [transpose(self.root, Interval.P4)]
+    
+    def add13(self):
+        """ Returns an array containing the notes of the chord with the added 13th. 
+
+            e.g. Chord(Note.A).add13() -> [Note.A, Note.Db, Note.E, Note.Gb]
+
+        Args:
+            None.
+
+        Returns:
+            An array.
+        """    
+        return self.notes + [transpose(self.root, Interval.M6)]
+    
     def __str__(self):
         """ Returns a string representing the Chord name and type. 
 
