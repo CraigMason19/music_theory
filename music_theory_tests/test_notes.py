@@ -72,9 +72,16 @@ class TestNotes(unittest.TestCase):
 
     #region Note
 
-    def test_all_notes(self):
+    def test_items(self):
         expected = [Note.C, Note.Db, Note.D, Note.Eb, Note.E, Note.F, Note.Gb, Note.G, Note.Ab, Note.A, Note.Bb, Note.B]
         self.assertEqual(Note.items(), expected)
+
+    def test_all_notes_alias(self):
+        expected = [Note.C, Note.Db, Note.D, Note.Eb, Note.E, Note.F, Note.Gb, Note.G, Note.Ab, Note.A, Note.Bb, Note.B]
+        self.assertEqual(Note.all_notes(), expected)
+
+    def test_items_same_as_all_notes_alias(self):
+        self.assertListEqual(Note.items(), Note.all_notes())
 
     def test_note_C_equality(self):
         self.assertEqual(Note.C, Note.C)

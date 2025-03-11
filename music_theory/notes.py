@@ -36,6 +36,8 @@ def _index_to_range(index):
 
     return sign * index
 
+# region Interval
+
 class Interval(Enum):
     """ Represents a interval (diffence between two notes). Derived from the 
         Enum class.
@@ -169,6 +171,10 @@ class Interval(Enum):
         """
         return f'Interval.{self.name}'
 
+#endregion
+
+#region Note
+
 class Note(Enum):
     """ Represents a musical note starting at 'middle C'. Derived from the 
         Enum class.
@@ -182,6 +188,8 @@ class Note(Enum):
     Methods:
         items(cls):
             A class method to return the enums as a list.
+        all_notes(cls):
+            An alias for items(), returning the enums as a list.
         from_index(cls, index):
             A class method to return a enumeration based upon an index.
         random(cls):
@@ -209,6 +217,8 @@ class Note(Enum):
         """  
         return [n for n in cls]
  
+    all_notes = items  # Alias
+
     @classmethod
     def from_index(cls, index):
         """ A class method that returns a note based upon it's enumeration
@@ -312,6 +322,8 @@ class Note(Enum):
             A string representing a note.
         """
         return f'Note.{self.name}'
+    
+#endregion
 
 #region Functions
 
