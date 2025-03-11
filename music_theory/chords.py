@@ -42,7 +42,11 @@ class ChordType(Enum):
         __repr__(self):
             Returns the Enum name.
     """
-    (Major, Minor, Diminished, Seven, Sus2, Sus4) = range(6)
+    (
+        Major, Minor, Diminished, 
+        Major7, Minor7, Diminished7, Dominant7,
+        Sus2, Sus4
+    ) = range(9)
 
     @classmethod    
     def items(cls):
@@ -157,8 +161,12 @@ class Chord:
             case ChordType.Diminished:
                 self.notes = [self.root, transpose(self.root, Interval.m3), transpose(self.root, Interval.dim5)]
 
-            case ChordType.Seven:
+            case ChordType.Dominant7:
                 self.notes = [self.root, transpose(self.root, Interval.M3), transpose(self.root, Interval.P5), transpose(self.root, Interval.m7)]
+
+        # Major7, Minor7, Diminished7, Dominant7,
+
+
             
             case ChordType.Sus2:
                 self.notes = [self.root, transpose(self.root, Interval.M2), transpose(self.root, Interval.P5)]        
@@ -219,14 +227,23 @@ class Chord:
             case ChordType.Diminished:
                 return f"dim"
             
-            case ChordType.Seven:
-                return f"7"
+            case ChordType.Major7:
+                return f"Δ"            
+
+            case ChordType.Minor7:
+                return f"m7"      
+
+            case ChordType.Diminished7:
+                return f"°7"   
+            
+            case ChordType.Dominant7:
+                return f"7"   
             
             case ChordType.Sus2:
-                return f"Sus2"
+                return f"sus2"
             
             case ChordType.Sus4:
-                return f"Sus4"
+                return f"sus4"
             
             case _:
                 return f"M"
@@ -273,7 +290,7 @@ class Chord:
     def __str__(self):
         """ Returns a string representing the Chord name and type. 
 
-            e.g. str(Chord(Note.E, ChordType.Seven)) -> E7
+            e.g. str(Chord(Note.E, ChordType.Dominant7)) -> E7
 
         Args:
             None.
@@ -286,7 +303,7 @@ class Chord:
     def __repr__(self):
         """ Returns a string representing the Chord. 
 
-            e.g. repr(Chord(Note.E, ChordType.Seven)) -> Chord(E, Seven)
+            e.g. repr(Chord(Note.E, ChordType.Dominant7)) -> Chord(E, Dominant7)
 
         Args:
             None.

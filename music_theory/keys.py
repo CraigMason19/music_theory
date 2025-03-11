@@ -409,7 +409,7 @@ class Key:
                 
         Returns:
                 A dict in the form. key='V7/RomanNumeral' value=Chord
-                e.g. { "V7/I": Chord(C, ChordType.Seven) ... }
+                e.g. { "V7/I": Chord(C, ChordType.Dominant7) ... }
         """
         chords = self.chords()
 
@@ -417,7 +417,7 @@ class Key:
         dom_notes = [transpose(chord.root, Interval.P5) for k, chord in chords.items()]
 
         # Create a seventh chord from this new note.
-        dom_chords = [Chord(note, ChordType.Seven) for note in dom_notes]
+        dom_chords = [Chord(note, ChordType.Dominant7) for note in dom_notes]
 
         return {f'V7/{n[0]}': n[1] for n in zip(chords.keys(), dom_chords)}
 

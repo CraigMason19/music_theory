@@ -188,13 +188,13 @@ class TestKeys(unittest.TestCase):
 
         chord_dict = Key(Note.A, KeyType.Major).dominant_chords()
 
-        expected = [Chord(Note.E, ChordType.Seven),
-                    Chord(Note.Gb, ChordType.Seven),
-                    Chord(Note.Ab, ChordType.Seven),
-                    Chord(Note.A, ChordType.Seven),
-                    Chord(Note.B, ChordType.Seven),
-                    Chord(Note.Db, ChordType.Seven),
-                    Chord(Note.Eb, ChordType.Seven)]
+        expected = [Chord(Note.E, ChordType.Dominant7),
+                    Chord(Note.Gb, ChordType.Dominant7),
+                    Chord(Note.Ab, ChordType.Dominant7),
+                    Chord(Note.A, ChordType.Dominant7),
+                    Chord(Note.B, ChordType.Dominant7),
+                    Chord(Note.Db, ChordType.Dominant7),
+                    Chord(Note.Eb, ChordType.Dominant7)]
  
         self.assertListEqual(list(chord_dict.values()), expected)   
 
@@ -203,13 +203,13 @@ class TestKeys(unittest.TestCase):
 
         chord_dict = Key(Note.C, KeyType.Minor).dominant_chords()
 
-        expected = [Chord(Note.G, ChordType.Seven),
-                    Chord(Note.A, ChordType.Seven),
-                    Chord(Note.Bb, ChordType.Seven),
-                    Chord(Note.C, ChordType.Seven),
-                    Chord(Note.D, ChordType.Seven),
-                    Chord(Note.Eb, ChordType.Seven),
-                    Chord(Note.F, ChordType.Seven)]
+        expected = [Chord(Note.G, ChordType.Dominant7),
+                    Chord(Note.A, ChordType.Dominant7),
+                    Chord(Note.Bb, ChordType.Dominant7),
+                    Chord(Note.C, ChordType.Dominant7),
+                    Chord(Note.D, ChordType.Dominant7),
+                    Chord(Note.Eb, ChordType.Dominant7),
+                    Chord(Note.F, ChordType.Dominant7)]
  
         self.assertListEqual(list(chord_dict.values()), expected)  
     #endregion
