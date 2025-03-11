@@ -13,7 +13,7 @@ import unittest
 import _setup
 
 from music_theory.notes import (Note, Interval, transpose, interval_distance, notes_to_string,
-                   intervals_to_string)
+                   intervals_to_string, chromatic_notes)
 
 class TestNotes(unittest.TestCase):
     #---------------------------------------------------------------------------
@@ -200,6 +200,24 @@ class TestNotes(unittest.TestCase):
 
     def test_transpose_value_error(self):
         self.assertRaises(ValueError, transpose, Note.C, Interval.P4, direction='sideways')
+    #endregion
+
+    #region chromatic_notes
+
+    def test_chromatic_notes_up_00(self):
+        note, expected = Note.A, [Note.A, Note.Bb, Note.B, Note.C, Note.Db, Note.D, Note.Eb, Note.E, Note.F, Note.Gb, Note.G, Note.Ab]
+        self.assertEqual(chromatic_notes(note), expected)
+
+    def test_chromatic_notes_down_01(self):
+        note, expected = Note.A, [Note.A, Note.Ab, Note.G, Note.Gb, Note.F, Note.E, Note.Eb, Note.D, Note.Db, Note.C, Note.B, Note.Bb]
+        self.assertEqual(chromatic_notes(note, direction="down"), expected)
+
+    def test_chromatic_notes_direction_error(self):
+        note, expected = Note.A, [Note.A, Note.Ab, Note.G, Note.Gb, Note.F, Note.E, Note.Eb, Note.D, Note.Db, Note.C, Note.B, Note.Bb]
+        
+        with self.assertRaises(ValueError):
+            chromatic_notes(Note, "Uppy Up")
+
     #endregion
 
 if __name__ == '__main__':

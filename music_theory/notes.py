@@ -12,6 +12,9 @@
 import random
 from enum import Enum
 
+UP_DIRECTIONS = ["u", "up", "above"]
+DOWN_DIRECTIONS = ["d", "down", "below"]
+
 # Single underscore indicates that this function is not meant to be imported from
 # other modules.
 def _index_to_range(index):
@@ -371,13 +374,13 @@ def interval_distance(first_note, second_note, direction="u"):
     direction = direction.lower()
     dif = abs(first_note.value - second_note.value)
 
-    if direction in ["u", "up", "above"]:
+    if direction in UP_DIRECTIONS:
         if first_note.value > second_note.value:
             return Interval.from_index(12 - dif)  
 
         return Interval.from_index(dif)        
 
-    elif direction in ["d", "down", "below"]:
+    elif direction in DOWN_DIRECTIONS:
         if first_note.value > second_note.value:
             return Interval.from_index(dif) 
          
@@ -409,12 +412,50 @@ def transpose(note, interval, direction="u"):
     """       
     direction = direction.lower()
 
-    if direction in ["u", "up", "above"]:
+    if direction in UP_DIRECTIONS:
         return Note.from_index(note.value + interval.value)
 
-    elif direction in ["d", "down", "below"]:
+    elif direction in DOWN_DIRECTIONS:
         return Note.from_index(note.value - interval.value)
 
     raise ValueError(f'direction not recognized({direction})')
+
+def chromatic_notes(note, direction="u"):
+    """ Takes a note and returns every note between that note and it's octave
+
+        e.g. 
+            chromatic_notes(Note.A, direction="down")
+            [Note.A, Note.Ab, Note.G, Note.Gb, Note.F, Note.E, Note.Eb, Note.D, Note.Db, Note.C, Note.B, Note.Bb]
+
+    Args:
+        note:
+            The note to start from.
+        direction:
+            Can either transpose up or down in pitch. acceptable values are
+            "u", "up", "above", "d", "down" or "below" in any case.
+
+    Returns:
+        A list of notes.
+
+    Raises:
+        ValueError:
+            If the direction string is not recognized.
+    """      
+    notes = [note]
+    direction = direction.lower()
+
+    for _ in range(11):
+        if direction in UP_DIRECTIONS:
+            note = note.next()
+
+        elif direction in DOWN_DIRECTIONS:
+            note = note.previous()
+
+        else:
+            raise ValueError(f'direction not recognized({direction})')
+
+        notes.append(note)
+
+    return notes
 
 #endregion
