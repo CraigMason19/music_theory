@@ -74,7 +74,7 @@ class TestNotes(unittest.TestCase):
 
     def test_all_notes(self):
         expected = [Note.C, Note.Db, Note.D, Note.Eb, Note.E, Note.F, Note.Gb, Note.G, Note.Ab, Note.A, Note.Bb, Note.B]
-        self.assertEqual(Note.all_notes(), expected)
+        self.assertEqual(Note.items(), expected)
 
     def test_note_C_equality(self):
         self.assertEqual(Note.C, Note.C)

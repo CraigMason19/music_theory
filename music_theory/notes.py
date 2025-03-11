@@ -177,7 +177,7 @@ class Note(Enum):
             12 class attributes representing note enumerations. Starting at middle C
 
     Methods:
-        all_notes(cls):
+        items(cls):
             A class method to return the enums as a list.
         from_index(cls, index):
             A class method to return a enumeration based upon an index.
@@ -193,7 +193,7 @@ class Note(Enum):
     C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B = range(12) 
 
     @classmethod    
-    def all_notes(cls):
+    def items(cls):
         """ A class method that returns a list of the note enumerations. 
 
             e.g. [Note.C, Note.Db, ... ]
