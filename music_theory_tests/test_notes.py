@@ -43,6 +43,7 @@ class TestNotes(unittest.TestCase):
     #---------------------------------------------------------------------------
 
     #region Interval
+
     def test_interval_from_index_00(self):
         self.assertEqual(Interval.from_index(0), Interval.Unison)
 
@@ -66,9 +67,15 @@ class TestNotes(unittest.TestCase):
 
     def test_interval_from_numeric_02(self):
         self.assertEqual(Interval.from_numeric('b5'), Interval.dim5)
+
     #endregion
 
     #region Note
+
+    def test_all_notes(self):
+        expected = [Note.C, Note.Db, Note.D, Note.Eb, Note.E, Note.F, Note.Gb, Note.G, Note.Ab, Note.A, Note.Bb, Note.B]
+        self.assertEqual(Note.all_notes(), expected)
+
     def test_note_C_equality(self):
         self.assertEqual(Note.C, Note.C)
 
