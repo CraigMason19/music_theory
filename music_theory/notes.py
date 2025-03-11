@@ -257,7 +257,33 @@ class Note(Enum):
             return lower_note.name + '#'
 
         return self.name
+    
+    def previous(self):
+        """ Returns the previous note
 
+            e.g. Note.Eb.previous() -> Note.D
+
+        Args:
+            None.
+
+        Returns:
+            A note.
+        """  
+        return Note.from_index(self.value-1)
+    
+    def next(self):
+        """ Returns the next note
+
+            e.g. Note.Eb.next() -> Note.E
+
+        Args:
+            None.
+
+        Returns:
+            A note.
+        """  
+        return Note.from_index(self.value+1)
+    
     def __str__(self):
         """ Returns a string representing the note name. 
 

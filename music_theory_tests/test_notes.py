@@ -111,6 +111,19 @@ class TestNotes(unittest.TestCase):
     def test_to_sharp_02(self):
         sharp = Note.to_sharp(Note.Gb)
         self.assertEqual(sharp, "F#")
+
+    def test_previous_01(self):
+        self.assertEqual(Note.C.previous(), Note.B)
+
+    def test_previous_02(self):
+        self.assertEqual(Note.Gb.previous(), Note.F)
+
+    def test_next_01(self):
+        self.assertEqual(Note.A.next(), Note.Bb)
+
+    def test_next_02(self):
+        self.assertEqual(Note.B.previous(), Note.Bb)
+
     #endregion
 
     #region ListsToStrings
