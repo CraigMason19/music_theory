@@ -81,6 +81,24 @@ class TestChords(unittest.TestCase):
         expected_notes = [Note.A, Note.Db, Note.E, Note.G]
         self.assertEqual(chord.notes, expected_notes)
 
+    def test_chord_notes_for_A_major_seven(self):
+        print('\t\ttest_chord_notes_for_A_major_seven')
+        chord = Chord(Note.A, ChordType.Major7)
+        expected_notes = [Note.A, Note.Db, Note.E, Note.Ab]
+        self.assertEqual(chord.notes, expected_notes)
+
+    def test_chord_notes_for_A_minor_seven(self):
+        print('\t\ttest_chord_notes_for_A_minor_seven')
+        chord = Chord(Note.A, ChordType.Minor7)
+        expected_notes = [Note.A, Note.C, Note.E, Note.G]
+        self.assertEqual(chord.notes, expected_notes)
+
+    def test_chord_notes_for_A_diminished_seven(self):
+        print('\t\ttest_chord_notes_for_A_diminished_seven')
+        chord = Chord(Note.A, ChordType.Diminished7)
+        expected_notes = [Note.A, Note.C, Note.Eb, Note.Gb]
+        self.assertEqual(chord.notes, expected_notes)
+
     def test_chord_notes_for_A_sus2(self):
         print('\t\ttest_chord_notes_for_A_sus2')
         chord = Chord(Note.A, ChordType.Sus2)
@@ -130,16 +148,34 @@ class TestChords(unittest.TestCase):
         expected_notation = 'm'
         self.assertEqual(notation, expected_notation)
 
-    def test_chord_A_minor_notation(self):
-        print('\t\ttest_chord_notation_for_A_minor')
-        notation = Chord(Note.A, ChordType.Minor).notation
-        expected_notation = 'm'
-        self.assertEqual(notation, expected_notation)
-
     def test_chord_A_diminished_notation(self):
         print('\t\ttest_chord_notation_for_A_diminished')
         notation = Chord(Note.A, ChordType.Diminished).notation
         expected_notation = 'dim'
+        self.assertEqual(notation, expected_notation)
+
+    def test_chord_A_dominant_7_notation(self):
+        print('\t\ttest_chord_notation_for_A_dominant_7')
+        notation = Chord(Note.A, ChordType.Dominant7).notation
+        expected_notation = '7'
+        self.assertEqual(notation, expected_notation)
+
+    def test_chord_A_major_7_notation(self):
+        print('\t\ttest_chord_notation_for_A_major_7')
+        notation = Chord(Note.A, ChordType.Major7).notation
+        expected_notation = 'Δ7'
+        self.assertEqual(notation, expected_notation)
+
+    def test_chord_A_minor_7_notation(self):
+        print('\t\ttest_chord_notation_for_A_minor_7')
+        notation = Chord(Note.A, ChordType.Minor7).notation
+        expected_notation = 'm7'
+        self.assertEqual(notation, expected_notation)
+
+    def test_chord_A_diminished_7_notation(self):
+        print('\t\ttest_chord_notation_for_A_diminished_7')
+        notation = Chord(Note.A, ChordType.Diminished7).notation
+        expected_notation = '°7'
         self.assertEqual(notation, expected_notation)
 
     def test_chord_A_sus2_notation(self):
@@ -152,7 +188,8 @@ class TestChords(unittest.TestCase):
         print('\t\ttest_chord_notation_for_A_sus4')
         notation = Chord(Note.A, ChordType.Sus4).notation
         expected_notation = 'sus4'
-        self.assertEqual(notation, expected_notation)    
+        self.assertEqual(notation, expected_notation)   
+         
     #endregion
 
     #region String Representation

@@ -44,7 +44,7 @@ class ChordType(Enum):
     """
     (
         Major, Minor, Diminished, 
-        Major7, Minor7, Diminished7, Dominant7,
+        Dominant7, Major7, Minor7, Diminished7,
         Sus2, Sus4
     ) = range(9)
 
@@ -163,11 +163,16 @@ class Chord:
 
             case ChordType.Dominant7:
                 self.notes = [self.root, transpose(self.root, Interval.M3), transpose(self.root, Interval.P5), transpose(self.root, Interval.m7)]
-
-        # Major7, Minor7, Diminished7, Dominant7,
-
-
             
+            case ChordType.Major7:
+                self.notes = [self.root, transpose(self.root, Interval.M3), transpose(self.root, Interval.P5), transpose(self.root, Interval.M7)]
+
+            case ChordType.Minor7:
+                self.notes = [self.root, transpose(self.root, Interval.m3), transpose(self.root, Interval.P5), transpose(self.root, Interval.m7)]
+            
+            case ChordType.Diminished7:
+                self.notes = [self.root, transpose(self.root, Interval.m3), transpose(self.root, Interval.dim5), transpose(self.root, Interval.M6)]
+
             case ChordType.Sus2:
                 self.notes = [self.root, transpose(self.root, Interval.M2), transpose(self.root, Interval.P5)]        
 
@@ -227,18 +232,18 @@ class Chord:
             case ChordType.Diminished:
                 return f"dim"
             
+            case ChordType.Dominant7:
+                return f"7"   
+
             case ChordType.Major7:
-                return f"Δ"            
+                return f"Δ7"            
 
             case ChordType.Minor7:
                 return f"m7"      
 
             case ChordType.Diminished7:
                 return f"°7"   
-            
-            case ChordType.Dominant7:
-                return f"7"   
-            
+                        
             case ChordType.Sus2:
                 return f"sus2"
             
