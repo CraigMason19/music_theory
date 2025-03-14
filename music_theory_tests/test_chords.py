@@ -151,7 +151,7 @@ class TestChords(unittest.TestCase):
     def test_chord_A_diminished_notation(self):
         print('\t\ttest_chord_notation_for_A_diminished')
         notation = Chord(Note.A, ChordType.Diminished).notation
-        expected_notation = 'dim'
+        expected_notation = '°'
         self.assertEqual(notation, expected_notation)
 
     def test_chord_A_dominant_7_notation(self):
@@ -207,7 +207,7 @@ class TestChords(unittest.TestCase):
     def test_str_equal_Gb_diminished(self):
         print('\t\ttest_str_equal_Gb_diminished')
         expected = str(Chord(Note.Gb, ChordType.Diminished))
-        self.assertEqual("Gbdim", expected)
+        self.assertEqual("Gb°", expected)
 
     def test_str_equal_Gb_seven(self):
         print('\t\ttest_str_equal_Gb_seven')

@@ -230,7 +230,7 @@ class Chord:
                 return f"m" 
             
             case ChordType.Diminished:
-                return f"dim"
+                return f"°"
             
             case ChordType.Dominant7:
                 return f"7"   
