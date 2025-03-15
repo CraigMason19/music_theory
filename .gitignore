@@ -1,6 +1,7 @@
 .virtualenv/
 Source/__pycache__/
 Extras/
+htmlcov/
 playground.py
 TODO.txt
 Songs/

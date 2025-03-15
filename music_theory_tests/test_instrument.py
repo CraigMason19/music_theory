@@ -14,7 +14,7 @@ import _setup
 
 from music_theory.notes import Note, Interval
 from music_theory.instrument import StringInstrument
-from music_theory.instrument_creator import create_standard_guitar, E_STANDARD_GUITAR
+from music_theory.instrument_creator import create_standard_guitar, E_STANDARD_GUITAR, D_STANDARD_GUITAR, C_STANDARD_GUITAR
 
 class TestChords(unittest.TestCase):
     #---------------------------------------------------------------------------
@@ -114,5 +114,19 @@ class TestChords(unittest.TestCase):
 
     #endregion
 
-if __name__ == '__main__':
+    #region Detune
+
+    def test_detune_00(self):
+        guitar = create_standard_guitar(Note.E)
+        guitar.detune(Interval.M2)
+        self.assertEqual(guitar.tuning, D_STANDARD_GUITAR.tuning)
+
+    def test_detune_01(self):
+        guitar = create_standard_guitar(Note.D)
+        guitar.detune(Interval.M2)
+        self.assertEqual(guitar.tuning, C_STANDARD_GUITAR.tuning)
+
+    #endregion
+
+if __name__ == '__main__': # pragma: no cover
     unittest.main()
