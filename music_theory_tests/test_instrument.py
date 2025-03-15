@@ -92,5 +92,27 @@ class TestChords(unittest.TestCase):
 
     #endregion
 
+    #region Adjust String
+
+    def test_adjust_string_up_00(self):
+        guitar = create_standard_guitar(Note.E)
+        guitar.adjust_string(0, Interval.M2, "u")
+        self.assertEqual(guitar.tuning[0], Note.Gb)
+
+    def test_adjust_string_up_01(self):
+        guitar = create_standard_guitar(Note.E)
+        guitar.adjust_string(1, Interval.M2, "d")
+        self.assertEqual(guitar.tuning[1], Note.G)
+
+    def test_adjust_string_incorrect_string_index_00(self):
+        guitar = create_standard_guitar(Note.E)
+        self.assertRaises(ValueError, guitar.adjust_string, -1, Interval.M2, "d")
+
+    def test_adjust_string_incorrect_string_index_01(self):
+        guitar = create_standard_guitar(Note.E)
+        self.assertRaises(ValueError, guitar.adjust_string, 6, Interval.M2, "d")
+
+    #endregion
+
 if __name__ == '__main__':
     unittest.main()

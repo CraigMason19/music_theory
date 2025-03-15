@@ -31,10 +31,10 @@ class StringInstrument:
         self.tuning = [transpose(n, Interval.from_index(fret), "u") for n in self.tuning]
 
     def adjust_string(self, string_index, interval, direction="u"):
-        try:            
-            self.tuning[string_index] = transpose(self.tuning[string_index], interval, direction)
-        except:
+        if string_index < 0 or string_index >= self.num_strings:
             raise ValueError(f"Incorrect string index {string_index}")
+        
+        self.tuning[string_index] = transpose(self.tuning[string_index], interval, direction)
 
     def detune(self, interval):
         self.tuning = [transpose(string, interval, direction="d") for string in self.tuning]
