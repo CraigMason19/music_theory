@@ -1,7 +1,5 @@
 import re
 
-from enum import Enum
-
 from music_theory.notes import Note, Interval, transpose, notes_to_string
 
 def extract_frets(line):
@@ -40,13 +38,13 @@ class StringInstrument:
         self.tuning = [transpose(string, interval, direction="d") for string in self.tuning]
     
     def note_at_fret(self, string_index, fret):
+        if string_index < 0 or string_index >= self.num_strings:
+            raise ValueError(f"Incorrect string index {string_index}")
+
         if fret < 0:
             raise ValueError("Frets can't be negative")
         
-        try:            
-            return Note.from_index(self.tuning[string_index].value + fret)
-        except:
-            raise ValueError(f"Incorrect string index {string_index}")   
+        return Note.from_index(self.tuning[string_index].value + fret) 
 
     def notes_in_chord(self, chord_str):
         lines =  chord_str.split()
