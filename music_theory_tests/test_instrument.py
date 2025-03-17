@@ -178,6 +178,40 @@ class TestChords(unittest.TestCase):
 
     #endregion
 
+    #region Notes in Chord
+
+    def test_intervals_in_power_chord(self):
+        intervals = self.standard_guitar.intervals_in_chord("x 3 5 5 x x")
+        expected = [Interval.Unison, Interval.P5, Interval.Unison]
+        self.assertEqual(intervals, expected)
+
+    def test_intervals_in_empty_chord(self):
+        intervals = self.standard_guitar.intervals_in_chord("x x x x x x")
+        self.assertEqual(intervals, [])
+
+    def test_intervals_in_chord_to_few_strings(self):
+        self.assertRaises(ValueError, self.standard_guitar.intervals_in_chord, "x x 3 x 6")
+
+    def test_intervals_in_chord_to_many_strings(self):
+        self.assertRaises(ValueError, self.standard_guitar.intervals_in_chord, "x x x x x x 15")
+
+    def test_intervals_in_chord_octave(self):
+        intervals = self.standard_guitar.intervals_in_chord("x 3 x 5 x x")
+        expected = [Interval.Unison, Interval.Unison]
+        self.assertEqual(intervals, expected)
+
+    def test_intervals_in_chord_power_chord(self):
+        intervals = self.standard_guitar.intervals_in_chord("x 3 5 5 x x")
+        expected = [Interval.Unison, Interval.P5, Interval.Unison]
+        self.assertEqual(intervals, expected)
+
+    def test_intervals_in_chord_open_d(self):
+        intervals = self.standard_guitar.intervals_in_chord("x x 0 2 3 2")
+        expected = [Interval.Unison, Interval.P5, Interval.Unison, Interval.M3]
+        self.assertEqual(intervals, expected)
+
+    #region
+
     #region __str__
 
     def test_str_method(self):

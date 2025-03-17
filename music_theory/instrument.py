@@ -1,6 +1,6 @@
 import re
 
-from music_theory.notes import Note, Interval, transpose, notes_to_string
+from music_theory.notes import Note, Interval, transpose, notes_to_string, interval_distance
 
 def extract_frets(line):
     return [int(fret) for fret in re.findall(r"\d+", line)]
@@ -60,6 +60,14 @@ class StringInstrument:
             notes.extend([self.note_at_fret(string_index, fret) for fret in frets])
 
         return notes  
+
+    def intervals_in_chord(self, chord_str):
+        notes = self.notes_in_chord(chord_str)
+
+        if len(notes) == 0:
+            return []
+
+        return [Interval.Unison] + [interval_distance(notes[0], notes[i+1]) for i in range(len(notes)-1)]
 
     def __str__(self):
         return f"{notes_to_string(self.tuning)}"
