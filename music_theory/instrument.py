@@ -70,7 +70,27 @@ class StringInstrument:
         return [Interval.Unison] + [interval_distance(notes[0], notes[i+1]) for i in range(len(notes)-1)]
 
     def __str__(self):
+        """ Returns a string representing the instrument. 
+
+            e.g. str(StringInstrument([Note.B, Note.E, Note.A])) -> B, E, A, D, G
+
+        Args:
+            None.
+
+        Returns:
+            A string.
+        """
         return f"{notes_to_string(self.tuning)}"
 
     def __repr__(self):
+        """ Returns a string representing the instrument. 
+
+            e.g. repr(StringInstrument([Note.B, Note.E, Note.A])) -> StringInstrument(3, [B, E, A])
+
+        Args:
+            None.
+
+        Returns:
+            A string.
+        """
         return f"StringInstrument({self.num_strings}, [{notes_to_string(self.tuning)}])"
