@@ -68,6 +68,10 @@ class TestNotes(unittest.TestCase):
     def test_interval_from_numeric_02(self):
         self.assertEqual(Interval.from_numeric('b5'), Interval.dim5)
 
+    def test_random_interval_validity(self):
+        interval = Interval.random()
+        self.assertIn(interval, list(Interval))
+
     #endregion
 
     #region Note
@@ -130,6 +134,10 @@ class TestNotes(unittest.TestCase):
 
     def test_next_02(self):
         self.assertEqual(Note.B.previous(), Note.Bb)
+
+    def test_random_note_validity(self):
+        note = Note.random()
+        self.assertIn(note, list(Note))
 
     #endregion
 

@@ -122,7 +122,7 @@ formula_numeric_dict = {
 
 #endregion
 
-#region ScaleCreationMethods
+#region Scale Creation Methods
 
 def _notes_from_steps(root, formula):
     """ Returns a list of notes comprising a scale from a root note and a step
