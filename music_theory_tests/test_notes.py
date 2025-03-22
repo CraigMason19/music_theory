@@ -72,6 +72,14 @@ class TestNotes(unittest.TestCase):
         interval = Interval.random()
         self.assertIn(interval, list(Interval))
 
+    def test_interval_str(self):
+        interval = Interval.m7
+        self.assertEqual(str(interval), "m7")
+
+    def test_interval_repr(self):
+        interval = Interval.m7
+        self.assertEqual(repr(interval), "Interval.m7")
+
     #endregion
 
     #region Note
@@ -138,6 +146,14 @@ class TestNotes(unittest.TestCase):
     def test_random_note_validity(self):
         note = Note.random()
         self.assertIn(note, list(Note))
+
+    def test_note_str(self):
+        note = Note.Db
+        self.assertEqual(str(note), "Db")
+
+    def test_note_repr(self):
+        note = Note.Db
+        self.assertEqual(repr(note), "Note.Db")
 
     #endregion
 
