@@ -43,6 +43,14 @@ class TestChords(unittest.TestCase):
     # Tests
     #---------------------------------------------------------------------------
 
+    #region ChordTypes
+
+    def test_chord_type_items(self):
+        expected = [ChordType.Major, ChordType.Minor, ChordType.Diminished, ChordType.Dominant7, ChordType.Major7, ChordType.Minor7, ChordType.Diminished7, ChordType.Sus2, ChordType.Sus4]
+        self.assertEqual(ChordType.items(), expected)
+
+    #endregion
+
     #region Chords Equal
 
     def test_chord_equal_A_major(self):
@@ -110,7 +118,7 @@ class TestChords(unittest.TestCase):
         chord = Chord(Note.A, ChordType.Sus4)
         expected_notes = [Note.A, Note.D, Note.E]
         self.assertEqual(chord.notes, expected_notes)
-    
+
     #endregion
 
     #region Chord Extensions
