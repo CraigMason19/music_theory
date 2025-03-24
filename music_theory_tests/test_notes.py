@@ -44,6 +44,17 @@ class TestNotes(unittest.TestCase):
 
     #region Interval
 
+    def test_interval_items(self):
+        expected = [Interval.Unison, Interval.m2, Interval.M2, Interval.m3, Interval.M3, Interval.P4, Interval.dim5, Interval.P5, Interval.m6, Interval.M6, Interval.m7, Interval.M7]
+        self.assertEqual(Interval.items(), expected)
+
+    def test_all_interval_alias(self):
+        expected = [Interval.Unison, Interval.m2, Interval.M2, Interval.m3, Interval.M3, Interval.P4, Interval.dim5, Interval.P5, Interval.m6, Interval.M6, Interval.m7, Interval.M7]
+        self.assertEqual(Interval.all_intervals(), expected)
+
+    def test_items_same_as_all_intervals_alias(self):
+        self.assertListEqual(Interval.items(), Interval.all_intervals())
+
     def test_interval_from_index_00(self):
         self.assertEqual(Interval.from_index(0), Interval.Unison)
 
