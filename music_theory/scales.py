@@ -14,6 +14,8 @@ from enum import Enum
 
 from music_theory.notes import Note, Interval, notes_to_string, intervals_to_string
 
+#region Scale Type
+
 class ScaleType(Enum):
     """ Represents a type of scale (e.g. minor, major, blues, lydian, etc...).
         This determines how the scale will be constructed. Derived from the Enum
@@ -91,6 +93,8 @@ class ScaleType(Enum):
             A string representing the ScaleType.
         """
         return f'ScaleType.{self.name}'
+
+#endregion
 
 #region ScaleFormulas
 
@@ -217,6 +221,8 @@ def _intervals_from_numerics(formula):
     return [Interval.from_numeric(n) for n in formula]
 
 #endregion
+
+#region Scale
 
 class Scale:
     """ A class representing a Scale (A collection of musical notes).
@@ -434,3 +440,5 @@ def modes_from_note(note):
     m.append(Scale(s.notes[6], ScaleType.Locrian))
 
     return m
+
+#endregion
