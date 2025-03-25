@@ -199,6 +199,14 @@ class Note(Enum):
             A class method that returns a random note.
         to_sharp(self):
             Returns a string of a flat note as a sharp.
+        previous(self):
+            Returns the note below.
+        next(self):
+            Returns the note above.
+        transpose(self, interval, direction="u"):
+            Returns a Note transposed by an interval in either direction.
+        chromatics(self, direction="u"):
+            Returns a list of all notes from the note to the octave in either direction.
         __str__(self):
             Returns the name of the note.
         __repr__(self):
