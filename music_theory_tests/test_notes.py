@@ -220,6 +220,7 @@ class TestNotes(unittest.TestCase):
     #endregion
 
     #region Transpose
+
     def test_transpose_up_00(self):    
         note, expected = transpose(Note.A, Interval.P4, direction='u'), Note.D
         self.assertEqual(note, expected)
@@ -242,6 +243,15 @@ class TestNotes(unittest.TestCase):
 
     def test_transpose_value_error(self):
         self.assertRaises(ValueError, transpose, Note.C, Interval.P4, direction='sideways')
+
+    def test_transpose_from_class_up(self):
+        note = Note.C.transpose(Interval.P4)
+        self.assertEqual(note, Note.F)
+
+    def test_transpose_from_class_down(self):
+        note = Note.C.transpose(Interval.P4, direction='Down')
+        self.assertEqual(note, Note.G)
+
     #endregion
 
     #region chromatic_notes
@@ -250,7 +260,7 @@ class TestNotes(unittest.TestCase):
         note, expected = Note.A, [Note.A, Note.Bb, Note.B, Note.C, Note.Db, Note.D, Note.Eb, Note.E, Note.F, Note.Gb, Note.G, Note.Ab]
         self.assertEqual(chromatic_notes(note), expected)
 
-    def test_chromatic_notes_down_01(self):
+    def test_chromatic_notes_down_00(self):
         note, expected = Note.A, [Note.A, Note.Ab, Note.G, Note.Gb, Note.F, Note.E, Note.Eb, Note.D, Note.Db, Note.C, Note.B, Note.Bb]
         self.assertEqual(chromatic_notes(note, direction="down"), expected)
 
@@ -259,6 +269,16 @@ class TestNotes(unittest.TestCase):
         
         with self.assertRaises(ValueError):
             chromatic_notes(Note, "Uppy Up")
+
+    def test_chromatics_from_class_up(self):
+        notes = Note.A.chromatics()
+        expected = [Note.A, Note.Bb, Note.B, Note.C, Note.Db, Note.D, Note.Eb, Note.E, Note.F, Note.Gb, Note.G, Note.Ab]
+        self.assertEqual(notes, expected)
+
+    def test_chromatics_from_class_down(self):
+        notes = Note.A.chromatics("d")
+        expected = [Note.A, Note.Ab, Note.G, Note.Gb, Note.F, Note.E, Note.Eb, Note.D, Note.Db, Note.C, Note.B, Note.Bb]
+        self.assertEqual(notes, expected)
 
     #endregion
 

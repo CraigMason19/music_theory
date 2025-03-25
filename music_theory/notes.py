@@ -300,6 +300,50 @@ class Note(Enum):
         """  
         return Note.from_index(self.value+1)
     
+    def transpose(self, interval, direction="u"):
+        """ Transposes (changes) this note into a different note lower or higher
+            in pitch. 
+
+            Note.C.transpose(Interval.M3)
+            C tranposed a Major 3rd becomes E
+
+        Args:
+            interval:
+                The interval to transpose the note.
+            direction:
+                Can either transpose up or down in pitch. acceptable values are
+                "u", "up", "above", "d", "down" or "below" in any case.
+
+        Returns:
+            The note after being transposed.
+
+        Raises:
+            ValueError:
+                If the direction string is not recognized.
+        """   
+        return transpose(self, interval, direction)
+    
+    def chromatics(self, direction="u"):
+        """ Returns every note between this note and it's octave
+
+            e.g. 
+                Note.A.chromatics(direction="down")
+                [Note.A, Note.Ab, Note.G, Note.Gb, Note.F, Note.E, Note.Eb, Note.D, Note.Db, Note.C, Note.B, Note.Bb]
+
+        Args:
+            direction:
+                Can either transpose up or down in pitch. acceptable values are
+                "u", "up", "above", "d", "down" or "below" in any case.
+
+        Returns:
+            A list of notes.
+
+        Raises:
+            ValueError:
+                If the direction string is not recognized.
+        """            
+        return chromatic_notes(self, direction)
+    
     def __str__(self):
         """ Returns a string representing the note name. 
 
