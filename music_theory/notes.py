@@ -49,7 +49,7 @@ class Interval(Enum):
     Methods:
         items(cls):
             A class method to return the enums as a list.
-        all_intervals(cls):
+        all(cls):
             An alias for items(), returning the enums as a list.
         from_index(cls, index):
             A class method to return a enum based upon an index.
@@ -80,7 +80,7 @@ class Interval(Enum):
         """  
         return [n for n in cls]
  
-    all_intervals = items # Alias
+    all = items # Alias
 
     @classmethod
     def from_index(cls, index):
@@ -191,7 +191,7 @@ class Note(Enum):
     Methods:
         items(cls):
             A class method to return the enums as a list.
-        all_notes(cls):
+        all(cls):
             An alias for items(), returning the enums as a list.
         from_index(cls, index):
             A class method to return a enumeration based upon an index.
@@ -228,7 +228,7 @@ class Note(Enum):
         """  
         return [n for n in cls]
  
-    all_notes = items  # Alias
+    all = items  # Alias
 
     @classmethod
     def from_index(cls, index):

@@ -50,10 +50,10 @@ class TestNotes(unittest.TestCase):
 
     def test_all_interval_alias(self):
         expected = [Interval.Unison, Interval.m2, Interval.M2, Interval.m3, Interval.M3, Interval.P4, Interval.dim5, Interval.P5, Interval.m6, Interval.M6, Interval.m7, Interval.M7]
-        self.assertEqual(Interval.all_intervals(), expected)
+        self.assertEqual(Interval.all(), expected)
 
-    def test_items_same_as_all_intervals_alias(self):
-        self.assertListEqual(Interval.items(), Interval.all_intervals())
+    def test_items_same_as_all_alias(self):
+        self.assertListEqual(Interval.items(), Interval.all())
 
     def test_interval_from_index_00(self):
         self.assertEqual(Interval.from_index(0), Interval.Unison)
@@ -99,12 +99,12 @@ class TestNotes(unittest.TestCase):
         expected = [Note.C, Note.Db, Note.D, Note.Eb, Note.E, Note.F, Note.Gb, Note.G, Note.Ab, Note.A, Note.Bb, Note.B]
         self.assertEqual(Note.items(), expected)
 
-    def test_all_notes_alias(self):
+    def test_all_alias(self):
         expected = [Note.C, Note.Db, Note.D, Note.Eb, Note.E, Note.F, Note.Gb, Note.G, Note.Ab, Note.A, Note.Bb, Note.B]
-        self.assertEqual(Note.all_notes(), expected)
+        self.assertEqual(Note.all(), expected)
 
-    def test_items_same_as_all_notes_alias(self):
-        self.assertListEqual(Note.items(), Note.all_notes())
+    def test_items_same_as_all_alias(self):
+        self.assertListEqual(Note.items(), Note.all())
 
     def test_note_C_equality(self):
         self.assertEqual(Note.C, Note.C)
