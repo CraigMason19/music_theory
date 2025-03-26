@@ -52,7 +52,7 @@ class TestNotes(unittest.TestCase):
         expected = [Interval.Unison, Interval.m2, Interval.M2, Interval.m3, Interval.M3, Interval.P4, Interval.dim5, Interval.P5, Interval.m6, Interval.M6, Interval.m7, Interval.M7]
         self.assertEqual(Interval.all(), expected)
 
-    def test_items_same_as_all_alias(self):
+    def test_interval_items_same_as_all_alias(self):
         self.assertListEqual(Interval.items(), Interval.all())
 
     def test_interval_from_index_00(self):
