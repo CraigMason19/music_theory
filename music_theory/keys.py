@@ -35,6 +35,8 @@ The circle shows how many sharps and flats are in the key.
 # Before Eating A Doughnut Get Coffee First.
 """
 
+#region KeyType
+
 class KeyType(Enum):
     """ Represents a key type. Keys are either Major or Minor.
     
@@ -126,6 +128,10 @@ class KeyType(Enum):
             A string representing the key type's name.
         """
         return f'KeyType.{self.name}'
+
+#endregion
+
+#region Key
 
 class Key:
     """ Represents a musical key. A key is important to find what chords can be 
@@ -504,6 +510,10 @@ class Key:
         """
         return f'Key({self.root} {self.type})' 
 
+#endregion
+
+#region Functions
+
 def chords_from_progression(key, progression, error='X'):
     """ Returns a list of chords that match a progression in a key. Error is 
         used if a chord can't be found in the progression.
@@ -532,3 +542,5 @@ def chords_from_progression(key, progression, error='X'):
             l.append(error)
 
     return l
+
+#endregion
