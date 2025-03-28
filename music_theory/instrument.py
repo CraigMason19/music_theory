@@ -1,6 +1,7 @@
 import re
 
-from music_theory.notes import Note, Interval, transpose, notes_to_string, interval_distance
+from music_theory.notes import Note, transpose, notes_to_string
+from music_theory.intervals import Interval, interval_distance
 
 def extract_frets(line):
     return [int(fret) for fret in re.findall(r"\d+", line)]

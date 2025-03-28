@@ -12,7 +12,8 @@
 import random
 from enum import Enum
 
-from music_theory.notes import Note, Interval, notes_to_string, intervals_to_string
+from music_theory.notes import Note, notes_to_string
+from music_theory.intervals import Interval
 
 #region Scale Type
 

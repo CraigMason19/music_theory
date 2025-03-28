@@ -1,5 +1,6 @@
 from music_theory.instrument import StringInstrument
-from music_theory.notes import Note, Interval, transpose
+from music_theory.notes import Note, transpose
+from music_theory.intervals import Interval
 
 STANDARD_BASS_TUNING_INTERVALS = [
     Interval.Unison, Interval.P4, Interval.P4, Interval.P4

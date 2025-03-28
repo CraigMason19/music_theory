@@ -12,7 +12,8 @@
 import random
 from enum import Enum
 
-from music_theory.notes import Note, Interval, transpose
+from music_theory.notes import Note, transpose
+from music_theory.intervals import Interval
 from music_theory.chords import Chord, ChordType
 from music_theory.scales import Scale, ScaleType
 

@@ -11,7 +11,8 @@
 import random
 from enum import Enum
 
-from music_theory.notes import Note, transpose, Interval
+from music_theory.notes import Note, transpose
+from music_theory.intervals import Interval
 
 # A cadence in music is a chord progression of at least 2 chords that ends a 
 # phrase or section of a piece of music.
@@ -20,7 +21,7 @@ cadence_dict = {
     "Plagal": ["IV", "I"], # Or, Amen
     "Authentic": ["V", "I"], # Or, perfect
     # Unfinished
-    "Deceptive": ["V", "VI"], #Or, interupted
+    "Deceptive": ["V", "VI"], # Or, interupted
 }
 
 #region ChordType

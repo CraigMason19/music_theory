@@ -9,7 +9,8 @@
 # TODO:
 #-------------------------------------------------------------------------------
 
-from music_theory.notes import Note, Interval, transpose, interval_distance
+from music_theory.notes import Note, transpose
+from music_theory.intervals import Interval, interval_distance
 from music_theory.scales import Scale, ScaleType, notes_to_string, modes_from_note
 from music_theory.keys import Key, KeyType, chords_from_progression
 from music_theory.chords import Chord, ChordType
