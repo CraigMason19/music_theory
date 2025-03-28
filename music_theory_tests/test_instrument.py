@@ -12,7 +12,8 @@ import unittest
 
 import _setup
 
-from music_theory.notes import Note, Interval
+from music_theory.notes import Note
+from music_theory.intervals import Interval
 from music_theory.instrument import StringInstrument
 from music_theory.instrument_creator import create_standard_guitar, E_STANDARD_GUITAR, D_STANDARD_GUITAR, C_STANDARD_GUITAR
 
