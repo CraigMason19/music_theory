@@ -11,8 +11,6 @@
 UP_DIRECTIONS = ["u", "up", "above"]
 DOWN_DIRECTIONS = ["d", "down", "below"]
 
-# Single underscore indicates that this function is not meant to be imported from
-# other modules.
 def index_to_range(index):
     """ Takes a index and converts it into the range -11 to +11 (+ or - Interval 
         or note). 12 would be an octave and so the note would not change. 
