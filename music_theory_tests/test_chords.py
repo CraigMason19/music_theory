@@ -49,18 +49,64 @@ class TestChords(unittest.TestCase):
         expected = [ChordType.Major, ChordType.Minor, ChordType.Diminished, ChordType.Dominant7, ChordType.Major7, ChordType.Minor7, ChordType.Diminished7, ChordType.Sus2, ChordType.Sus4]
         self.assertEqual(ChordType.items(), expected)
 
+    def test_random_chord_type_validity(self):
+        type = ChordType.random()
+        self.assertIn(type, list(ChordType))
+
+    def test_chord_type_str(self):
+        type = ChordType.Dominant7
+        self.assertEqual(str(type), "Dominant7")
+
+    def test_chord_type_repr(self):
+        type = ChordType.Dominant7
+        self.assertEqual(repr(type), "ChordType.Dominant7")
+
+    #endregion
+
+    #regin Chord
+
+    def test_chord_valid_00(self):
+        chord = Chord(Note.Gb, ChordType.Minor)
+        expected = Chord(Note.Gb, ChordType.Minor)
+        self.assertEqual(chord, expected)
+
+    def test_chord_invalid_00(self):
+        with self.assertRaises(ValueError):
+                Chord(Note.A, 5)
+
+    def test_chord_invalid_01(self):
+        with self.assertRaises(ValueError):
+                Chord(Note.A, 17)
+
+    def test_chord_invalid_02(self):
+        with self.assertRaises(ValueError):
+                Chord(Note.A, -1)
+
+    def test_random_chord_validity(self):
+        chord = Chord.random()
+        self.assertIn(chord.root, list(Note))
+        self.assertIn(chord.chord_type, list(ChordType))
+
     #endregion
 
     #region Chords Equal
 
     def test_chord_equal_A_major(self):
-        print('\t\ttest_chord_equal_B_major')
         self.assertEqual(Chord(Note.B, ChordType.Major), Chord(Note.B, ChordType.Major))
 
     def test_chord_equal_Gb_minor(self):
-        print('\t\ttest_chord_equal_Gb_minor')
         self.assertEqual(Chord(Note.Gb, ChordType.Minor), Chord(Note.Gb, ChordType.Minor))
+
+    def test_chord_not_equal_Gb_minor_and_Gb_major(self):
+        self.assertNotEqual(Chord(Note.Gb, ChordType.Minor), Chord(Note.Gb, ChordType.Major))
     
+    def test_chord_not_equal_with_non_chord(self):
+        chord = Chord(Note.Gb, ChordType.Minor)
+        
+        self.assertFalse(chord == 5)
+        self.assertFalse(chord == "string")
+        self.assertFalse(chord == None)
+
     #endregion
 
     #region Chord Notes
@@ -222,9 +268,16 @@ class TestChords(unittest.TestCase):
         expected = str(Chord(Note.Gb, ChordType.Dominant7))
         self.assertEqual("Gb7", expected)
 
+    def test_chord_str(self):
+        chord = Chord(Note.F, ChordType.Diminished7)
+        self.assertEqual(str(chord), "F°7")
+
+    def test_chord_repr(self):
+        chord = Chord(Note.F, ChordType.Diminished7)
+        self.assertEqual(repr(chord), "Chord(F, Diminished7)")
+
     #endregion
     
-
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()

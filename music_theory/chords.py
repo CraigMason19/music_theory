@@ -149,6 +149,10 @@ class Chord:
 
         Returns:
             None.
+
+        Raises:
+            ValueError:
+                If the chord_type is not valid.
         """  
         self.root, self.chord_type, self.notes = root, chord_type, []
 
@@ -181,7 +185,7 @@ class Chord:
                 self.notes = [self.root, transpose(self.root, Interval.P4), transpose(self.root, Interval.P5)]      
 
             case _:
-                pass
+                raise ValueError(f"Unknown chord type: {self.chord_type}")
     
     @classmethod
     def random(cls):
