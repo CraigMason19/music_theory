@@ -222,7 +222,7 @@ class Chord:
     def notation(self):
         """ A property that returns the chord's notation without the Note. 
 
-            e.g. 'Fdim' -> 'dim'
+            e.g. 'F°' -> '°'
 
         Args:
             None.
@@ -232,25 +232,25 @@ class Chord:
         """    
         match self.chord_type:
             case ChordType.Minor:
-                return f"m" 
+                return "m" 
             
             case ChordType.Diminished:
-                return f"°"
+                return "°"
             
             case ChordType.Dominant7:
-                return f"7"   
+                return "7"   
 
             case ChordType.Major7:
-                return f"Δ7"            
+                return "Δ7"            
 
             case ChordType.Minor7:
-                return f"m7"      
+                return "m7"      
 
             case ChordType.Diminished7:
-                return f"°7"   
+                return "°7"   
                         
             case ChordType.Sus2:
-                return f"sus2"
+                return "sus2"
             
             case ChordType.Sus4:
                 return f"sus4"
