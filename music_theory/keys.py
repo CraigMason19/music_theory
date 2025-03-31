@@ -98,10 +98,7 @@ class KeyType(Enum):
         Returns:
             A KeyType
         """
-        if self.name == 'Major':
-            return KeyType.Minor
-         
-        return KeyType.Major
+        return KeyType.Minor if (self.name == 'Major') else KeyType.Major
 
     def __str__(self):
         """ Returns a string representing the key type name. 
