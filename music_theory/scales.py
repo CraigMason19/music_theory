@@ -55,6 +55,8 @@ class ScaleType(Enum):
         """  
         return [n for n in cls]
 
+    all = items  # Alias
+
     @classmethod
     def random(cls):
         """ A class method that returns a random scale. 
