@@ -45,6 +45,40 @@ class TestScales(unittest.TestCase):
     # Tests - (Only tests a, c, and f)
     #---------------------------------------------------------------------------
 
+    #region ScaleType
+
+    def test_scale_type_items(self):
+        expected = [s.ScaleType.Major, s.ScaleType.Minor, s.ScaleType.MajorPentatonic, s.ScaleType.MinorPentatonic, s.ScaleType.Ionian,
+            s.ScaleType.Dorian, s.ScaleType.Phrygian, s.ScaleType.Lydian, s.ScaleType.Mixolydian, s.ScaleType.Aeolian, s.ScaleType.Locrian,
+            s.ScaleType.Blues, s.ScaleType.HarmonicMinor, s.ScaleType.MelodicMinor]
+        self.assertEqual(s.ScaleType.items(), expected)
+
+    def test_scale_type_all_alias(self):
+        expected = [s.ScaleType.Major, s.ScaleType.Minor, s.ScaleType.MajorPentatonic, s.ScaleType.MinorPentatonic, s.ScaleType.Ionian,
+            s.ScaleType.Dorian, s.ScaleType.Phrygian, s.ScaleType.Lydian, s.ScaleType.Mixolydian, s.ScaleType.Aeolian, s.ScaleType.Locrian,
+            s.ScaleType.Blues, s.ScaleType.HarmonicMinor, s.ScaleType.MelodicMinor]
+        self.assertEqual(s.ScaleType.all(), expected)
+
+    def test_scale_type_items_same_as_all_alias(self):
+        self.assertListEqual(s.ScaleType.items(), s.ScaleType.all())
+
+    def test_random_scale_type_validity(self):
+        type = s.ScaleType.random()
+        self.assertIn(type, list(s.ScaleType))
+
+    def test_scale_type_str(self):
+        type = s.ScaleType.HarmonicMinor
+        self.assertEqual(str(type), "HarmonicMinor")
+
+    def test_scale_type_repr(self):
+        type = s.ScaleType.HarmonicMinor
+        self.assertEqual(repr(type), "ScaleType.HarmonicMinor")
+
+    #endregion
+
+
+
+
     #region MajorScales
     def test_a_major_scale(self):
         scale = s.Scale(Note.A, s.ScaleType.Major)
