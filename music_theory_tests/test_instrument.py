@@ -179,7 +179,7 @@ class TestChords(unittest.TestCase):
 
     #endregion
 
-    #region Notes in Chord
+    #region Intervals in Chord
 
     def test_intervals_in_power_chord(self):
         intervals = self.standard_guitar.intervals_in_chord("x 3 5 5 x x")
@@ -212,6 +212,12 @@ class TestChords(unittest.TestCase):
         self.assertEqual(intervals, expected)
 
     #region
+
+    #region Notes in riff
+
+
+
+    #endregion
 
     #region __str__
 
