@@ -14,7 +14,7 @@ import _setup
 
 from music_theory.notes import Note
 from music_theory.intervals import Interval
-from music_theory.scales import ScaleType, Scale, _intervals_from_numerics, _intervals_from_steps, _notes_from_intervals, _notes_from_steps
+from music_theory.scales import ScaleType, Scale, _intervals_from_numerics, _intervals_from_steps, _notes_from_intervals, _notes_from_steps, modes_from_note
 
 class TestScales(unittest.TestCase):
     #---------------------------------------------------------------------------
@@ -167,6 +167,21 @@ class TestScales(unittest.TestCase):
         notes = _notes_from_intervals(Note.C, [Interval.Unison, Interval.M2, Interval.M3, Interval.P4, Interval.P5, Interval.M6, Interval.M7])
         expected = [Note.C, Note.D, Note.E, Note.F, Note.G, Note.A, Note.B]
         self.assertEqual(notes, expected)
+    #endregion
+
+    #region Modes
+
+    def test_modes_fome_note_C(self):
+        modes = modes_from_note(Note.C)
+        expected = [Scale(Note.C, ScaleType.Ionian),
+            Scale(Note.D, ScaleType.Dorian),
+            Scale(Note.E, ScaleType.Phrygian),
+            Scale(Note.F, ScaleType.Lydian),
+            Scale(Note.G, ScaleType.Mixolydian),
+            Scale(Note.A, ScaleType.Aeolian),
+            Scale(Note.B, ScaleType.Locrian)]
+        self.assertEqual(modes, expected)
+
     #endregion
 
 
