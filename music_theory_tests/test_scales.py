@@ -75,6 +75,47 @@ class TestScales(unittest.TestCase):
 
     #endregion
 
+    #region scale
+
+    def test_scale_name(self):
+        scale = Scale(Note.A, ScaleType.Lydian)
+        expected = "A Lydian"
+        self.assertEqual(scale.name, expected)
+
+    def test_random_scale_validity(self):
+        scale = Scale.random()
+        self.assertIn(scale.root, list(Note))
+        self.assertIn(scale.type, list(ScaleType))
+
+    def test_scale_number_of_flats_00(self):
+        scale = Scale(Note.E, ScaleType.Dorian)
+        expected = 2
+        self.assertEqual(scale.number_of_flats, expected)
+
+    def test_scale_number_of_flats_01(self):
+        scale = Scale(Note.Eb, ScaleType.HarmonicMinor)
+        expected = 4
+        self.assertEqual(scale.number_of_flats, expected)
+
+    def test_scale_not_equal_with_non_scale(self):
+        scale = Scale(Note.Gb, ScaleType.Minor)
+        
+        self.assertFalse(scale == 5)
+        self.assertFalse(scale == "string")
+        self.assertFalse(scale == None)
+
+    def test_scale_str(self):
+        scale = Scale(Note.E, ScaleType.Dorian)
+        expected = "E Dorian: E, Gb, G, A, B, Db, D"
+        self.assertEqual(str(scale), expected)
+
+    def test_scale_repr(self):
+        scale = Scale(Note.E, ScaleType.Dorian)
+        expected = "Scale(Note.E, ScaleType.Dorian)"
+        self.assertEqual(repr(scale), expected)
+
+    #endregion
+
     #region MajorScales
     def test_a_major_scale(self):
         scale = Scale(Note.A, ScaleType.Major)
