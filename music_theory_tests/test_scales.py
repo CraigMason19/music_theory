@@ -14,7 +14,8 @@ import _setup
 
 from music_theory.notes import Note
 from music_theory.intervals import Interval
-from music_theory.scales import ScaleType, Scale, _intervals_from_numerics, _intervals_from_steps, _notes_from_intervals, _notes_from_steps, modes_from_note
+from music_theory.scales import Scale, _intervals_from_numerics, _intervals_from_steps, _notes_from_intervals, _notes_from_steps, modes_from_note
+from music_theory.scale_type import ScaleType
 
 class TestScales(unittest.TestCase):
     #---------------------------------------------------------------------------
@@ -43,37 +44,6 @@ class TestScales(unittest.TestCase):
     #---------------------------------------------------------------------------
     # Tests - (Only tests a, c, and f)
     #---------------------------------------------------------------------------
-
-    #region ScaleType
-
-    def test_scale_type_items(self):
-        expected = [ScaleType.Major, ScaleType.Minor, ScaleType.MajorPentatonic, ScaleType.MinorPentatonic, ScaleType.Ionian,
-            ScaleType.Dorian, ScaleType.Phrygian, ScaleType.Lydian, ScaleType.Mixolydian, ScaleType.Aeolian, ScaleType.Locrian,
-            ScaleType.Blues, ScaleType.HarmonicMinor, ScaleType.MelodicMinor]
-        self.assertEqual(ScaleType.items(), expected)
-
-    def test_scale_type_all_alias(self):
-        expected = [ScaleType.Major, ScaleType.Minor, ScaleType.MajorPentatonic, ScaleType.MinorPentatonic, ScaleType.Ionian,
-            ScaleType.Dorian, ScaleType.Phrygian, ScaleType.Lydian, ScaleType.Mixolydian, ScaleType.Aeolian, ScaleType.Locrian,
-            ScaleType.Blues, ScaleType.HarmonicMinor, ScaleType.MelodicMinor]
-        self.assertEqual(ScaleType.all(), expected)
-
-    def test_scale_type_items_same_as_all_alias(self):
-        self.assertListEqual(ScaleType.items(), ScaleType.all())
-
-    def test_random_scale_type_validity(self):
-        type = ScaleType.random()
-        self.assertIn(type, list(ScaleType))
-
-    def test_scale_type_str(self):
-        type = ScaleType.HarmonicMinor
-        self.assertEqual(str(type), "HarmonicMinor")
-
-    def test_scale_type_repr(self):
-        type = ScaleType.HarmonicMinor
-        self.assertEqual(repr(type), "ScaleType.HarmonicMinor")
-
-    #endregion
 
     #region scale
 
