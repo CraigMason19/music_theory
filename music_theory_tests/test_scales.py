@@ -87,15 +87,30 @@ class TestScales(unittest.TestCase):
         self.assertIn(scale.root, list(Note))
         self.assertIn(scale.type, list(ScaleType))
 
-    def test_scale_number_of_flats_00(self):
+    def test_num_notes_00(self):
+        scale = Scale(Note.E, ScaleType.Dorian)
+        expected = 7
+        self.assertEqual(scale.num_notes, expected)
+
+    def test_num_notes_01(self):
+        scale = Scale(Note.E, ScaleType.Blues)
+        expected = 6
+        self.assertEqual(scale.num_notes, expected)
+
+    def test_num_notes_02(self):
+        scale = Scale(Note.E, ScaleType.MinorPentatonic)
+        expected = 5
+        self.assertEqual(scale.num_notes, expected)
+
+    def test_scale_num_flats_00(self):
         scale = Scale(Note.E, ScaleType.Dorian)
         expected = 2
-        self.assertEqual(scale.number_of_flats, expected)
+        self.assertEqual(scale.num_flats, expected)
 
-    def test_scale_number_of_flats_01(self):
+    def test_scale_num_flats_01(self):
         scale = Scale(Note.Eb, ScaleType.HarmonicMinor)
         expected = 4
-        self.assertEqual(scale.number_of_flats, expected)
+        self.assertEqual(scale.num_flats, expected)
 
     def test_scale_not_equal_with_non_scale(self):
         scale = Scale(Note.Gb, ScaleType.Minor)

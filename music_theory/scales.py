@@ -249,7 +249,9 @@ class Scale:
             A list of numerics describing the scale.
         name:
             A property that returns the name of the scale.
-        number_of_flats:
+        num_notes:
+            A property that returns the number of notes in the scale.
+        num_flats:
             A property that returns the number of flats in the scale.
 
     Methods:        
@@ -360,7 +362,19 @@ class Scale:
         return f"{self.root} {self.type}"
 
     @property
-    def number_of_flats(self):
+    def num_notes(self):
+        """ Returns the number of notes in the scale. 
+
+        Args:
+            None.
+
+        Returns:
+            An integer.
+        """
+        return len(self.notes)
+
+    @property
+    def num_flats(self):
         """ Returns the number of flats in the scale. 
 
         Args:
