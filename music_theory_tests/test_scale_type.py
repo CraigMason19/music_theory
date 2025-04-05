@@ -14,7 +14,7 @@ import _setup
 
 from music_theory.scale_type import ScaleType
 
-class TestScales(unittest.TestCase):
+class TestScaleType(unittest.TestCase):
     #---------------------------------------------------------------------------
     # setUpClass and tearDownClass run before and after all tests, called once
     # NOTE - the camelCase syntax. Important that they are named this way.
