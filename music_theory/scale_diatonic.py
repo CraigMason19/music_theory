@@ -78,7 +78,18 @@ class DiatonicScale(Scale):
 
     @property
     def leading_tone(self):
-        # Raise error for Minor scales as they do not have a leading tone
+        """ Returns the leading tone of the scale.
+
+            In diatonic scales, the 7th degree is called the leading tone, except in 
+            minor scales, where it is referred to as the subtonic instead.
+
+        Returns:
+            A Note.
+
+        Raises:
+            AttributeError: 
+                If the scale is minor, which does not have a leading tone.
+        """
         if self.type == ScaleType.Minor:
             raise AttributeError("Minor scales don't have a leading tone")
         
@@ -86,13 +97,20 @@ class DiatonicScale(Scale):
 
     @property
     def subtonic(self):
-        """ For Minor scales ONLY, the 7th note is the subtonic rather than a 
-            leading tone.
+        """ Returns the subtonic of the scale.
+
+            The subtonic is the 7th note in a Minor diatonic scale, where it is 
+            a whole tone below the tonic. Major scales do not have a subtonic; they 
+            use a leading tone instead.
 
         Returns:
             A Note.
+
+        Raises:
+            AttributeError: 
+                If the scale is not Minor.
         """
         if self.type == ScaleType.Minor:
             return self.notes[6]
         
-        raise AttributeError("Only minor scales have a subtonic")
+        raise AttributeError("Only Minor scales have a subtonic")
