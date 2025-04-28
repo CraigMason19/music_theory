@@ -1,3 +1,16 @@
+#-------------------------------------------------------------------------------
+# Name:        mnemonics.py
+#
+# Notes:       A collection of mnemonics for musical concepts, reminders, 
+#              tunings, and related topics.
+#
+# Links:
+#
+# TODO:
+#-------------------------------------------------------------------------------
+
+import random
+
 class Mnemonics:
     rhythm_spelling = "Rhythm Helps Your Two Hips Move"
 
@@ -16,7 +29,7 @@ class Mnemonics:
     bass_clef_spaces = "All Cows Eat Grass"
 
     # Tunings
-    standar_guitar_tuning = [
+    standard_guitar_tuning = [
         "Elephants And Donkeys Grow Big Ears",
         "Easter Bunnies Get Drunk At Easter",
         "Eddie Ate Dynamite Good Bye Eddie",
