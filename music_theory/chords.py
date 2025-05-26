@@ -14,6 +14,11 @@ from enum import Enum
 from music_theory.notes import Note, transpose
 from music_theory.intervals import Interval
 
+class Progressions:
+    axis = ["I", "V", "vi", "IV"] # Axis of Awesome 4 Chord Song, very common in western music
+    royal_road = ["IV", "V", "iii", "vi"] # It's like the Japanese version of the Axis progression
+    twelve_bar_blues = ["I", "IV", "V"]
+
 # A cadence in music is a chord progression of at least 2 chords that ends a 
 # phrase or section of a piece of music.
 cadence_dict = {
