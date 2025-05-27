@@ -438,7 +438,7 @@ class Key:
                         i        ii       III        iv         v        VI       VII
 
                         G7        A7       Bb7        C7        D7       Eb7        F7
-                    V7/i     V7/ii    V7/III     V7/iv      V7/v     V7/VI    V7/VII
+                      V7/i     V7/ii    V7/III     V7/iv      V7/v     V7/VI    V7/VII
 
                         CM        Dm        Em        FM        GM        Am      Bdim
                         I        ii       iii        IV         V        vi       vii
@@ -506,33 +506,5 @@ class Key:
             A string representing the key type's name.
         """
         return f'Key({self.root} {self.type})' 
-
-#endregion
-
-#region Functions
-
-def chords_from_progression(key, progression, error='X'):
-    """ Returns a list of chords that match a progression in a key. Can be in 
-        either the chords or parallel chords.
-            
-        error string is used if a chord can't be found in the progression.
-
-        e.g. key=C Major, progression=['I', 'i', 'IV', 'V']
-            -> [CM, Cm, FM, GM]
-            
-    Args:
-        key:
-            The key the chords are from.
-        progression:
-            A list of roman numerals notating the chords.
-        error:
-            A empty value representing a missing of invalid chord in the key.
-
-    Returns:
-        A List of chords.
-    """
-    chord_dict = key.chords() | key.parallel_chords()
-
-    return [str(chord_dict[numeral]) if (numeral in chord_dict) else error for numeral in progression]
 
 #endregion
