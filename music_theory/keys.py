@@ -512,12 +512,14 @@ class Key:
 #region Functions
 
 def chords_from_progression(key, progression, error='X'):
-    """ Returns a list of chords that match a progression in a key. Error is 
-        used if a chord can't be found in the progression.
+    """ Returns a list of chords that match a progression in a key. Can be in 
+        either the chords or parallel chords.
+            
+        error string is used if a chord can't be found in the progression.
 
-        e.g. key=C Major, progression=['I', 'IV', 'V']'
-            -> [C Major, F Major, G Major]
-
+        e.g. key=C Major, progression=['I', 'i', 'IV', 'V']
+            -> [CM, Cm, FM, GM]
+            
     Args:
         key:
             The key the chords are from.
@@ -529,15 +531,8 @@ def chords_from_progression(key, progression, error='X'):
     Returns:
         A List of chords.
     """
-    chord_dict = key.chords()
+    chord_dict = key.chords() | key.parallel_chords()
 
-    l = []
-    for numeral in progression:
-        if numeral in chord_dict:
-            l.append(str(chord_dict[numeral]))
-        else:
-            l.append(error)
-
-    return l
+    return [str(chord_dict[numeral]) if (numeral in chord_dict) else error for numeral in progression]
 
 #endregion
