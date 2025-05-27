@@ -18,15 +18,23 @@ class Progressions:
     axis = ["I", "V", "vi", "IV"] # Axis of Awesome 4 Chord Song, very common in western music
     royal_road = ["IV", "V", "iii", "vi"] # It's like the Japanese version of the Axis progression
     twelve_bar_blues = ["I", "IV", "V"]
+    andalusian = ["i", "VII", "VI", "V"] # Not really a cadance, but it's known as one
 
 # A cadence in music is a chord progression of at least 2 chords that ends a 
 # phrase or section of a piece of music.
+
+# NOTE: Major Plagal Cadence is not the same as a Plagal Cadence in a Major key.
+# NOTE: Minor Plagal Cadence is not the same as a Plagal Cadence in a minor key.
 cadence_dict = {
     # Finished
     "Plagal": ["IV", "I"], # Or, Amen
+    "Minor Plagal": ["iv", "I"], # Or, Amen
     "Authentic": ["V", "I"], # Or, perfect
     # Unfinished
-    "Deceptive": ["V", "VI"], # Or, interupted
+    "Deceptive": ["V", "VI"], # Or, interupted. Named so because ot decieves or interupts the resolution
+    "Imperfect": ["V"], # Or, half-cadance. Doesn't resolve and hangs there. Used at the end of songs
+    # More Casual Uses / cadences are like 2 chord progression, these are more like mini chord progresions
+    "Super Mario": ["bVI", "bVII", "i"],
 }
 
 #region ChordType
