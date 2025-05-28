@@ -100,13 +100,10 @@ class Note(Enum):
         return random.choice(cls.items())
 
     def to_sharp(self):
-        """ Returns a sharp rather than a flat. Or just the name of the note if 
-            it doesn't have a flat. 
+        """ Returns the enharmonic sharp equivalent of the note, or the note's name 
+            if it does not use a flat.
 
             e.g. Note.Eb.to_sharp() -> 'D#'
-
-        Args:
-            None.
 
         Returns:
             A string representing a note.
