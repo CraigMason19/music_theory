@@ -1,7 +1,7 @@
 
 # music_theory
 
-A set of Python classes to help me learn music theory by implementing it.
+A Python package to help me learn music theory by implementing it.
  
  ### Features
 - Transpose notes & calculate the interval distance.
