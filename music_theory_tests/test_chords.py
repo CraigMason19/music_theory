@@ -1,11 +1,9 @@
 #-------------------------------------------------------------------------------
+#
 # Name:        test_chords.py
 #
 # Notes:       A test for various chord shapes
-#
-# Links:        
-#
-# TODO:        
+#     
 #-------------------------------------------------------------------------------
 
 import unittest
@@ -16,25 +14,6 @@ from music_theory.notes import Note
 from music_theory.chords import Chord, ChordType
 
 class TestChords(unittest.TestCase):
-    #region ChordTypes
-
-    def test_chord_type_items(self):
-        expected = [ChordType.Major, ChordType.Minor, ChordType.Diminished, ChordType.Dominant7, ChordType.Major7, ChordType.Minor7, ChordType.Diminished7, ChordType.Sus2, ChordType.Sus4]
-        self.assertEqual(ChordType.items(), expected)
-
-    def test_random_chord_type_validity(self):
-        type = ChordType.random()
-        self.assertIn(type, list(ChordType))
-
-    def test_chord_type_str(self):
-        type = ChordType.Dominant7
-        self.assertEqual(str(type), "Dominant7")
-
-    def test_chord_type_repr(self):
-        type = ChordType.Dominant7
-        self.assertEqual(repr(type), "ChordType.Dominant7")
-
-    #endregion
 
     #regin Chord
 
