@@ -7,7 +7,7 @@
 # TODO:
 #-------------------------------------------------------------------------------
 
-from  music_theory.keys import Key, KeyType
+from music_theory.keys import Key
 
 #region Progressions
 

@@ -8,7 +8,8 @@
 
 from music_theory.notes import Note, transpose
 from music_theory.intervals import Interval
-from music_theory.chords import Chord, ChordType
+from music_theory.chords import Chord
+from music_theory.chord_type import ChordType
 from music_theory.scales import Scale, ScaleType
 from music_theory.key_type import KeyType
 
