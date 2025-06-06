@@ -18,41 +18,8 @@ from music_theory.keys import Key, KeyType
 
 class TestKeys(unittest.TestCase):
     #---------------------------------------------------------------------------
-    # setUpClass and tearDownClass run before and after all tests, called once
-    # NOTE - the camelCase syntax. Important that they are named this way.
-    #---------------------------------------------------------------------------
-
-    @classmethod
-    def setUpClass(cls):
-        pass
-
-    @classmethod
-    def tearDownClass(cls):
-        pass
-
-    #---------------------------------------------------------------------------
-    # setUp and tearDown run before every single test.
-    #---------------------------------------------------------------------------
-
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
-
-    #---------------------------------------------------------------------------
     # Tests
     #---------------------------------------------------------------------------
-
-    #region KeyTypes
-    def test_parallel_key_type_00(self):
-        parallel, expected = KeyType.Major.parallel, KeyType.Minor
-        self.assertEqual(parallel, expected)
-
-    def test_parallel_key_type_01(self):
-        parallel, expected = KeyType.Minor.parallel, KeyType.Major
-        self.assertEqual(parallel, expected)
-    #endregion
 
     #region Parallel Keys
     def test_parallel_key_00(self):
