@@ -35,9 +35,13 @@ class NumeralProgressions:
         andalusian (list of str): Often referred to as a cadence, though technically a progression.
     """
     axis = ["I", "V", "vi", "IV"]
+    axis_alt = ["vi", "IV", "I", "V"]
     royal_road = ["IV", "V", "iii", "vi"]
     twelve_bar_blues = ["I", "IV", "V"]
     andalusian = ["i", "VII", "VI", "V"]
+    andalusian_alt = ["i", "VII", "VI", "VII"]
+    doo_wop = ["I", "vi", "IV", "V"]
+    doo_wop_changes = ["I", "vi", "ii", "V"]
 
 class SongProgressions:
     """Represents famous songs and their chord progressions.
@@ -45,8 +49,9 @@ class SongProgressions:
     Attributes:
         kiss_from_a_rose (list of str): dreamy, modal feel.
     """
-    seal_kiss_from_a_rose = ["VI", "VII", "I"]
-
+    seal_kiss_from_a_rose = ["VI", "VII", "I"],
+    beatles_hey_jude = ["I", "vii", "IV", "I"]
+    
 #endregion
  
 #region Cadences
