@@ -1,9 +1,9 @@
-
 # music_theory
-
 A Python package to help me learn music theory by implementing it.
- 
- ### Features
+
+Includes tests for core theory components, can be ignored, but included for completeness.
+
+## Features
 - Transpose notes & calculate the interval distance.
 - Builds scales of various lengths from various formulas (Interval, steps & numbers).
 - Calculates all the modes of a note.
@@ -12,9 +12,7 @@ A Python package to help me learn music theory by implementing it.
 - Works out all the dominant seventh chords in a given key.
 - Can output the chords from a key from the roman numeral notation.  
   
-
 ## Requirements
-
 No extra packages are needed.
 
 ## Examples
