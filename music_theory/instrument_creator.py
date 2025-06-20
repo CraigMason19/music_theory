@@ -37,7 +37,9 @@ C_STANDARD_GUITAR = create_standard_guitar(Note.C)
 
 # Drop tunings
 DROP_D_GUITAR = create_drop_guitar(Note.D)
+DOUBLE_DROP_D_GUITAR = StringInstrument([Note.D, Note.A, Note.D, Note.G, Note.B, Note.D])
 DROP_C_GUITAR = create_drop_guitar(Note.C)
+DOUBLE_DROP_C_GUITAR = StringInstrument([Note.C, Note.G, Note.C, Note.F, Note.A, Note.D])
 
 # Basses
 E_STANDARD_BASS = create_standard_bass()

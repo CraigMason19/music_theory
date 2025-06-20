@@ -13,7 +13,7 @@ class StringInstrument:
 
         self.num_strings = len(tuning)
         self.tuning = tuning
-    
+        
     @classmethod 
     def from_tuning_intervals(cls, root_note, tuning_intervals):
         tuning = [root_note]  
