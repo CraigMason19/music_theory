@@ -1,13 +1,3 @@
-#-------------------------------------------------------------------------------
-# Name:        test_instrument_creator.py
-#
-# Notes:       A test for various instrument setups
-#
-# Links:        
-#
-# TODO:        
-#-------------------------------------------------------------------------------
-
 import unittest
 
 import _setup
@@ -15,36 +5,7 @@ import _setup
 from music_theory.notes import Note
 from music_theory.instrument_creator import create_standard_bass, create_drop_bass, create_standard_guitar, create_drop_guitar, create_ukulele
 
-class TestChords(unittest.TestCase):
-    #---------------------------------------------------------------------------
-    # setUpClass and tearDownClass run before and after all tests, called once
-    # NOTE - the camelCase syntax. Important that they are named this way.
-    #---------------------------------------------------------------------------
-
-    @classmethod
-    def setUpClass(cls):
-        pass
-
-    @classmethod
-    def tearDownClass(cls):
-        pass
-
-    #---------------------------------------------------------------------------
-    # setUp and tearDown run before every single test.
-    #---------------------------------------------------------------------------
-
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
-
-    #---------------------------------------------------------------------------
-    # Tests
-    #---------------------------------------------------------------------------
-
-    #region Bass
-
+class TestBass(unittest.TestCase):
     def test_default_standard_bass_00(self):
         bass = create_standard_bass()
         expected = [Note.E, Note.A, Note.D, Note.G]
@@ -75,10 +36,7 @@ class TestChords(unittest.TestCase):
         expected = [Note.C, Note.G, Note.C, Note.F]
         self.assertEqual(bass.tuning, expected)
 
-    #endregion
-
-    #region Guitar
-
+class TestGuitar(unittest.TestCase):
     def test_default_standard_guitar_00(self):
         guitar = create_standard_guitar()
         expected = [Note.E, Note.A, Note.D, Note.G, Note.B, Note.E]
@@ -109,16 +67,11 @@ class TestChords(unittest.TestCase):
         expected = [Note.C, Note.G, Note.C, Note.F, Note.A, Note.D]
         self.assertEqual(guitar.tuning, expected)
 
-    #endregion
-
-    #region Other Instruments
-
+class TestOtherInstruments(unittest.TestCase):
     def test_default_ukelele(self):
         ukelele = create_ukulele()
         expected = [Note.G, Note.C, Note.E, Note.A]
         self.assertEqual(ukelele.tuning, expected)
-
-    #endregion
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()

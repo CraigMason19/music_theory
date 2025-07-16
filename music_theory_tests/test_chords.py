@@ -1,11 +1,3 @@
-#-------------------------------------------------------------------------------
-#
-# Name:        test_chords.py
-#
-# Notes:       A test for various chord shapes
-#     
-#-------------------------------------------------------------------------------
-
 import unittest
 
 import _setup
@@ -13,10 +5,7 @@ import _setup
 from music_theory.notes import Note
 from music_theory.chords import Chord, ChordType
 
-class TestChords(unittest.TestCase):
-
-    #regin Chord
-
+class TestChordValidity(unittest.TestCase):
     def test_chord_valid_00(self):
         chord = Chord(Note.Gb, ChordType.Minor)
         expected = Chord(Note.Gb, ChordType.Minor)
@@ -39,10 +28,7 @@ class TestChords(unittest.TestCase):
         self.assertIn(chord.root, list(Note))
         self.assertIn(chord.chord_type, list(ChordType))
 
-    #endregion
-
-    #region Chords Equal
-
+class TestChordEquality(unittest.TestCase):
     def test_chord_equal_A_major(self):
         self.assertEqual(Chord(Note.B, ChordType.Major), Chord(Note.B, ChordType.Major))
 
@@ -59,10 +45,7 @@ class TestChords(unittest.TestCase):
         self.assertFalse(chord == "string")
         self.assertFalse(chord == None)
 
-    #endregion
-
-    #region Chord Notes
-
+class TestChordNotes(unittest.TestCase):
     def test_chord_notes_A_major(self):
         chord = Chord(Note.A, ChordType.Major)
         expected_notes = [Note.A, Note.Db, Note.E]
@@ -108,10 +91,7 @@ class TestChords(unittest.TestCase):
         expected_notes = [Note.A, Note.D, Note.E]
         self.assertEqual(chord.notes, expected_notes)
 
-    #endregion
-
-    #region Chord Extensions
-
+class TestChordExtensions(unittest.TestCase):
     def test_chord_A_major_add9(self):
         notes = Chord(Note.A, ChordType.Major).add9()
         expected_notes = [Note.A, Note.Db, Note.E, Note.B]
@@ -127,10 +107,7 @@ class TestChords(unittest.TestCase):
         expected_notes = [Note.A, Note.Db, Note.E, Note.Gb]
         self.assertEqual(notes, expected_notes)
 
-    #endregion
-
-    #region Chord Notation
-
+class TestChordNotation(unittest.TestCase):
     def test_chord_A_major_notation(self):
         notation = Chord(Note.A, ChordType.Major).notation
         expected_notation = 'M'
@@ -175,11 +152,8 @@ class TestChords(unittest.TestCase):
         notation = Chord(Note.A, ChordType.Sus4).notation
         expected_notation = 'sus4'
         self.assertEqual(notation, expected_notation)   
-         
-    #endregion
 
-    #region String Representation
-
+class TestChordStringRepresentation(unittest.TestCase):
     def test_str_equal_Gb_major(self):
         expected = str(Chord(Note.Gb, ChordType.Major))
         self.assertEqual("GbM", expected)
@@ -203,9 +177,6 @@ class TestChords(unittest.TestCase):
     def test_chord_repr(self):
         chord = Chord(Note.F, ChordType.Diminished7)
         self.assertEqual(repr(chord), "Chord(F, Diminished7)")
-
-    #endregion
     
-
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
