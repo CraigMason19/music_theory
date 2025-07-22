@@ -1,13 +1,3 @@
-#-------------------------------------------------------------------------------
-# Name:        test_intervals.py
-#
-# Notes:       A test suite for the intervals script.
-#
-# Links:       
-#
-# TODO:
-#-------------------------------------------------------------------------------
-
 import unittest
 
 import _setup
@@ -15,33 +5,7 @@ import _setup
 from music_theory.notes import Note
 from music_theory.intervals import Interval, interval_distance, intervals_to_string
 
-class TestNotes(unittest.TestCase):
-    #---------------------------------------------------------------------------
-    # setUpClass and tearDownClass run before and after all tests, called once
-    # NOTE - the camelCase syntax. Important that they are named this way.
-    #---------------------------------------------------------------------------
-
-    @classmethod
-    def setUpClass(cls):
-        pass
-
-    @classmethod
-    def tearDownClass(cls):
-        pass
-
-    #---------------------------------------------------------------------------
-    # setUp and tearDown run before every single test.
-    #---------------------------------------------------------------------------
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
-
-    #---------------------------------------------------------------------------
-    # Tests
-    #---------------------------------------------------------------------------
-
+class TestIntervalAttributes(unittest.TestCase):
     def test_interval_items(self):
         expected = [Interval.Unison, Interval.m2, Interval.M2, Interval.m3, Interval.M3, Interval.P4, Interval.dim5, Interval.P5, Interval.m6, Interval.M6, Interval.m7, Interval.M7]
         self.assertEqual(Interval.items(), expected)
@@ -53,6 +17,7 @@ class TestNotes(unittest.TestCase):
     def test_interval_items_same_as_all_alias(self):
         self.assertListEqual(Interval.items(), Interval.all())
 
+class TestIntervalCreation(unittest.TestCase):
     def test_interval_from_index_00(self):
         self.assertEqual(Interval.from_index(0), Interval.Unison)
 
@@ -89,7 +54,7 @@ class TestNotes(unittest.TestCase):
         interval = Interval.m7
         self.assertEqual(repr(interval), "Interval.m7")
 
-    #region Interval Distance
+class TestIntervalDistance(unittest.TestCase):
     def test_interval_distance_same(self):    
         inteval, expected = interval_distance(Note.Bb, Note.Bb), Interval.Unison
         self.assertEqual(inteval, expected)
@@ -112,7 +77,6 @@ class TestNotes(unittest.TestCase):
 
     def test_interval_distance_value_error(self):
         self.assertRaises(ValueError, interval_distance, Note.C, Note.G, direction='sideways')
-    #endregion
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
