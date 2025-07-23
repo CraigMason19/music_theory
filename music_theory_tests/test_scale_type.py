@@ -1,47 +1,10 @@
-#-------------------------------------------------------------------------------
-# Name:        test_scale_types.py
-#
-# Notes:       A test for various scale types
-#
-# Links:        
-#
-# TODO:        
-#-------------------------------------------------------------------------------
-
 import unittest
 
 import _setup
 
 from music_theory.scale_type import ScaleType
 
-class TestScaleType(unittest.TestCase):
-    #---------------------------------------------------------------------------
-    # setUpClass and tearDownClass run before and after all tests, called once
-    # NOTE - the camelCase syntax. Important that they are named this way.
-    #---------------------------------------------------------------------------
-
-    @classmethod
-    def setUpClass(cls):
-        pass
-
-    @classmethod
-    def tearDownClass(cls):
-        pass
-
-    #---------------------------------------------------------------------------
-    # setUp and tearDown run before every single test.
-    #---------------------------------------------------------------------------
-    
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
-
-    #---------------------------------------------------------------------------
-    # Tests - (Only tests a, c, and f)
-    #---------------------------------------------------------------------------
-
+class TestScaleTypeAttributes(unittest.TestCase):
     def test_scale_type_items(self):
         expected = [ScaleType.Major, ScaleType.Minor, ScaleType.MajorPentatonic, ScaleType.MinorPentatonic, ScaleType.Ionian,
             ScaleType.Dorian, ScaleType.Phrygian, ScaleType.Lydian, ScaleType.Mixolydian, ScaleType.Aeolian, ScaleType.Locrian,
@@ -61,6 +24,7 @@ class TestScaleType(unittest.TestCase):
         type = ScaleType.random()
         self.assertIn(type, list(ScaleType))
 
+class TestScaleTypeStringRepresentation(unittest.TestCase):
     def test_scale_type_str(self):
         type = ScaleType.HarmonicMinor
         self.assertEqual(str(type), "HarmonicMinor")

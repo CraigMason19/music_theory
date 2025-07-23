@@ -78,5 +78,18 @@ class TestIntervalDistance(unittest.TestCase):
     def test_interval_distance_value_error(self):
         self.assertRaises(ValueError, interval_distance, Note.C, Note.G, direction='sideways')
 
+class TestIntervalStringRepresentation(unittest.TestCase):
+    def test_intervals_to_string_00(self):
+        intervals = intervals_to_string(Interval.items())
+        expected = "Unison, m2, M2, m3, M3, P4, dim5, P5, m6, M6, m7, M7"
+
+        self.assertEqual(intervals, expected)
+
+    def test_intervals_to_string_01(self):
+        intervals = intervals_to_string([Interval.Unison, Interval.dim5, Interval.M7])
+        expected = "Unison, dim5, M7"
+
+        self.assertEqual(intervals, expected)
+
 if __name__ == '__main__': # pragma: no cover
     unittest.main()

@@ -1,13 +1,3 @@
-#-------------------------------------------------------------------------------
-# Name:        test_keys.py
-#
-# Notes:       A test for various chords in a certain key.
-#
-# Links:        
-#
-# TODO:        
-#-------------------------------------------------------------------------------
-
 import unittest
 
 import _setup
@@ -16,12 +6,7 @@ from music_theory.notes import Note
 from music_theory.chords import Chord, ChordType
 from music_theory.keys import Key, KeyType
 
-class TestKeys(unittest.TestCase):
-    #---------------------------------------------------------------------------
-    # Tests
-    #---------------------------------------------------------------------------
-
-    #region Parallel Keys
+class TestKeyParallel(unittest.TestCase):
     def test_parallel_key_00(self):
         parallel, expected = Key(Note.C).parallel, Key(Note.C, KeyType.Minor)
         self.assertEqual(parallel, expected)
@@ -29,9 +14,8 @@ class TestKeys(unittest.TestCase):
     def test_parallel_key_01(self):
         parallel, expected = Key(Note.A, KeyType.Minor).parallel, Key(Note.A, KeyType.Major)
         self.assertEqual(parallel, expected)
-    #endregion
 
-    #region Relative Keys
+class TestKeyRelative(unittest.TestCase):
     def test_relative_key_00(self):
         relative, expected = Key(Note.C).relative_key, Key(Note.A, KeyType.Minor)
         self.assertEqual(relative, expected)
@@ -39,9 +23,8 @@ class TestKeys(unittest.TestCase):
     def test_relative_key_01(self):
         relative, expected = Key(Note.D, KeyType.Minor).relative_key, Key(Note.F, KeyType.Major)
         self.assertEqual(relative, expected)
-    #endregion
 
-    #region Sharps & flats
+class TestKeySharpsAndFlats(unittest.TestCase):
     def test_sharp_count_00(self):
         sharps, expected = Key(Note.Db).sharp_count, 7
         self.assertEqual(sharps, expected)
@@ -81,12 +64,9 @@ class TestKeys(unittest.TestCase):
         flats = Key(Note.B, KeyType.Minor).flats
         expected = []
         self.assertListEqual(flats, expected)
-#endregion
 
-    #region Chords in Major Key
+class TestKeyMajorChords(unittest.TestCase):
     def test_chords_in_key_A_major(self):
-        print('\t\ttest_chords_in_key_A_major')
-
         chord_dict = Key(Note.A).chords()
 
         expected = [Chord(Note.A, ChordType.Major),
@@ -98,12 +78,9 @@ class TestKeys(unittest.TestCase):
                     Chord(Note.Ab, ChordType.Diminished)]
  
         self.assertListEqual(list(chord_dict.values()), expected)   
-    #endregion
 
-    #region Chords in Minor Key
+class TestKeyMinorChords(unittest.TestCase):
     def test_chords_in_key_C_minor(self):
-        print('\t\ttest_chords_in_key_C_minor')
-
         chord_dict = Key(Note.C, KeyType.Minor).chords()
 
         expected = [Chord(Note.C, ChordType.Minor),
@@ -115,12 +92,9 @@ class TestKeys(unittest.TestCase):
                     Chord(Note.Bb, ChordType.Major)]
  
         self.assertListEqual(list(chord_dict.values()), expected)    
-    #endregion
 
-    #region Paralell Chords
+class TestKeyParalellChords(unittest.TestCase):
     def test_paralell_chords_from_key_A_major(self):
-        print('\t\ttest_paralell_chords_from_key_A_major')
-
         chord_dict = Key(Note.A).parallel_chords()
 
         expected = [Chord(Note.A, ChordType.Minor),
@@ -134,8 +108,6 @@ class TestKeys(unittest.TestCase):
         self.assertListEqual(list(chord_dict.values()), expected)      
 
     def test_paralell_chords_from_key_C_minor(self):
-        print('\t\ttest_paralell_chords_from_key_C_minor')
-
         chord_dict = Key(Note.C, KeyType.Minor).parallel_chords()
 
         expected = [Chord(Note.C, ChordType.Major),
@@ -147,12 +119,9 @@ class TestKeys(unittest.TestCase):
                     Chord(Note.B, ChordType.Diminished)]
  
         self.assertListEqual(list(chord_dict.values()), expected)      
-    #endregion
 
-    #region Dominant Chords
+class TestKeyDominantChords(unittest.TestCase):
     def test_dominant_chords_from_key_A_major(self):
-        print('\t\ttest_dominant_chords_from_key_A_major')
-
         chord_dict = Key(Note.A, KeyType.Major).dominant_chords()
 
         expected = [Chord(Note.E, ChordType.Dominant7),
@@ -166,8 +135,6 @@ class TestKeys(unittest.TestCase):
         self.assertListEqual(list(chord_dict.values()), expected)   
 
     def test_dominant_chords_from_key_C_minor(self):
-        print('\t\ttest_dominant_chords_from_key_C_minor')
-
         chord_dict = Key(Note.C, KeyType.Minor).dominant_chords()
 
         expected = [Chord(Note.G, ChordType.Dominant7),
@@ -179,8 +146,6 @@ class TestKeys(unittest.TestCase):
                     Chord(Note.F, ChordType.Dominant7)]
  
         self.assertListEqual(list(chord_dict.values()), expected)  
-
-    #endregion
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()

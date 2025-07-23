@@ -1,13 +1,3 @@
-#-------------------------------------------------------------------------------
-# Name:        test_keys.py
-#
-# Notes:       A test for various chords in a certain key.
-#
-# Links:        
-#
-# TODO:        
-#-------------------------------------------------------------------------------
-
 import unittest
 
 import _setup
@@ -16,13 +6,7 @@ from music_theory.progressions import chords_from_progression
 from music_theory.keys import Key, KeyType
 from music_theory.notes import Note
 
-class TestProgressions(unittest.TestCase):
-    #---------------------------------------------------------------------------
-    # Tests
-    #---------------------------------------------------------------------------
-
-    #region Chord Progressions
-
+class TestChordsFromProgression(unittest.TestCase):
     def test_chord_progressions_C_major(self):
         prog = ['I', 'IV', 'V']
         
@@ -64,8 +48,6 @@ class TestProgressions(unittest.TestCase):
         expected = [error] * len(prog)
 
         self.assertListEqual(result, expected)
-
-    #endregion
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
