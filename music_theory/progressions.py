@@ -112,6 +112,6 @@ def chords_from_progression(key, progression, error='X'):
     """
     chord_dict = key.chords() | key.parallel_chords()
 
-    return [str(chord_dict[numeral]) if (numeral in chord_dict) else error for numeral in progression]
+    return [chord_dict[numeral] if (numeral in chord_dict) else error for numeral in progression]
 
 #endregion
