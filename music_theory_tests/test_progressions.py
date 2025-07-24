@@ -49,7 +49,7 @@ class TestChordsFromProgression(unittest.TestCase):
         expected = [error] * len(prog)
 
         self.assertListEqual(result, expected)
-        
+
 class TestChordsFromProgressionDiminished(unittest.TestCase):
     def test_C_Major_chords_diminished_7th(self):
         prog = ['I', 'vii°']
@@ -64,6 +64,14 @@ class TestChordsFromProgressionDiminished(unittest.TestCase):
 
         result = chords_from_progression(Key(Note.C), prog)
         expected = [Chord(Note.C, ChordType.Major), Chord(Note.D, ChordType.Diminished)]
+
+        self.assertListEqual(result, expected)
+
+    def test_C_Major_multiple_diminished_declarations(self):
+        prog = ['ii°', 'iidim']
+
+        result = chords_from_progression(Key(Note.C), prog)
+        expected = [Chord(Note.D, ChordType.Diminished), Chord(Note.D, ChordType.Diminished)]
 
         self.assertListEqual(result, expected)
 

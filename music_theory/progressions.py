@@ -96,6 +96,8 @@ def chords_from_progression(key, progression, error='X'):
             
         error string is used if a chord can't be found in the progression.
 
+        Diminished chords can be passed as '°' or 'dim' ('ii°' or 'viidim')
+
         e.g. key=C Major, progression=['I', 'i', 'IV', 'V']
             -> [CM, Cm, FM, GM]
             
@@ -110,6 +112,8 @@ def chords_from_progression(key, progression, error='X'):
     Returns:
         A List of chords.
     """
+    progression = [numeral.replace('dim', '°') if isinstance(numeral, str) else numeral for numeral in progression]
+
     chord_dict = key.chords() | key.parallel_chords()
 
     return [chord_dict[numeral] if (numeral in chord_dict) else error for numeral in progression]
