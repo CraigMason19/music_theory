@@ -255,12 +255,14 @@ class Key:
     def chords(self):
         """ Returns a dict representing all the chords in the key.
 
-            The dict key is a Roman numeral as used in traditional notation. 
-            A upper case numneral represents a major chord and a lower case numeral
-            represents a minor chord (or diminished).
+        The dict key is a Roman numeral as used in traditional notation. 
+        A upper case numneral represents a major chord and a lower case numeral
+        represents a minor chord.
 
-            Args:
-                None.
+        Note: The major key has a diminished 7th (vii°) and the minor a diminished 2nd (ii°)
+                
+        Args:
+            None.
                 
         Returns:
                 A dict in the form. key=RomanNumeral value=Chord
@@ -269,14 +271,14 @@ class Key:
         scale, numerals, sequence = None, None, None
         
         if self.type == KeyType.Major:
-            numerals = ["I", "ii", "iii", "IV", "V", "vi", "vii"]
+            numerals = ["I", "ii", "iii", "IV", "V", "vi", "vii°"]
             scale = Scale(self.root, ScaleType.Major)
             sequence = [ChordType.Major, ChordType.Minor, ChordType.Minor, 
                         ChordType.Major, ChordType.Major, ChordType.Minor, 
                         ChordType.Diminished]
             
         elif self.type == KeyType.Minor:
-            numerals = ["i", "ii", "III", "iv", "v", "VI", "VII"]
+            numerals = ["i", "ii°", "III", "iv", "v", "VI", "VII"]
             scale = Scale(self.root, ScaleType.Minor)
             sequence = [ChordType.Minor, ChordType.Diminished, ChordType.Major, 
                         ChordType.Minor, ChordType.Minor, ChordType.Major, 
