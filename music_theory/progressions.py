@@ -11,20 +11,6 @@ from music_theory.keys import Key
 
 #region Progressions
 
-class Progression:
-    """Represents a chord progression.
-    """
-    def __init__(self, key, numeral_progression):
-        self.key = key
-        self.numerals = numeral_progression
-        self.chords = chords_from_progression(key, self.numerals)
-
-    def __str__(self):
-        return f'{self.key} - {self.numerals}'
-
-    def __repr__(self):
-        return f'Progression({self.key}, {self.numerals})'
-
 class NumeralProgressions:
     """Represents common musical chord progressions.
 
@@ -88,6 +74,32 @@ class NumeralCadences:
 
 #endregion
 
+class Progression:
+    """Represents a chord progression.
+    """
+    def __init__(self, key, numeral_progression, error='X'):
+        self.key = key
+        self.numerals = numeral_progression
+        self.error = error
+        self.chords = chords_from_progression(key, self.numerals, error)
+
+    def pretty_print(self):
+        print(f"Chords in progression in the key of {self.key}:")
+
+        table_data = [
+            list(self.numerals), 
+            [str(chord) for chord in self.chords],
+        ]
+
+        for row in table_data:
+            print(("{: >10}" * len(self.numerals)).format(*row))
+
+    def __str__(self):
+        return f'{self.key} - {self.numerals}'
+
+    def __repr__(self):
+        return f'Progression({self.key}, {self.numerals})'
+    
 #region Functions
 
 def chords_from_progression(key, progression, error='X'):
