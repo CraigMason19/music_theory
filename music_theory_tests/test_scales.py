@@ -18,35 +18,6 @@ from music_theory.scales import Scale, _intervals_from_numerics, _intervals_from
 from music_theory.scale_type import ScaleType
 
 class TestScales(unittest.TestCase):
-    #---------------------------------------------------------------------------
-    # setUpClass and tearDownClass run before and after all tests, called once
-    # NOTE - the camelCase syntax. Important that they are named this way.
-    #---------------------------------------------------------------------------
-
-    @classmethod
-    def setUpClass(cls):
-        pass
-
-    @classmethod
-    def tearDownClass(cls):
-        pass
-
-    #---------------------------------------------------------------------------
-    # setUp and tearDown run before every single test.
-    #---------------------------------------------------------------------------
-    
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
-
-    #---------------------------------------------------------------------------
-    # Tests - (Only tests a, c, and f)
-    #---------------------------------------------------------------------------
-
-    #region scale
-
     def test_scale_name(self):
         scale = Scale(Note.A, ScaleType.Lydian)
         expected = "A Lydian"
@@ -89,6 +60,7 @@ class TestScales(unittest.TestCase):
         self.assertFalse(scale == "string")
         self.assertFalse(scale == None)
 
+class TestScalesStringRepresentation(unittest.TestCase):
     def test_scale_str(self):
         scale = Scale(Note.E, ScaleType.Dorian)
         expected = "E Dorian: E, Gb, G, A, B, Db, D"
@@ -99,9 +71,7 @@ class TestScales(unittest.TestCase):
         expected = "Scale(Note.E, ScaleType.Dorian)"
         self.assertEqual(repr(scale), expected)
 
-    #endregion
-
-    #region MajorScales
+class TestScalesMajor(unittest.TestCase):
     def test_a_major_scale(self):
         scale = Scale(Note.A, ScaleType.Major)
         self.assertEqual(scale.notes, [Note.A, Note.B, Note.Db, Note.D, Note.E, Note.Gb, Note.Ab])
@@ -113,9 +83,8 @@ class TestScales(unittest.TestCase):
     def test_f_major_scale(self):
         scale = Scale(Note.F, ScaleType.Major)
         self.assertEqual(scale.notes, [Note.F, Note.G, Note.A, Note.Bb, Note.C, Note.D, Note.E])
-    #endregion
 
-    #region MinorScales
+class TestScalesMinor(unittest.TestCase):
     def test_a_minor_scale(self):
         scale = Scale(Note.A, ScaleType.Minor)
         self.assertEqual(scale.notes, [Note.A, Note.B, Note.C, Note.D, Note.E, Note.F, Note.G])
@@ -127,9 +96,8 @@ class TestScales(unittest.TestCase):
     def test_f_minor_scale(self):
         scale = Scale(Note.F, ScaleType.Minor)
         self.assertEqual(scale.notes, [Note.F, Note.G, Note.Ab, Note.Bb, Note.C, Note.Db, Note.Eb])
-    #endregion
 
-    #region MajorPentatonicScales
+class TestScalesPentatonic(unittest.TestCase):
     def test_a_major_pentatonic(self):
         scale = Scale(Note.A, ScaleType.MajorPentatonic)
         self.assertEqual(scale.notes, [Note.A, Note.B, Note.Db, Note.E, Note.Gb])
@@ -141,9 +109,7 @@ class TestScales(unittest.TestCase):
     def test_f_major_pentatonic(self):
         scale = Scale(Note.F, ScaleType.MajorPentatonic)
         self.assertEqual(scale.notes, [Note.F, Note.G, Note.A, Note.C, Note.D])
-    #endregion
 
-    #region MinorPentatonicScales
     def test_a_minor_pentatonic(self):
         scale = Scale(Note.A, ScaleType.MinorPentatonic)
         self.assertEqual(scale.notes, [Note.A, Note.C, Note.D, Note.E, Note.G])
@@ -155,9 +121,8 @@ class TestScales(unittest.TestCase):
     def test_f_minor_pentatonic(self):
         scale = Scale(Note.F, ScaleType.MinorPentatonic)
         self.assertEqual(scale.notes, [Note.F, Note.Ab, Note.Bb, Note.C, Note.Eb])
-    #endregion
 
-    #region NotesFromSteps
+class TestScalesNotesFromSteps(unittest.TestCase):
     def test_c_major_notes_from_steps(self):
         notes = _notes_from_steps(Note.C, 'wwhwwwh')
         expected = [Note.C, Note.D, Note.E, Note.F, Note.G, Note.A, Note.B]
@@ -167,16 +132,14 @@ class TestScales(unittest.TestCase):
         notes = _notes_from_steps(Note.Bb, ['w', 'w', 'h', 'w', 'w', 'h', 'w'])
         expected = [Note.Bb, Note.C, Note.D, Note.Eb, Note.F, Note.G, Note.Ab]
         self.assertEqual(notes, expected)
-    #endregion
 
-    #region IntervalsFromSteps
+class TestScalesIntervalsFromSteps(unittest.TestCase):
     def test_major_intervals_from_steps(self):
         intervals = _intervals_from_steps(['w', 'w', 'h', 'w', 'w', 'w', 'h'])
         expected = [Interval.Unison, Interval.M2, Interval.M3, Interval.P4, Interval.P5, Interval.M6, Interval.M7]
         self.assertEqual(intervals, expected)
-    #endregion
 
-    #region IntervalsFromNumerics
+class TestScalesIntervalsFromNumerics(unittest.TestCase):
     def test_major_intervals_from_numerics(self):
         intervals = _intervals_from_numerics(['1', '2', '3', '4', '5', '6', '7'])
         expected = [Interval.Unison, Interval.M2, Interval.M3, Interval.P4, Interval.P5, Interval.M6, Interval.M7]
@@ -186,17 +149,14 @@ class TestScales(unittest.TestCase):
         intervals = _intervals_from_numerics(['1', '2', 'b3', '4', '5', 'b6', '7'])
         expected = [Interval.Unison, Interval.M2, Interval.m3, Interval.P4, Interval.P5, Interval.m6, Interval.M7]
         self.assertEqual(intervals, expected)
-    #endregion
 
-    #region NotesFromIntervals
+class TestScalesNotesFromIntervals(unittest.TestCase):
     def test_C_major_notes_from_intervals(self):
         notes = _notes_from_intervals(Note.C, [Interval.Unison, Interval.M2, Interval.M3, Interval.P4, Interval.P5, Interval.M6, Interval.M7])
         expected = [Note.C, Note.D, Note.E, Note.F, Note.G, Note.A, Note.B]
         self.assertEqual(notes, expected)
-    #endregion
 
-    #region Modes
-
+class TestScalesModes(unittest.TestCase):
     def test_modes_fome_note_C(self):
         modes = modes_from_note(Note.C)
         expected = [Scale(Note.C, ScaleType.Ionian),
@@ -207,9 +167,6 @@ class TestScales(unittest.TestCase):
             Scale(Note.A, ScaleType.Aeolian),
             Scale(Note.B, ScaleType.Locrian)]
         self.assertEqual(modes, expected)
-
-    #endregion
-
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
