@@ -5,9 +5,15 @@ import _setup
 from music_theory.keys import KeyType
 
 class TestKeyTypeAttributes(unittest.TestCase):
-    pass
+    def test_key_type_items(self):
+        expected = [KeyType.Major, KeyType.Minor]
+        self.assertEqual(KeyType.items(), expected)
 
-class TestKeyTypeMethods(unittest.TestCase):
+    def test_random_key_type_validity(self):
+        type = KeyType.random()
+        self.assertIn(type, list(KeyType))
+
+class TestKeyTypeParallel(unittest.TestCase):
     def test_parallel_key_type_major_returns_minor(self):
         parallel = KeyType.Major.parallel
         expected = KeyType.Minor
@@ -20,8 +26,14 @@ class TestKeyTypeMethods(unittest.TestCase):
         
         self.assertEqual(parallel, expected)
 
-class TestKeyTypeRepresentation(unittest.TestCase):
-    pass
+class TestKeyTypeStringRepresentation(unittest.TestCase):
+    def test_key_type_str(self):
+        type = KeyType.Major
+        self.assertEqual(str(type), "Major")
+
+    def test_key_type_repr(self):
+        type = KeyType.Minor
+        self.assertEqual(repr(type), "KeyType.Minor")
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
