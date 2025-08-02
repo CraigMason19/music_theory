@@ -227,10 +227,11 @@ def notes_to_string(note_list):
     return ', '.join([n.name for n in note_list])
 
 def transpose(note, interval, direction="u"):
-    """ Takes a note and transposes (changes) it into a different note lower or 
-        higher in pitch. 
+    """ 
+    Takes a note and transposes (changes) it into a different note lower or 
+    higher in pitch. 
 
-        e.g. C tranposed a Major 3rd becomes E
+    e.g. C tranposed a Major 3rd becomes E
 
     Args:
         note:
