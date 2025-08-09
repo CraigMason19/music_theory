@@ -12,32 +12,60 @@ from music_theory.keys import Key
 #region Progressions
 
 class NumeralProgressions:
-    """Represents common musical chord progressions.
+    """
+    Represents common musical chord progressions using Roman numerals.
+
+    Each progression is stored as a list of strings, where each string
+    represents a chord in the progression (e.g., ["I", "V", "vi", "IV"]).
 
     Attributes:
-        axis (list of str): Very common in western music. (Axis of Awesome 4 Chord Song).
-        royal_road (list of str): Very common in Japanese music.
-        twelve_bar_blues (list of str): A very common blues progression.
-        andalusian (list of str): Often referred to as a cadence, though technically a progression.
+        axis: 
+            A very common progression in Western pop music, popularized by the 
+            'Axis of Awesome - 4 Chord Song'.
+        axis_alt: 
+            A minor-key variant of the Axis progression.
+        royal_road: 
+            Frequently used in Japanese music.
+        twelve_bar_blues: 
+            A very common blues progression.
+        andalusian_cadence: 
+            Often called a cadence, though technically a progression. Common in
+            flamenco and classical music.
+        andalusian_alt: 
+            A variant of the Andalusian cadence that ends on the VII chord 
+            instead of V.
+        doo_wop: 
+            Also known as the '50s progression', characteristic of many doo-wop 
+            and early rock 'n' roll songs.
+        doo_wop_alt: 
+            A jazzier or more modern variation, sometimes called a circle 
+            progression or ii-V turnaround.
     """
     axis = ["I", "V", "vi", "IV"]
     axis_alt = ["vi", "IV", "I", "V"]
     royal_road = ["IV", "V", "iii", "vi"]
     twelve_bar_blues = ["I", "IV", "V"]
-    andalusian = ["i", "VII", "VI", "V"]
+    andalusian_cadence  = ["i", "VII", "VI", "V"]
     andalusian_alt = ["i", "VII", "VI", "VII"]
     doo_wop = ["I", "vi", "IV", "V"]
-    doo_wop_changes = ["I", "vi", "ii", "V"]
+    doo_wop_alt = ["I", "vi", "ii", "V"]
+
 
 class SongProgressions:
-    """Represents famous songs and their chord progressions.
+    """
+    Represents famous songs and their chord progressions using Roman numerals.
 
     Attributes:
-        kiss_from_a_rose (list of str): dreamy, modal feel.
+        seal_kiss_from_a_rose
+        beatles_hey_jude 
+
+    Each progression is stored as a list of strings, where each string
+    represents a chord in the progression (e.g., ["I", "V", "vi", "IV"]).
     """
     seal_kiss_from_a_rose = ["VI", "VII", "I"],
-    beatles_hey_jude = ["I", "vii", "IV", "I"]
-    
+    beatles_hey_jude = ["I", "vii", "VI", "I"]
+
+
 #endregion
  
 #region Cadences
@@ -111,7 +139,7 @@ def chords_from_progression(key, progression, error='X'):
         Diminished chords can be passed as '°' or 'dim' ('ii°' or 'viidim')
 
         e.g. key=C Major, progression=['I', 'i', 'IV', 'V']
-            -> [CM, Cm, FM, GM]
+            -> [Chord(C, Major), Chord(C, Minor), Chord(F, Major), Chord(G, Major)]
             
     Args:
         key:
