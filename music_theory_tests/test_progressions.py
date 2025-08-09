@@ -75,5 +75,13 @@ class TestChordsFromProgressionDiminished(unittest.TestCase):
 
         self.assertListEqual(result, expected)
 
+    def test_C_Major_multiple_vii_diminished_declarations(self):
+        prog = ['vii', 'vii°', 'viidim']
+
+        result = chords_from_progression(Key(Note.C), prog)
+        expected = [Chord(Note.B, ChordType.Diminished), Chord(Note.B, ChordType.Diminished), Chord(Note.B, ChordType.Diminished)]
+
+        self.assertListEqual(result, expected)
+
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
