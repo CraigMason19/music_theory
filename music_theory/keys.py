@@ -68,6 +68,8 @@ class Key:
             Returns a dict containing the parallel chords of the key.
         dominant_chords(self):
             Returns a dict containing the dominant chords of the key.
+        to_string_array(self, dominant=False, parallel=False):
+            Returns the chords in the key as an array of strings.
         pretty_print(self, dominant=False, parallel=False):
             Prints out the chords in a easy to read table format.
         __str__(self):
@@ -328,37 +330,6 @@ class Key:
 
         return {f'V7/{n[0]}': n[1] for n in zip(chords.keys(), dom_chords)}
 
-    def pretty_print(self, dominant=False, parallel=False):
-        """ Prints out the key information in a formatted table view. 
-        
-        The output includes:
-            - Diatonic chords in the key (e.g. C Major or C Minor)
-            - [Optional] dominant seventh chords (V7 of each degree)
-            - [Optional] parallel key chords (relative major/minor)
-
-        Example output:
-            Chords of C Minor:
-                CM        Dm        Em        FM        GM        Am        B°
-                 I        ii       iii        IV         V        vi       vii
-
-                G7        A7        B7        C7        D7        E7       Gb7
-              V7/I     V7/ii    V7/iii     V7/IV      V7/V     V7/vi    V7/vii
-
-                Cm        D°       EbM        Fm        Gm       AbM       BbM
-                 i        ii       III        iv         v        VI       VII
-
-        Args:
-            dominant: 
-                A bool indicating whether you want to print the dominant chords.
-            parallel: 
-                A bool indicating whether you want to print the parallel chords.
-                
-        Returns:
-                None.
-        """      
-        for line in self.to_string_array(dominant, parallel):
-            print(line)
-
     def to_string_array(self, dominant=False, parallel=False):
         """
         Generates a formatted chord table for the current key as a list of strings.
@@ -418,6 +389,37 @@ class Key:
             data.append(("{: >10}" * 7).format(*row)) # Always 7 chords in a key
 
         return data
+
+    def pretty_print(self, dominant=False, parallel=False):
+        """ Prints out the key information in a formatted table view. 
+        
+        The output includes:
+            - Diatonic chords in the key (e.g. C Major or C Minor)
+            - [Optional] dominant seventh chords (V7 of each degree)
+            - [Optional] parallel key chords (relative major/minor)
+
+        Example output:
+            Chords of C Minor:
+                CM        Dm        Em        FM        GM        Am        B°
+                 I        ii       iii        IV         V        vi       vii
+
+                G7        A7        B7        C7        D7        E7       Gb7
+              V7/I     V7/ii    V7/iii     V7/IV      V7/V     V7/vi    V7/vii
+
+                Cm        D°       EbM        Fm        Gm       AbM       BbM
+                 i        ii       III        iv         v        VI       VII
+
+        Args:
+            dominant: 
+                A bool indicating whether you want to print the dominant chords.
+            parallel: 
+                A bool indicating whether you want to print the parallel chords.
+                
+        Returns:
+                None.
+        """      
+        for line in self.to_string_array(dominant, parallel):
+            print(line)
 
     def __str__(self):
         """ Returns a string representing the key. 
