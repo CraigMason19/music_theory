@@ -1,9 +1,17 @@
-#-------------------------------------------------------------------------------
-# Name:        key_type.py
-#
-# Notes:       Contains a class representing either a minor or major key.
-#
-#-------------------------------------------------------------------------------
+"""
+Defines the KeyType enumeration for musical keys, representing either major or minor.
+
+This module provides:
+- An Enum class `KeyType` with two values: Major and Minor.
+- Utility methods to list all key types, select a random key type, and retrieve the parallel (opposite) key.
+- String representations for clean display and debugging.
+
+Example:
+    from music_theory.key_type import KeyType
+
+    kt = KeyType.Major
+    print(f"Selected key: {kt}, Parallel: {kt.parallel}")
+"""
 
 import random
 from enum import Enum
