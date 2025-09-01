@@ -35,6 +35,8 @@ class Chord:
             Compares two chords.
         notation(self):
             Returns the chord's notation without the Note.
+        quality(self):
+            An alias for notation. Returns the chord's notation without the Note.
         add9(self):
             Returns an array of the chord's notes with the added 9th
         add11(self):
@@ -128,9 +130,11 @@ class Chord:
 
     @property
     def notation(self):
-        """ A property that returns the chord's notation without the Note. 
+        """ 
+        A property that returns the chord's notation without the Note. 
+        Also known as the quality.
 
-            e.g. 'F°' -> '°'
+        e.g. 'F°' -> '°'
 
         Args:
             None.
@@ -165,6 +169,8 @@ class Chord:
             
             case _:
                 return f"M"
+            
+    quality = notation  # Alias
 
     def add9(self):
         """ Returns an array containing the notes of the chord with the added 9th. 
