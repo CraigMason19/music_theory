@@ -1,12 +1,17 @@
-#-------------------------------------------------------------------------------
-# Name:        utils.py
-#
-# Notes:       
-#
-# Links:
-#
-# TODO:
-#-------------------------------------------------------------------------------
+"""
+This module defines symbolic direction aliases for upward and downward movement
+in musical space, and provides a utility to constrain arbitrary integer indices
+to the musically meaningful range of ±11 semitones. Values ≥12 are treated as
+octave-equivalent and reduced modulo 12, preserving directional intent.
+
+Constants:
+    UP_DIRECTIONS:    Aliases for upward movement.
+    DOWN_DIRECTIONS:  Aliases for downward movement.
+
+Functions:
+    index_to_range(index): 
+        Normalizes an integer index to the range -11 to +11, preserving sign.
+"""
 
 UP_DIRECTIONS = ["u", "up", "above"]
 DOWN_DIRECTIONS = ["d", "down", "below"]
