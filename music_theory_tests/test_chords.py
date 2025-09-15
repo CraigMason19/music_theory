@@ -3,7 +3,7 @@ import unittest
 import _setup
 
 from music_theory.notes import Note
-from music_theory.chords import Chord, ChordType
+from music_theory.chords import Chord, ChordType, unique_notes_in_chords
 
 class TestChordValidity(unittest.TestCase):
     def test_chord_valid_00(self):
@@ -178,5 +178,14 @@ class TestChordStringRepresentation(unittest.TestCase):
         chord = Chord(Note.F, ChordType.Diminished7)
         self.assertEqual(repr(chord), "Chord(F, Diminished7)")
     
+class TestUniqueNotesInChord(unittest.TestCase):
+    def test_unique_A_major_A_minor(self):
+        aM = Chord(Note.A, ChordType.Major)
+        am = Chord(Note.A, ChordType.Minor)
+
+        result = unique_notes_in_chords(aM, am)
+        expected = [Note.C, Note.Db, Note.E, Note.A]
+        self.assertEqual(result, expected)
+
 if __name__ == '__main__': # pragma: no cover
     unittest.main()

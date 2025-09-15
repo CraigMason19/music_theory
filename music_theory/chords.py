@@ -236,3 +236,35 @@ class Chord:
             A string.
         """
         return f"Chord({self.root}, {self.chord_type})"
+
+    
+#region Functions
+
+def unique_notes_in_chords(*args: Chord) -> list[Note]:
+    """
+    Collects all unique notes from the given Chords and returns them as a 
+    list, sorted by the the Notes enumeration value.
+
+    Example:
+        >>> unique_notes_in_chords(
+        ...     Chord(Note.A, ChordType.Major),
+        ...     Chord(Note.A, ChordType.Minor)
+        ... )
+        [Note.C, Note.Db, Note.E, Note.A]
+
+    Args:
+        *args: 
+            One or more Chord objects to extract notes from.
+
+    Returns:
+        list[Note]: 
+            A list of unique Notes sorted by their value.
+    """ 
+    notes: list[Note] = []
+
+    for c in args:
+        notes.extend(c.notes)
+
+    return sorted(set(notes), key=lambda n: n.value)
+
+#endregion

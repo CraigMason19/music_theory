@@ -1,7 +1,7 @@
 from . import instrument_creator
 from . import utils
 from music_theory.chord_type import ChordType
-from music_theory.chords import Chord
+from music_theory.chords import Chord, unique_notes_in_chords
 from music_theory.instrument import StringInstrument
 from music_theory.intervals import Interval
 from music_theory.key_type import KeyType
