@@ -7,7 +7,22 @@ def extract_frets(line):
     return [int(fret) for fret in re.findall(r"\d+", line)]
 
 class StringInstrument:
-    def __init__(self, tuning):
+    def __init__(self, tuning: list[Note]):
+        """ 
+        Creates the instrument from a list of Notes that represent each string. 
+
+        By convention, the first element in the tuning list corresponds to the 
+        lowest-pitched (thickest) string, and the last element to the 
+        highest-pitched (thinnest) string.
+
+        Args:
+            tuning (list[Note]):
+                A list of notes representing each string of the instrument.
+
+        Raises:
+            ValueError:
+                If the list of tunings is empty.
+        """  
         if len(tuning) < 1:
             raise ValueError("Instruments must have at least 1 string")
 
