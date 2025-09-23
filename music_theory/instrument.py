@@ -53,12 +53,35 @@ class StringInstrument:
     def detune(self, interval):
         self.tuning = [transpose(string, interval, direction="d") for string in self.tuning]
     
-    def note_at_fret(self, string_index, fret):
+    def note_at_fret(self, string_index: int, fret: int) -> Note:
+        """
+        Returns the note on a tuned string at a specific fret.
+
+        Example:
+            >>> StringInstrument([Note.E, Note.A]).note_at_fret(1, 5)
+            Note.D
+            
+        Args:
+            string_index (int): 
+                The index of the string in the instruments tuning. 0 index referes to the first Note in self.tuning.
+                
+            fret (int):
+                An integer representing the fret number. Must be >= 0, where 0 represents an open string.
+
+        Raises:
+            ValueError:
+                - If `string_index` is out of range
+                - If `fret` is negative.
+                
+        Returns:
+            Note: 
+                The note at the corresponding fret.
+        """ 
         if string_index < 0 or string_index >= self.num_strings:
-            raise ValueError(f"Incorrect string index {string_index}")
+            raise ValueError(f"String index out of range for tuning: {string_index}")
 
         if fret < 0:
-            raise ValueError("Frets can't be negative")
+            raise ValueError(f"Frets can't be negative: {fret}")
         
         return Note.from_index(self.tuning[string_index].value + fret) 
 
@@ -86,9 +109,9 @@ class StringInstrument:
         return [Interval.Unison] + [interval_distance(notes[0], notes[i+1]) for i in range(len(notes)-1)]
 
     def __str__(self):
-        """ Returns a string representing the instrument. 
+        """ Returns a string representing of the instrument. 
 
-            e.g. str(StringInstrument([Note.B, Note.E, Note.A])) -> B, E, A, D, G
+            e.g. str(StringInstrument([Note.B, Note.E, Note.A])) -> B, E, A
 
         Args:
             None.
@@ -110,3 +133,31 @@ class StringInstrument:
             A string.
         """
         return f"StringInstrument({self.num_strings}, [{notes_to_string(self.tuning)}])"
+
+def note_at_fret(string_tuning: Note, fret: int) -> Note:
+    """
+    Returns the note on a tuned string at a specific fret.
+
+    Example:
+        >>> note_at_fret(Note.E, 5)
+        Note.A
+        
+    Args:
+        string_tuning (Note): 
+            The tuning of the string.
+            
+        fret (int):
+            An integer representing the fret number. Must be >= 0, where 0 represents an open string.
+
+    Raises:
+        ValueError:
+            If `fret` is a negative. 
+            
+    Returns:
+        Note: 
+            The note at the corresponding fret.
+    """ 
+    if fret < 0:
+        raise ValueError(f"Frets can't be negative: {fret}")
+    
+    return Note.from_index(string_tuning.value + fret) 
