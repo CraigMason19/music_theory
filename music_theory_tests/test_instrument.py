@@ -4,8 +4,9 @@ import _setup
 
 from music_theory.notes import Note
 from music_theory.intervals import Interval
-from music_theory.instrument import StringInstrument
+from music_theory.instrument import StringInstrument, note_at_fret
 from music_theory.instrument_creator import create_standard_guitar, E_STANDARD_GUITAR, D_STANDARD_GUITAR, C_STANDARD_GUITAR
+
 
 class TestInstrumentCreation(unittest.TestCase):
     def test_custom_instrument_00(self):
@@ -26,6 +27,7 @@ class TestInstrumentCreation(unittest.TestCase):
         instrument = StringInstrument.from_tuning_intervals(Note.E, intervals)
         
         self.assertEqual(instrument.tuning, E_STANDARD_GUITAR.tuning)
+
 
 class TestInstrumentCapo(unittest.TestCase):
     def test_add_a_capo_at_second_fret(self):
@@ -52,6 +54,7 @@ class TestInstrumentCapo(unittest.TestCase):
         guitar = create_standard_guitar()
 
         self.assertRaises(ValueError, guitar.add_capo, -1)
+
 
 class TestInstrumentAdjustString(unittest.TestCase):
     def test_adjust_string_up_00(self):
@@ -114,6 +117,7 @@ class TestInstrumentNoteAtFret(unittest.TestCase):
         expected = Note.F
         self.assertEqual(note, expected)
 
+
 class TestInstrumentNoteInChord(unittest.TestCase):
     def test_notes_in_chord_to_few_strings(self):
         self.assertRaises(ValueError, create_standard_guitar().notes_in_chord, "x x 3 x 6")
@@ -144,6 +148,7 @@ class TestInstrumentNoteInChord(unittest.TestCase):
         expected = [Note.E, Note.E, Note.Ab, Note.D, Note.G]
 
         self.assertEqual(notes, expected)
+
 
 class TestInstrumentIntervalsInChord(unittest.TestCase):
     def test_intervals_in_power_chord(self):
@@ -180,8 +185,10 @@ class TestInstrumentIntervalsInChord(unittest.TestCase):
 
         self.assertEqual(intervals, expected)
 
+
 class TestInstrumentNotesInRiff(unittest.TestCase):
     pass
+
 
 class TestInstrumentStringRepresentation(unittest.TestCase):
     def test_str_method(self):
@@ -191,6 +198,31 @@ class TestInstrumentStringRepresentation(unittest.TestCase):
     def test_repr_method(self):
         expected = "StringInstrument(6, [E, A, D, G, B, E])"
         self.assertEqual(repr(create_standard_guitar()), expected)
+
+
+class TestNoteAtFret(unittest.TestCase):
+    def test_note_at_fret_A_on_E_string(self):
+        result = note_at_fret(Note.E, 5)
+        expected = Note.A
+
+        self.assertEqual(result, expected)
+
+    def test_note_at_fret_bigger_than_24_frets(self):
+        result = note_at_fret(Note.A, 36)
+        expected = Note.A
+
+        self.assertEqual(result, expected)
+
+    def test_note_at_fret_0_on_D_string(self):
+        result = note_at_fret(Note.D, 0)
+        expected = Note.D
+
+        self.assertEqual(result, expected)
+
+    def test_note_at_fret_negative_fret(self):
+        with self.assertRaises(ValueError):
+            _ = note_at_fret(Note.B, -1)
+
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
