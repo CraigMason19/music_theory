@@ -1,4 +1,4 @@
-from music_theory.instrument import StringInstrument
+from music_theory.string_instrument import StringInstrument
 from music_theory.notes import Note, transpose
 from music_theory.intervals import Interval
 
