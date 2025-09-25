@@ -8,3 +8,5 @@ Songs/
 music_theory_tests/__pycache__/
 music_theory/__pycache__/
 .coverage
+_dev/
+_songs/
