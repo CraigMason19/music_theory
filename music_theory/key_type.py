@@ -17,7 +17,8 @@ import random
 from enum import Enum
 
 class KeyType(Enum):
-    """ Represents a key type. Keys are either Major or Minor.
+    """ 
+    Represents a key type. Keys are either Major or Minor.
     
     Attributes:
         Type attributes:
@@ -39,9 +40,10 @@ class KeyType(Enum):
 
     @classmethod    
     def items(cls):
-        """ A class method that returns a list of the key enumerations. 
+        """ 
+        A class method that returns a list of the key enumerations. 
 
-            e.g. [KeyType.Major, KeyType.Minor ... ]
+        e.g. [KeyType.Major, KeyType.Minor ... ]
 
         Args:
             None.
@@ -53,9 +55,10 @@ class KeyType(Enum):
 
     @classmethod
     def random(cls):
-        """ A class method that returns a random key type. 
+        """
+        A class method that returns a random key type. 
 
-            e.g. KeyType.Major
+        e.g. KeyType.Major
 
         Args:
             None.
@@ -67,9 +70,10 @@ class KeyType(Enum):
 
     @property
     def parallel(self):
-        """ Returns the opposite KeyType. 
+        """ 
+        Returns the opposite KeyType. 
 
-            e.g. C Minor is the parallel of C Major.
+        e.g. C Minor is the parallel of C Major.
 
         Args:
             None.
@@ -80,9 +84,10 @@ class KeyType(Enum):
         return KeyType.Minor if (self.name == 'Major') else KeyType.Major
 
     def __str__(self):
-        """ Returns a string representing the key type name. 
+        """ 
+        Returns a string representing the key type name. 
 
-            e.g. str(KeyType.Major) -> 'Major'
+        e.g. str(KeyType.Major) -> 'Major'
 
         Args:
             None.
@@ -93,9 +98,10 @@ class KeyType(Enum):
         return self.name
 
     def __repr__(self):
-        """ Returns a string representing the key types enum. 
+        """ 
+        Returns a string representing the key types enum. 
 
-            e.g. repr(KeyType.Major) -> 'KeyType.Major'
+        e.g. repr(KeyType.Major) -> 'KeyType.Major'
 
         Args:
             None.
