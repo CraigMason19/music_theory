@@ -1,22 +1,10 @@
-#-------------------------------------------------------------------------------
-# Name:        chords.py
-#
-# Notes:       Contains a class representing a Chord. 
-#
-# Links:
-#
-# TODO:
-#-------------------------------------------------------------------------------
-
-import random
-from enum import Enum
-
 from music_theory.notes import Note, transpose
 from music_theory.intervals import Interval
 from music_theory.chord_type import ChordType
 
 class Chord:
-    """ A class representing a musical chord. 
+    """ 
+    A class representing a musical chord. 
 
     Attributes:
         root:
@@ -48,8 +36,9 @@ class Chord:
         __repr__(self):
             Returns a string representation of the Chord.
     """
-    def __init__(self, root, chord_type=ChordType.Major):
-        """ Constructs the chord.
+    def __init__(self, root: Note, chord_type: ChordType = ChordType.Major) -> None:
+        """ 
+        Constructs the chord.
 
         Args:
             root:
@@ -98,10 +87,11 @@ class Chord:
                 raise ValueError(f"Unknown chord type: {self.chord_type}")
     
     @classmethod
-    def random(cls):
-        """ A class method that returns a random chord. 
+    def random(cls) -> ChordType:
+        """ 
+        A class method that returns a random chord. 
 
-            e.g. Fdim
+        e.g. Fdim
 
         Args:
             None.
@@ -111,10 +101,11 @@ class Chord:
         """  
         return Chord(Note.random(), ChordType.random())
 
-    def __eq__(self, other):
-        """ Equality operator to check that both the note and chord type match. 
+    def __eq__(self, other: ChordType) -> bool:
+        """ 
+        Equality operator to check that both the note and chord type match. 
 
-            e.g. Chord(F, ChordType.Diminished) == Chord(F, ChordType.Diminished)
+        e.g. Chord(F, ChordType.Diminished) == Chord(F, ChordType.Diminished)
 
         Args:
             other:
@@ -129,7 +120,7 @@ class Chord:
             return False
 
     @property
-    def notation(self):
+    def notation(self) -> str:
         """ 
         A property that returns the chord's notation without the Note. 
         Also known as the quality.
@@ -172,10 +163,11 @@ class Chord:
             
     quality = notation  # Alias
 
-    def add9(self):
-        """ Returns an array containing the notes of the chord with the added 9th. 
+    def add9(self) -> str:
+        """ 
+        Returns an array containing the notes of the chord with the added 9th. 
 
-            e.g. Chord(Note.A).add9() -> [Note.A, Note.Db, Note.E, Note.B]
+        e.g. Chord(Note.A).add9() -> [Note.A, Note.Db, Note.E, Note.B]
 
         Args:
             None.
@@ -185,10 +177,11 @@ class Chord:
         """    
         return self.notes + [transpose(self.root, Interval.M2)]
 
-    def add11(self):
-        """ Returns an array containing the notes of the chord with the added 11th. 
+    def add11(self) -> str:
+        """ 
+        Returns an array containing the notes of the chord with the added 11th. 
 
-            e.g. Chord(Note.A).add11() -> [Note.A, Note.Db, Note.E, Note.D]
+        e.g. Chord(Note.A).add11() -> [Note.A, Note.Db, Note.E, Note.D]
 
         Args:
             None.
@@ -198,10 +191,11 @@ class Chord:
         """    
         return self.notes + [transpose(self.root, Interval.P4)]
     
-    def add13(self):
-        """ Returns an array containing the notes of the chord with the added 13th. 
+    def add13(self) -> str:
+        """ 
+        Returns an array containing the notes of the chord with the added 13th. 
 
-            e.g. Chord(Note.A).add13() -> [Note.A, Note.Db, Note.E, Note.Gb]
+        e.g. Chord(Note.A).add13() -> [Note.A, Note.Db, Note.E, Note.Gb]
 
         Args:
             None.
@@ -211,10 +205,11 @@ class Chord:
         """    
         return self.notes + [transpose(self.root, Interval.M6)]
     
-    def __str__(self):
-        """ Returns a string representing the Chord name and type. 
+    def __str__(self) -> str:
+        """ 
+        Returns a string representing the Chord name and type. 
 
-            e.g. str(Chord(Note.E, ChordType.Dominant7)) -> E7
+        e.g. str(Chord(Note.E, ChordType.Dominant7)) -> E7
 
         Args:
             None.
@@ -224,10 +219,11 @@ class Chord:
         """
         return f"{self.root}{self.notation}"
 
-    def __repr__(self):
-        """ Returns a string representing the Chord. 
+    def __repr__(self) -> str:
+        """ 
+        Returns a string representing the Chord. 
 
-            e.g. repr(Chord(Note.E, ChordType.Dominant7)) -> Chord(E, Dominant7)
+        e.g. repr(Chord(Note.E, ChordType.Dominant7)) -> Chord(E, Dominant7)
 
         Args:
             None.
