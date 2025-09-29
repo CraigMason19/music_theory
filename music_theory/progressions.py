@@ -131,24 +131,25 @@ class Progression:
 #region Functions
 
 def chords_from_progression(key, progression, error='X'):
-    """ Returns a list of chords that match a progression in a key. Can be in 
-        either the chords or parallel chords.
-           
-        'error' string is used if a chord can't be found in the progression.
+    """ 
+    Returns a list of chords that match a progression in a key. Can be in 
+    either the chords or parallel chords.
+        
+    'error' string is used if a chord can't be found in the progression.
 
-        Diminished chords can be passed as '°' or 'dim' ('ii°' or 'viidim')
+    Diminished chords can be passed as '°' or 'dim' ('ii°' or 'viidim')
 
-        Note: 
-        The shorthand 'vii' is accepted as a synonym for 'vii°' or 'viidim' to
-        improve usability and reflect common practice in major keys.
+    Note: 
+    The shorthand 'vii' is accepted as a synonym for 'vii°' or 'viidim' to
+    improve usability and reflect common practice in major keys.
 
-        'ii' without a diminished marker is NOT accepted as shorthand for
-        'iidim' because the diatonic ii chord is typically minor in major keys,
-        while 'iidim' only appears in parallel keys and is less commonly written
-        without explicit notation.
+    'ii' without a diminished marker is NOT accepted as shorthand for
+    'iidim' because the diatonic ii chord is typically minor in major keys,
+    while 'iidim' only appears in parallel keys and is less commonly written
+    without explicit notation.
 
-        e.g. key=C Major, progression=['I', 'i', 'IV', 'V']
-            -> [Chord(C, Major), Chord(C, Minor), Chord(F, Major), Chord(G, Major)]
+    e.g. key=C Major, progression=['I', 'i', 'IV', 'V']
+        -> [Chord(C, Major), Chord(C, Minor), Chord(F, Major), Chord(G, Major)]
             
     Args:
         key:
@@ -159,8 +160,8 @@ def chords_from_progression(key, progression, error='X'):
             A placeholder for missing or invalid chords in the key.
 
     Returns:
-        list[Chord|str]: A List of Chord objects or a string containing the 'error' 
-        parameter.
+        list[Chord|str]: 
+            A List of Chord objects or a string containing the 'error' parameter.
     """
     # Normalisation table for user shorthand
     shorthand_map = {

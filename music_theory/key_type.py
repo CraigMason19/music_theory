@@ -7,10 +7,10 @@ This module provides:
 - String representations for clean display and debugging.
 
 Example:
-    from music_theory.key_type import KeyType
-
-    kt = KeyType.Major
-    print(f"Selected key: {kt}, Parallel: {kt.parallel}")
+    >>> from music_theory.key_type import KeyType
+    >>> kt = KeyType.Major
+    >>> print(f"Selected key: {kt}, Parallel: {kt.parallel}")
+    Selected key: Major, Parallel: Minor
 """
 
 import random
@@ -43,13 +43,12 @@ class KeyType(Enum):
         """ 
         A class method that returns a list of the key enumerations. 
 
-        e.g. [KeyType.Major, KeyType.Minor ... ]
-
-        Args:
-            None.
+        Example:
+            >>> KeyType.items()
+            [KeyType.Major, KeyType.Minor]
 
         Returns:
-            A list of key types.
+            list[KeyTypes]
         """  
         return [n for n in cls]
 
@@ -58,13 +57,8 @@ class KeyType(Enum):
         """
         A class method that returns a random key type. 
 
-        e.g. KeyType.Major
-
-        Args:
-            None.
-
         Returns:
-            A KeyType.
+            KeyType
         """  
         return random.choice(cls.items())
 
@@ -73,40 +67,37 @@ class KeyType(Enum):
         """ 
         Returns the opposite KeyType. 
 
-        e.g. C Minor is the parallel of C Major.
-
-        Args:
-            None.
+        Example:
+            >>> KeyType.Major.parallel
+            KeyType.Minor
 
         Returns:
-            A KeyType
+            KeyType
         """
         return KeyType.Minor if (self.name == 'Major') else KeyType.Major
 
-    def __str__(self):
+    def __str__(self) -> str:
         """ 
-        Returns a string representing the key type name. 
+        Returns a string representing the key types enum name. 
 
-        e.g. str(KeyType.Major) -> 'Major'
-
-        Args:
-            None.
-
+        Example:
+            >>> str(KeyType.Major)
+            Major
+        
         Returns:
-            A string.
+            str
         """
         return self.name
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """ 
-        Returns a string representing the key types enum. 
+        Returns a string representing the key types class and enum name. 
 
-        e.g. repr(KeyType.Major) -> 'KeyType.Major'
-
-        Args:
-            None.
+        Example:
+            >>> repr(KeyType.Major)
+            KeyType.Major
 
         Returns:
-            A string representing the key type's name.
+            str
         """
         return f'KeyType.{self.name}'

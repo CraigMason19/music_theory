@@ -7,8 +7,7 @@ This module provides:
 - String representations for clean display and debugging.
 
 Example:
-    from music_theory.chord_type import ChordType
-
+    >>> from music_theory.chord_type import ChordType
     >>> ct = ChordType.Major
     >>> str(ct)
     'Major'

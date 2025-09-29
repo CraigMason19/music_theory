@@ -239,7 +239,7 @@ class Chord:
 def unique_notes_in_chords(*args: Chord) -> list[Note]:
     """
     Collects all unique notes from the given Chords and returns them as a 
-    list, sorted by the the Notes enumeration value.
+    list, sorted by the Notes enumeration value.
 
     Example:
         >>> unique_notes_in_chords(
@@ -249,7 +249,7 @@ def unique_notes_in_chords(*args: Chord) -> list[Note]:
         [Note.C, Note.Db, Note.E, Note.A]
 
     Args:
-        *args: 
+        *args (Chord): 
             One or more Chord objects to extract notes from.
 
     Returns:

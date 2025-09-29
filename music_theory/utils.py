@@ -16,16 +16,19 @@ Functions:
 UP_DIRECTIONS = ["u", "up", "above"]
 DOWN_DIRECTIONS = ["d", "down", "below"]
 
-def index_to_range(index):
-    """ Takes a index and converts it into the range -11 to +11 (+ or - Interval 
-        or note). 12 would be an octave and so the note would not change. 
+def index_to_range(index: int) -> int:
+    """ 
+    Converts an index into the range -11 to +11 (+ or - Interval or Note). 
+    
+    12 would be an octave and so the note would not change. 
 
     Args:
-        index:
+        index (int):
             An integer representing a positive or negative index.
 
     Returns:
-        A integer index in the range -11 to +11.
+        int:    
+            An integer index in the range -11 to +11.
     """ 
     sign = 1 if (index >= 0) else -1
     index = abs(index)
