@@ -5,7 +5,6 @@ from music_theory.chords import Chord, unique_notes_in_chords
 from music_theory.intervals import Interval
 from music_theory.key_type import KeyType
 from music_theory.keys import Key
-from music_theory.mnemonics import Mnemonics
 from music_theory.notes import Note
 from music_theory.progressions import Progression, NumeralProgressions, SongProgressions, NumeralCadences, chords_from_progression     
 from music_theory.scale_diatonic import DiatonicScale
