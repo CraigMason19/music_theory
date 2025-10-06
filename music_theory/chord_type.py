@@ -10,7 +10,7 @@ Example:
     >>> from music_theory.chord_type import ChordType
     >>> ct = ChordType.Major
     >>> str(ct)
-    'Major'
+    Major
 """
 
 import random
@@ -61,26 +61,31 @@ class ChordType(Enum):
         e.g. ChordType.Diminished
 
         Returns:
-            A random ChordType
+            ChordType:
+                A random ChordType
         """  
         return random.choice(cls.items())
 
     def __str__(self):
         """ 
-        Returns a string representing the chord type name. 
+        Returns a string representing the chord types name. 
 
-        e.g. str(ChordType.Major) -> 'Major'
+        Example:
+            >>> str(ChordType.Major)
+            Major
 
         Returns:
-            str
+            str:
         """
         return self.name
 
     def __repr__(self):
         """ 
-        Returns a string representing the key types enum. 
+        Returns a string representing the chord types enum along with the objects name. 
 
-        e.g. repr(ChordType.Major) -> 'ChordType.Major'
+        Example:
+            >>> repr(ChordType.Major)
+            ChordType.Major
 
         Returns:
             str:

@@ -1,24 +1,31 @@
-#-------------------------------------------------------------------------------
-# Name:        intervals.py
-#
-# Notes:       Contains a Interval class and related functions
-#
-# Links:
-#
-# TODO:
-#-------------------------------------------------------------------------------
+"""
+Defines the Interval class representing a offset from a Note in music.
+
+This module provides:
+- An Enum class `Interval` with 12 values: From Unison to Major 7th.
+- Utility methods to create from index or a numeric string, select a random Interval type.
+- String representations for clean display and debugging.
+
+Example:
+    >>> from music_theory.intervals import Interval
+    >>> i = Interval.M3
+    >>> print(repr(i))
+    Interval.M3
+"""
 
 import random
 from enum import Enum
 
+from music_theory.notes import Note
 from music_theory.utils import index_to_range, UP_DIRECTIONS, DOWN_DIRECTIONS
 
 class Interval(Enum):
-    """ Represents a interval (diffence between two notes). Derived from the 
-        Enum class.
+    """ 
+    Represents a interval (diffence between two notes). Derived from the 
+    Enum class.
     
     Attributes:
-        interval attributes:
+        intervals:
             12 class attributes representing interval enumerations.
 
     Methods:
@@ -43,15 +50,11 @@ class Interval(Enum):
 
     @classmethod    
     def items(cls):
-        """ A class method that returns a list of the interval enumerations. 
-
-            e.g. [Interval.Unison, Interval.m2, ... ]
-
-        Args:
-            None.
+        """ 
+        A class method that returns a list of the interval enumerations. 
 
         Returns:
-            A list of intervals.
+            list(Interval):
         """  
         return [n for n in cls]
  
@@ -59,137 +62,158 @@ class Interval(Enum):
 
     @classmethod
     def from_index(cls, index):
-        """ A class methd that returns a interval based upon it's enumeration 
-            value (positive or negative). Positive indices are counted from the
-            start and negative indices are counted from the end.
+        """ 
+        A class methd that returns a interval based upon it's enumeration 
+        value (positive or negative). Positive indices are counted from the
+        start and negative indices are counted from the end.
 
-            e.g. from_index(8) -> Interval.m6
-                 from_index(-8) -> Interval.M3
+        Examples:
+            >>> from_index(8)
+            m6
+            >>> from_index(-8)
+            M3
 
         Args:
-            index:
-                The index of the value to be retrieved. Can be positive or 
+            index (int):
+                The index of the value to be calculated. Can be positive or 
                 negative.
 
         Returns:
-            A Interval.
+            Interval:
         """  
         index = index_to_range(index)
         return Interval.items()[index]
 
     @classmethod
-    def from_numeric(cls, numeric):
-        """ A class method that returns a interval based upon a numeric interval
-            value.
-            ('1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7')
-            
-            e.g. from_numeric('b3') -> Interval.m3
+    def from_numeric(cls, numeric: str):
+        """ 
+        A class method that returns a interval based upon a numeric interval
+        value.
+        
+        ('1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7')
+        
+        Example:
+            >>> Interval.from_numeric('b3')
+            m3
 
         Args:
-            numeric:
+            numeric (str):
                 The numeric interval to be translated.
 
         Returns:
-            A Interval.
+            Interval:
         """  
         numerics = ['1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7']
         index = numerics.index(numeric)
         return Interval.items()[index]
 
-    def to_numeric(self):
-        """ Returns the numeric value of an interval. 
+    def to_numeric(self) -> str:
+        """ 
+        Returns the numeric value of a Interval as a string. 
+        'b' is included if it is a flat.
 
-            e.g. Interval.P4.to_numeric() -> '4'
-
-        Args:
-            None.
+        Example:
+            >>> Interval.dim5.to_numeric()
+            b5
 
         Returns:
-            A string representing the numeric value.
+            str:
+                A string representing the numeric value.
         """  
         numerics = ['1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7']
         return numerics[self.value]
 
     @classmethod
     def random(cls):
-        """ A class method that returns a random interval. 
+        """ 
+        A class method that returns a random interval. 
 
-            e.g. Interval.P4
-
-        Args:
-            None.
+        Example:
+            >>> Interval.random()
+            P5
 
         Returns:
-            A interval.
+            Interval:
         """  
         return random.choice(cls.items())
 
-    def __str__(self):
-        """ Returns a string representing the interval name. 
+    def __str__(self) -> str:
+        """ 
+        Returns a string representing the interval name. 
 
-            e.g. str(Interval.P5) -> 'P5'
-
-        Args:
-            None.
+        Examples:
+            >>> str(Interval.P5)
+            P5
 
         Returns:
-            A string representing a interval's name.
+            str:
+                A string representing a interval's name.
         """
         return self.name
 
-    def __repr__(self):
-        """ Returns a string representing the interval. 
+    def __repr__(self) -> str:
+        """ 
+        Returns a string representing the interval. 
 
-            e.g. repr(Interval.P5) -> 'Interval.P5'
-
-        Args:
-            None.
+        Examples:
+            >>> repr(Interval.P5)
+            Interval.P5
 
         Returns:
-            A string representing a interval.
+            str:
+                A string representing a interval.
         """
         return f'Interval.{self.name}'
     
 #region Functions
 
-def intervals_to_string(interval_list):
-    """ Takes a list of intervals and returns a string of interval names. 
+def intervals_to_string(interval_list: list[Interval]) -> str:
+    """ 
+    Takes a list of intervals and returns a string of interval names. 
 
-        e.g. [Interval.M3, Interval.P4, Interval.P5] -> "M3, P4, P5"
+    Example:
+        >>> [Interval.M3, Interval.P4, Interval.P5]
+        M3, P4, P5
 
     Args:
-        note_list:
+        note_list (list[Note]):
             The list of intervals to be converted to a string.
 
     Returns:
-        The string of interval names.
+        str:
+            A string of Interval names.
     """  
     return ', '.join([i.name for i in interval_list])
 
-def interval_distance(first_note, second_note, direction="u"):
-    """ Takes two notes and calculates the interval distance between them, 
-        either up or down.
+def interval_distance(first_note: Note, second_note: Note, direction="u") -> str:
+    """ 
+    Takes two notes and calculates the interval distance between them, either up
+    or down.
 
-        NOTE: A perfect 5th up is the same as a perfect 4th down and vice-versa
+    NOTE: A perfect 5th up is the same as a perfect 4th down and vice-versa
 
-        e.g. Note.C, Note.G, 'u' -> interval.P5
-             Note.C, Note.G, 'd' -> interval.P4
+    Examples:
+        >>> interval_distance(Note.C, Note.G, 'u')
+        P5
+        >>> interval_distance(Note.C, Note.G, 'd')
+        P4
 
     Args:
-        first_note:
+        first_note (Note):
             The note to start measuring from.
-        second_note:
+        second_note (Note):
             The note above or below the first.
-        direction:
+        direction (str):
             Can either check distance up or down in pitch. acceptable values are
             "u", "up", "above", "d", "down" or "below" in any case.
-
-    Returns:
-        A Interval representing the difference between two notes.
 
     Raises:
         ValueError:
             If the direction string is not recognized.
+
+    Returns:
+        Interval:
+            A Interval object representing the difference between two notes.
     """  
     if(first_note == second_note):
         return Interval.Unison

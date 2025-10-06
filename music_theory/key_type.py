@@ -1,9 +1,11 @@
 """
-Defines the KeyType enumeration for musical keys, representing either major or minor.
+Defines the KeyType enumeration for musical keys, representing either major or 
+minor.
 
 This module provides:
 - An Enum class `KeyType` with two values: Major and Minor.
-- Utility methods to list all key types, select a random key type, and retrieve the parallel (opposite) key.
+- Utility methods to list all key types, select a random key type, and retrieve
+  the parallel (opposite) key.
 - String representations for clean display and debugging.
 
 Example:
@@ -98,6 +100,6 @@ class KeyType(Enum):
             KeyType.Major
 
         Returns:
-            str
+            str:
         """
         return f'KeyType.{self.name}'
