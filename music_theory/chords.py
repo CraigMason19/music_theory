@@ -41,13 +41,10 @@ class Chord:
         Constructs the chord.
 
         Args:
-            root:
+            root (Note):
                 The root note to build the chord from.
-            chord_type:
+            chord_type (ChordType):
                 The ChordType to represent the chord.
-
-        Returns:
-            None.
 
         Raises:
             ValueError:
@@ -87,32 +84,30 @@ class Chord:
                 raise ValueError(f"Unknown chord type: {self.chord_type}")
     
     @classmethod
-    def random(cls) -> ChordType:
+    def random(cls):
         """ 
         A class method that returns a random chord. 
 
-        e.g. Fdim
-
-        Args:
-            None.
-
         Returns:
-            A Chord.
+            Chord:
         """  
         return Chord(Note.random(), ChordType.random())
 
-    def __eq__(self, other: ChordType) -> bool:
+    def __eq__(self, other) -> bool:
         """ 
-        Equality operator to check that both the note and chord type match. 
+        Equality operator to check that both the Note and ChordType match. 
 
-        e.g. Chord(F, ChordType.Diminished) == Chord(F, ChordType.Diminished)
+        Example:
+            >>> Chord(Note.F, ChordType.Diminished) == Chord(Note.F, ChordType.Diminished)
+            True
 
         Args:
-            other:
+            other (Chord):
                 The other Chord to compare.
 
         Returns:
-            A bool. True if this and another chord are the same.
+            bool:
+                True if this and another chord are the same.
         """
         try:
             return self.root == other.root and self.chord_type == other.chord_type
@@ -125,13 +120,15 @@ class Chord:
         A property that returns the chord's notation without the Note. 
         Also known as the quality.
 
-        e.g. 'F°' -> '°'
-
-        Args:
-            None.
+        Example:
+            >>> c = Chord(Note.F, ChordType.Diminished)
+            >>> print(c)
+            F°
+            >>> print(c.notation)
+            °
 
         Returns:
-            A string.
+            str:
         """    
         match self.chord_type:
             case ChordType.Minor:
@@ -163,45 +160,42 @@ class Chord:
             
     quality = notation  # Alias
 
-    def add9(self) -> str:
+    def add9(self) -> list[Note]:
         """ 
         Returns an array containing the notes of the chord with the added 9th. 
 
-        e.g. Chord(Note.A).add9() -> [Note.A, Note.Db, Note.E, Note.B]
-
-        Args:
-            None.
+        Example:
+            >>> Chord(Note.A).add9()
+            [Note.A, Note.Db, Note.E, Note.B]
 
         Returns:
-            An array.
+            list[Note]
         """    
         return self.notes + [transpose(self.root, Interval.M2)]
 
-    def add11(self) -> str:
+    def add11(self) -> list[Note]:
         """ 
         Returns an array containing the notes of the chord with the added 11th. 
 
-        e.g. Chord(Note.A).add11() -> [Note.A, Note.Db, Note.E, Note.D]
-
-        Args:
-            None.
+        Example:
+            >>> hord(Note.A).add11()
+            [Note.A, Note.Db, Note.E, Note.D]
 
         Returns:
-            An array.
+            list[Note]
         """    
         return self.notes + [transpose(self.root, Interval.P4)]
     
-    def add13(self) -> str:
+    def add13(self) -> list[Note]:
         """ 
         Returns an array containing the notes of the chord with the added 13th. 
 
-        e.g. Chord(Note.A).add13() -> [Note.A, Note.Db, Note.E, Note.Gb]
-
-        Args:
-            None.
+        Example:
+            >>> Chord(Note.A).add13()
+            [Note.A, Note.Db, Note.E, Note.Gb]
 
         Returns:
-            An array.
+            list[Note]
         """    
         return self.notes + [transpose(self.root, Interval.M6)]
     
@@ -209,27 +203,25 @@ class Chord:
         """ 
         Returns a string representing the Chord name and type. 
 
-        e.g. str(Chord(Note.E, ChordType.Dominant7)) -> E7
-
-        Args:
-            None.
+        Example:
+            >>> str(Chord(Note.E, ChordType.Dominant7))
+            E7
 
         Returns:
-            A string.
+            str:
         """
         return f"{self.root}{self.notation}"
 
     def __repr__(self) -> str:
         """ 
         Returns a string representing the Chord. 
-
-        e.g. repr(Chord(Note.E, ChordType.Dominant7)) -> Chord(E, Dominant7)
-
-        Args:
-            None.
+        
+        Example:
+            >>> repr(Chord(Note.E, ChordType.Dominant7))
+            Chord(E, Dominant7)
 
         Returns:
-            A string.
+            str:
         """
         return f"Chord({self.root}, {self.chord_type})"
 
