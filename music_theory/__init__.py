@@ -9,5 +9,5 @@ from music_theory.notes import Note
 from music_theory.progressions import Progression, NumeralProgressions, SongProgressions, NumeralCadences, chords_from_progression     
 from music_theory.scale_diatonic import DiatonicScale
 from music_theory.scale_type import ScaleType
-from music_theory.scales import Scale
+from music_theory.scales import Scale, modes_from_note
 from music_theory.string_instrument import StringInstrument
