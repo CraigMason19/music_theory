@@ -337,28 +337,37 @@ class Scale:
         """
         return f"Scale(Note.{self.notes[0]}, ScaleType.{self.type})"
 
-def modes_from_note(note):
-    """ Returns a list of Scales depicting all the modes from a starting note. 
+#endregion
 
-        Each subsequent mode starts from the next note in the scale (effectively 
-        shifts the notes up). This repeats until it wraps back to the start.
-        There are always 7 modes and they are always in the same order. Theyare
-        named (note -> mode).
+def modes_from_note(note: Note) -> list[Scale]:
+    """ 
+    Returns a list of Scales depicting all the modes from a starting note. 
 
-        e.g. Mode 1 - C Ionian - C D E F G A B
-            Mode 2 - D Dorian - D E F G A B C
-            Mode 3 - E Phrygian: E, F, G, A, B, C, D
-            Mode 4 - F Lydian: F, G, A, B, C, D, E
-            Mode 5 - G Mixolydian: G, A, B, C, D, E, F
-            Mode 6 - A Aeolian: A, B, C, D, E, F, G
-            Mode 7 - B Locrian: B, C, D, E, F, G, A
+    Each subsequent mode starts from the next note in the scale (effectively 
+    shifts the notes up). This repeats until it wraps back to the start.
+    There are always 7 modes and they are always in the same order. Theyare
+    named (note -> mode).
+
+    Example:
+        >>> modes_from_note(Note.C)
+        [
+            Scale(Note.C, ScaleType.Ionian), 
+            Scale(Note.D, ScaleType.Dorian), 
+            Scale(Note.E, ScaleType.Phrygian), 
+            Scale(Note.F, ScaleType.Lydian), 
+            Scale(Note.G, ScaleType.Mixolydian), 
+            Scale(Note.A, ScaleType.Aeolian), 
+            Scale(Note.B, ScaleType.Locrian)
+        ]
 
     Args:
-        note:
+        note (Note):
             The note to build the modes from.
 
     Returns:
-        A list of 7 Scales.
+        list[Scale]:
+            The 7 scales representing all the modes.
+
     """
     m, s = [], Scale(note, ScaleType.Ionian)
 
@@ -371,5 +380,3 @@ def modes_from_note(note):
     m.append(Scale(s.notes[6], ScaleType.Locrian))
 
     return m
-
-#endregion
