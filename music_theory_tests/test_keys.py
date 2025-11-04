@@ -6,6 +6,38 @@ from music_theory.notes import Note
 from music_theory.chords import Chord, ChordType
 from music_theory.keys import Key, KeyType
 
+class TestKeyEquality(unittest.TestCase):
+    def test_keys_are_equal_same_note_same_type(self):
+        a = Key(Note.F, KeyType.Major)
+        b = Key(Note.F, KeyType.Major)
+        
+        self.assertEqual(a, b)
+
+    def test_keys_are_not_equal_different_note_same_type(self):
+        a = Key(Note.C, KeyType.Major)
+        b = Key(Note.D, KeyType.Major)
+        
+        self.assertNotEqual(a, b)
+
+    def test_keys_are_not_equal_different_note_different_type(self):
+        a = Key(Note.C, KeyType.Major)
+        b = Key(Note.G, KeyType.Minor)
+        
+        self.assertNotEqual(a, b)
+
+    def test_keys_are_not_equal_same_note_different_type(self):
+        a = Key(Note.C, KeyType.Major)
+        b = Key(Note.C, KeyType.Minor)
+        
+        self.assertNotEqual(a, b)
+
+    def test_keys_are_not_equal_other_is_not_a_key(self):
+        a = Key(Note.C, KeyType.Major)
+        b = Chord(Note.C)
+        
+        self.assertNotEqual(a, b)
+    
+
 class TestKeyParallel(unittest.TestCase):
     def test_parallel_key_00(self):
         parallel, expected = Key(Note.C).parallel, Key(Note.C, KeyType.Minor)
