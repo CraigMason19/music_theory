@@ -32,8 +32,9 @@ The circle shows how many sharps and flats are in the key.
 """
 
 class Key:
-    """ Represents a musical key. A key is important to find what chords can be 
-        used.
+    """ 
+    Represents a musical key. A key is important to find what chords can be 
+    used.
 
     Attributes:
         root:
@@ -77,19 +78,19 @@ class Key:
         __repr__(self):
             Returns the name of the key.
     """
-    def __init__(self, root, key_type=KeyType.Major):
-        """ Constructs the key 
+    def __init__(self, root: Note, key_type: KeyType=KeyType.Major) -> None:
+        """
+        Constructs the key from a Note and a KeyType. 
 
-            e.g. C Minor
+        Example
+            >>> Key(Note.C, KeyType.Major)
+            C Minor
 
         Args:
-            root:
-                The note to build the key from
-            key_type:
+            root (Note):
+                The note to build the key from.
+            key_type (KeyType):
                 The type of the key to be built.
-
-        Returns:
-            None.
         """  
         self.root = root
         self.type = key_type
