@@ -97,7 +97,7 @@ class Key:
         self.root = root
         self.type = key_type
 
-    def __eq__(self, other: Self):
+    def __eq__(self, other: Self) -> bool:
         """ 
         Equality operator to check that both the note and key type match. 
 
@@ -119,45 +119,42 @@ class Key:
             return False
 
     @classmethod
-    def random(cls):
-        """ A class method that returns a random key. 
-
-            e.g. C Minor
-
-        Args:
-            None.
+    def random(cls) -> Self:
+        """
+        A class method that returns a random key. 
 
         Returns:
-            A Key.
+            Key:
+                A random key.
         """  
         return Key(Note.random(), KeyType.random())
 
     @property
-    def parallel(self):
-        """ Returns the paralell (opposite) key. 
+    def parallel(self) -> Self:
+        """ 
+        Returns the paralell (opposite) key. 
 
-            e.g. C Minor -> C Major
-
-        Args:
-            None.
+        Example:
+            >>> F Minor.parallel
+            F Major
 
         Returns:
-            A Key.
+            Key:
+                The paralell (opposite) key
         """  
         return Key(self.root, self.type.parallel)
 
     @property
-    def relative_key(self):
-        """ Returns the relative key. If a Key is Major it will have a relative 
-            Minor key (and vice-versa). This can be easily found on a instrument
-            by going up or down 3 semitones.   
-
-        Args:
-            None.
+    def relative_key(self) -> Self:
+        """ 
+        Returns the relative key. If a Key is Major it will have a relative 
+        Minor key (and vice-versa). This can be easily found on a instrument
+        by going up or down 3 semitones.   
 
         Returns:
-            A Key.        
-        """
+            Key:
+                The relative key.
+        """  
         if self.type == KeyType.Major:
             new_note = transpose(self.root, Interval.m3, direction='d')
             return Key(new_note, KeyType.Minor)
@@ -167,36 +164,33 @@ class Key:
             return Key(new_note, KeyType.Major)
 
     @property
-    def name(self):
-        """ Returns the name of the key, the root and key type. 
+    def name(self) -> str:
+        """ 
+        Returns the name of the key, the root and key type. 
 
-            e.g. 'C MAJOR'
-
-        Args:
-            None.
+        e.g. 'C MAJOR'
 
         Returns:
-            A string.
+            str:
+                Representing the Key's Note and KeyType.
         """
         return f"{self.root} {self.type}"
 
     @property
-    def sharp_count(self):
-        """ Returns the number of sharps in this key. 
-        
-        Args:
-            None.
+    def sharp_count(self) -> int:
+        """ 
+        Returns the number of sharps in this key. 
 
         Returns:
-            An integer.        
+            int:
+                The sharp count.        
         """
         if self.type == KeyType.Minor:
             return self.relative_key.sharp_count
 
         note = Note.C
 
-        for i in range(7+1):
- 
+        for i in range(7+1): 
             if note == self.root:
                 return i
 
@@ -205,14 +199,13 @@ class Key:
         return 0
 
     @property
-    def flat_count(self):
-        """ Returns the number of flats in this key.
-        
-        Args:
-            None.
+    def flat_count(self) -> int:
+        """ 
+        Returns the number of flats in this key.
 
         Returns:
-            An integer.        
+            int:
+                The flat count.         
         """
         if self.type == KeyType.Minor:
             return self.relative_key.flat_count
