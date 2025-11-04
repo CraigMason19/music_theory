@@ -125,7 +125,6 @@ class Key:
 
         Returns:
             Key:
-                A random key.
         """  
         return Key(Note.random(), KeyType.random())
 
@@ -140,7 +139,6 @@ class Key:
 
         Returns:
             Key:
-                The paralell (opposite) key
         """  
         return Key(self.root, self.type.parallel)
 
@@ -153,7 +151,6 @@ class Key:
 
         Returns:
             Key:
-                The relative key.
         """  
         if self.type == KeyType.Major:
             new_note = transpose(self.root, Interval.m3, direction='d')
@@ -182,8 +179,7 @@ class Key:
         Returns the number of sharps in this key. 
 
         Returns:
-            int:
-                The sharp count.        
+            int:     
         """
         if self.type == KeyType.Minor:
             return self.relative_key.sharp_count
@@ -204,8 +200,7 @@ class Key:
         Returns the number of flats in this key.
 
         Returns:
-            int:
-                The flat count.         
+            int:     
         """
         if self.type == KeyType.Minor:
             return self.relative_key.flat_count
@@ -228,9 +223,6 @@ class Key:
         F C G D A E B
         Fast Cars Go Dangerously Around Every Bend
 
-        Args:
-            None.
-
         Returns:
             An list of Notes.        
         """
@@ -245,17 +237,15 @@ class Key:
         B E A D G C F
         Before Eating A Doughnut Get Coffee First.
 
-        Args:
-            None.
-
         Returns:
             An list of Notes.        
         """
         order_of_flats = [Note.B, Note.E, Note.A, Note.D, Note.G, Note.C, Note.F]
         return order_of_flats[:self.flat_count]
 
-    def chords(self):
-        """ Returns a dict representing all the chords in the key.
+    def chords(self) -> dict[str, Chord]:
+        """ 
+        Returns a dict representing all the chords in the key.
 
         The dict key is a Roman numeral as used in traditional notation. 
         A upper case numneral represents a major chord and a lower case numeral
@@ -263,11 +253,9 @@ class Key:
 
         Note: The major key has a diminished 7th (vii°) and the minor a diminished 2nd (ii°)
                 
-        Args:
-            None.
-                
         Returns:
-                A dict in the form. key=RomanNumeral value=Chord
+            dict[str, Chord]:
+                key=RomanNumeral value=Chord
                 e.g. { "I": Chord(C, ChordType.Major) ... }
         """
         scale, numerals, sequence = None, None, None
@@ -293,9 +281,6 @@ class Key:
 
             These are the chords that are constructed from the parallel (opposite)
             key. e.g. the paralell chords of C Major are the chords of C Minor. 
-
-        Args:
-            None
                 
         Returns:
                 A dict in the form. key=RomanNumeral value=Chord
@@ -312,9 +297,6 @@ class Key:
             e.g. C Major
                 I        ii       iii        IV         V        vi       vii
                 V7/I     V7/ii    V7/iii     V7/IV      V7/V     V7/vi    V7/vii
-
-        Args:
-            None.
                 
         Returns:
                 A dict in the form. key='V7/RomanNumeral' value=Chord
@@ -390,7 +372,7 @@ class Key:
 
         return data
 
-    def pretty_print(self, dominant=False, parallel=False):
+    def pretty_print(self, dominant=False, parallel=False) -> None:
         """ Prints out the key information in a formatted table view. 
         
         The output includes:
@@ -414,35 +396,33 @@ class Key:
                 A bool indicating whether you want to print the dominant chords.
             parallel: 
                 A bool indicating whether you want to print the parallel chords.
-                
-        Returns:
-                None.
         """      
         for line in self.to_string_array(dominant, parallel):
             print(line)
 
-    def __str__(self):
-        """ Returns a string representing the key. 
+    def __str__(self) -> str:
+        """ 
+        Returns a string representing the key. 
 
-            e.g. str(Key(Note.G, KeyType.Major)) -> 'G Major'
-
-        Args:
-            None.
+        Example:
+            >>> str(Key(Note.G, KeyType.Major))
+            G Major
 
         Returns:
-            A string.
+            str:
         """
         return f'{self.root} {self.type}' 
 
-    def __repr__(self):
-        """ Returns a string representing the key. 
+    def __repr__(self) -> str:
+        """ 
+        Returns a string representing the key. 
 
-            e.g. repr(Key(Note.G, KeyType.Major)) -> 'Key(G Major)'
-
-        Args:
-            None.
+        Example:
+            >>> repr(Key(Note.G, KeyType.Major))
+            Key(G Major)
 
         Returns:
-            A string representing the key type's name.
+            str:
+                A string representing the key type's name.
         """
         return f'Key({self.root} {self.type})' 
