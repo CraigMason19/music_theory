@@ -6,6 +6,8 @@
 #
 #-------------------------------------------------------------------------------
 
+from typing import Self
+
 from music_theory.notes import Note, transpose
 from music_theory.intervals import Interval
 from music_theory.chords import Chord
@@ -82,7 +84,7 @@ class Key:
         """
         Constructs the key from a Note and a KeyType. 
 
-        Example
+        Example:
             >>> Key(Note.C, KeyType.Major)
             C Minor
 
@@ -95,17 +97,21 @@ class Key:
         self.root = root
         self.type = key_type
 
-    def __eq__(self, other):
-        """ Equality operator to check that both the note and key type match. 
+    def __eq__(self, other: Self):
+        """ 
+        Equality operator to check that both the note and key type match. 
 
-            e.g. Key(Note.F, KeyType.Major) == Key(Note.F, KeyType.Major)
+        Example:
+            >>> Key(Note.F, KeyType.Major) == Key(Note.F, KeyType.Major)
+            True
 
         Args:
-            other:
+            other (Key):
                 The other Key to compare.
 
         Returns:
-            A bool. True if this and another key are the same.
+            bool: 
+                True if this and another key have the same note and key_type properties. False otherwise. 
         """
         try:
             return self.root == other.root and self.type == other.type
