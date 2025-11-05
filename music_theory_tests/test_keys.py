@@ -6,6 +6,13 @@ from music_theory.notes import Note
 from music_theory.chords import Chord, ChordType
 from music_theory.keys import Key, KeyType
 
+class TestKeyRandom(unittest.TestCase):
+    def test_random_key_vallidity(self):
+        k = Key.random()
+
+        self.assertIn(k.root, Note.items())
+        self.assertIn(k.type, KeyType.items())
+
 class TestKeyEquality(unittest.TestCase):
     def test_keys_are_equal_same_note_same_type(self):
         a = Key(Note.F, KeyType.Major)
