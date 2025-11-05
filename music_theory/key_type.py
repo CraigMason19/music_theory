@@ -16,7 +16,9 @@ Example:
 """
 
 import random
+
 from enum import Enum
+from typing import Self
 
 class KeyType(Enum):
     """ 
@@ -41,7 +43,7 @@ class KeyType(Enum):
     (Major, Minor) = range(2) 
 
     @classmethod    
-    def items(cls):
+    def items(cls) -> list[Self]:
         """ 
         A class method that returns a list of the key enumerations. 
 
@@ -50,22 +52,22 @@ class KeyType(Enum):
             [KeyType.Major, KeyType.Minor]
 
         Returns:
-            list[KeyTypes]
+            list[KeyType]:
         """  
         return [n for n in cls]
 
     @classmethod
-    def random(cls):
+    def random(cls) -> Self:
         """
         A class method that returns a random key type. 
 
         Returns:
-            KeyType
+            KeyType:
         """  
         return random.choice(cls.items())
 
     @property
-    def parallel(self):
+    def parallel(self) -> Self:
         """ 
         Returns the opposite KeyType. 
 
@@ -74,7 +76,7 @@ class KeyType(Enum):
             KeyType.Minor
 
         Returns:
-            KeyType
+            KeyType:
         """
         return KeyType.Minor if (self.name == 'Major') else KeyType.Major
 
@@ -87,7 +89,7 @@ class KeyType(Enum):
             Major
         
         Returns:
-            str
+            str:
         """
         return self.name
 
