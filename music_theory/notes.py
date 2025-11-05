@@ -10,7 +10,9 @@
 #-------------------------------------------------------------------------------
 
 import random
+
 from enum import Enum
+from typing import Self
 
 from music_theory.utils import index_to_range, UP_DIRECTIONS, DOWN_DIRECTIONS
 
@@ -50,16 +52,16 @@ class Note(Enum):
     C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B = range(12) 
 
     @classmethod    
-    def items(cls):
-        """ A class method that returns a list of the note enumerations. 
+    def items(cls) -> list[Self]:
+        """ 
+        A class method that returns a list of the note enumerations. 
 
-            e.g. [Note.C, Note.Db, ... ]
-
-        Args:
-            None.
+        Example:
+            >>> Note.items()
+            [Note.C, Note.Db, Note.D, Note.Eb, Note.E, Note.F, Note.Gb, Note.G, Note.Ab, Note.A, Note.Bb, Note.B]
 
         Returns:
-            A list of notes.
+            list[Note]:
         """  
         return [n for n in cls]
  
