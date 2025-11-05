@@ -165,11 +165,12 @@ class Key:
         """ 
         Returns the name of the key, the root and key type. 
 
-        e.g. 'C MAJOR'
+        Example:
+            >>> Key(Note.C, KeyType.Major).name
+            C Major
 
         Returns:
             str:
-                Representing the Key's Note and KeyType.
         """
         return f"{self.root} {self.type}"
 
@@ -423,6 +424,5 @@ class Key:
 
         Returns:
             str:
-                A string representing the key type's name.
         """
         return f'Key({self.root} {self.type})' 
