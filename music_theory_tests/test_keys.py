@@ -186,5 +186,26 @@ class TestKeyDominantChords(unittest.TestCase):
  
         self.assertListEqual(list(chord_dict.values()), expected)  
 
+
+class TestKeyStringRepresentation(unittest.TestCase):
+    def test_key_name(self):
+        result = Key(Note.B, KeyType.Minor).name
+        expected = "B Minor"
+
+        self.assertEqual(result, expected)
+
+    def test_key_str(self):
+        result = str(Key(Note.B, KeyType.Minor))
+        expected = "B Minor"
+
+        self.assertEqual(result, expected)
+
+    def test_key_repr(self):
+        result = repr(Key(Note.B, KeyType.Minor))
+        expected = "Key(B Minor)"
+
+        self.assertEqual(result, expected)
+  
+
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
