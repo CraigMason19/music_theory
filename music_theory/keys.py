@@ -1,10 +1,28 @@
-#-------------------------------------------------------------------------------
-# Name:        keys.py
-#
-# Notes:       Contains KeyType and Key class and methods for building and 
-#              printing standard, dominant and parallel keys.
-#
-#-------------------------------------------------------------------------------
+"""
+This module defines the `Key` class, which represents a musical key, this 
+provides the structural context for scales, chords, and harmonic relationships.
+
+Classes:
+    Key:
+        Encapsulates a musical key defined by a root `Note` and a `KeyType` (Major or Minor).
+        Provides methods and properties to:
+            - Compare keys
+            - Generate random keys
+            - Access parallel and relative keys
+            - Determine sharps and flats
+            - Construct diatonic, parallel, and dominant chords
+            - Format chord progressions for display    
+
+Example:
+    >>> from music_theory import Note, Key, KeyType
+    >>> Key(Note.C, KeyType.Major)
+    C Major
+
+Notes:
+    - Roman numeral notation is used for chord labeling.
+    - Major keys include a diminished seventh chord (vii°).
+    - Minor keys include a diminished second chord (ii°).
+"""
 
 from typing import Self
 
@@ -15,34 +33,16 @@ from music_theory.chord_type import ChordType
 from music_theory.scales import Scale, ScaleType
 from music_theory.key_type import KeyType
 
-""" The circle of 5th's and keys.
-
-Going to the right of the circle goes up a 5th and to the left goes down a 5th.
-
-The outside are Major keys, the inside is Minor keys. This shows the relative 
-connection between the keys.
-
-The circle shows how many sharps and flats are in the key.
-
-# Order of Sharps 
-# F C G D A E B
-# Fast Cars Go Dangerously Around Every Bend
-# 
-# Order of flats (the reverse)
-# B E A D G C F
-# Before Eating A Doughnut Get Coffee First.
-"""
-
 class Key:
     """ 
     Represents a musical key. A key is important to find what chords can be 
-    used.
+    used together.
 
     Attributes:
-        root:
-            A note that the key starts on. (defines the I chord)
-        type:
-            A KeyType. (Major or Minor)
+        root (Note):
+            A note that the key starts on. (defines the I chord).
+        type (KeyType):
+            The type of the key (Major or Minor).
 
     Methods:
         __init__(root, key_type=KeyType.Major):
