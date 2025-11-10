@@ -1,4 +1,6 @@
 import unittest
+from io import StringIO
+from unittest.mock import patch
 
 import _setup
 
@@ -188,24 +190,66 @@ class TestKeyDominantChords(unittest.TestCase):
 
 
 class TestKeyStringRepresentation(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        """
+        Run before all tests, called once
+        """
+        cls.key = Key(Note.B, KeyType.Minor)
+
     def test_key_name(self):
-        result = Key(Note.B, KeyType.Minor).name
+        result = self.key.name
         expected = "B Minor"
 
         self.assertEqual(result, expected)
 
     def test_key_str(self):
-        result = str(Key(Note.B, KeyType.Minor))
+        result = str(self.key)
         expected = "B Minor"
 
         self.assertEqual(result, expected)
 
     def test_key_repr(self):
-        result = repr(Key(Note.B, KeyType.Minor))
+        result = repr(self.key)
         expected = "Key(B Minor)"
 
         self.assertEqual(result, expected)
-  
+
+    def test_to_string_array_is_a_list_of_strings(self):
+        result = self.key.to_string_array()
+
+        self.assertIsInstance(result, list)
+        self.assertTrue(all(isinstance(_, str) for _ in result))
+
+    def test_to_string_array_length_chords(self):
+        result = len(self.key.to_string_array(dominant=False, parallel=False))
+        expected = 3
+
+        self.assertEqual(result, expected)
+
+    def test_to_string_array_length_chords_and_dominants(self):
+        result = len(self.key.to_string_array(dominant=True, parallel=False))
+        expected = 6
+
+        self.assertEqual(result, expected)
+
+    def test_to_string_array_length_chords_and_dominants_and_parallels(self):
+        result = len(self.key.to_string_array(dominant=True, parallel=True))
+        expected = 9
+
+        self.assertEqual(result, expected)
+
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_pretty_print_output_matches_to_string_array(self, mock_stdout):
+        expected = self.key.to_string_array(dominant=True, parallel=True)
+
+        # Run pretty_print (which prints to stdout) and capture the output
+        self.key.pretty_print(dominant=True, parallel=True)
+        printed_output = mock_stdout.getvalue().strip().splitlines()
+
+        self.assertEqual(printed_output, expected)
+
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
