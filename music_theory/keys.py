@@ -313,7 +313,7 @@ class Key:
 
         return {f'V7/{n[0]}': n[1] for n in zip(chords.keys(), dom_chords)}
 
-    def to_string_array(self, dominant=False, parallel=False):
+    def to_string_array(self, dominant=False, parallel=False) -> list[str]:
         """
         Generates a formatted chord table for the current key as a list of strings.
 
@@ -322,7 +322,11 @@ class Key:
             - [Optional] dominant seventh chords (V7 of each degree)
             - [Optional] parallel key chords (relative major/minor)
 
-        Example output:
+        Example:
+            >>> k = Key(Note.C, KeyType.Minor)
+            >>> lines = k.to_string_array(dominant=True, parallel=True)
+            >>> for _ in lines:
+            >>>     print(_)
             Chords of C Minor:
                 CM        Dm        Em        FM        GM        Am        B°
                  I        ii       iii        IV         V        vi       vii
@@ -334,13 +338,14 @@ class Key:
                  i        ii       III        iv         v        VI       VII
 
         Args:
-            dominant: 
-                A bool indicating whether you want to print the dominant chords.
-            parallel: 
-                A bool indicating whether you want to print the parallel chords.
+            dominant (bool): 
+                A bool indicating whether you want to include the dominant chords.
+            parallel (bool): 
+                A bool indicating whether you want to include the parallel chords.
                 
         Returns:
-            List[str]: An array of strings representing the formatted chord lines.
+            List[str]: 
+                An array of strings representing the formatted chord lines.
         """     
         data = [f"Chords of {self.root} {self.type}:"] 
 
@@ -381,7 +386,9 @@ class Key:
             - [Optional] dominant seventh chords (V7 of each degree)
             - [Optional] parallel key chords (relative major/minor)
 
-        Example output:
+        Example
+            >>> k = Key(Note.C, KeyType.Minor)
+            >>> k.pretty_print(dominant=True, parallel=True)
             Chords of C Minor:
                 CM        Dm        Em        FM        GM        Am        B°
                  I        ii       iii        IV         V        vi       vii
@@ -393,9 +400,9 @@ class Key:
                  i        ii       III        iv         v        VI       VII
 
         Args:
-            dominant: 
+            dominant (bool): 
                 A bool indicating whether you want to print the dominant chords.
-            parallel: 
+            parallel (bool): 
                 A bool indicating whether you want to print the parallel chords.
         """      
         for line in self.to_string_array(dominant, parallel):
