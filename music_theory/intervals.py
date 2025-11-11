@@ -185,7 +185,7 @@ def intervals_to_string(interval_list: list[Interval]) -> str:
     """  
     return ', '.join([i.name for i in interval_list])
 
-def interval_distance(first_note: Note, second_note: Note, direction="u") -> str:
+def interval_distance(first_note: Note, second_note: Note, direction="u") -> Interval:
     """ 
     Takes two notes and calculates the interval distance between them, either up
     or down.
