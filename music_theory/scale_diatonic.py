@@ -14,9 +14,18 @@ from music_theory.scale_type import ScaleType
 from music_theory.scales import Scale
 
 class DiatonicScale(Scale):
-    """ An extended scale class that represents a diatonic scale (7 notes) with properties for the scale degrees.
+    """ 
+    An class that represents a diatonic scale (7 notes) with properties for the 
+    scale degrees. Inherited from the Scale class.
 
-        While the scale degrees for the first six notes are the same for both major and minor scales, the seventh one is special.
+    NOTE: 
+        While the scale degrees for the first six notes are the same for all 
+        scales, the seventh one is special. 
+
+        - If the 7th note is a (wholetone / full-step / major 2nd) below the 
+        tonic, it is called a subtonic.
+        - If the 7th note is a (semitone / half-step / minor 2nd) below the 
+        tonic, it is called a leading tone.
 
     Attributes:
         tonic (Note):
@@ -32,15 +41,15 @@ class DiatonicScale(Scale):
         submediant (Note):
             The 6th scale degree       
         leading_tone (Note):
-            The 7th scale degree (NOT for natural Minor scales)
+            The 7th scale degree (see above)
         subtonic (Note):
-            The 7th scale degree (ONLY for natural Minor scales, whole step below the tonic)
-        __repr__(self):
-            Returns a string with the class, root note and ScaleType.
+            The 7th scale degree (see above)
 
     Methods:        
         __init__(self, root, scale_type):
             Initialises the root and scale type
+        __repr__(self):
+            Returns a string with the class, root note and ScaleType.
     """
     def __init__(self, root: Note, scale_type: ScaleType=ScaleType.Major) -> None:
         """ 
@@ -48,16 +57,17 @@ class DiatonicScale(Scale):
 
         Example:
             >>> ds = DiatonicScale(Note.E, ScaleType.Dorian)
-            
+
         Raises:
              AttributeError: 
-                If the scale does not have a subtonic.
+                If the scale does not contain 7 notes.
 
         Args:
             root (Note):
                 The note to build the scale from.
             scale_type (ScaleType):
-                The type of scale that contains 7 notes (i.e. not pentantonic or blues)      
+                The type of scale that contains 7 notes (i.e. not pentantonic
+                or blues)      
         """
         super(DiatonicScale, self).__init__(root, scale_type)
         
@@ -169,14 +179,15 @@ class DiatonicScale(Scale):
         """
         distance = interval_distance(self.notes[6], self.notes[0])
                 
-        if distance != Interval.M2:
-            raise AttributeError(f"{self.type} scales don't have a subtonic.")
+        if distance == Interval.M2:
+            return self.notes[6]
+
+        raise AttributeError(f"{self.type} scales don't have a subtonic.")
         
-        return self.notes[6]
   
     def __repr__(self) -> str:
         """ 
-        Returns a string represention of the class, root note and scale type. 
+        Returns a string representation of the class, root note and scale type. 
 
         Example:
             >>> ds = DiatonicScale(Note.E, ScaleType.Dorian)
