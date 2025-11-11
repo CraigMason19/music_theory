@@ -8,9 +8,10 @@
 # TODO:
 #-------------------------------------------------------------------------------
 
+from music_theory.intervals import Interval, interval_distance
 from music_theory.notes import Note
-from music_theory.scales import Scale
 from music_theory.scale_type import ScaleType
+from music_theory.scales import Scale
 
 class DiatonicScale(Scale):
     """ An extended scale class that represents a diatonic scale (7 notes) with properties for the scale degrees.
@@ -99,40 +100,51 @@ class DiatonicScale(Scale):
         return self.notes[5]
 
     @property
-    def leading_tone(self):
-        """ Returns the leading tone of the scale.
-
-            If the seventh note is a half step below the tonic, it is called a leading tone.
-
-
-        Returns:
-            A Note.
-
-        Raises:
-            AttributeError: 
-                If the scale is Minor, which does not have a leading tone.
-        """
-        if self.type == ScaleType.Minor:
-            raise AttributeError("Minor scales don't have a leading tone")
-        
-        return self.notes[6]
-
-    @property
-    def subtonic(self) -> Note:
+    def leading_tone(self) -> Note:
         """ 
-        Returns the subtonic of the scale.
-        
-        In natural Minor ONLY, the seventh note is a whole step below the tonic. 
-        In this case, the note is called a subtonic.
+        Returns the leading tone of the scale, if it exists, raises AttributeError otherwise.
+
+        If the 7th note is a (semitone / half-step / minor 2nd) below the tonic, it is called a leading tone.
+
+        Example:
+            >>> DiatonicScale(Note.C, ScaleType.Major).leading_tone
+            B
 
         Raises:
             AttributeError: 
-                If the scale is not Minor.
+                If the scale does not have a leading tone.
 
         Returns:
             Note:
         """
-        if self.type == ScaleType.Minor:
-            return self.notes[6]
+        distance = interval_distance(self.notes[6], self.notes[0])
+
+        if distance == Interval.m2:
+            return self.notes[6]            
+            
+        raise AttributeError(f"{self.type} scales don't have a leading tone.")        
+
+    @property
+    def subtonic(self) -> Note:
+        """ 
+        Returns the subtonic of the scale, if it exists, raises AttributeError otherwise.
+
+        If the 7th note is a (wholetone / full-step / major 2nd) below the tonic, it is called a subtonic.
+
+        Example:
+            >>> DiatonicScale(Note.A, ScaleType.Minor).subtonic
+            G
+
+        Raises:
+            AttributeError: 
+                If the scale does not have a subtonic.
+
+        Returns:
+            Note:
+        """
+        distance = interval_distance(self.notes[6], self.notes[0])
+                
+        if distance != Interval.M2:
+            raise AttributeError(f"{self.type} scales don't have a subtonic.")
         
-        raise AttributeError("Only Minor scales have a subtonic")
+        return self.notes[6]
