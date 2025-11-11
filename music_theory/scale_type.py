@@ -23,6 +23,8 @@ class ScaleType(Enum):
     Methods:
         items(cls):
             A class method to return the enums as a list.
+        all(cls):
+            An alias for items(), returning the enums as a list.
         random(cls):
             A class method to return a random scale type.
         __str__(self):

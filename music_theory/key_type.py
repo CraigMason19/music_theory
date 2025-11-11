@@ -31,6 +31,8 @@ class KeyType(Enum):
     Methods:
         items(cls):
             A class method to return the enums as a list.
+        all(cls):
+            An alias for items(), returning the enums as a list.
         random(cls):
             A class method to return a random key type.
         parallel(self):
@@ -56,6 +58,8 @@ class KeyType(Enum):
         """  
         return [n for n in cls]
 
+    all = items  # Alias
+    
     @classmethod
     def random(cls) -> Self:
         """
