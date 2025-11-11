@@ -8,6 +8,7 @@
 # TODO:
 #-------------------------------------------------------------------------------
 
+from music_theory.notes import Note
 from music_theory.scales import Scale
 from music_theory.scale_type import ScaleType
 
@@ -17,21 +18,21 @@ class DiatonicScale(Scale):
         While the scale degrees for the first six notes are the same for both major and minor scales, the seventh one is special.
 
     Attributes:
-        tonic:
+        tonic (Note):
             The 1st scale degree (root)
-        supertonic:
+        supertonic (Note):
             The 2nd scale degree
-        mediant:
+        mediant (Note):
             The 3rd scale degree 
-        subdominant:
+        subdominant (Note):
             The 4th scale degree 
-        dominant:
+        dominant (Note):
             The 5th scale degree 
-        submediant:
+        submediant (Note):
             The 6th scale degree       
-        leading_tone:
+        leading_tone (Note):
             The 7th scale degree (NOT for natural Minor scales)
-        subtonic:
+        subtonic (Note):
             The 7th scale degree (ONLY for natural Minor scales, whole step below the tonic)
 
     Methods:        
@@ -88,7 +89,13 @@ class DiatonicScale(Scale):
         return self.notes[4]
 
     @property
-    def submediant(self):
+    def submediant(self) -> Note:
+        """
+        Returns the dominant (5th) of the scale. 
+
+        Returns:
+            Note:
+        """
         return self.notes[5]
 
     @property
@@ -111,18 +118,19 @@ class DiatonicScale(Scale):
         return self.notes[6]
 
     @property
-    def subtonic(self):
-        """ Returns the subtonic of the scale.
+    def subtonic(self) -> Note:
+        """ 
+        Returns the subtonic of the scale.
         
-            In natural Minor ONLY, the seventh note is a whole step below the tonic. 
-            In this case, the note is called a subtonic.
-
-        Returns:
-            A Note.
+        In natural Minor ONLY, the seventh note is a whole step below the tonic. 
+        In this case, the note is called a subtonic.
 
         Raises:
             AttributeError: 
                 If the scale is not Minor.
+
+        Returns:
+            Note:
         """
         if self.type == ScaleType.Minor:
             return self.notes[6]
