@@ -137,9 +137,11 @@ class DiatonicScale(Scale):
     @property
     def leading_tone(self) -> Note:
         """ 
-        Returns the leading tone of the scale, if it exists, raises AttributeError otherwise.
+        Returns the leading tone of the scale, if it exists, raises AttributeError
+        otherwise.
 
-        If the 7th note is a (semitone / half-step / minor 2nd) below the tonic, it is called a leading tone.
+        If the 7th note is a (semitone / half-step / minor 2nd) below the tonic, it
+        is called a leading tone.
 
         Example:
             >>> DiatonicScale(Note.C, ScaleType.Major).leading_tone
@@ -162,9 +164,11 @@ class DiatonicScale(Scale):
     @property
     def subtonic(self) -> Note:
         """ 
-        Returns the subtonic of the scale, if it exists, raises AttributeError otherwise.
+        Returns the subtonic of the scale, if it exists, raises AttributeError 
+        otherwise.
 
-        If the 7th note is a (wholetone / full-step / major 2nd) below the tonic, it is called a subtonic.
+        If the 7th note is a (wholetone / full-step / major 2nd) below the tonic, 
+        it is called a subtonic.
 
         Example:
             >>> DiatonicScale(Note.A, ScaleType.Minor).subtonic
