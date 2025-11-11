@@ -35,18 +35,28 @@ class DiatonicScale(Scale):
             The 7th scale degree (NOT for natural Minor scales)
         subtonic (Note):
             The 7th scale degree (ONLY for natural Minor scales, whole step below the tonic)
+        __repr__(self):
+            Returns a string with the class, root note and ScaleType.
 
     Methods:        
         __init__(self, root, scale_type):
             Initialises the root and scale type
     """
-    def __init__(self, root, scale_type=ScaleType.Major):
-        """ Builds the scale from a root note and a scale type. 
+    def __init__(self, root: Note, scale_type: ScaleType=ScaleType.Major) -> None:
+        """ 
+        Builds the scale from a root note and a scale type. 
+
+        Example:
+            >>> ds = DiatonicScale(Note.E, ScaleType.Dorian)
+            
+        Raises:
+             AttributeError: 
+                If the scale does not have a subtonic.
 
         Args:
-            root:
+            root (Note):
                 The note to build the scale from.
-            scale_type:
+            scale_type (ScaleType):
                 The type of scale that contains 7 notes (i.e. not pentantonic or blues)      
         """
         super(DiatonicScale, self).__init__(root, scale_type)
@@ -55,44 +65,59 @@ class DiatonicScale(Scale):
             raise ValueError(f"Diatonic scales must contain 7 notes, not {self.num_notes}")
         
     @property
-    def tonic(self):
-        """ Returns the tonic (root) of the scale. 
+    def tonic(self) -> Note:
+        """ 
+        Returns the tonic (root / 1st) of the scale. 
 
         Returns:
-            A Note.
+            Note:
         """
         return self.notes[0]
 
     @property
-    def supertonic(self):
+    def supertonic(self) -> Note:
+        """ 
+        Returns the supertonic (2nd) of the scale. 
+
+        Returns:
+            Note:
+        """
         return self.notes[1]
 
     @property
-    def mediant(self):
+    def mediant(self) -> Note:
+        """ 
+        Returns the mediant (3rd) of the scale. 
+
+        Returns:
+            Note:
+        """
         return self.notes[2]
 
     @property
-    def subdominant(self):
-        """ Returns the subdominant (4th) of the scale. 
+    def subdominant(self) -> Note:
+        """ 
+        Returns the subdominant (4th) of the scale. 
 
         Returns:
-            A Note.
+            Note:
         """
         return self.notes[3]
 
     @property
-    def dominant(self):
-        """ Returns the dominant (5th) of the scale. 
+    def dominant(self) -> Note:
+        """ 
+        Returns the dominant (5th) of the scale. 
 
         Returns:
-            A Note.
+            Note:
         """
         return self.notes[4]
 
     @property
     def submediant(self) -> Note:
         """
-        Returns the dominant (5th) of the scale. 
+        Returns the submediant (6th) of the scale. 
 
         Returns:
             Note:
@@ -148,3 +173,17 @@ class DiatonicScale(Scale):
             raise AttributeError(f"{self.type} scales don't have a subtonic.")
         
         return self.notes[6]
+  
+    def __repr__(self) -> str:
+        """ 
+        Returns a string represention of the class, root note and scale type. 
+
+        Example:
+            >>> ds = DiatonicScale(Note.E, ScaleType.Dorian)
+            >>> repr(ds)
+            DiatonicScale(Note.E, ScaleType.Dorian)
+
+        Returns:
+            str:
+        """
+        return f"DiatonicScale(Note.{self.notes[0]}, ScaleType.{self.type})"
