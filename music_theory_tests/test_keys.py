@@ -190,7 +190,6 @@ class TestKeyDominantChords(unittest.TestCase):
 
 
 class TestKeyStringRepresentation(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         """
