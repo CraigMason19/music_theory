@@ -130,5 +130,20 @@ class TestDiatonicScaleMinorProperties(unittest.TestCase):
         with self.assertRaises(AttributeError):
                 _ = self.scale.leading_tone
 
+class TestDiatonicScaleStringRepresentation(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        """
+        Run before all tests, called once
+        """
+        cls.scale = DiatonicScale(Note.B, ScaleType.Minor)
+
+    def test_diatonic_scale_repr(self):
+        result = repr(self.scale)
+        expected = "DiatonicScale(Note.B, ScaleType.Minor)"
+
+        self.assertEqual(result, expected)
+
+
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
