@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="music_theory",
-    version="1.7.0",
+    version="1.8.0",
     packages=find_packages(),
     author="Craig Mason",
     description="A toolkit for working with and exploring music theory concepts.",
