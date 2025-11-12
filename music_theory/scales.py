@@ -9,6 +9,8 @@
 # TODO:
 #-------------------------------------------------------------------------------
 
+from typing import Iterator
+
 from music_theory.notes import Note, notes_to_string
 from music_theory.scale_type import ScaleType
 from music_theory.intervals import Interval
@@ -176,6 +178,8 @@ class Scale:
             Put into it's own private method so that __init__() remains readable. 
         __eq__(self, other):
             Compares two scales.
+        __iter__(self):
+            Allows for convienient for loop useage.
         random(cls):
             A class method to return a random scale (root and type).
         __str__(self):
@@ -244,7 +248,7 @@ class Scale:
         self.notes = _notes_from_intervals(self.root, self.interval_formula) 
         self.numeric_formula = [i.to_numeric() for i in self.interval_formula]  
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """ Equality operator to check that both the note and scale type match. 
 
             e.g. Key(Note.F, ScaleType.Major) == Key(Note.F, ScaleType.Major)
@@ -260,6 +264,21 @@ class Scale:
             return self.root == other.root and self.type == other.type
         except AttributeError:
             return False
+
+    def __iter__(self) -> Iterator[Note]:
+        """
+        Allows convenient iteration over the scale using a for loop to return 
+        the notes of the scale.
+
+        Example:
+            >>> s = Scale(Note.A, ScaleType.Major)
+            >>> for note in s:
+            ...     print(note)
+            
+        Returns:
+            Iterator[Note]:
+        """
+        return iter(self.notes)
 
     @property
     def name(self):
