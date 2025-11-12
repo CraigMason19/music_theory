@@ -48,6 +48,10 @@ class DiatonicScale(Scale):
     Methods:        
         __init__(self, root, scale_type):
             Initialises the root and scale type.
+        valid_scale_types(cls):
+            A class method that returns all ScaleTypes that contain 7 notes.
+        invalid_scale_types(cls):
+            A class method that returns all ScaleTypes that do not contain 7 notes.
         note_degrees(self):
             Returns a dictionary of all scale degrees.
         to_string_array(self):
@@ -80,6 +84,30 @@ class DiatonicScale(Scale):
         if self.num_notes != 7:
             raise ValueError(f"Diatonic scales must contain 7 notes, not {self.num_notes}")
         
+    @classmethod
+    def valid_scale_types(cls) -> list[ScaleType]:
+        """
+        A class method that returns all ScaleTypes that contain 7 notes. 
+
+        Returns:
+            list[ScaleType]:
+        """  
+        scale_types = [st for st in ScaleType.items() if Scale(Note.C, st).num_notes == 7]
+
+        return scale_types
+    
+    @classmethod
+    def invalid_scale_types(cls) -> list[ScaleType]:
+        """
+        A class method that returns all ScaleTypes that do not contain 7 notes. 
+
+        Returns:
+            list[ScaleType]:
+        """  
+        scale_types = [st for st in ScaleType.items() if Scale(Note.C, st).num_notes != 7]
+
+        return scale_types
+    
     def note_degrees(self) -> dict[str, Note]:
         """ 
         Returns a dictionary mapping each scale degree name to its corresponding
