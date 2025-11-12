@@ -47,7 +47,13 @@ class DiatonicScale(Scale):
 
     Methods:        
         __init__(self, root, scale_type):
-            Initialises the root and scale type
+            Initialises the root and scale type.
+        note_degrees(self):
+            Returns a dictionary of all scale degrees.
+        to_string_array(self):
+            Returns the scale as a list of formatted strings.
+        pretty_print(self):
+            Prints the `to_string_array` directly to the console.
         __repr__(self):
             Returns a string with the class, root note and ScaleType.
     """
@@ -74,6 +80,34 @@ class DiatonicScale(Scale):
         if self.num_notes != 7:
             raise ValueError(f"Diatonic scales must contain 7 notes, not {self.num_notes}")
         
+    def note_degrees(self) -> dict[str, Note]:
+        """ 
+        Returns a dictionary mapping each scale degree name to its corresponding
+        Note.
+
+        The seventh degree may be either a 'leading_tone' or a 'subtonic' 
+        depending on the scale type.
+
+        Returns:
+            dict[str, Note]:
+                A dictionary containing all seven scale degrees.
+        """
+        d = {
+            "tonic": self.notes[0],
+            "supertonic": self.notes[1],
+            "mediant": self.notes[2],
+            "subdominant": self.notes[3],
+            "dominant": self.notes[4],
+            "submediant": self.notes[5],
+        }
+
+        try:
+            d["leading_tone"] = self.leading_tone
+        except AttributeError:
+            d["subtonic"] = self.subtonic
+
+        return d
+            
     @property
     def tonic(self) -> Note:
         """ 
@@ -188,6 +222,56 @@ class DiatonicScale(Scale):
 
         raise AttributeError(f"{self.type} scales don't have a subtonic.")
         
+    def to_string_array(self) -> list[str]:
+        """
+        Returns the scale as a list of formatted strings, suitable for printing
+        or exporting to text-based outputs (e.g., files, logs, or GUIs).
+
+        Example:
+            >>> ds = DiatonicScale(Note.A, ScaleType.Minor)
+            >>> for line in ds.to_string_array():
+            ...     print(line)
+            Scale Degrees of A Minor:
+                tonic       : A
+                supertonic  : B
+                mediant     : C
+                subdominant : D
+                dominant    : E
+                submediant  : F
+                subtonic    : G
+
+        Returns:
+            list[str]:
+                A list of strings representing each scale degree in a readable format.
+        """
+        nd = self.note_degrees()
+        max_key_len = max(len(k) for k in nd.keys())
+
+        l = [f"Scale Degrees of {self.name}:"]
+
+        for k, v in nd.items():
+            l.append(f"\t{k.ljust(max_key_len + 1)}: {v}")
+
+        return l      
+
+    def pretty_print(self) -> None:
+        """
+        Prints the formatted scale (from `to_string_array`) directly to the console.
+
+        Example:
+            >>> ds = DiatonicScale(Note.C, ScaleType.Major)
+            >>> ds.pretty_print()
+            Scale Degrees of C Major:
+                tonic        : C
+                supertonic   : D
+                mediant      : E
+                subdominant  : F
+                dominant     : G
+                submediant   : A
+                leading_tone : B
+        """
+        for _ in self.to_string_array():
+            print(_)
   
     def __repr__(self) -> str:
         """ 
