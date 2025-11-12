@@ -1,4 +1,6 @@
 import unittest
+from io import StringIO
+from unittest.mock import patch
 
 import _setup
 
@@ -33,6 +35,41 @@ class TestDiatonicScaleContains7Notes(unittest.TestCase):
         for st in self.invalid_scale_types:
             with self.assertRaises(ValueError, msg=f"{st} did not raise ValueError"):
                 _ = DiatonicScale(Note.C, st)
+
+
+class TestDiatonicScaleNoteDegrees(unittest.TestCase):
+    def test_note_degrees_returns_a_dict_of_str_Note(self):
+        result = DiatonicScale(Note.C).note_degrees()
+
+        self.assertIsInstance(result, dict)
+
+        for k, v in result.items():
+            self.assertIsInstance(k, str)
+            self.assertIsInstance(v, Note)
+
+    def test_note_degrees_major_has_7_items(self):
+        result = len(DiatonicScale(Note.C).note_degrees())
+        expected = 7
+
+        self.assertEqual(result, expected) 
+
+    def test_note_degrees_minor_has_7_items(self):
+        result = len(DiatonicScale(Note.C, ScaleType.Minor).note_degrees())
+        expected = 7
+
+        self.assertEqual(result, expected) 
+
+    def test_note_degrees_major_has_leading_tone_and_not_subtonic(self):
+        result = DiatonicScale(Note.F, ScaleType.Major).note_degrees()
+
+        self.assertIn("leading_tone", result)
+        self.assertNotIn("subtonic", result)
+
+    def test_note_degrees_minor_has_leading_tone_and_not_subtonic(self):
+        result = DiatonicScale(Note.F, ScaleType.Minor).note_degrees()
+
+        self.assertIn("subtonic", result)
+        self.assertNotIn("leading_tone", result)
 
 
 class TestDiatonicScaleLeadingTonesAndSubTonics(unittest.TestCase):
@@ -144,6 +181,27 @@ class TestDiatonicScaleStringRepresentation(unittest.TestCase):
 
         self.assertEqual(result, expected)
 
+    def test_diatonic_scale_to_string_array_is_a_list_of_strings(self):
+        result = self.scale.to_string_array()
+
+        self.assertIsInstance(result, list)
+        self.assertTrue(all(isinstance(_, str) for _ in result))
+
+    def test_diatonic_scale_to_string_array_length(self):
+        result = len(self.scale.to_string_array())
+        expected = 8
+
+        self.assertEqual(result, expected)
+
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_pretty_print_output_matches_to_string_array(self, mock_stdout):
+        expected = self.scale.to_string_array()
+
+        # Run pretty_print (which prints to stdout) and capture the output
+        self.scale.pretty_print()
+        printed_output = mock_stdout.getvalue().strip().splitlines()
+
+        self.assertEqual(printed_output, expected)
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
