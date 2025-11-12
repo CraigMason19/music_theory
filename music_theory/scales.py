@@ -9,7 +9,7 @@
 # TODO:
 #-------------------------------------------------------------------------------
 
-from typing import Iterator
+from typing import Iterator, Self
 
 from music_theory.notes import Note, notes_to_string
 from music_theory.scale_type import ScaleType
@@ -177,7 +177,7 @@ class Scale:
             Constructs the scale from the root and scale type in __init__().
             Put into it's own private method so that __init__() remains readable. 
         __eq__(self, other):
-            Compares two scales.
+            Compares two scales. True if root and scale_type match.
         __iter__(self):
             Allows for convienient for loop useage.
         random(cls):
@@ -248,17 +248,21 @@ class Scale:
         self.notes = _notes_from_intervals(self.root, self.interval_formula) 
         self.numeric_formula = [i.to_numeric() for i in self.interval_formula]  
 
-    def __eq__(self, other) -> bool:
-        """ Equality operator to check that both the note and scale type match. 
+    def __eq__(self, other: Self) -> bool:
+        """ 
+        Equality operator to check that both the note and scale_type match. 
 
-            e.g. Key(Note.F, ScaleType.Major) == Key(Note.F, ScaleType.Major)
+        Example:
+            >>> Scale(Note.F, ScaleType.Major) == Scale(Note.F, ScaleType.Major)
+            True
 
         Args:
-            other:
+            other (Scale):
                 The other Scale to compare.
 
         Returns:
-            A bool. True if this and another scale are the same.
+            bool:
+                True if this and another scale are the same.
         """
         try:
             return self.root == other.root and self.type == other.type
