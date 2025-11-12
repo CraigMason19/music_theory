@@ -60,6 +60,53 @@ class TestScales(unittest.TestCase):
         self.assertFalse(scale == "string")
         self.assertFalse(scale == None)
 
+
+class TestScaleIterator(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        """
+        Run before all tests, called once
+        """
+        cls.scale = Scale(Note.A, ScaleType.Minor)
+
+    def test_scale_iter_yields_expected_values(self):
+        """
+        Converting to list implicitly tests __iter__ by consuming the iterator.
+        """
+        result = list(self.scale)
+        expected = [Note.A, Note.B, Note.C, Note.D, Note.E, Note.F, Note.G]
+
+        self.assertEqual(result, expected)
+
+    def test_scale_iter_returns_iterator(self):
+        """
+        A proper iterator returns itself when passed to iter().
+        """
+        iterator = iter(self.scale)
+
+        self.assertIs(iter(iterator), iterator)
+
+    def test_scale_multiple_iterations_are_independent(self):
+        first = list(self.scale)
+        second = list(self.scale)
+        expected = [Note.A, Note.B, Note.C, Note.D, Note.E, Note.F, Note.G]
+
+        self.assertEqual(first, expected)
+        self.assertEqual(second, expected)
+
+    def test_scale_iter_with_for_loop(self):
+        """
+        Using a for loop exercises __iter__ directly in typical syntax.
+        """
+        result = []
+        expected = [Note.A, Note.B, Note.C, Note.D, Note.E, Note.F, Note.G]
+
+        for _ in self.scale:
+            result.append(_)
+
+        self.assertEqual(result, expected)
+
+
 class TestScalesStringRepresentation(unittest.TestCase):
     def test_scale_str(self):
         scale = Scale(Note.E, ScaleType.Dorian)
