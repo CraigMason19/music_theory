@@ -1,12 +1,42 @@
-#-------------------------------------------------------------------------------
-# Name:        scale_diatonic.py
-#
-# Notes:       A class representing a diatonic scale (7 notes)
-#
-# Links:
-#
-# TODO:
-#-------------------------------------------------------------------------------
+"""
+This module defines the `DiatonicScale` class, derived from the `Scale` class 
+that represents any seven-note (diatonic) scale. 
+
+Description:
+    A diatonic scale consists of seven notes arranged in a pattern of whole and
+    half steps. 
+    
+    This class exposes each note as a named degree (tonic, mediant, etc.)
+
+    It also handles the unique behaviour of the seventh degree, which may 
+    function as either a 'leading tone' (half step below the tonic) or a 
+    'subtonic' (whole step below the tonic), depending on the scale type.
+
+Classes:
+    DiatonicScale:
+        Represents a diatonic (7-note) scale and provides named access to its
+        scale degrees. Includes utilities for:
+            - Validating scale types that produce 7 notes
+            - Distinguishing between leading tones and subtonics (the 7th 
+              degree)
+            - Accessing each degree
+            - Formatting scale degrees for display or printing
+
+Example:
+    >>> from music_theory import DiatonicScale
+    >>> DiatonicScale(Note.C, ScaleType.Major)
+    C Major: C, D, E, F, G, A, B
+    >>> DiatonicScale(Note.C, ScaleType.Major).to_string_array()
+    ['Scale Degrees of C Major:',
+        '    tonic        : C',
+        '    supertonic   : D',
+        '    mediant      : E',
+        '    subdominant  : F',
+        '    dominant     : G',
+        '    submediant   : A',
+        '    leading_tone : B'
+    ]
+"""
 
 from music_theory.intervals import Interval, interval_distance
 from music_theory.notes import Note
