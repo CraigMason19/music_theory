@@ -2,6 +2,11 @@
 This module defines the `Key` class, which represents a musical key, this 
 provides the structural context for scales, chords, and harmonic relationships.
 
+Notes:
+    - Roman numeral notation is used for chord labeling.
+    - Major keys include a diminished seventh chord (vii°).
+    - Minor keys include a diminished second chord (ii°).
+    
 Classes:
     Key:
         Encapsulates a musical key defined by a root `Note` and a `KeyType` (Major or Minor).
@@ -17,11 +22,6 @@ Example:
     >>> from music_theory import Note, Key, KeyType
     >>> Key(Note.C, KeyType.Major)
     C Major
-
-Notes:
-    - Roman numeral notation is used for chord labeling.
-    - Major keys include a diminished seventh chord (vii°).
-    - Minor keys include a diminished second chord (ii°).
 """
 
 from typing import Self
