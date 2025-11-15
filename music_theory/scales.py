@@ -187,8 +187,9 @@ class Scale:
         __repr__(self):
             Returns a string representation of the scale and type.
     """
-    def __init__(self, root, scale_type=ScaleType.Major):
-        """ Builds the scale from a root note and a scale type. 
+    def __init__(self, root: Note, scale_type:ScaleType=ScaleType.Major) -> None:
+        """ 
+        Builds the scale from a root Note and a ScaleType. 
 
         Args:
             root:
@@ -242,7 +243,7 @@ class Scale:
             self.interval_formula = _intervals_from_numerics(numerics) 
             
         else:
-            raise ValueError(f'Scale is not in either formula dictionary ({self.type})')
+            raise ValueError(f'Scale is not in either formula dictionary ({repr(self.type)})')
 
         # Once we have a formula in interval format we can build the scale from it.
         self.notes = _notes_from_intervals(self.root, self.interval_formula) 
