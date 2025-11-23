@@ -26,11 +26,8 @@ class TestDiatonicScaleContains7Notes(unittest.TestCase):
 
     def test_diatonic_scale_has_7_notes(self):
         for st in self.valid_scale_types:
-            try:
-                _ = DiatonicScale(Note.C, st)
-            except ValueError as e:
-                self.fail(f"{st} unexpectedly raised ValueError: {e}")
-
+            _ = DiatonicScale(Note.C, st)
+            
     def test_diatonic_scale_non_7_note_scale_types_raises_valueerror(self):
         for st in self.invalid_scale_types:
             with self.assertRaises(ValueError, msg=f"{st} did not raise ValueError"):
