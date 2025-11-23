@@ -12,6 +12,9 @@ Functions:
     index_to_range(index): 
         Normalizes an integer index to the range -11 to +11, preserving sign.
 """
+from typing import Sequence, TypeVar
+
+T = TypeVar("T")
 
 UP_DIRECTIONS = ["u", "up", "above"]
 DOWN_DIRECTIONS = ["d", "down", "below"]
@@ -37,3 +40,29 @@ def index_to_range(index: int) -> int:
         index = index % 12        
 
     return sign * index
+
+def list_rotations(seq: Sequence[T]) -> list[list[T]]:
+    """
+    Return all cyclic rotations of a sequence.
+
+    A cyclic rotation moves the first element(s) to the end while preserving
+    order. For example:
+
+    Example:
+        >>> list_rotations([1, 2, 3, 4])
+        [
+            [1, 2, 3, 4],
+            [2, 3, 4, 1],
+            [3, 4, 1, 2],
+            [4, 1, 2, 3]
+        ]
+
+    Args:
+        seq (Sequence[T]):
+            The input sequence.
+
+    Returns:
+        list[list[T]]:
+            A list containing all cyclic rotations of the input sequence.
+    """
+    return [list(seq[i:] + seq[:i]) for i in range(len(seq))]
