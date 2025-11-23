@@ -13,7 +13,7 @@ class Chord:
         type:
             A ChordType. 
         notes:
-            An array containing the root, 3rd(Major or Minor) & the fifth
+            An array containing the root, 3rd(Major or Minor) & the 5th.
 
     Methods:
         __init__(self, root, chord_type):
