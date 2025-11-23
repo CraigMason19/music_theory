@@ -213,7 +213,6 @@ class Chord:
             >>> c = Chord(Note.A, ChordType.Minor7)
             >>> c.inversions()
             [
-                [Note.A, Note.C, Note.E, Note.G],
                 [Note.C, Note.E, Note.G, Note.A],
                 [Note.E, Note.G, Note.A, Note.C],
                 [Note.G, Note.A, Note.C, Note.E]
@@ -223,7 +222,8 @@ class Chord:
             list[list[Note]]:
                 A list of note lists, one for each inversion.
         """
-        return list_rotations(self.notes)
+        inversions = list_rotations(self.notes)
+        return inversions[1:]  # skip root position
     
     def __str__(self) -> str:
         """ 
