@@ -1,6 +1,7 @@
 from music_theory.notes import Note, transpose
 from music_theory.intervals import Interval
 from music_theory.chord_type import ChordType
+from music_theory.utils import list_rotations
 
 class Chord:
     """ 
@@ -31,6 +32,8 @@ class Chord:
             Returns an array of the chord's notes with the added 11th
         add13(self):
             Returns an array of the chord's notes with the added 13th
+        inversions(self):
+            Return all inversions of the chord as cyclic rotations of its notes.
         __str__(self):
             Returns a string representation of the Chord.
         __repr__(self):
@@ -195,9 +198,32 @@ class Chord:
             [Note.A, Note.Db, Note.E, Note.Gb]
 
         Returns:
-            list[Note]
+            list[Note]:
         """    
         return self.notes + [transpose(self.root, Interval.M6)]
+
+    def inversions(self) -> list[list[Note]]:
+        """
+        Return all inversions of the chord as cyclic rotations of its notes.
+
+        An inversion is created by moving the lowest note to the top, producing
+        a new voicing while keeping the same pitch classes.
+
+        Example:
+            >>> c = Chord(Note.A, ChordType.Minor7)
+            >>> c.inversions()
+            [
+                [Note.A, Note.C, Note.E, Note.G],
+                [Note.C, Note.E, Note.G, Note.A],
+                [Note.E, Note.G, Note.A, Note.C],
+                [Note.G, Note.A, Note.C, Note.E]
+            ]
+
+        Returns:
+            list[list[Note]]:
+                A list of note lists, one for each inversion.
+        """
+        return list_rotations(self.notes)
     
     def __str__(self) -> str:
         """ 
