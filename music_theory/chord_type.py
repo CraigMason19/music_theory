@@ -12,9 +12,10 @@ Example:
     >>> str(ct)
     Major
 """
-
 import random
+
 from enum import Enum
+from typing import Self
 
 class ChordType(Enum):
     """ 
@@ -41,11 +42,9 @@ class ChordType(Enum):
     ) = range(9)
 
     @classmethod    
-    def items(cls):
+    def items(cls) ->list[Self]:
         """ 
         A class method that returns a list of the chord enumerations. 
-
-        e.g. [ChordType.Major, ChordType.Minor ... ]
  
         Returns:
             list[ChordType]:
@@ -54,11 +53,9 @@ class ChordType(Enum):
         return [n for n in cls]
 
     @classmethod
-    def random(cls):
+    def random(cls) -> Self:
         """ 
         A class method that returns a random chord type. 
-
-        e.g. ChordType.Diminished
 
         Returns:
             ChordType:
@@ -66,7 +63,7 @@ class ChordType(Enum):
         """  
         return random.choice(cls.items())
 
-    def __str__(self):
+    def __str__(self) -> str:
         """ 
         Returns a string representing the chord types name. 
 
@@ -79,7 +76,7 @@ class ChordType(Enum):
         """
         return self.name
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """ 
         Returns a string representing the chord types enum along with the objects name. 
 
