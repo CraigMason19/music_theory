@@ -153,6 +153,18 @@ class TestChordNotation(unittest.TestCase):
         expected_notation = 'sus4'
         self.assertEqual(notation, expected_notation)   
 
+
+class TestChordInversions(unittest.TestCase):
+    def test_chord_inversions_A_minor(self):
+        result = Chord(Note.A, ChordType.Minor).inversions()
+        expected = [
+            [Note.C, Note.E, Note.A],
+            [Note.E, Note.A, Note.C],
+        ]
+
+        self.assertEqual(result, expected)
+
+
 class TestChordStringRepresentation(unittest.TestCase):
     def test_str_equal_Gb_major(self):
         expected = str(Chord(Note.Gb, ChordType.Major))

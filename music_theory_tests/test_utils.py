@@ -2,7 +2,7 @@ import unittest
 
 import _setup
 
-from music_theory.utils import UP_DIRECTIONS, DOWN_DIRECTIONS, index_to_range
+from music_theory.utils import UP_DIRECTIONS, DOWN_DIRECTIONS, index_to_range, list_rotations
 
 class TestUtilsIndexToRange(unittest.TestCase):
     def test_index_to_range_negative_00(self):
@@ -29,6 +29,7 @@ class TestUtilsIndexToRange(unittest.TestCase):
 
         self.assertEqual(result, expected)
 
+
 class TestUtilsDirections(unittest.TestCase):
     def test_direction_in_up_directions_correct(self):
         self.assertIn('up', UP_DIRECTIONS)
@@ -41,6 +42,27 @@ class TestUtilsDirections(unittest.TestCase):
 
     def test_direction_in_down_directions_incorrect(self):
         self.assertNotIn('downy', DOWN_DIRECTIONS)
+
+
+class TestUtilsListRotations(unittest.TestCase):
+    def test_list_rotations_empty(self):
+        l = []
+        result = list_rotations(l)
+        expected = []
+
+        self.assertEqual(result, expected)
+
+    def test_list_rotations(self):
+        result = list_rotations([1, 2, 3])
+
+        expected = [
+            [1, 2, 3],
+            [2, 3, 1],
+            [3, 1, 2],
+        ]
+
+        self.assertEqual(result, expected)
+
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
