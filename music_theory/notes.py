@@ -14,6 +14,7 @@ import random
 from enum import Enum
 from typing import Self
 
+# from music_theory.intervals import Interval
 from music_theory.utils import index_to_range, UP_DIRECTIONS, DOWN_DIRECTIONS
 
 class Note(Enum):
@@ -70,47 +71,51 @@ class Note(Enum):
     all = items  # Alias
 
     @classmethod
-    def from_index(cls, index):
-        """ A class method that returns a note based upon it's enumeration
-            value (positive or negative). Positive indices are counted from
-            the start and negative indices are counted from the end.
+    def from_index(cls, index: int) -> Self:
+        """ 
+        A class method that returns a note based upon it's enumeration
+        value (positive or negative). Positive indices are counted from
+        the start and negative indices are counted from the end.
 
-            e.g. from_index(3) -> Note.Eb
-                 from_index(-3) -> Note.A
+        Example:
+            >>> Note.from_index(3)
+            Note.Eb
+            >>> Note.from_index(-3)
+            Note.A
                  
         Args:
-            index:
+            index (int):
                 The index of the value to be retrieved. Can be positive or 
                 negative.
 
         Returns:
-            A Note.
+            Note:
         """  
         index = index_to_range(index)
         return Note.items()[index]
 
     @classmethod
-    def random(cls):
-        """ A class method that returns a random note. 
-
-            e.g. Note.Ab
-
-        Args:
-            None.
+    def random(cls) -> Self:
+        """ 
+        A class method that returns a random note. 
 
         Returns:
-            A Note.
+            Note:
         """  
         return random.choice(cls.items())
 
-    def to_sharp(self):
-        """ Returns the enharmonic sharp equivalent of the note, or the note's name 
-            if it does not use a flat.
+    def to_sharp(self) -> str:
+        """ 
+        Returns the enharmonic sharp equivalent of the note, or the note's name 
+        if it does not use a flat.
 
-            e.g. Note.Eb.to_sharp() -> 'D#'
+        Example:
+            >>> Note.Eb.to_sharp()
+            D#
 
         Returns:
-            A string representing a note.
+            str:
+                A string representing a note.
         """  
         if(len(self.name) == 2):
             lower_note = Note.from_index(self.value-1) # move down a semitone
@@ -120,140 +125,152 @@ class Note(Enum):
     
     enharmonic = to_sharp  # Alias
 
-    def previous(self):
-        """ Returns the previous note
+    def previous(self) -> Self:
+        """
+        Returns the previous note
 
-            e.g. Note.Eb.previous() -> Note.D
-
-        Args:
-            None.
+        Example:
+            >>> Note.Eb.previous()
+            Note.D
 
         Returns:
-            A note.
+            Note:
         """  
         return Note.from_index(self.value-1)
     
-    def next(self):
-        """ Returns the next note
+    def next(self) -> Self:
+        """ 
+        Returns the next note
 
-            e.g. Note.Eb.next() -> Note.E
-
-        Args:
-            None.
+        Example:
+        >>> Note.Eb.next()
+        Note.E
 
         Returns:
-            A note.
+            Note:
         """  
         return Note.from_index(self.value+1)
     
-    def transpose(self, interval, direction="u"):
-        """ Transposes (changes) this note into a different note lower or higher
-            in pitch. 
+    def transpose(self, interval, direction: str="u") -> Self:
+        """ 
+        Transposes (changes) this note into a different note lower or higher in 
+        pitch. 
 
-            Note.C.transpose(Interval.M3)
-            C tranposed a Major 3rd becomes E
+        Example:
+            >>> Note.C.transpose(Interval.M3)
+            Note.E
 
         Args:
-            interval:
+            interval (Interval):
                 The interval to transpose the note.
-            direction:
+            direction (str):
                 Can either transpose up or down in pitch. acceptable values are
                 "u", "up", "above", "d", "down" or "below" in any case.
-
-        Returns:
-            The note after being transposed.
 
         Raises:
             ValueError:
                 If the direction string is not recognized.
+
+        Returns:
+            Note: 
+                The note after being transposed.
         """   
         return transpose(self, interval, direction)
     
-    def chromatics(self, direction="u"):
-        """ Returns every note between this note and it's octave
+    def chromatics(self, direction: str="u") -> list[Self]:
+        """ 
+        Returns every note between this note and it's octave
 
-            e.g. 
-                Note.A.chromatics(direction="down")
-                [Note.A, Note.Ab, Note.G, Note.Gb, Note.F, Note.E, Note.Eb, Note.D, Note.Db, Note.C, Note.B, Note.Bb]
+        Example:
+            >>> Note.A.chromatics(direction="down")
+            [Note.A, Note.Ab, Note.G, Note.Gb, Note.F, Note.E, Note.Eb, Note.D, Note.Db, Note.C, Note.B, Note.Bb]
 
         Args:
-            direction:
+            direction (str):
                 Can either transpose up or down in pitch. acceptable values are
                 "u", "up", "above", "d", "down" or "below" in any case.
-
-        Returns:
-            A list of notes.
 
         Raises:
             ValueError:
                 If the direction string is not recognized.
+
+        Returns:
+            list[Note]:
         """            
         return chromatic_notes(self, direction)
     
-    def __str__(self):
-        """ Returns a string representing the note name. 
+    def __str__(self) -> str:
+        """ 
+        Returns a string representing the note name. 
 
-            e.g. str(Note.Ab) -> 'Ab'
-
-        Args:
-            None.
+        Example:
+            >>> str(Note.Ab)
+            Ab
 
         Returns:
-            A string representing a note's name.
+            str:
+                A string representing a note's name.
         """
         return self.name
 
-    def __repr__(self):
-        """ Returns a string representing the note. 
+    def __repr__(self) -> str:
+        """ 
+        Returns a string representing the note. 
 
-            e.g. repr(Note.Ab) -> 'Note.Ab'
-
-        Args:
-            None.
+        Example:
+            >>> repr(Note.Ab)
+            Note.Ab
 
         Returns:
-            A string representing a note.
+            str:
+                A string representing a note along with it's Class name.
         """
         return f'Note.{self.name}'
     
 #region Functions
 
-def notes_to_string(note_list):
-    """ Takes a list of notes and returns a string of note names. 
+def notes_to_string(note_list: list[Note]) -> str:
+    """ 
+    Takes a list of notes and returns a string of note names. 
 
-        e.g. [Note.C, Note.B, Note.D] -> "C, B, D"
+    Example:
+        >>> notes_to_string[Note.C, Note.B, Note.D])
+        C, B, D
 
     Args:
-        note_list:
+        note_list (list[Note]):
             The list of notes to be converted to a string.
 
     Returns:
-        The string of note names.
+        str:
     """  
     return ', '.join([n.name for n in note_list])
 
-def transpose(note, interval, direction="u"):
+def transpose(note, interval, direction: str="u") -> Note:
     """ 
     Takes a note and transposes (changes) it into a different note lower or 
     higher in pitch. 
 
-    e.g. C tranposed a Major 3rd becomes E
+    Example:
+        >>> transpose(Note.C, Intervl.M3, "up")
+        Note.E
 
     Args:
-        note:
+        note (Note):
             The note to be transposed.
-        interval:
+        interval (int):
             The interval to transpose the note.
-        direction:
+        direction (str):
             Can either transpose up or down in pitch. acceptable values are
             "u", "up", "above", "d", "down" or "below" in any case.
-
-    Returns:
-        The note after being transposed.
 
     Raises:
         ValueError:
             If the direction string is not recognized.
+
+    Returns:
+        Note:
+            The note after being transposed.
     """       
     direction = direction.lower()
 
@@ -265,27 +282,26 @@ def transpose(note, interval, direction="u"):
 
     raise ValueError(f'direction not recognized({direction})')
 
-def chromatic_notes(note, direction="u"):
-    """ Takes a note and returns every note between that note and it's octave
+def chromatic_notes(note: Note, direction: str="u"):
+    """ 
+    Returns every note between this note and it's octave
 
-        e.g. 
-            chromatic_notes(Note.A, direction="down")
-            [Note.A, Note.Ab, Note.G, Note.Gb, Note.F, Note.E, Note.Eb, Note.D, Note.Db, Note.C, Note.B, Note.Bb]
+    Example:
+        >>> Note.A.chromatics(direction="down")
+        [Note.A, Note.Ab, Note.G, Note.Gb, Note.F, Note.E, Note.Eb, Note.D, Note.Db, Note.C, Note.B, Note.Bb]
 
     Args:
-        note:
-            The note to start from.
-        direction:
+        direction (str):
             Can either transpose up or down in pitch. acceptable values are
             "u", "up", "above", "d", "down" or "below" in any case.
-
-    Returns:
-        A list of notes.
 
     Raises:
         ValueError:
             If the direction string is not recognized.
-    """      
+
+    Returns:
+        list[Note]:
+    """     
     notes = [note]
     direction = direction.lower()
 
