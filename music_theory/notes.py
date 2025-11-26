@@ -36,6 +36,8 @@ class Note(Enum):
             A class method that returns a random note.
         to_sharp(self):
             Returns a string of a flat note as a sharp.
+        enharmonic(self):
+            An alias for to_sharp(), Returns a string of a flat note as a sharp.
         previous(self):
             Returns the note below.
         next(self):
@@ -116,6 +118,8 @@ class Note(Enum):
 
         return self.name
     
+    enharmonic = to_sharp  # Alias
+
     def previous(self):
         """ Returns the previous note
 
