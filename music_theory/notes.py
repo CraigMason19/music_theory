@@ -14,8 +14,8 @@ import random
 from enum import Enum
 from typing import Self
 
-# from music_theory.intervals import Interval
-from music_theory.utils import index_to_range, UP_DIRECTIONS, DOWN_DIRECTIONS
+from music_theory.intervals import Interval
+from music_theory.utils import index_to_range, UP_DIRECTIONS, DOWN_DIRECTIONS, is_valid_note_str
 
 class Note(Enum):
     """ Represents a musical note. Derived from the Enum class.
@@ -33,6 +33,8 @@ class Note(Enum):
             An alias for items(), returning the enums as a list.
         from_index(cls, index):
             A class method to return a enumeration based upon an index.
+        from_string(cls, note_str: str) -> Self | None:
+            A class method that converts a validated note string into a `Note` object.
         random(cls):
             A class method that returns a random note.
         to_sharp(self):
@@ -94,6 +96,56 @@ class Note(Enum):
         index = index_to_range(index)
         return Note.items()[index]
 
+    @classmethod
+    def from_string(cls, note_str: str) -> Self | None:
+        """
+        A class method that converts a validated note string into a `Note` object.
+
+        The input must be a letter A–G (any case), optionally followed by one or
+        two sharps ('#') or flats ('b'). If the string is not a valid note,
+        the function returns None.
+
+        Behaviour:
+            - Single-letter notes (e.g., "C", "f") are returned directly.
+            - One accidental (e.g., "C#", "Eb") applies a minor second transposition.
+            - Double accidentals (e.g., "C##", "Ebb") apply a major second transposition.
+
+        Examples:
+            >>> note_from_string("C")
+            Note.C
+            >>> note_from_string("F#")
+            Note.Gb
+            >>> note_from_string("Ebb")
+            Note.D
+
+        Args:
+            note_str (str):
+                The string representation of the musical note.
+
+        Returns:
+            Note | None:
+                A corresponding `Note` object if valid, otherwise None.
+        """
+        if not is_valid_note_str(note_str):
+            return None
+        
+        note_strs = [str(n) for n in Note.items()]
+        note_index = note_strs.index(note_str[0].upper())
+        note = Note.from_index(note_index)
+
+        if len(note_str) == 1:
+            return note
+        
+        direction = 'u' if (note_str[1] == '#') else 'd'
+
+        # Sharps / flats
+        if len(note_str) == 2:
+            return note.transpose(Interval.m2, direction)
+
+        # Double sharps / flats
+        if len(note_str) == 3:
+            return note.transpose(Interval.M2, direction)
+    
     @classmethod
     def random(cls) -> Self:
         """ 

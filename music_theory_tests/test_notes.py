@@ -59,6 +59,49 @@ class TestNoteToSharp(unittest.TestCase):
         sharp = Note.to_sharp(Note.Gb)
         self.assertEqual(sharp, "F#")
 
+
+class TestNoteFromString(unittest.TestCase):
+    def test_from_string_valid(self):
+        inputs = [
+            "C",
+            "A#",
+            "b##",
+            "Dbb",
+        ]
+
+        for _ in inputs:
+            self.assertIsNotNone(Note.from_string(_))
+
+    def test_from_string_invalid(self):
+        inputs = [
+            "",
+            " ",
+            "      ",
+            " C ",
+            "V",
+            "A~",
+            "N~",
+            "DBB",
+        ]
+
+        for _ in inputs:
+            self.assertIsNone(Note.from_string(_))
+
+    def test_from_string_enharmonic_correct(self):
+        input = 'c#'
+        result = Note.from_string(input).enharmonic()
+        expected = "C#"
+
+        self.assertEqual(result, expected)
+
+    def test_from_string_from_enharmonic_correct(self):
+        input = Note.Db.enharmonic() # C#
+        result = Note.from_string(input)
+        expected = Note.Db
+
+        self.assertEqual(result, expected)
+
+
 class TestNotePreviousAndNext(unittest.TestCase):
     def test_previous_01(self):
         self.assertEqual(Note.C.previous(), Note.B)
