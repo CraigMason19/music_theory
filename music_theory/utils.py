@@ -12,6 +12,8 @@ Functions:
     index_to_range(index): 
         Normalizes an integer index to the range -11 to +11, preserving sign.
 """
+import re
+
 from typing import Sequence, TypeVar
 
 T = TypeVar("T")
@@ -41,6 +43,7 @@ def index_to_range(index: int) -> int:
 
     return sign * index
 
+
 def list_rotations(seq: Sequence[T]) -> list[list[T]]:
     """
     Return all cyclic rotations of a sequence.
@@ -66,3 +69,36 @@ def list_rotations(seq: Sequence[T]) -> list[list[T]]:
             A list containing all cyclic rotations of the input sequence.
     """
     return [list(seq[i:] + seq[:i]) for i in range(len(seq))]
+
+
+def is_valid_note_str(note_str: str) -> bool:
+    """
+    Determine whether a string represents a valid musical note.
+
+    A valid note consists of a letter A–G (any case), optionally followed by
+    one or two flats ('b') or sharps ('#').
+
+    Notes:
+        - The function does not handle the natural symbol ('♮').
+        - Whitespace causes validation to fail. For example, " C" is invalid.
+     
+    Examples:
+        >>> is_valid_note_str('c')
+        True
+        >>> is_valid_note_str('cb')
+        True
+        >>> is_valid_note_str('cbb')
+        True
+        >>> is_valid_note_str('cb#')
+        False  
+
+    Args:
+        note_str (str):
+            The note string to validate.
+
+    Returns:
+        bool:
+    """
+    pattern = re.compile(r'^[a-gA-G](?:#{1,2}|b{1,2})?$', re.ASCII)
+
+    return bool(pattern.match(note_str))

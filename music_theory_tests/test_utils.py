@@ -2,7 +2,7 @@ import unittest
 
 import _setup
 
-from music_theory.utils import UP_DIRECTIONS, DOWN_DIRECTIONS, index_to_range, list_rotations
+from music_theory.utils import UP_DIRECTIONS, DOWN_DIRECTIONS, index_to_range, list_rotations, is_valid_note_str
 
 class TestUtilsIndexToRange(unittest.TestCase):
     def test_index_to_range_negative_00(self):
@@ -62,6 +62,63 @@ class TestUtilsListRotations(unittest.TestCase):
         ]
 
         self.assertEqual(result, expected)
+
+
+class TestValidNoteStrings(unittest.TestCase):
+    def test_valid_note_strings(self):
+        inputs = [
+            # Sharps
+            "F",
+            "f",
+            "F#",
+            "f#",
+            "F##",
+            "f##",
+
+            # Flats
+            "D",
+            "db",
+            "Db",
+            "db",
+            "Db",
+            "dbb",
+
+            # b flats
+            "b",
+            "bb",
+            "bbb",
+        ]
+
+        for _ in inputs:
+            self.assertTrue(is_valid_note_str(_))
+
+    def test_invalid_note_strings(self):
+        inputs = [
+            # Non Notes
+            "H",
+            "h",
+
+            # Symbols
+            "A~",
+
+            # Mixed notation
+            "C#b",
+            "Cb#",
+
+            # Capital flats
+            "CB",
+            "CBb",
+            "CbB",
+
+            # Empty or Whitespace
+            "",
+            " ",
+            "    C",
+            "C# ",
+        ]
+
+        for _ in inputs:
+            self.assertFalse(is_valid_note_str(_))
 
 
 if __name__ == '__main__': # pragma: no cover
