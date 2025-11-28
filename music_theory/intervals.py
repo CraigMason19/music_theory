@@ -13,10 +13,15 @@ Example:
     Interval.M3
 """
 
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from music_theory.notes import Note
+    
 import random
 from enum import Enum
 
-from music_theory.notes import Note
 from music_theory.utils import index_to_range, UP_DIRECTIONS, DOWN_DIRECTIONS
 
 class Interval(Enum):
@@ -176,7 +181,7 @@ def intervals_to_string(interval_list: list[Interval]) -> str:
         M3, P4, P5
 
     Args:
-        note_list (list[Note]):
+        interval_list (list[Interval]):
             The list of intervals to be converted to a string.
 
     Returns:
@@ -185,7 +190,7 @@ def intervals_to_string(interval_list: list[Interval]) -> str:
     """  
     return ', '.join([i.name for i in interval_list])
 
-def interval_distance(first_note: Note, second_note: Note, direction="u") -> Interval:
+def interval_distance(first_note: "Note", second_note: "Note", direction="u") -> Interval:
     """ 
     Takes two notes and calculates the interval distance between them, either up
     or down.
