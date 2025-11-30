@@ -16,13 +16,28 @@ Example:
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
+if TYPE_CHECKING: # pragma: no cover
     from music_theory.notes import Note
     
 import random
 from enum import Enum
 
 from music_theory.utils import index_to_range, UP_DIRECTIONS, DOWN_DIRECTIONS
+
+LABELS: list[str] = [
+    "Unison",
+    "Minor 2nd",
+    "Major 2nd",
+    "Minor 3rd",
+    "Major 3rd",
+    "Perfect 4th",
+    "Diminished 5th",
+    "Perfect 5th",
+    "Minor 6th",
+    "Major 6th",
+    "Minor 7th",
+    "Major 7th",
+]
 
 class Interval(Enum):
     """ 
@@ -33,7 +48,14 @@ class Interval(Enum):
         intervals:
             12 class attributes representing interval enumerations.
 
+    Properties:
+        label(self) -> str:
+            A property to return the Interval as a more descriptive, human 
+            readable string.
+
     Methods:
+        labels(cls):
+            A class method that returns a list of all the interval labels.        
         items(cls):
             A class method to return the enums as a list.
         all(cls):
@@ -52,7 +74,34 @@ class Interval(Enum):
             Returns the Enum name.
     """
     Unison, m2, M2, m3, M3, P4, dim5, P5, m6, M6, m7, M7 = range(12) 
+    
+    @property
+    def label(self) -> str:
+        """
+        A property to return the Interval as a more descriptive, human readable 
+        string.
+        
+        Example:
+            >>> Interval.m2
+            Minor 2nd
 
+        Returns:
+            str:
+        """
+        return LABELS[self.value]
+
+    @classmethod
+    def labels(cls) -> list[str]:
+        """ 
+        A class method that returns a list of all the interval labels. 
+
+        Labels are a more descriptive, human readable string of the interval.  
+
+        Returns:
+            list(str):
+        """  
+        return LABELS
+    
     @classmethod    
     def items(cls):
         """ 

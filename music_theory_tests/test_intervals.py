@@ -91,5 +91,18 @@ class TestIntervalStringRepresentation(unittest.TestCase):
 
         self.assertEqual(intervals, expected)
 
+    def test_interval_label(self):
+        result = Interval.M3.label
+        expected = "Major 3rd"
+
+        self.assertEqual(result, expected)
+
+    def test_interval_labels(self):
+        result = Interval.labels()
+
+        self.assertIsInstance(result, list)
+        self.assertTrue(all(isinstance(x, str) for x in result))
+
+
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
