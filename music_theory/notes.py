@@ -12,10 +12,10 @@
 import random
 
 from enum import Enum
-from typing import Self
+from typing import Any, Self
 
 from music_theory.intervals import Interval
-from music_theory.utils import index_to_range, UP_DIRECTIONS, DOWN_DIRECTIONS, is_valid_note_str
+from music_theory.utils import UP_DIRECTIONS, DOWN_DIRECTIONS, index_to_range, is_valid_note_str, is_empty_or_whitespace
 
 class Note(Enum):
     """ Represents a musical note. Derived from the Enum class.
@@ -297,6 +297,47 @@ def notes_to_string(note_list: list[Note]) -> str:
         str:
     """  
     return ', '.join([n.name for n in note_list])
+
+def notes_from_string(notes_str: str, allow_duplicates: bool=True, error: Any=None) -> list[Note|Any]:
+    """
+    Convert a whitespace-separated string of note names into a list of `Note` 
+    objects.
+
+    Each whitespace token is passed to `Note.from_string()`. Successful 
+    conversions produce a `Note` object; failures insert the provided `error`
+    value instead.
+
+    Example:
+        >>> notes_from_string("cb c c#")
+        [Note.B, Note.C, Note.Db]
+
+    Args:
+        notes_str (str):
+            A string containing note names separated by whitespace.
+        allow_duplicates (bool):
+            If False, duplicate notes are removed while preserving order.
+        error (Any):
+            A fallback value to insert when a token cannot be converted
+            into a `Note` object (default: `None`).
+
+    Returns:
+        list[Note|Any]:
+            A list containing one item per input token — either a `Note` for
+            successful conversions or the `error` value for failed ones.
+    """
+    if is_empty_or_whitespace(notes_str):
+        return []
+    
+    l = []
+
+    for _ in notes_str.split(" "):
+        note = Note.from_string(_)
+        l.append(note if note else error)
+
+    if not allow_duplicates:
+        l = list(dict.fromkeys(l))
+
+    return l
 
 def transpose(note, interval, direction: str="u") -> Note:
     """ 
