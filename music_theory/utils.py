@@ -102,3 +102,16 @@ def is_valid_note_str(note_str: str) -> bool:
     pattern = re.compile(r'^[a-gA-G](?:#{1,2}|b{1,2})?$', re.ASCII)
 
     return bool(pattern.match(note_str))
+
+def is_empty_or_whitespace(s: str) -> bool:
+    """
+    A simple function to determine if a string is empty or made of whitespaces.
+
+    Args:
+        s (str):
+            The string to validate.
+
+    Returns:
+        bool:
+    """
+    return not s or s.isspace()
