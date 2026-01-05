@@ -9,8 +9,14 @@ Constants:
     DOWN_DIRECTIONS:  Aliases for downward movement.
 
 Functions:
-    index_to_range(index): 
+    index_to_range(index: int) -> int:
         Normalizes an integer index to the range -11 to +11, preserving sign.
+    list_rotations(seq: Sequence[T]) -> list[list[T]]:
+        Return all cyclic rotations of a sequence.
+    is_valid_note_str(note_str: str) -> bool:
+        Determine whether a string represents a valid musical note.
+    is_empty_or_whitespace(s: str) -> bool:
+        A simple function to determine if a string is empty or made of whitespaces. 
 """
 import re
 
@@ -49,7 +55,7 @@ def list_rotations(seq: Sequence[T]) -> list[list[T]]:
     Return all cyclic rotations of a sequence.
 
     A cyclic rotation moves the first element(s) to the end while preserving
-    order. For example:
+    order.
 
     Example:
         >>> list_rotations([1, 2, 3, 4])
@@ -75,7 +81,7 @@ def is_valid_note_str(note_str: str) -> bool:
     """
     Determine whether a string represents a valid musical note.
 
-    A valid note consists of a letter A–G (any case), optionally followed by
+    A valid note consists of a letter A-G (any case), optionally followed by
     one or two flats ('b') or sharps ('#').
 
     Notes:
