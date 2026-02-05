@@ -1,13 +1,16 @@
-#-------------------------------------------------------------------------------
-# Name:        notes.py
-#
-# Notes:       A collection of objects and methods representing the 12 notes of 
-#              the western musical scale.
-#
-# Links:
-#
-# TODO:
-#-------------------------------------------------------------------------------
+"""
+This module provides a `Note` enumeration and various utilities for parsing,
+formatting, and manipulating musical notes.
+
+The module is intentionally octave-agnostic and operates purely on pitch
+classes.
+
+Features:
+- Converting between string representations and `Note` objects
+- Transposing notes by musical intervals
+- Generating chromatic note sequences
+- Serializing and deserializing collections of notes
+"""
 
 import random
 
@@ -15,12 +18,17 @@ from enum import Enum
 from typing import Any, Self
 
 from music_theory.intervals import Interval
-from music_theory.utils import UP_DIRECTIONS, DOWN_DIRECTIONS, index_to_range, is_valid_note_str, is_empty_or_whitespace
+from music_theory.utils import (UP_DIRECTIONS, 
+                                DOWN_DIRECTIONS,
+                                index_to_range, 
+                                is_valid_note_str, 
+                                is_empty_or_whitespace)
 
 class Note(Enum):
-    """ Represents a musical note. Derived from the Enum class.
+    """ 
+    Represents a musical note. Derived from the Enum class.
 
-        NOTE: Can't have sharps (#) in variable names
+    NOTE: Can't have sharps (#) in variable names
 
     Attributes:
         note attributes:
@@ -105,7 +113,7 @@ class Note(Enum):
         two sharps ('#') or flats ('b'). If the string is not a valid note,
         the function returns None.
 
-        Behaviour:
+        Behavior:
             - Single-letter notes (e.g., "C", "f") are returned directly.
             - One accidental (e.g., "C#", "Eb") applies a minor second transposition.
             - Double accidentals (e.g., "C##", "Ebb") apply a major second transposition.
@@ -286,7 +294,7 @@ def notes_to_string(note_list: list[Note]) -> str:
     Takes a list of notes and returns a string of note names. 
 
     Example:
-        >>> notes_to_string[Note.C, Note.B, Note.D])
+        >>> notes_to_string([Note.C, Note.B, Note.D])
         C, B, D
 
     Args:
@@ -339,19 +347,19 @@ def notes_from_string(notes_str: str, allow_duplicates: bool=True, error: Any=No
 
     return l
 
-def transpose(note, interval, direction: str="u") -> Note:
+def transpose(note: Note, interval: Interval, direction: str="u") -> Note:
     """ 
     Takes a note and transposes (changes) it into a different note lower or 
     higher in pitch. 
 
     Example:
-        >>> transpose(Note.C, Intervl.M3, "up")
+        >>> transpose(Note.C, Interval.M3, "up")
         Note.E
 
     Args:
         note (Note):
             The note to be transposed.
-        interval (int):
+        interval (Interval):
             The interval to transpose the note.
         direction (str):
             Can either transpose up or down in pitch. acceptable values are
@@ -375,9 +383,9 @@ def transpose(note, interval, direction: str="u") -> Note:
 
     raise ValueError(f'direction not recognized({direction})')
 
-def chromatic_notes(note: Note, direction: str="u"):
+def chromatic_notes(note: Note, direction: str="u") -> list[Note]:
     """ 
-    Returns every note between this note and it's octave
+    Returns every note between a note and its octave.
 
     Example:
         >>> Note.A.chromatics(direction="down")
