@@ -2,8 +2,7 @@
 This module provides a `Note` enumeration and various utilities for parsing,
 formatting, and manipulating musical notes.
 
-The module is intentionally octave-agnostic and operates purely on pitch
-classes.
+The module is intentionally octave-agnostic.
 
 Features:
 - Converting between string representations and `Note` objects
@@ -23,6 +22,9 @@ from music_theory.utils import (UP_DIRECTIONS,
                                 index_to_range, 
                                 is_valid_note_str, 
                                 is_empty_or_whitespace)
+
+
+#region Note
 
 class Note(Enum):
     """ 
@@ -287,6 +289,8 @@ class Note(Enum):
         """
         return f'Note.{self.name}'
     
+#endregion
+
 #region Functions
 
 def notes_to_string(note_list: list[Note]) -> str:
