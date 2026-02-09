@@ -289,19 +289,29 @@ class Key:
         """
         return self.parallel.chords()
 
-    def dominant_chords(self):
-        """ Returns a dict representing all the chords in dominant the key.
+    def dominant_chords(self) -> dict[str, Chord]:
+        """ 
+        Returns a dict representing all the chords in dominant the key.
 
-            The dominant key is created by raising the root note of the chord in 
-            the main key up a 5th. It is then turned into a seventh cord.     
+        The dominant key is created by raising the root note of the chord in 
+        the main key up a 5th. It is then turned into a seventh cord.     
             
-            e.g. C Major
-                I        ii       iii        IV         V        vi       vii
-                V7/I     V7/ii    V7/iii     V7/IV      V7/V     V7/vi    V7/vii
-                
+        Example:
+            >>> k = Key(Note.C)
+            >>> k.dominant_chords()
+            {
+                'V7/I': Chord(G, Dominant7), 
+                'V7/ii': Chord(A, Dominant7), 
+                'V7/iii': Chord(B, Dominant7), 
+                'V7/IV': Chord(C, Dominant7), 
+                'V7/V': Chord(D, Dominant7), 
+                'V7/vi': Chord(E, Dominant7), 
+                'V7/vii°': Chord(Gb, Dominant7)
+            }
+
         Returns:
-                A dict in the form. key='V7/RomanNumeral' value=Chord
-                e.g. { "V7/I": Chord(C, ChordType.Dominant7) ... }
+            dict[str, Chord]:
+                A dict in the form key='V7/RomanNumeral' value=Chord
         """
         chords = self.chords()
 
@@ -379,7 +389,8 @@ class Key:
         return data
 
     def pretty_print(self, dominant=False, parallel=False) -> None:
-        """ Prints out the key information in a formatted table view. 
+        """ 
+        Prints out the key information in a formatted table view. 
         
         The output includes:
             - Diatonic chords in the key (e.g. C Major or C Minor)
