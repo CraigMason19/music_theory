@@ -249,15 +249,29 @@ class Key:
         Returns a dict representing all the chords in the key.
 
         The dict key is a Roman numeral as used in traditional notation. 
-        A upper case numneral represents a major chord and a lower case numeral
+        A upper case numeral represents a major chord and a lower case numeral
         represents a minor chord.
 
-        Note: The major key has a diminished 7th (vii°) and the minor a diminished 2nd (ii°)
-                
+        Note: The major key has a diminished 7th (vii°) and the minor a diminished
+        2nd (ii°)
+
+        Example:
+            >>> k = Key(Note.C)
+            >>> k.chords()
+            {
+                'I': Chord(C, Major),
+                'ii': Chord(D, Minor),
+                'iii': Chord(E, Minor), 
+                'IV': Chord(F, Major),
+                'V': Chord(G, Major),
+                'vi': Chord(A, Minor),
+                'vii°': Chord(B, Diminished)
+            }
+
         Returns:
             dict[str, Chord]:
-                key=RomanNumeral value=Chord
-                e.g. { "I": Chord(C, ChordType.Major) ... }
+                A dict where each key is a string in the RomanNumeral format 
+                and each value is a Chord instance.
         """
         scale, numerals, sequence = None, None, None
         
@@ -277,15 +291,32 @@ class Key:
 
         return  {n[0]: Chord(n[1], n[2]) for n in zip(numerals, scale.notes, sequence)}
  
-    def parallel_chords(self):
-        """ Returns a dict representing all the parallel chords in the key.
+    def parallel_chords(self) -> dict[str, Chord]:
+        """ 
+        Returns a dict representing all the parallel chords in the key.
 
-            These are the chords that are constructed from the parallel (opposite)
-            key. e.g. the paralell chords of C Major are the chords of C Minor. 
-                
+        These are the chords that are constructed from the parallel (opposite)
+        key.
+        
+        For Example, the parallel chords of C Major are the chords of C Minor. 
+
+        Example:
+            >>> k = Key(Note.C)
+            >>> k.parallel_chords()
+            {
+                'i': Chord(C, Minor), 
+                'ii°': Chord(D, Diminished), 
+                'III': Chord(Eb, Major), 
+                'iv': Chord(F, Minor), 
+                'v': Chord(G, Minor), 
+                'VI': Chord(Ab, Major), 
+                'VII': Chord(Bb, Major)
+            }
+
         Returns:
-                A dict in the form. key=RomanNumeral value=Chord
-                e.g. { "I": Chord(C, ChordType.Major) ... }
+            dict[str, Chord]
+                A dict where each key is a string in the RomanNumeral format 
+                and each value is a Chord instance.
         """
         return self.parallel.chords()
 
