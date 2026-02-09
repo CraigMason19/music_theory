@@ -310,8 +310,9 @@ class Key:
             }
 
         Returns:
-            dict[str, Chord]:
-                A dict in the form key='V7/RomanNumeral' value=Chord
+            dict[str, Chord]: 
+                A dict where each key is a string in the format 'V7/RomanNumeral' 
+                and each value is a Chord instance.
         """
         chords = self.chords()
 
