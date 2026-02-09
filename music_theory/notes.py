@@ -9,6 +9,11 @@ Features:
 - Transposing notes by musical intervals
 - Generating chromatic note sequences
 - Serializing and deserializing collections of notes
+
+Example:
+    >>> from music_theory import Note
+    >>> Note.C
+    C
 """
 
 import random

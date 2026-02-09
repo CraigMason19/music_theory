@@ -33,6 +33,8 @@ from music_theory.chord_type import ChordType
 from music_theory.scales import Scale, ScaleType
 from music_theory.key_type import KeyType
 
+#region Key
+
 class Key:
     """ 
     Represents a musical key. A key is important to find what chords can be 
@@ -46,13 +48,13 @@ class Key:
 
     Methods:
         __init__(root, key_type=KeyType.Major):
-            Contructs the key.
+            Constructs the key.
         __eq__(self, other):
             Compares two keys.
         random(cls):
             A class method that returns a random Key from a random Note.
         parallel(self):
-            A property that returns the paralell (opposite) key.
+            A property that returns the parallel (opposite) key.
         relative_key(self):
             A property that returns the key relative to this one.
         name(self):
@@ -111,7 +113,8 @@ class Key:
 
         Returns:
             bool: 
-                True if this and another key have the same note and key_type properties. False otherwise. 
+                True if this and another key have the same note and key_type properties. 
+                False otherwise. 
         """
         try:
             return self.root == other.root and self.type == other.type
@@ -131,10 +134,11 @@ class Key:
     @property
     def parallel(self) -> Self:
         """ 
-        Returns the paralell (opposite) key. 
+        Returns the parallel (opposite) key. 
 
         Example:
-            >>> F Minor.parallel
+            >>> k = Key(Note.F, KeyType.Minor)
+            >>> k.parallel
             F Major
 
         Returns:
@@ -148,6 +152,11 @@ class Key:
         Returns the relative key. If a Key is Major it will have a relative 
         Minor key (and vice-versa). This can be easily found on a instrument
         by going up or down 3 semitones.   
+
+        Example:
+            >>> k = Key(Note.A, KeyType.Minor)
+            >>> k.relative_key
+            C Major
 
         Returns:
             Key:
@@ -163,7 +172,7 @@ class Key:
     @property
     def name(self) -> str:
         """ 
-        Returns the name of the key, the root and key type. 
+        Returns the name of the key comprised of the root and key type. 
 
         Example:
             >>> Key(Note.C, KeyType.Major).name
@@ -478,3 +487,5 @@ class Key:
             str:
         """
         return f'Key({self.root} {self.type})' 
+
+#endregion
