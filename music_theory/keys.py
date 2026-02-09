@@ -217,29 +217,31 @@ class Key:
         return 0
 
     @property
-    def sharps(self):
-        """ Returns a list of the sharps in this key.
+    def sharps(self) -> list[Note]:
+        """ 
+        Returns a list of the sharps in this key.
         
         Order of Sharps 
         F C G D A E B
-        Fast Cars Go Dangerously Around Every Bend
 
         Returns:
-            An list of Notes.        
+            list[Note]:
+                An list of Notes representing the sharps.        
         """
         order_of_sharps = [Note.F, Note.C, Note.G, Note.D, Note.A, Note.E, Note.B]
         return order_of_sharps[:self.sharp_count]
 
     @property
-    def flats(self):
-        """ Returns a list of the flats in this key.
+    def flats(self) -> list[Note]:
+        """ 
+        Returns a list of the flats in this key.
 
         Order of flats (the reverse of the order of sharps)
         B E A D G C F
-        Before Eating A Doughnut Get Coffee First.
 
         Returns:
-            An list of Notes.        
+            list[Note]:
+                An list of Notes representing the flats.        
         """
         order_of_flats = [Note.B, Note.E, Note.A, Note.D, Note.G, Note.C, Note.F]
         return order_of_flats[:self.flat_count]
