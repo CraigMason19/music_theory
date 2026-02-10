@@ -1,5 +1,6 @@
 """
-Defines the Interval class representing a offset from a Note in music.
+This module Defines the `Interval` class representing a offset from a musical 
+note.
 
 This module provides:
 - An Enum class `Interval` with 12 values: From Unison to Major 7th.
@@ -8,20 +9,19 @@ This module provides:
 
 Example:
     >>> from music_theory.intervals import Interval
-    >>> i = Interval.M3
-    >>> print(repr(i))
+    >>> Interval.M3
     Interval.M3
 """
 
 from __future__ import annotations
-from typing import TYPE_CHECKING
+
+import random
+from enum import Enum
+from typing import Self, TYPE_CHECKING
 
 if TYPE_CHECKING: # pragma: no cover
     from music_theory.notes import Note
     
-import random
-from enum import Enum
-
 from music_theory.utils import index_to_range, UP_DIRECTIONS, DOWN_DIRECTIONS
 
 LABELS: list[str] = [
@@ -41,7 +41,7 @@ LABELS: list[str] = [
 
 class Interval(Enum):
     """ 
-    Represents a interval (diffence between two notes). Derived from the 
+    Represents a interval (difference between two notes). Derived from the 
     Enum class.
     
     Attributes:
@@ -103,7 +103,7 @@ class Interval(Enum):
         return LABELS
     
     @classmethod    
-    def items(cls):
+    def items(cls) -> list[Self]:
         """ 
         A class method that returns a list of the interval enumerations. 
 
@@ -115,9 +115,9 @@ class Interval(Enum):
     all = items # Alias
 
     @classmethod
-    def from_index(cls, index):
+    def from_index(cls, index) -> Self:
         """ 
-        A class methd that returns a interval based upon it's enumeration 
+        A class method that returns a interval based upon it's enumeration 
         value (positive or negative). Positive indices are counted from the
         start and negative indices are counted from the end.
 
@@ -139,7 +139,7 @@ class Interval(Enum):
         return Interval.items()[index]
 
     @classmethod
-    def from_numeric(cls, numeric: str):
+    def from_numeric(cls, numeric: str) -> Self:
         """ 
         A class method that returns a interval based upon a numeric interval
         value.
@@ -239,7 +239,7 @@ def intervals_to_string(interval_list: list[Interval]) -> str:
     """  
     return ', '.join([i.name for i in interval_list])
 
-def interval_distance(first_note: "Note", second_note: "Note", direction="u") -> Interval:
+def interval_distance(first_note: "Note", second_note: "Note", direction: str="u") -> Interval:
     """ 
     Takes two notes and calculates the interval distance between them, either up
     or down.
