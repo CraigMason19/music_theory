@@ -39,6 +39,8 @@ LABELS: list[str] = [
     "Major 7th",
 ]
 
+#region Interval
+
 class Interval(Enum):
     """ 
     Represents a interval (difference between two notes). Derived from the 
@@ -219,6 +221,8 @@ class Interval(Enum):
         """
         return f'Interval.{self.name}'
     
+#endregion
+
 #region Functions
 
 def intervals_to_string(interval_list: list[Interval]) -> str:
