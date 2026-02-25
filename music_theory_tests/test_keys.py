@@ -2,14 +2,13 @@ import unittest
 from io import StringIO
 from unittest.mock import patch
 
-import _setup
-
 from music_theory.notes import Note
 from music_theory.chords import Chord, ChordType
 from music_theory.keys import Key, KeyType
 
+
 class TestKeyRandom(unittest.TestCase):
-    def test_random_key_vallidity(self):
+    def test_random_key_validity(self):
         k = Key.random()
 
         self.assertIn(k.root, Note.items())
@@ -134,8 +133,8 @@ class TestKeyMinorChords(unittest.TestCase):
  
         self.assertListEqual(list(chord_dict.values()), expected)    
 
-class TestKeyParalellChords(unittest.TestCase):
-    def test_paralell_chords_from_key_A_major(self):
+class TestKeyParallelChords(unittest.TestCase):
+    def test_parallel_chords_from_key_A_major(self):
         chord_dict = Key(Note.A).parallel_chords()
 
         expected = [Chord(Note.A, ChordType.Minor),
@@ -148,7 +147,7 @@ class TestKeyParalellChords(unittest.TestCase):
  
         self.assertListEqual(list(chord_dict.values()), expected)      
 
-    def test_paralell_chords_from_key_C_minor(self):
+    def test_parallel_chords_from_key_C_minor(self):
         chord_dict = Key(Note.C, KeyType.Minor).parallel_chords()
 
         expected = [Chord(Note.C, ChordType.Major),

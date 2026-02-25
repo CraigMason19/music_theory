@@ -1,9 +1,8 @@
 import unittest
 
-import _setup
-
 from music_theory.notes import Note
 from music_theory.intervals import Interval, interval_distance, intervals_to_string
+
 
 class TestIntervalAttributes(unittest.TestCase):
     def test_interval_items(self):
@@ -56,24 +55,24 @@ class TestIntervalCreation(unittest.TestCase):
 
 class TestIntervalDistance(unittest.TestCase):
     def test_interval_distance_same(self):    
-        inteval, expected = interval_distance(Note.Bb, Note.Bb), Interval.Unison
-        self.assertEqual(inteval, expected)
+        interval, expected = interval_distance(Note.Bb, Note.Bb), Interval.Unison
+        self.assertEqual(interval, expected)
 
     def test_interval_distance_up_00(self):    
-        inteval, expected = interval_distance(Note.B, Note.Gb, direction="UP"), Interval.P5 
-        self.assertEqual(inteval, expected)
+        interval, expected = interval_distance(Note.B, Note.Gb, direction="UP"), Interval.P5 
+        self.assertEqual(interval, expected)
 
     def test_interval_distance_up_01(self):    
-        inteval, expected = interval_distance(Note.A, Note.C, direction="UP"), Interval.m3 
-        self.assertEqual(inteval, expected)
+        interval, expected = interval_distance(Note.A, Note.C, direction="UP"), Interval.m3 
+        self.assertEqual(interval, expected)
 
     def test_interval_distance_down_00(self):    
-        inteval, expected = interval_distance(Note.C, Note.G, direction="below"), Interval.P4 
-        self.assertEqual(inteval, expected)
+        interval, expected = interval_distance(Note.C, Note.G, direction="below"), Interval.P4 
+        self.assertEqual(interval, expected)
 
     def test_interval_distance_down_01(self):    
-        inteval, expected = interval_distance(Note.A, Note.C, direction="below"), Interval.M6 
-        self.assertEqual(inteval, expected)
+        interval, expected = interval_distance(Note.A, Note.C, direction="below"), Interval.M6 
+        self.assertEqual(interval, expected)
 
     def test_interval_distance_value_error(self):
         self.assertRaises(ValueError, interval_distance, Note.C, Note.G, direction='sideways')

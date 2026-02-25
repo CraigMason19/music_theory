@@ -1,7 +1,5 @@
 import unittest
 
-import _setup
-
 from music_theory.notes import Note
 from music_theory.intervals import Interval
 from music_theory.string_instrument import StringInstrument, note_at_fret
@@ -93,13 +91,13 @@ class TestInstrumentDetuning(unittest.TestCase):
 
 
 class TestInstrumentNoteAtFret(unittest.TestCase):
-    def test_note_at_fret_incorrct_string_index_00(self):
+    def test_note_at_fret_incorrect_string_index_00(self):
         self.assertRaises(ValueError, create_standard_guitar().note_at_fret, -1, 3)
 
-    def test_note_at_fret_incorrct_string_index_01(self):
+    def test_note_at_fret_incorrect_string_index_01(self):
         self.assertRaises(ValueError, create_standard_guitar().note_at_fret, 6, 3)
 
-    def test_note_at_fret_incorrct_fret(self):
+    def test_note_at_fret_incorrect_fret(self):
         self.assertRaises(ValueError, create_standard_guitar().note_at_fret, 0, -1)
 
     def test_note_at_fret_zero_fret(self):

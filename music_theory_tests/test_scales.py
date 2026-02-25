@@ -10,8 +10,6 @@
 
 import unittest
 
-import _setup
-
 from music_theory.notes import Note
 from music_theory.intervals import Interval
 from music_theory.scales import Scale, _intervals_from_numerics, _intervals_from_steps, _notes_from_intervals, _notes_from_steps, modes_from_note

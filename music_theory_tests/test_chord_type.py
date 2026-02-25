@@ -1,8 +1,7 @@
 import unittest
 
-import _setup
-
 from music_theory.chords import ChordType
+
 
 class TestChordTypeMethods(unittest.TestCase):
     def test_chord_type_items(self):

@@ -1,9 +1,8 @@
 import unittest
 
-import _setup
-
 from music_theory.notes import Note
 from music_theory.chords import Chord, ChordType, unique_notes_in_chords
+
 
 class TestChordValidity(unittest.TestCase):
     def test_chord_valid_00(self):

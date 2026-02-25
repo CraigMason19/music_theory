@@ -1,9 +1,8 @@
 import unittest
 
-import _setup
-
 from music_theory.notes import Note
 from music_theory.instrument_creator import create_standard_bass, create_drop_bass, create_standard_guitar, create_drop_guitar, create_ukulele
+
 
 class TestBass(unittest.TestCase):
     def test_default_standard_bass_00(self):

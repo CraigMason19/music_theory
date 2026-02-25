@@ -1,7 +1,5 @@
 import unittest
 
-import _setup
-
 from music_theory.scale_type import ScaleType
 
 class TestScaleTypeAttributes(unittest.TestCase):

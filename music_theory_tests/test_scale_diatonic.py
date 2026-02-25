@@ -2,8 +2,6 @@ import unittest
 from io import StringIO
 from unittest.mock import patch
 
-import _setup
-
 from music_theory.notes import Note
 from music_theory.scales import Scale
 from music_theory.scale_type import ScaleType

@@ -1,7 +1,5 @@
 import unittest
 
-import _setup
-
 from music_theory.utils import UP_DIRECTIONS, DOWN_DIRECTIONS, index_to_range, list_rotations, is_valid_note_str
 
 class TestUtilsIndexToRange(unittest.TestCase):

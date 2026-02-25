@@ -1,9 +1,8 @@
 import unittest
 
-import _setup
-
 from music_theory.notes import Note, transpose, notes_to_string, notes_from_string, chromatic_notes
 from music_theory.intervals import Interval, interval_distance, intervals_to_string
+
 
 class TestNoteAttributes(unittest.TestCase):
     def test_items(self):

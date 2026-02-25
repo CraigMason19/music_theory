@@ -1,11 +1,10 @@
 import unittest
 
-import _setup
-
 from music_theory.progressions import chords_from_progression
 from music_theory.keys import Key, KeyType
 from music_theory.notes import Note
 from music_theory.chords import Chord, ChordType
+
 
 class TestChordsFromProgression(unittest.TestCase):
     def test_chord_progressions_C_major(self):

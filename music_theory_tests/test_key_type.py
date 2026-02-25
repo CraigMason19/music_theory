@@ -1,8 +1,7 @@
 import unittest
 
-import _setup
-
 from music_theory.keys import KeyType
+
 
 class TestKeyTypeAttributes(unittest.TestCase):
     def test_key_type_items(self):
