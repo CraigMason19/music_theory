@@ -162,7 +162,38 @@ class TestDiatonicScaleMinorProperties(unittest.TestCase):
 
     def test_diatonic_scale_minor_leading_tone_raises_exception(self):
         with self.assertRaises(AttributeError):
-                _ = self.scale.leading_tone
+            _ = self.scale.leading_tone
+
+
+class TestDiatonicScaleValidTypes(unittest.TestCase):
+    def test_valid_scale_types_returns_list_of_scale_types(self):
+        result = DiatonicScale.valid_scale_types()
+
+        self.assertIsInstance(result, list)
+        self.assertTrue(all(isinstance(_, ScaleType) for _ in result))
+
+    def test_valid_scale_types_returns_valid_scale_types(self):
+        result = DiatonicScale.valid_scale_types()
+
+        for scale_type in result:
+            num_notes = Scale(Note.C, scale_type).num_notes
+            self.assertEqual(num_notes, 7)
+
+
+class TestDiatonicScaleInvalidTypes(unittest.TestCase):
+    def test_invalid_scale_types_returns_list_of_scale_types(self):
+        result = DiatonicScale.invalid_scale_types()
+
+        self.assertIsInstance(result, list)
+        self.assertTrue(all(isinstance(_, ScaleType) for _ in result))
+
+    def test_valid_scale_types_returns_valid_scale_types(self):
+        result = DiatonicScale.invalid_scale_types()
+
+        for scale_type in result:
+            num_notes = Scale(Note.C, scale_type).num_notes
+            self.assertNotEqual(num_notes, 7)
+
 
 class TestDiatonicScaleStringRepresentation(unittest.TestCase):
     @classmethod
