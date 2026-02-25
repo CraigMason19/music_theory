@@ -8,7 +8,7 @@ Description:
     
     This class exposes each note as a named degree (tonic, mediant, etc.)
 
-    It also handles the unique behaviour of the seventh degree, which may 
+    It also handles the unique behavior of the seventh degree, which may 
     function as either a 'leading tone' (half step below the tonic) or a 
     'subtonic' (whole step below the tonic), depending on the scale type.
 
@@ -52,7 +52,7 @@ class DiatonicScale(Scale):
         While the scale degrees for the first six notes are the same for all 
         scales, the seventh one is special. 
 
-        - If the 7th note is a (wholetone / full-step / major 2nd) below the 
+        - If the 7th note is a (whole-tone / full-step / major 2nd) below the 
         tonic, it is called a subtonic.
         - If the 7th note is a (semitone / half-step / minor 2nd) below the 
         tonic, it is called a leading tone.
@@ -77,7 +77,7 @@ class DiatonicScale(Scale):
 
     Methods:        
         __init__(self, root, scale_type):
-            Initialises the root and scale type.
+            Initializes the root and scale type.
         valid_scale_types(cls):
             A class method that returns all ScaleTypes that contain 7 notes.
         invalid_scale_types(cls):
@@ -106,7 +106,7 @@ class DiatonicScale(Scale):
             root (Note):
                 The note to build the scale from.
             scale_type (ScaleType):
-                The type of scale that contains 7 notes (i.e. not pentantonic
+                The type of scale that contains 7 notes (i.e. not pentatonic
                 or blues)      
         """
         super(DiatonicScale, self).__init__(root, scale_type)
@@ -259,7 +259,7 @@ class DiatonicScale(Scale):
         Returns the subtonic of the scale, if it exists, raises AttributeError 
         otherwise.
 
-        If the 7th note is a (wholetone / full-step / major 2nd) below the tonic, 
+        If the 7th note is a (whole-tone / full-step / major 2nd) below the tonic, 
         it is called a subtonic.
 
         Example:
