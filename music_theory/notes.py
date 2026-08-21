@@ -54,6 +54,8 @@ class Note(Enum):
             A class method that returns a random note.
         diatonic(self) -> Note:
             A property to extract the diatonic component of a note.
+        is_diatonic(self) -> bool:
+            A property to show that whether a note has accidentals or not.
         to_sharp(self):
             Returns a string of a flat note as a sharp.
         enharmonic(self):
@@ -188,6 +190,23 @@ class Note(Enum):
                 A new note representing the diatonic component
         """
         return Note.from_string(self.name[0])
+
+    @property
+    def is_diatonic(self) -> bool:
+        """
+        A property to show that whether a note has accidentals or not. True if 
+        the note has no accidentals, False otherwise
+
+        Example:
+            >>> n = Note.E.is_diatonic
+            True
+            >>> n = Note.Eb.is_diatonic
+            False
+
+        Returns:
+            bool:               
+        """
+        return len(self.name) == 1   
     
     def to_sharp(self) -> str:
         """ 

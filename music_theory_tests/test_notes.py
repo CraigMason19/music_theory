@@ -45,6 +45,7 @@ class TestNoteCreation(unittest.TestCase):
         index = Note.B.value
         self.assertEqual(Note.from_index(index - 27), Note.Ab)
 
+
 class TestNoteDiatonic(unittest.TestCase):
     def test_diatonic(self):
         result = Note.C.diatonic
@@ -57,6 +58,21 @@ class TestNoteDiatonic(unittest.TestCase):
         expected = Note.E
 
         self.assertEqual(result, expected)
+
+
+class TestNoteIsDiatonic(unittest.TestCase):
+    def test_is_diatonic_true(self):
+        result = Note.C.is_diatonic
+        expected = True
+
+        self.assertEqual(result, expected)
+
+    def test_is_diatonic_false(self):
+        result = Note.Db.is_diatonic
+        expected = False
+
+        self.assertEqual(result, expected)
+
 
 class TestNoteToSharp(unittest.TestCase):
     def test_to_sharp_00(self):
