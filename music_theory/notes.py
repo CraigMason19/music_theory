@@ -22,12 +22,15 @@ from enum import Enum
 from typing import Any, Self
 
 from music_theory.intervals import Interval
-from music_theory.utils import (UP_DIRECTIONS, 
-                                DOWN_DIRECTIONS,
-                                index_to_range, 
-                                is_valid_note_str, 
-                                is_empty_or_whitespace)
+from music_theory.utils import (
+    UP_DIRECTIONS, 
+    DOWN_DIRECTIONS,
+    index_to_range, 
+    is_valid_note_str, 
+    is_empty_or_whitespace,
+)
 
+DIATONIC_NOTES = ["C", "D", "E", "F", "G", "A", "B"]
 
 #region Note
 
