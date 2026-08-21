@@ -41,6 +41,9 @@ class Note(Enum):
         note attributes:
             12 class attributes representing note enumerations. Starting at 'middle C'.
 
+        diatonic(self) -> Note:
+            A property to extract the diatonic component of a note.
+
     Methods:
         items(cls):
             A class method to return the enums as a list.
@@ -71,6 +74,22 @@ class Note(Enum):
     """
     C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B = range(12) 
 
+    @property
+    def diatonic(self) -> Note:
+        """
+        A property to extract the diatonic component of a note. This is the note
+        itself without any accidentals (sharps or flats)
+
+        Example:
+            >>> n = Note.Eb.diatonic
+            E
+
+        Returns:
+            Note:
+                A new note representing the diatonic component
+        """
+        return Note.from_string(self.name[0])
+    
     @classmethod    
     def items(cls) -> list[Self]:
         """ 
