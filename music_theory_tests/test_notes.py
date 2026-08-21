@@ -25,6 +25,19 @@ class TestNoteAttributes(unittest.TestCase):
     def test_random_note_validity(self):
         note = Note.random()
         self.assertIn(note, list(Note))
+
+    def test_diatonic(self):
+        result = Note.C.diatonic
+        expected = Note.C
+
+        self.assertEqual(result, expected)
+
+    def test_diatonic_with_flat(self):
+        result = Note.Eb.diatonic
+        expected = Note.E
+
+        self.assertEqual(result, expected)
+
         
 class TestNoteCreation(unittest.TestCase):
     def test_note_index_octave_C_up(self):
