@@ -41,9 +41,6 @@ class Note(Enum):
         note attributes:
             12 class attributes representing note enumerations. Starting at 'middle C'.
 
-        diatonic(self) -> Note:
-            A property to extract the diatonic component of a note.
-
     Methods:
         items(cls):
             A class method to return the enums as a list.
@@ -55,6 +52,8 @@ class Note(Enum):
             A class method that converts a validated note string into a `Note` object.
         random(cls):
             A class method that returns a random note.
+        diatonic(self) -> Note:
+            A property to extract the diatonic component of a note.
         to_sharp(self):
             Returns a string of a flat note as a sharp.
         enharmonic(self):
@@ -73,22 +72,6 @@ class Note(Enum):
             Returns the Enum name.
     """
     C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B = range(12) 
-
-    @property
-    def diatonic(self) -> Note:
-        """
-        A property to extract the diatonic component of a note. This is the note
-        itself without any accidentals (sharps or flats)
-
-        Example:
-            >>> n = Note.Eb.diatonic
-            E
-
-        Returns:
-            Note:
-                A new note representing the diatonic component
-        """
-        return Note.from_string(self.name[0])
     
     @classmethod    
     def items(cls) -> list[Self]:
@@ -129,7 +112,7 @@ class Note(Enum):
         """  
         index = index_to_range(index)
         return Note.items()[index]
-
+   
     @classmethod
     def from_string(cls, note_str: str) -> Self | None:
         """
@@ -190,6 +173,22 @@ class Note(Enum):
         """  
         return random.choice(cls.items())
 
+    @property
+    def diatonic(self) -> Note:
+        """
+        A property to extract the diatonic component of a note. This is the note
+        itself without any accidentals (sharps or flats)
+
+        Example:
+            >>> n = Note.Eb.diatonic
+            E
+
+        Returns:
+            Note:
+                A new note representing the diatonic component
+        """
+        return Note.from_string(self.name[0])
+    
     def to_sharp(self) -> str:
         """ 
         Returns the enharmonic sharp equivalent of the note, or the note's name 
