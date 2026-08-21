@@ -59,10 +59,10 @@ class Note(Enum):
             A property to extract the diatonic component of a note.
         is_diatonic(self) -> bool:
             A property to show that whether a note has accidentals or not.
+        enharmonic(self) -> str:
+            A property to return the enharmonic equivalent (same pitch but a different name).
         to_sharp(self):
             Returns a string of a flat note as a sharp.
-        enharmonic(self):
-            An alias for to_sharp(), Returns a string of a flat note as a sharp.
         previous(self):
             Returns the note below.
         next(self):
@@ -210,6 +210,24 @@ class Note(Enum):
             bool:               
         """
         return len(self.name) == 1   
+
+    @property
+    def enharmonic(self) -> str:
+        """
+        A property to return the enharmonic equivalent of a note. The same 
+        pitch but a different name.
+
+        As notes are defined as flat ('b'), this gives the alternative sharp 
+        note.
+
+        Example:
+            >>> n = Note.Eb.enharmonic
+            D#
+
+        Returns:
+            str:               
+        """
+        return self.to_sharp()    
     
     def to_sharp(self) -> str:
         """ 
@@ -230,8 +248,6 @@ class Note(Enum):
 
         return self.name
     
-    enharmonic = to_sharp  # Alias
-
     def previous(self) -> Self:
         """
         Returns the previous note

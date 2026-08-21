@@ -117,13 +117,13 @@ class TestNoteFromString(unittest.TestCase):
 
     def test_from_string_enharmonic_correct(self):
         input = 'c#'
-        result = Note.from_string(input).enharmonic()
+        result = Note.from_string(input).enharmonic
         expected = "C#"
 
         self.assertEqual(result, expected)
 
     def test_from_string_from_enharmonic_correct(self):
-        input = Note.Db.enharmonic() # C#
+        input = Note.Db.enharmonic # C#
         result = Note.from_string(input)
         expected = Note.Db
 
