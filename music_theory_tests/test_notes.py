@@ -142,6 +142,32 @@ class TestNotePreviousAndNext(unittest.TestCase):
     def test_next_02(self):
         self.assertEqual(Note.B.previous(), Note.Bb)
 
+
+class TestNotePreviousAndNextDiatonic(unittest.TestCase):
+    def test_previous_diatonic(self):
+        result = Note.E.previous_diatonic()
+        expected = Note.D
+
+        self.assertEqual(result, expected)
+
+    def test_previous_diatonic_with_flat(self):
+        result = Note.Eb.previous_diatonic()
+        expected = Note.D
+
+        self.assertEqual(result, expected)
+
+    def test_next_diatonic(self):
+        result = Note.E.next_diatonic()
+        expected = Note.F
+
+        self.assertEqual(result, expected)
+
+    def test_next_diatonic_with_flat(self):
+        result = Note.Eb.next_diatonic()
+        expected = Note.F
+
+        self.assertEqual(result, expected)
+
 class TestNoteStringRepresentation(unittest.TestCase):
     def test_note_str(self):
         note = Note.Db

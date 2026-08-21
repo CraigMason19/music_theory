@@ -67,6 +67,10 @@ class Note(Enum):
             Returns the note below.
         next(self):
             Returns the note above.
+        previous_diatonic(self) -> Note:
+            Returns the previous diatonic note.
+        next_diatonic(self) -> Note:
+            Returns the next diatonic note.
         transpose(self, interval, direction="u"):
             Returns a Note transposed by an interval in either direction.
         chromatics(self, direction="u"):
@@ -273,6 +277,45 @@ class Note(Enum):
             Note:
         """  
         return Note.from_index(self.value+1)
+
+    def previous_diatonic(self) -> Note:
+        """
+        Returns the previous diatonic note (a note that has no accidentals).
+       
+        Example:
+            >>> Note.Eb.previous_diatonic()
+            Note.D
+
+        Returns:
+            Note:
+        """  
+        n = self.diatonic.previous()
+
+        while not n.is_diatonic:
+            n = n.previous()
+
+        return n
+
+    def next_diatonic(self) -> Note:
+        """
+        Returns the next diatonic note (a note that has no accidentals).
+
+        NOTE: A note is made up of a {diatonic}{accidental}. In `Eb` the diatonic
+        is E so the next diatonic is F not E.
+       
+        Example:
+            >>> Note.Eb.next_diatonic()
+            Note.F
+
+        Returns:
+            Note:
+        """  
+        n = self.diatonic.next()
+
+        while not n.is_diatonic:
+            n = n.next()
+
+        return n
     
     def transpose(self, interval, direction: str="u") -> Self:
         """ 
