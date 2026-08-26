@@ -29,6 +29,8 @@ class ScaleType(Enum):
             A class method that returns a list of the mode scale types. 
         random(cls):
             A class method to return a random scale type.
+        is_diatonic(self) -> bool:
+            A property that returns True if the ScaleType is diatonic (a mode). False otherwise.
         __str__(self):
             Returns the name of the scale type.
         __repr__(self):
@@ -88,10 +90,10 @@ class ScaleType(Enum):
         """  
         return random.choice(cls.items())
 
-    @classmethod
-    def is_diatonic(cls, scale_type: ScaleType) -> bool:
+    @property
+    def is_diatonic(self) -> bool:
         """ 
-        Returns True if the ScaleType is diatonic (a mode). False otherwise. 
+        A property that returns True if the ScaleType is diatonic (a mode). False otherwise. 
 
         NOTE: Major & Minor are diatonic as they are the Ionian & Aeolian modes.
 
@@ -104,7 +106,7 @@ class ScaleType(Enum):
         Returns:
             bool:
         """
-        return scale_type in (ScaleType.modes() + [ScaleType.Major, ScaleType.Minor])
+        return self in (ScaleType.modes() + [ScaleType.Major, ScaleType.Minor])
  
     def __str__(self):
         """ Returns a string representing the scale name. 

@@ -308,6 +308,8 @@ class Scale:
         """ 
         A property that returns the true if the scale's `type` is diatonic (a mode). 
 
+        NOTE: Major & Minor are diatonic as they are the Ionian & Aeolian modes.
+
         Example:
             >>> Scale(Note.C, ScaleType.Ionian))
             True
@@ -315,7 +317,7 @@ class Scale:
         Returns:
             bool:
         """
-        return ScaleType.is_diatonic(self.type)
+        return self.type.is_diatonic
 
     @property
     def notes_str(self) -> str:

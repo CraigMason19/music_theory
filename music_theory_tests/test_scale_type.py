@@ -40,25 +40,25 @@ class TestScaleTypeAttributes(unittest.TestCase):
 
 class TestScaleTypeIsDiatonic(unittest.TestCase):
     def test_is_diatonic_true(self):
-        result = ScaleType.is_diatonic(ScaleType.Dorian)
+        result = ScaleType.Dorian.is_diatonic
         expected = True
 
         self.assertEqual(result, expected)
 
     def test_is_diatonic_major_true(self):
-        result = ScaleType.is_diatonic(ScaleType.Major)
+        result = ScaleType.Major.is_diatonic
         expected = True
 
         self.assertEqual(result, expected)
 
     def test_is_diatonic_minor_true(self):
-        result = ScaleType.is_diatonic(ScaleType.Minor)
+        result = ScaleType.Minor.is_diatonic
         expected = True
 
         self.assertEqual(result, expected)
 
     def test_is_diatonic_false(self):
-        result = ScaleType.is_diatonic(ScaleType.Blues)
+        result = ScaleType.Blues.is_diatonic
         expected = False
 
         self.assertEqual(result, expected)           
