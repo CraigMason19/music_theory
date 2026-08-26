@@ -33,26 +33,36 @@ class TestScaleTypeAttributes(unittest.TestCase):
 
         self.assertEqual(result, expected)
 
-    def test_scale_type_diatonics_alias(self):
-        result = ScaleType.diatonics()
-        expected = [
-            ScaleType.Ionian,
-            ScaleType.Dorian,
-            ScaleType.Phrygian,
-            ScaleType.Lydian,
-            ScaleType.Mixolydian,
-            ScaleType.Aeolian,
-            ScaleType.Locrian,
-        ]
-
-        self.assertEqual(result, expected)
-
-    def test_scale_type_modes_same_as_diatonics_alias(self):
-        self.assertListEqual(ScaleType.modes(), ScaleType.diatonics())
-
     def test_random_scale_type_validity(self):
         type = ScaleType.random()
         self.assertIn(type, list(ScaleType))
+
+
+class TestScaleTypeIsDiatonic(unittest.TestCase):
+    def test_is_diatonic_true(self):
+        result = ScaleType.is_diatonic(ScaleType.Dorian)
+        expected = True
+
+        self.assertEqual(result, expected)
+
+    def test_is_diatonic_major_true(self):
+        result = ScaleType.is_diatonic(ScaleType.Major)
+        expected = True
+
+        self.assertEqual(result, expected)
+
+    def test_is_diatonic_minor_true(self):
+        result = ScaleType.is_diatonic(ScaleType.Minor)
+        expected = True
+
+        self.assertEqual(result, expected)
+
+    def test_is_diatonic_false(self):
+        result = ScaleType.is_diatonic(ScaleType.Blues)
+        expected = False
+
+        self.assertEqual(result, expected)           
+
 
 class TestScaleTypeStringRepresentation(unittest.TestCase):
     def test_scale_type_str(self):

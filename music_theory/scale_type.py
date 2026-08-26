@@ -27,8 +27,6 @@ class ScaleType(Enum):
             An alias for items(), returning the enums as a list.
         modes(cls) -> list[ScaleType]:
             A class method that returns a list of the mode scale types. 
-        diatonics:
-            An alias for modes.
         random(cls):
             A class method to return a random scale type.
         __str__(self):
@@ -76,8 +74,6 @@ class ScaleType(Enum):
             ScaleType.Locrian,
         ]
 
-    diatonics = modes  # Alias
-
     @classmethod
     def random(cls):
         """ A class method that returns a random scale. 
@@ -92,6 +88,24 @@ class ScaleType(Enum):
         """  
         return random.choice(cls.items())
 
+    @classmethod
+    def is_diatonic(cls, scale_type: ScaleType) -> bool:
+        """ 
+        Returns True if the ScaleType is diatonic (a mode). False otherwise. 
+
+        NOTE: Major & Minor are diatonic as they are the Ionian & Aeolian modes.
+
+        Example:
+            >>> ScaleType.is_diatonic(ScaleType.Aeolian)
+            True
+            >>> ScaleType.is_diatonic(ScaleType.MelodicMinor)
+            False
+
+        Returns:
+            bool:
+        """
+        return scale_type in (ScaleType.modes() + [ScaleType.Major, ScaleType.Minor])
+ 
     def __str__(self):
         """ Returns a string representing the scale name. 
 
