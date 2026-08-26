@@ -167,6 +167,8 @@ class Scale:
             A list of numerics describing the scale.
         name:
             A property that returns the name of the scale.
+        is_diatonic:
+            A property that returns the true if the scale `type` is diatonic (a mode).
         num_notes:
             A property that returns the number of notes in the scale.
         num_flats:
@@ -300,6 +302,20 @@ class Scale:
             A string.
         """
         return f"{self.root} {self.type}"
+
+    @property
+    def is_diatonic(self) -> bool:
+        """ 
+        A property that returns the true if the scale's `type` is diatonic (a mode). 
+
+        Example:
+            >>> Scale(Note.C, ScaleType.Ionian))
+            True
+
+        Returns:
+            bool:
+        """
+        return ScaleType.is_diatonic(self.type)
 
     @property
     def notes_str(self) -> str:

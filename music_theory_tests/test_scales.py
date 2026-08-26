@@ -20,7 +20,7 @@ class TestScale(unittest.TestCase):
         scale = Scale(Note.A, ScaleType.Lydian)
         expected = "A Lydian"
         self.assertEqual(scale.name, expected)
-
+ 
     def test_scale_notes_str(self):
         result = Scale(Note.C, ScaleType.Minor).notes_str
         expected = "C, D, Eb, F, G, Ab, Bb"
@@ -63,6 +63,32 @@ class TestScale(unittest.TestCase):
         self.assertFalse(scale == 5)
         self.assertFalse(scale == "string")
         self.assertFalse(scale == None)
+
+
+class TestScaleIsDiatonic(unittest.TestCase):
+    def test_is_diatonic_true(self):
+        result = Scale(Note.C, ScaleType.Dorian).is_diatonic
+        expected = True
+
+        self.assertEqual(result, expected)
+
+    def test_is_diatonic_major_true(self):
+        result = Scale(Note.C, ScaleType.Major).is_diatonic
+        expected = True
+
+        self.assertEqual(result, expected)
+
+    def test_is_diatonic_minor_true(self):
+        result = Scale(Note.C, ScaleType.Minor).is_diatonic
+        expected = True
+
+        self.assertEqual(result, expected)
+
+    def test_is_diatonic_false(self):
+        result = Scale(Note.C, ScaleType.MelodicMinor).is_diatonic
+        expected = False
+
+        self.assertEqual(result, expected) 
 
 
 class TestScaleIterator(unittest.TestCase):
