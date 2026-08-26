@@ -4,4 +4,11 @@
 			"path": "."
 		},
 	],
+	"settings": {
+		"cSpell.words": [
+			"diatonics",
+			"Locrian",
+			"Mixolydian"
+		]
+	},
 }
