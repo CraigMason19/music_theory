@@ -18,6 +18,38 @@ class TestScaleTypeAttributes(unittest.TestCase):
     def test_scale_type_items_same_as_all_alias(self):
         self.assertListEqual(ScaleType.items(), ScaleType.all())
 
+    # Modes
+    def test_scale_type_modes(self):
+        result = ScaleType.modes()
+        expected = [
+            ScaleType.Ionian,
+            ScaleType.Dorian,
+            ScaleType.Phrygian,
+            ScaleType.Lydian,
+            ScaleType.Mixolydian,
+            ScaleType.Aeolian,
+            ScaleType.Locrian,
+        ]
+
+        self.assertEqual(result, expected)
+
+    def test_scale_type_diatonics_alias(self):
+        result = ScaleType.diatonics()
+        expected = [
+            ScaleType.Ionian,
+            ScaleType.Dorian,
+            ScaleType.Phrygian,
+            ScaleType.Lydian,
+            ScaleType.Mixolydian,
+            ScaleType.Aeolian,
+            ScaleType.Locrian,
+        ]
+
+        self.assertEqual(result, expected)
+
+    def test_scale_type_modes_same_as_diatonics_alias(self):
+        self.assertListEqual(ScaleType.modes(), ScaleType.diatonics())
+
     def test_random_scale_type_validity(self):
         type = ScaleType.random()
         self.assertIn(type, list(ScaleType))

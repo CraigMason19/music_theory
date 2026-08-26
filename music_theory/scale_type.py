@@ -25,6 +25,10 @@ class ScaleType(Enum):
             A class method to return the enums as a list.
         all(cls):
             An alias for items(), returning the enums as a list.
+        modes(cls) -> list[ScaleType]:
+            A class method that returns a list of the mode scale types. 
+        diatonics:
+            An alias for modes.
         random(cls):
             A class method to return a random scale type.
         __str__(self):
@@ -52,6 +56,27 @@ class ScaleType(Enum):
         return [n for n in cls]
 
     all = items  # Alias
+
+    @classmethod    
+    def modes(cls) -> list[ScaleType]:
+        """ 
+        A class method that returns a list of the mode scale types. Also known
+        as diatonic scales.
+
+        Returns:
+            list[ScaleType]
+        """  
+        return [
+            ScaleType.Ionian,
+            ScaleType.Dorian,
+            ScaleType.Phrygian,
+            ScaleType.Lydian,
+            ScaleType.Mixolydian,
+            ScaleType.Aeolian,
+            ScaleType.Locrian,
+        ]
+
+    diatonics = modes  # Alias
 
     @classmethod
     def random(cls):
