@@ -15,11 +15,17 @@ from music_theory.intervals import Interval
 from music_theory.scales import Scale, _intervals_from_numerics, _intervals_from_steps, _notes_from_intervals, _notes_from_steps, modes_from_note
 from music_theory.scale_type import ScaleType
 
-class TestScales(unittest.TestCase):
+class TestScale(unittest.TestCase):
     def test_scale_name(self):
         scale = Scale(Note.A, ScaleType.Lydian)
         expected = "A Lydian"
         self.assertEqual(scale.name, expected)
+
+    def test_scale_notes_str(self):
+        result = Scale(Note.C, ScaleType.Minor).notes_str
+        expected = "C, D, Eb, F, G, Ab, Bb"
+
+        self.assertEqual(result, expected)
 
     def test_random_scale_validity(self):
         scale = Scale.random()

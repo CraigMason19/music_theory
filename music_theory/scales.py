@@ -157,6 +157,8 @@ class Scale:
             The type of scale (e.g. minor, major, blues, lydian, etc...).
         notes:
             A list of notes for the scale
+        notes_str (str):
+            A property that returns a string representation for the notes in the scale.
         creation_formula:
             The formula used to create the scale.
         interval_formula:
@@ -299,6 +301,20 @@ class Scale:
         """
         return f"{self.root} {self.type}"
 
+    @property
+    def notes_str(self) -> str:
+        """ 
+        A property that returns a string representation for the notes in the scale. 
+
+        Example:
+            >>> Scale(Note.C, ScaleTime.Minor).notes_str
+            C, D, Eb, F, G, Ab, Bb
+
+        Returns:
+            str
+        """
+        return notes_to_string(self.notes)
+    
     @property
     def num_notes(self):
         """ Returns the number of notes in the scale. 
