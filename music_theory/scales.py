@@ -11,7 +11,7 @@
 
 from typing import Iterator, Self
 
-from music_theory.notes import Note, notes_to_string
+from music_theory.notes import Note, notes_to_str
 from music_theory.scale_type import ScaleType
 from music_theory.intervals import Interval
 
@@ -331,7 +331,7 @@ class Scale:
         Returns:
             str
         """
-        return notes_to_string(self.notes)
+        return notes_to_str(self.notes)
     
     @property
     def num_notes(self):
@@ -380,7 +380,7 @@ class Scale:
         Returns:
             A string.
         """
-        return f"{self.notes[0].name} {self.type.name}: { notes_to_string(self.notes) }"
+        return f"{self.notes[0].name} {self.type.name}: { notes_to_str(self.notes) }"
 
     def __repr__(self):
         """ Returns a string representing the Scale name and type. 

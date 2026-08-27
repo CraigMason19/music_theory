@@ -1,6 +1,6 @@
 import unittest
 
-from music_theory.notes import Note, transpose, notes_to_string, notes_from_string, chromatic_notes
+from music_theory.notes import Note, transpose, notes_to_str, notes_from_str, chromatic_notes
 from music_theory.intervals import Interval, interval_distance, intervals_to_string
 
 
@@ -89,7 +89,7 @@ class TestNoteToSharp(unittest.TestCase):
 
 
 class TestNoteFromString(unittest.TestCase):
-    def test_from_string_valid(self):
+    def test_from_str_valid(self):
         inputs = [
             "C",
             "A#",
@@ -98,9 +98,9 @@ class TestNoteFromString(unittest.TestCase):
         ]
 
         for _ in inputs:
-            self.assertIsNotNone(Note.from_string(_))
+            self.assertIsNotNone(Note.from_str(_))
 
-    def test_from_string_invalid(self):
+    def test_from_str_invalid(self):
         inputs = [
             "",
             " ",
@@ -113,18 +113,18 @@ class TestNoteFromString(unittest.TestCase):
         ]
 
         for _ in inputs:
-            self.assertIsNone(Note.from_string(_))
+            self.assertIsNone(Note.from_str(_))
 
-    def test_from_string_enharmonic_correct(self):
+    def test_from_str_enharmonic_correct(self):
         input = 'c#'
-        result = Note.from_string(input).enharmonic
+        result = Note.from_str(input).enharmonic
         expected = "C#"
 
         self.assertEqual(result, expected)
 
-    def test_from_string_from_enharmonic_correct(self):
+    def test_from_str_from_enharmonic_correct(self):
         input = Note.Db.enharmonic # C#
-        result = Note.from_string(input)
+        result = Note.from_str(input)
         expected = Note.Db
 
         self.assertEqual(result, expected)
@@ -177,76 +177,82 @@ class TestNoteStringRepresentation(unittest.TestCase):
         note = Note.Db
         self.assertEqual(repr(note), "Note.Db")
 
-    def test_notes_to_string_00(self):
-        notes = notes_to_string(Note.items())
+    def test_notes_to_str_00(self):
+        notes = notes_to_str(Note.items())
         expected = "C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B"
 
         self.assertEqual(notes, expected)
     
-    def test_notes_to_string_01(self):
-        notes = notes_to_string([Note.A, Note.Db, Note.F])
+    def test_notes_to_str_01(self):
+        notes = notes_to_str([Note.A, Note.Db, Note.F])
         expected = "A, Db, F"
+
+        self.assertEqual(notes, expected)
+
+    def test_notes_to_str_seperator(self):
+        notes = notes_to_str([Note.A, Note.Db, Note.F], " ")
+        expected = "A Db F"
 
         self.assertEqual(notes, expected)
 
 
 class TestNotesFromString(unittest.TestCase):
-    def test_notes_from_string_empty(self):
-        result = notes_from_string("")
+    def test_notes_from_str_empty(self):
+        result = notes_from_str("")
         expected = []
 
         self.assertEqual(result, expected)
 
-    def test_notes_from_string_whitespace(self):
-        result = notes_from_string("          ")
+    def test_notes_from_str_whitespace(self):
+        result = notes_from_str("          ")
         expected = []
 
         self.assertEqual(result, expected)
 
-    def test_notes_from_string_invalid(self):
-        result = notes_from_string("33")
+    def test_notes_from_str_invalid(self):
+        result = notes_from_str("33")
         expected = [None]
 
         self.assertEqual(result, expected)
 
-    def test_notes_from_string_multiple_invalid(self):
-        result = notes_from_string("33, X None Z")
+    def test_notes_from_str_multiple_invalid(self):
+        result = notes_from_str("33, X None Z")
         expected = [None] * 4
 
         self.assertEqual(result, expected)
 
-    def test_notes_from_string_valid(self):
-        result = notes_from_string("C")
+    def test_notes_from_str_valid(self):
+        result = notes_from_str("C")
         expected = [Note.C]
 
         self.assertEqual(result, expected)
 
-    def test_notes_from_string_multiple_valid(self):
-        result = notes_from_string("C A")
+    def test_notes_from_str_multiple_valid(self):
+        result = notes_from_str("C A")
         expected = [Note.C, Note.A]
 
         self.assertEqual(result, expected)
 
-    def test_notes_from_string_mixed_valid_invalid(self):
-        result = notes_from_string("C Z A 4")
+    def test_notes_from_str_mixed_valid_invalid(self):
+        result = notes_from_str("C Z A 4")
         expected = [Note.C, None, Note.A, None]
 
         self.assertEqual(result, expected)
 
-    def test_notes_from_string_valid_flats_and_sharps(self):
-        result = notes_from_string("cbb cb c c# c##")
+    def test_notes_from_str_valid_flats_and_sharps(self):
+        result = notes_from_str("cbb cb c c# c##")
         expected = [Note.Bb, Note.B, Note.C, Note.Db, Note.D]
 
         self.assertEqual(result, expected) 
 
-    def test_notes_from_string_no_duplicates(self):
-        result = notes_from_string("A", allow_duplicates=False)
+    def test_notes_from_str_no_duplicates(self):
+        result = notes_from_str("A", allow_duplicates=False)
         expected = [Note.A]
 
         self.assertEqual(result, expected)
 
-    def test_notes_from_string_with_duplicates(self):
-        result = notes_from_string("A A A A", allow_duplicates=True)
+    def test_notes_from_str_with_duplicates(self):
+        result = notes_from_str("A A A A", allow_duplicates=True)
         expected = [Note.A] * 4
 
         self.assertEqual(result, expected)

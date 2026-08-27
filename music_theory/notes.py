@@ -51,7 +51,7 @@ class Note(Enum):
             An alias for items(), returning the enums as a list.
         from_index(cls, index):
             A class method to return a enumeration based upon an index.
-        from_string(cls, note_str: str) -> Self | None:
+        from_str(cls, note_str: str) -> Self | None:
             A class method that converts a validated note string into a `Note` object.
         random(cls):
             A class method that returns a random note.
@@ -123,7 +123,7 @@ class Note(Enum):
         return Note.items()[index]
    
     @classmethod
-    def from_string(cls, note_str: str) -> Self | None:
+    def from_str(cls, note_str: str) -> Self | None:
         """
         A class method that converts a validated note string into a `Note` object.
 
@@ -137,11 +137,11 @@ class Note(Enum):
             - Double accidentals (e.g., "C##", "Ebb") apply a major second transposition.
 
         Examples:
-            >>> note_from_string("C")
+            >>> note_from_str("C")
             Note.C
-            >>> note_from_string("F#")
+            >>> note_from_str("F#")
             Note.Gb
-            >>> note_from_string("Ebb")
+            >>> note_from_str("Ebb")
             Note.D
 
         Args:
@@ -196,7 +196,7 @@ class Note(Enum):
             Note:
                 A new note representing the diatonic component
         """
-        return Note.from_string(self.name[0])
+        return Note.from_str(self.name[0])
 
     @property
     def is_diatonic(self) -> bool:
@@ -397,34 +397,36 @@ class Note(Enum):
 
 #region Functions
 
-def notes_to_string(note_list: list[Note]) -> str:
+def notes_to_str(notes: list[Note], sep: str = ", ") -> str:
     """ 
-    Takes a list of notes and returns a string of note names. 
+    Takes a list of notes and returns a string of the note names. 
 
     Example:
-        >>> notes_to_string([Note.C, Note.B, Note.D])
+        >>> notes_to_str([Note.C, Note.B, Note.D])
         C, B, D
 
     Args:
-        note_list (list[Note]):
+        notes (list[Note]):
             The list of notes to be converted to a string.
+        sep (str):
+            A string separator.
 
     Returns:
         str:
     """  
-    return ', '.join([n.name for n in note_list])
+    return sep.join([n.name for n in notes])
 
-def notes_from_string(notes_str: str, allow_duplicates: bool=True, error: Any=None) -> list[Note|Any]:
+def notes_from_str(notes_str: str, allow_duplicates: bool=True, error: Any=None) -> list[Note|Any]:
     """
     Convert a whitespace-separated string of note names into a list of `Note` 
     objects.
 
-    Each whitespace token is passed to `Note.from_string()`. Successful 
+    Each whitespace token is passed to `Note.from_str()`. Successful 
     conversions produce a `Note` object; failures insert the provided `error`
     value instead.
 
     Example:
-        >>> notes_from_string("cb c c#")
+        >>> notes_from_str("cb c c#")
         [Note.B, Note.C, Note.Db]
 
     Args:
@@ -447,7 +449,7 @@ def notes_from_string(notes_str: str, allow_duplicates: bool=True, error: Any=No
     l = []
 
     for _ in notes_str.split(" "):
-        note = Note.from_string(_)
+        note = Note.from_str(_)
         l.append(note if note else error)
 
     if not allow_duplicates:

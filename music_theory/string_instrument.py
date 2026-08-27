@@ -1,6 +1,6 @@
 import re
 
-from music_theory.notes import Note, transpose, notes_to_string
+from music_theory.notes import Note, transpose, notes_to_str
 from music_theory.intervals import Interval, interval_distance
 
 def extract_frets(line):
@@ -119,7 +119,7 @@ class StringInstrument:
         Returns:
             A string.
         """
-        return f"{notes_to_string(self.tuning)}"
+        return f"{notes_to_str(self.tuning)}"
 
     def __repr__(self):
         """ Returns a string representing the instrument. 
@@ -132,7 +132,7 @@ class StringInstrument:
         Returns:
             A string.
         """
-        return f"StringInstrument({self.num_strings}, [{notes_to_string(self.tuning)}])"
+        return f"StringInstrument({self.num_strings}, [{notes_to_str(self.tuning)}])"
 
 def note_at_fret(string_tuning: Note, fret: int) -> Note:
     """

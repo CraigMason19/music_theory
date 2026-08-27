@@ -11,7 +11,7 @@
 
 from music_theory.notes import Note, transpose
 from music_theory.intervals import Interval, interval_distance
-from music_theory.scales import Scale, ScaleType, notes_to_string, modes_from_note
+from music_theory.scales import Scale, ScaleType, notes_to_str, modes_from_note
 from music_theory.keys import Key, KeyType, chords_from_progression
 from music_theory.chords import Chord, ChordType
 
@@ -62,7 +62,7 @@ def demo_scale():
     print(f"\trepr() -> {repr(scale)}")
     print(f"\tRoot -> {scale.root}")
     print(f"\tType -> {scale.type}")
-    print(f"\tNotes -> {notes_to_string(scale.notes)}")
+    print(f"\tNotes -> {notes_to_str(scale.notes)}")
     print(f"\tNumber of notes -> {scale.num_notes}")
     print(f"\tNumber of flats -> {scale.num_flats}")
     print(f"\tCreation Formula -> {scale.creation_formula})")
