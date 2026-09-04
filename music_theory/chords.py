@@ -1,3 +1,5 @@
+from typing import Iterator
+
 from music_theory.notes import Note, transpose
 from music_theory.intervals import Interval
 from music_theory.chord_type import ChordType
@@ -12,7 +14,7 @@ class Chord:
             The Note the rest of the chord is built from.
         type:
             A ChordType. 
-        notes:
+        notes (list[Note]):
             An array containing the root, 3rd(Major or Minor) & the 5th.
 
     Methods:
@@ -22,6 +24,8 @@ class Chord:
             A class method to return a random chord.
         __eq__(self, other):
             Compares two chords.
+        __iter__(self) -> Iterator[Note]:
+            Allows for convenient for loop usage.
         notation(self):
             Returns the chord's notation without the Note.
         quality(self):
@@ -116,6 +120,20 @@ class Chord:
             return self.root == other.root and self.chord_type == other.chord_type
         except AttributeError:
             return False
+
+    def __iter__(self) -> Iterator[Note]:
+        """
+        Allows convenient iteration over a Chord using a for loop.
+
+        Example:
+            >>> c = Chord(Note.A, ChordType.Minor)
+            >>> for note in c:
+            ...     print(note)
+            
+        Returns:
+            Iterator[Note]:
+        """
+        return iter(self.notes)
 
     @property
     def notation(self) -> str:
