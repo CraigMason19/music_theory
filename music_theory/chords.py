@@ -181,7 +181,7 @@ class Chord:
         Returns an array containing the notes of the chord with the added 11th. 
 
         Example:
-            >>> hord(Note.A).add11()
+            >>> Chord(Note.A).add11()
             [Note.A, Note.Db, Note.E, Note.D]
 
         Returns:

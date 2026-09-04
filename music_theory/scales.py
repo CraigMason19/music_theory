@@ -146,7 +146,7 @@ def _intervals_from_numerics(formula):
 class Scale:
     """ A class representing a Scale (A collection of musical notes).
 
-        Note: There isn't a step_fomula attribute, because not every scale can
+        Note: There isn't a step_formula attribute, because not every scale can
         represent them. The pentatonic scale for example, will cover steps
         greater than a whole (2 semi-tones).
     
@@ -176,14 +176,14 @@ class Scale:
 
     Methods:        
         __init__(self, root, scale_type):
-            Initialises the root and scale type, then calls _construct().
+            Initializes the root and scale type, then calls _construct().
         _construct(self):
             Constructs the scale from the root and scale type in __init__().
             Put into it's own private method so that __init__() remains readable. 
         __eq__(self, other):
             Compares two scales. True if root and scale_type match.
         __iter__(self):
-            Allows for convienient for loop useage.
+            Allows for convenient for loop usage.
         random(cls):
             A class method to return a random scale (root and type).
         __str__(self):
@@ -403,7 +403,7 @@ def modes_from_note(note: Note) -> list[Scale]:
 
     Each subsequent mode starts from the next note in the scale (effectively 
     shifts the notes up). This repeats until it wraps back to the start.
-    There are always 7 modes and they are always in the same order. Theyare
+    There are always 7 modes and they are always in the same order. They are
     named (note -> mode).
 
     Example:
