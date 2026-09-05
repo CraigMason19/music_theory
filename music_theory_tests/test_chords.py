@@ -27,6 +27,7 @@ class TestChordValidity(unittest.TestCase):
         self.assertIn(chord.root, list(Note))
         self.assertIn(chord.chord_type, list(ChordType))
 
+
 class TestChordEquality(unittest.TestCase):
     def test_chord_equal_A_major(self):
         self.assertEqual(Chord(Note.B, ChordType.Major), Chord(Note.B, ChordType.Major))
@@ -43,6 +44,53 @@ class TestChordEquality(unittest.TestCase):
         self.assertFalse(chord == 5)
         self.assertFalse(chord == "string")
         self.assertFalse(chord == None)
+
+
+class TestChordIterator(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        """
+        Run before all tests, called once
+        """
+        cls.chord = Chord(Note.F, ChordType.Minor)
+
+    def test_chord_iter_yields_expected_values(self):
+        """
+        Converting to list implicitly tests __iter__ by consuming the iterator.
+        """
+        result = list(self.chord)
+        expected = [Note.F, Note.Ab, Note.C]
+
+        self.assertEqual(result, expected)
+
+    def test_chord_iter_returns_iterator(self):
+        """
+        A proper iterator returns itself when passed to iter().
+        """
+        iterator = iter(self.chord)
+
+        self.assertIs(iter(iterator), iterator)
+
+    def test_chord_multiple_iterations_are_independent(self):
+        first = list(self.chord)
+        second = list(self.chord)
+        expected = [Note.F, Note.Ab, Note.C]
+
+        self.assertEqual(first, expected)
+        self.assertEqual(second, expected)
+
+    def test_chord_iter_with_for_loop(self):
+        """
+        Using a for loop exercises __iter__ directly in typical syntax.
+        """
+        result = []
+        expected = [Note.F, Note.Ab, Note.C]
+
+        for _ in self.chord:
+            result.append(_)
+
+        self.assertEqual(result, expected)
+
 
 class TestChordNotes(unittest.TestCase):
     def test_chord_notes_A_major(self):
