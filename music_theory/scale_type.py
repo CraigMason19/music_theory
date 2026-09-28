@@ -12,9 +12,10 @@ import random
 from enum import Enum
 
 class ScaleType(Enum):
-    """ Represents a type of scale (e.g. minor, major, blues, lydian, etc...).
-        This determines how the scale will be constructed. Derived from the Enum
-        class.
+    """ 
+    Represents a type of scale (e.g. minor, major, blues, lydian, etc...).
+    This determines how the scale will be constructed. Derived from the Enum
+    class.
     
     Attributes:
         scale type attributes:
@@ -78,18 +79,18 @@ class ScaleType(Enum):
 
     @classmethod
     def random(cls):
-        """ A class method that returns a random scale. 
+        """ 
+        A class method that returns a random scale. 
 
-            e.g. ScaleType.MelodicMinor
-
-        Args:
-            None.
+        Example:
+            >>> ScaleType.random()
+            ScaleType.MelodicMinor
 
         Returns:
-            A ScaleType.
+            ScaleType
         """  
         return random.choice(cls.items())
-
+    
     @property
     def is_diatonic(self) -> bool:
         """ 
